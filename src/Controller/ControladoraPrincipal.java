@@ -99,15 +99,13 @@ public class ControladoraPrincipal {
         System.out.println("\n");
 
         Pessoa pessoaLogada = pessoaDAO.buscaPessoaQuerendoLogar(login, senha);
-        
+
         gerenciaControladoras(pessoaLogada);
-        
+
     }
 
-    
-    private void gerenciaControladoras(Pessoa pessoaLogada)
-    {
-      if (pessoaLogada != null) {
+    private void gerenciaControladoras(Pessoa pessoaLogada) {
+        if (pessoaLogada != null) {
             System.out.println("Login efetuado Com Sucesso!");
             System.out.println("Logado Como: " + pessoaLogada.getTipoUsuario());
 
@@ -119,9 +117,9 @@ public class ControladoraPrincipal {
         } else {
             System.out.println("Nao Foi Possivel Fazer Login: Usuario Nao Encontrado OU "
                     + "Nao Cadastrado.");
-        }  
+        }
     }
-    
+
     private void menuOpcoesPaciente(Pessoa pessoa) {
 
         int opcao;
@@ -131,7 +129,8 @@ public class ControladoraPrincipal {
 
             switch (opcao) {
                 case 1: {
-                    System.out.println("\n" + pessoaDAO.mostraDadosPessoaLogada(pessoa.getLoginPessoa(), pessoa.getSenhaPessoa()));
+                    System.out.println("\n" + pessoaDAO.mostraDadosPessoaLogada(pessoa.getLoginPessoa(),
+                            pessoa.getSenhaPessoa()));
                     break;
                 }
                 case 2: {
