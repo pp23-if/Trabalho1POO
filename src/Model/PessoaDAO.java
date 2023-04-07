@@ -83,11 +83,11 @@ public class PessoaDAO {
     }
     
     
-    public boolean atualizaNomePessoa(Pessoa p, String novoNomePessoa)
+    public boolean atualizaNomePessoa(String nomePessoa, String novoNomePessoa)
     {
         for (Pessoa pessoa : vetorPessoa) {
             
-            if(pessoa != null && pessoa.getNomePessoa().equals(p.getNomePessoa()))
+            if(pessoa != null && pessoa.getNomePessoa().equals(nomePessoa))
             {
                pessoa.setNomePessoa(novoNomePessoa);
                pessoa.setDataModificacao(LocalDateTime.now());
@@ -98,9 +98,84 @@ public class PessoaDAO {
         return false;
     }
     
+    public boolean atualizaCpfPessoa(String cpf, String novoCpf)
+    {
+        for (Pessoa pessoa : vetorPessoa) {
+            
+            if(pessoa != null && pessoa.getCpf().equals(cpf))
+            {
+               pessoa.setCpf(novoCpf);
+               pessoa.setDataModificacao(LocalDateTime.now());
+               return true;
+            }
+            
+        }
+        return false;
+    }
+    
+    public boolean atualizaEnderecoPessoa(String endereco, String novoEndereco)
+    {
+        for (Pessoa pessoa : vetorPessoa) {
+            
+            if(pessoa != null && pessoa.getEnderecoPessoa().equals(endereco))
+            {
+               pessoa.setEnderecoPessoa(novoEndereco);
+               pessoa.setDataModificacao(LocalDateTime.now());
+               return true;
+            }
+            
+        }
+        return false;
+    }
     
     
+    public boolean atualizaTelefonePessoa(String telefone, String novoTelefone)
+    {
+        for (Pessoa pessoa : vetorPessoa) {
+            
+            if(pessoa != null && pessoa.getTelefonePessoa().equals(telefone))
+            {
+               pessoa.setTelefonePessoa(novoTelefone);
+               pessoa.setDataModificacao(LocalDateTime.now());
+               return true;
+            }
+            
+        }
+        return false;
+    }
     
+    
+    public boolean atualizaLoginPessoa(String login, String novoLogin, String tipoUsuario)
+    {
+        for (Pessoa pessoa : vetorPessoa) {
+            
+            if(pessoa != null && pessoa.getLoginPessoa().equals(login) && pessoa.getTipoUsuario().equals(tipoUsuario))
+            {
+               pessoa.setLoginPessoa(novoLogin);
+               pessoa.setDataModificacao(LocalDateTime.now());
+               return true;
+            }
+            
+        }
+        return false;
+    }
+     
+     
+     public boolean atualizaSenhaPessoa(String senha, String login, String novaSenha, String tipoUsuario)
+    {
+        for (Pessoa pessoa : vetorPessoa) {
+            
+            if(pessoa != null && pessoa.getLoginPessoa().equals(login) && pessoa.getSenhaPessoa().equals(senha) 
+                    && pessoa.getTipoUsuario().equals(tipoUsuario))
+            {
+               pessoa.setSenhaPessoa(novaSenha);
+               pessoa.setDataModificacao(LocalDateTime.now());
+               return true;
+            }
+            
+        }
+        return false;
+    }
     /*public boolean verificaSePessoaExiste(String login, String nome, String cpf) {
         for (Pessoa pessoa : vetorPessoa) {
             if (pessoa != null && pessoa.getLoginPessoa().equals(login)

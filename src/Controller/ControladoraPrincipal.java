@@ -26,7 +26,7 @@ public class ControladoraPrincipal {
                     String login = scanner.nextLine();
                     System.out.println("\n");
 
-                    System.out.println("Senha: ");
+                    System.out.println("\nSenha: ");
                     String senha = scanner.nextLine();
                     System.out.println("\n");
 
@@ -126,7 +126,7 @@ public class ControladoraPrincipal {
              {
                  case 1:
                  {
-                     System.out.println(pessoaDAO.mostraDadosPessoaLogada(pessoa.getLoginPessoa(), pessoa.getSenhaPessoa()));
+                     System.out.println("\n" + pessoaDAO.mostraDadosPessoaLogada(pessoa.getLoginPessoa(), pessoa.getSenhaPessoa()));
                      break;
                  }
                  case 2:
@@ -155,43 +155,96 @@ public class ControladoraPrincipal {
                      System.out.println("Informe o Novo Nome: ");
                      String novoNomePessoa = scanner.nextLine();
                      
-                     if(pessoaDAO.atualizaNomePessoa(pessoa, novoNomePessoa) == true)
+                     if(pessoaDAO.atualizaNomePessoa(pessoa.getNomePessoa(), novoNomePessoa) == true)
                      {
                          System.out.println("O Nome Foi Alterado Com Sucesso!");
                      }
                      else
                      {
-                       System.out.println("Nao Foi Possivel Alterar O Nonme");  
+                       System.out.println("Nao Foi Possivel Alterar O Nome");  
                      }
                      break;
                  }
                  case 2:
                  {
+                     System.out.println("Informe o Novo Cpf: ");
+                     String novoCpf = scanner.nextLine();
+                     
+                     if(pessoaDAO.atualizaCpfPessoa(pessoa.getCpf(), novoCpf) == true)
+                     {
+                         System.out.println("O Cpf Foi Alterado Com Sucesso!");
+                     }
+                     else
+                     {
+                        System.out.println("Nao Foi Possivel Alterar O Cpf");   
+                     }
                      
                      break;
                  }
                  
                  case 3:
                  {
+                     System.out.println("Informe o Novo Endereco: ");
+                     String novoEndereco = scanner.nextLine();
                      
+                     if(pessoaDAO.atualizaEnderecoPessoa(pessoa.getEnderecoPessoa(), novoEndereco) == true)
+                     {
+                        System.out.println("O Endereco Foi Alterado Com Sucesso!"); 
+                     }
+                     else
+                     {
+                        System.out.println("Nao Foi Possivel Alterar O Endereco");  
+                     }
                      break;
                  }
                  
                  case 4:
                  {
+                     System.out.println("Informe o Novo Telefone: ");
+                     String novoTelefone = scanner.nextLine();
                      
+                     if(pessoaDAO.atualizaTelefonePessoa(pessoa.getTelefonePessoa(), novoTelefone) == true)
+                     {
+                        System.out.println("O Telefone Foi Alterado Com Sucesso!"); 
+                     }
+                     else
+                     {
+                        System.out.println("Nao Foi Possivel Alterar O Telefone");  
+                     }
                      break;
                  }
                  
                  case 5:
                  {
+                     System.out.println("Informe o Novo Login: ");
+                     String novoLogin = scanner.nextLine();
+                     
+                     if(pessoaDAO.atualizaLoginPessoa(pessoa.getLoginPessoa(), novoLogin, pessoa.getTipoUsuario()) == true)
+                     {
+                        System.out.println("O Login Foi Alterado Com Sucesso!"); 
+                     }
+                     else
+                     {
+                        System.out.println("Nao Foi Possivel Alterar O Login");  
+                     }
                      
                      break;
                  }
                  
                  case 6:
                  {
+                     System.out.println("Informe a Nova Senha: ");
+                     String novaSenha = scanner.nextLine();
                      
+                     if(pessoaDAO.atualizaSenhaPessoa(pessoa.getSenhaPessoa(), pessoa.getLoginPessoa(), 
+                             novaSenha, pessoa.getTipoUsuario()) == true)
+                     {
+                        System.out.println("A Senha Foi Alterada Com Sucesso!"); 
+                     }
+                     else
+                     {
+                        System.out.println("Nao Foi Possivel Alterar A Senha");  
+                     }
                      break;
                  }
              }

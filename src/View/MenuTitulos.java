@@ -18,10 +18,12 @@ public class MenuTitulos {
         builder.append("\n2 - cadastrar Pessoa: ");
         builder.append("\n3 - Listar Todos os Vetores: ");
         builder.append("\n\nOpcao: ");
+        
 
         System.out.print(builder.toString());
-
+        //builder.append("\n");
         return Integer.parseInt(scanner.nextLine());
+        
     }
     
      public int menuPaciente() {
@@ -37,7 +39,7 @@ public class MenuTitulos {
         builder.append("\n5 - : ");
         builder.append("\n6 - : ");
         builder.append("\n\nOpcao: ");
-
+       
         System.out.print(builder.toString());
 
         return Integer.parseInt(scanner.nextLine());
