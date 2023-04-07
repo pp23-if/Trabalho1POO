@@ -61,7 +61,7 @@ public class PessoaDAO {
         for (Pessoa pessoa : vetorPessoa) {
             if (pessoa != null && pessoa.getLoginPessoa().equals(login)
                     || pessoa != null && pessoa.getTipoUsuario().equals(tipoUsuario) && 
-                    pessoa.getLoginPessoa().equals(nome)) { 
+                    pessoa.getNomePessoa().equals(nome)) { 
                 
                 return true;
             }
