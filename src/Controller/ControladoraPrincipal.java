@@ -22,37 +22,12 @@ public class ControladoraPrincipal {
 
             switch (opcao) {
                 case 1: {
-                    System.out.println("\nLogin: ");
-                    String login = scanner.nextLine();
-                    System.out.println("\n");
-
-                    System.out.println("\nSenha: ");
-                    String senha = scanner.nextLine();
-                    System.out.println("\n");
-
-                    Pessoa pessoaLogada = pessoaDAO.fazLogin(login, senha);
-
-                    if (pessoaLogada != null) {
-                        System.out.println("Login efetuado Com Sucesso!");
-                        System.out.println("Logado Como: " + pessoaLogada.getTipoUsuario());
-
-                        if (pessoaLogada.getTipoUsuario().equals("Paciente")) {
-                            
-                            menuOpcoesPaciente(pessoaLogada);
-                        }
-                        
-                    } else {
-                        System.out.println("Nao Foi Possivel Fazer Login: Usuario Nao Encontrado OU "
-                                + "Nao Cadastrado.");
-                    }
-
+                    fazLogin();
                     break;
                 }
 
                 case 2: {
-
                     cadastrarPessoa();
-
                     break;
                 }
 
@@ -114,142 +89,144 @@ public class ControladoraPrincipal {
 
     }
 
-    private void menuOpcoesPaciente(Pessoa pessoa) {
-       
-        int opcao;
+    private void fazLogin() {
+        System.out.println("\nLogin: ");
+        String login = scanner.nextLine();
+        System.out.println("\n");
+
+        System.out.println("\nSenha: ");
+        String senha = scanner.nextLine();
+        System.out.println("\n");
+
+        Pessoa pessoaLogada = pessoaDAO.buscaPessoaQuerendoLogar(login, senha);
         
-         do
-         {
-             opcao = Tela.menuPaciente();
-             
-             switch(opcao)
-             {
-                 case 1:
-                 {
-                     System.out.println("\n" + pessoaDAO.mostraDadosPessoaLogada(pessoa.getLoginPessoa(), pessoa.getSenhaPessoa()));
-                     break;
-                 }
-                 case 2:
-                 {
-                     menuOpcoesAtualizarDadosPaciente(pessoa);
-                     break;
-                 }
-             }
-             
-         }while(opcao != 0);
+        gerenciaControladoras(pessoaLogada);
+        
+    }
+
+    
+    private void gerenciaControladoras(Pessoa pessoaLogada)
+    {
+      if (pessoaLogada != null) {
+            System.out.println("Login efetuado Com Sucesso!");
+            System.out.println("Logado Como: " + pessoaLogada.getTipoUsuario());
+
+            if (pessoaLogada.getTipoUsuario().equals("Paciente")) {
+
+                menuOpcoesPaciente(pessoaLogada);
+            }
+
+        } else {
+            System.out.println("Nao Foi Possivel Fazer Login: Usuario Nao Encontrado OU "
+                    + "Nao Cadastrado.");
+        }  
     }
     
-    
-    private void menuOpcoesAtualizarDadosPaciente(Pessoa pessoa) {
-       
+    private void menuOpcoesPaciente(Pessoa pessoa) {
+
         int opcao;
-        
-         do
-         {
-             opcao = Tela.menuAlteraDadosPaciente();
-             
-             switch(opcao)
-             {
-                 case 1:
-                 {
-                     System.out.println("Informe o Novo Nome: ");
-                     String novoNomePessoa = scanner.nextLine();
-                     
-                     if(pessoaDAO.atualizaNomePessoa(pessoa.getNomePessoa(), novoNomePessoa) == true)
-                     {
-                         System.out.println("O Nome Foi Alterado Com Sucesso!");
-                     }
-                     else
-                     {
-                       System.out.println("Nao Foi Possivel Alterar O Nome");  
-                     }
-                     break;
-                 }
-                 case 2:
-                 {
-                     System.out.println("Informe o Novo Cpf: ");
-                     String novoCpf = scanner.nextLine();
-                     
-                     if(pessoaDAO.atualizaCpfPessoa(pessoa.getCpf(), novoCpf) == true)
-                     {
-                         System.out.println("O Cpf Foi Alterado Com Sucesso!");
-                     }
-                     else
-                     {
-                        System.out.println("Nao Foi Possivel Alterar O Cpf");   
-                     }
-                     
-                     break;
-                 }
-                 
-                 case 3:
-                 {
-                     System.out.println("Informe o Novo Endereco: ");
-                     String novoEndereco = scanner.nextLine();
-                     
-                     if(pessoaDAO.atualizaEnderecoPessoa(pessoa.getEnderecoPessoa(), novoEndereco) == true)
-                     {
-                        System.out.println("O Endereco Foi Alterado Com Sucesso!"); 
-                     }
-                     else
-                     {
-                        System.out.println("Nao Foi Possivel Alterar O Endereco");  
-                     }
-                     break;
-                 }
-                 
-                 case 4:
-                 {
-                     System.out.println("Informe o Novo Telefone: ");
-                     String novoTelefone = scanner.nextLine();
-                     
-                     if(pessoaDAO.atualizaTelefonePessoa(pessoa.getTelefonePessoa(), novoTelefone) == true)
-                     {
-                        System.out.println("O Telefone Foi Alterado Com Sucesso!"); 
-                     }
-                     else
-                     {
-                        System.out.println("Nao Foi Possivel Alterar O Telefone");  
-                     }
-                     break;
-                 }
-                 
-                 case 5:
-                 {
-                     System.out.println("Informe o Novo Login: ");
-                     String novoLogin = scanner.nextLine();
-                     
-                     if(pessoaDAO.atualizaLoginPessoa(pessoa.getLoginPessoa(), novoLogin, pessoa.getTipoUsuario()) == true)
-                     {
-                        System.out.println("O Login Foi Alterado Com Sucesso!"); 
-                     }
-                     else
-                     {
-                        System.out.println("Nao Foi Possivel Alterar O Login");  
-                     }
-                     
-                     break;
-                 }
-                 
-                 case 6:
-                 {
-                     System.out.println("Informe a Nova Senha: ");
-                     String novaSenha = scanner.nextLine();
-                     
-                     if(pessoaDAO.atualizaSenhaPessoa(pessoa.getSenhaPessoa(), pessoa.getLoginPessoa(), 
-                             novaSenha, pessoa.getTipoUsuario()) == true)
-                     {
-                        System.out.println("A Senha Foi Alterada Com Sucesso!"); 
-                     }
-                     else
-                     {
-                        System.out.println("Nao Foi Possivel Alterar A Senha");  
-                     }
-                     break;
-                 }
-             }
-             
-         }while(opcao != 0);
+
+        do {
+            opcao = Tela.menuPaciente();
+
+            switch (opcao) {
+                case 1: {
+                    System.out.println("\n" + pessoaDAO.mostraDadosPessoaLogada(pessoa.getLoginPessoa(), pessoa.getSenhaPessoa()));
+                    break;
+                }
+                case 2: {
+                    menuOpcoesAtualizarDadosPaciente(pessoa);
+                    break;
+                }
+            }
+
+        } while (opcao != 0);
+    }
+
+    private void menuOpcoesAtualizarDadosPaciente(Pessoa pessoa) {
+
+        int opcao;
+
+        do {
+            opcao = Tela.menuAlteraDadosPaciente();
+
+            switch (opcao) {
+                case 1: {
+                    System.out.println("Informe o Novo Nome: ");
+                    String novoNomePessoa = scanner.nextLine();
+
+                    if (pessoaDAO.atualizaNomePessoa(pessoa.getNomePessoa(), novoNomePessoa) == true) {
+                        System.out.println("O Nome Foi Alterado Com Sucesso!");
+                    } else {
+                        System.out.println("Nao Foi Possivel Alterar O Nome");
+                    }
+                    break;
+                }
+                case 2: {
+                    System.out.println("Informe o Novo Cpf: ");
+                    String novoCpf = scanner.nextLine();
+
+                    if (pessoaDAO.atualizaCpfPessoa(pessoa.getCpf(), novoCpf) == true) {
+                        System.out.println("O Cpf Foi Alterado Com Sucesso!");
+                    } else {
+                        System.out.println("Nao Foi Possivel Alterar O Cpf");
+                    }
+
+                    break;
+                }
+
+                case 3: {
+                    System.out.println("Informe o Novo Endereco: ");
+                    String novoEndereco = scanner.nextLine();
+
+                    if (pessoaDAO.atualizaEnderecoPessoa(pessoa.getEnderecoPessoa(), novoEndereco) == true) {
+                        System.out.println("O Endereco Foi Alterado Com Sucesso!");
+                    } else {
+                        System.out.println("Nao Foi Possivel Alterar O Endereco");
+                    }
+                    break;
+                }
+
+                case 4: {
+                    System.out.println("Informe o Novo Telefone: ");
+                    String novoTelefone = scanner.nextLine();
+
+                    if (pessoaDAO.atualizaTelefonePessoa(pessoa.getTelefonePessoa(), novoTelefone) == true) {
+                        System.out.println("O Telefone Foi Alterado Com Sucesso!");
+                    } else {
+                        System.out.println("Nao Foi Possivel Alterar O Telefone");
+                    }
+                    break;
+                }
+
+                case 5: {
+                    System.out.println("Informe o Novo Login: ");
+                    String novoLogin = scanner.nextLine();
+
+                    if (pessoaDAO.atualizaLoginPessoa(pessoa.getLoginPessoa(), novoLogin, pessoa.getTipoUsuario()) == true) {
+                        System.out.println("O Login Foi Alterado Com Sucesso!");
+                    } else {
+                        System.out.println("Nao Foi Possivel Alterar O Login");
+                    }
+
+                    break;
+                }
+
+                case 6: {
+                    System.out.println("Informe a Nova Senha: ");
+                    String novaSenha = scanner.nextLine();
+
+                    if (pessoaDAO.atualizaSenhaPessoa(pessoa.getSenhaPessoa(), pessoa.getLoginPessoa(),
+                            novaSenha, pessoa.getTipoUsuario()) == true) {
+                        System.out.println("A Senha Foi Alterada Com Sucesso!");
+                    } else {
+                        System.out.println("Nao Foi Possivel Alterar A Senha");
+                    }
+                    break;
+                }
+            }
+
+        } while (opcao != 0);
     }
 
 }

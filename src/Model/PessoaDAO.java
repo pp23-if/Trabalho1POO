@@ -70,7 +70,7 @@ public class PessoaDAO {
         return false;
     }
     
-    public Pessoa fazLogin(String login, String senha)
+    public Pessoa buscaPessoaQuerendoLogar(String login, String senha)
     {
         for (Pessoa pessoa : vetorPessoa) {
             if(pessoa != null && pessoa.getLoginPessoa().equals(login) && 
