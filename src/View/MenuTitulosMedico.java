@@ -26,4 +26,19 @@ public class MenuTitulosMedico {
 
         return Integer.parseInt(scanner.nextLine());
     }
+    
+      public int menuAlteraDadosMedico() {
+
+        StringBuilder builder = new StringBuilder("");
+
+        builder.append("\n============ Menu Alteracao De Dados Medico ===========");
+        builder.append("\n0 - Para sair");
+        builder.append("\n1 - Alterar Login Medico: ");
+        builder.append("\n2 - Alterar Senha Medico: ");
+        builder.append("\n\nOpcao: ");
+
+        System.out.print(builder.toString());
+
+        return Integer.parseInt(scanner.nextLine());
+    }
 }

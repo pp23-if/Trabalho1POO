@@ -140,7 +140,7 @@ public class Pessoa {
         DateTimeFormatter fd = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
         if (this.dataModificacao == null) {
-            return "ID: " + this.idPessoa + "\n"
+            return "ID - Pessoa: " + this.idPessoa + "\n"
                     + "Nome: " + this.nomePessoa + "\n"
                     + "Cpf: " + this.cpf + "\n"
                     + "Endereco: " + this.enderecoPessoa + "\n"
@@ -150,7 +150,7 @@ public class Pessoa {
                     + "Tipo de Usuario: " + this.tipoUsuario + "\n"
                     + "Data e Hora da Criacao: " + fd.format(this.dataCriacao) + "\n";
         } else {
-            return "ID: " + this.idPessoa + "\n"
+            return "ID - Pessoa: " + this.idPessoa + "\n"
                     + "Nome: " + this.nomePessoa + "\n"
                     + "Cpf: " + this.cpf + "\n"
                     + "Endereco: " + this.enderecoPessoa + "\n"

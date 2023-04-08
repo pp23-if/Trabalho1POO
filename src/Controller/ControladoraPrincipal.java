@@ -125,7 +125,7 @@ public class ControladoraPrincipal {
             }
             else if(pessoaLogada.getTipoUsuario().equals("Medico"))
             {
-                Medico medico = medicoDAO.mostraDadosmedicoLogado(pessoaLogada.getLoginPessoa(), 
+                Medico medico = medicoDAO.mostraDadosMedicoLogado(pessoaLogada.getLoginPessoa(), 
                         pessoaLogada.getSenhaPessoa());
                 
                MedicoControladora medicoControladora = new MedicoControladora(medico,medicoDAO);
