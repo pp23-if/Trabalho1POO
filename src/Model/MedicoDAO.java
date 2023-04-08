@@ -57,7 +57,18 @@ public class MedicoDAO {
      
      
      
-     
+     public Medico mostraDadosmedicoLogado(String login, String senha) {
+         
+         for (Medico medico : vetorMedico) {
+             
+             if(medico != null && medico.getPessoa().getLoginPessoa().equals(login) && 
+                medico.getPessoa().getSenhaPessoa().equals(senha))
+             {
+                 return medico;
+             }
+         }
+        return null;
+    }
      
      
      

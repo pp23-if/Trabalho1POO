@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Medico;
 import Model.MedicoDAO;
 import Model.Pessoa;
 import Model.PessoaDAO;
@@ -121,6 +122,13 @@ public class ControladoraPrincipal {
             if (pessoaLogada.getTipoUsuario().equals("Paciente")) {
 
                 menuOpcoesPaciente(pessoaLogada);
+            }
+            else if(pessoaLogada.getTipoUsuario().equals("Medico"))
+            {
+                Medico medico = medicoDAO.mostraDadosmedicoLogado(pessoaLogada.getLoginPessoa(), 
+                        pessoaLogada.getSenhaPessoa());
+                
+               MedicoControladora medicoControladora = new MedicoControladora(medico,medicoDAO);
             }
 
         } else {
