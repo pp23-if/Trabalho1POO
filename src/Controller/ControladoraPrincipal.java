@@ -69,7 +69,7 @@ public class ControladoraPrincipal {
         boolean existePessoa;
         boolean adicionado;
 
-        existePessoa = pessoaDAO.verificaSePessoaExiste(loginPessoa, tipoUsuario, nomePessoa);
+        existePessoa = pessoaDAO.verificaSePessoaExiste(loginPessoa, tipoUsuario, nomePessoa, cpf);
 
         if (existePessoa == true) {
             System.out.println("\nPessoa ja Cadastrada");
@@ -157,7 +157,7 @@ public class ControladoraPrincipal {
                     if (pessoaDAO.atualizaNomePessoa(pessoa.getNomePessoa(), novoNomePessoa) == true) {
                         System.out.println("O Nome Foi Alterado Com Sucesso!");
                     } else {
-                        System.out.println("Nao Foi Possivel Alterar O Nome");
+                        System.out.println("Nome Informado Ja Se Encontra Cadastrado.");
                     }
                     break;
                 }
@@ -168,7 +168,7 @@ public class ControladoraPrincipal {
                     if (pessoaDAO.atualizaCpfPessoa(pessoa.getCpf(), novoCpf) == true) {
                         System.out.println("O Cpf Foi Alterado Com Sucesso!");
                     } else {
-                        System.out.println("Nao Foi Possivel Alterar O Cpf");
+                        System.out.println("Cpf Informado Ja Se Encontra Cadastrado.");
                     }
 
                     break;
@@ -193,7 +193,7 @@ public class ControladoraPrincipal {
                     if (pessoaDAO.atualizaTelefonePessoa(pessoa.getTelefonePessoa(), novoTelefone) == true) {
                         System.out.println("O Telefone Foi Alterado Com Sucesso!");
                     } else {
-                        System.out.println("Nao Foi Possivel Alterar O Telefone");
+                        System.out.println("Telefone Informado Ja Se Encontra Cadastrado.");
                     }
                     break;
                 }
@@ -205,7 +205,7 @@ public class ControladoraPrincipal {
                     if (pessoaDAO.atualizaLoginPessoa(pessoa.getLoginPessoa(), novoLogin, pessoa.getTipoUsuario()) == true) {
                         System.out.println("O Login Foi Alterado Com Sucesso!");
                     } else {
-                        System.out.println("Nao Foi Possivel Alterar O Login");
+                        System.out.println("Login Informado Ja Se Encontra Cadastrado.");
                     }
 
                     break;

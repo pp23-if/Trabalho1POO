@@ -57,14 +57,14 @@ public class PessoaDAO {
         return null;
     }
 
-    public boolean verificaSePessoaExiste(String login, String tipoUsuario, String nome) {
+    public boolean verificaSePessoaExiste(String login, String tipoUsuario, String nome, String cpf) {
         for (Pessoa pessoa : vetorPessoa) {
-            if (pessoa != null && pessoa.getLoginPessoa().equals(login.toUpperCase()) 
+            if (pessoa != null && pessoa.getLoginPessoa().equals(login.toUpperCase())
                     || pessoa != null && pessoa.getLoginPessoa().equals(login.toLowerCase())
                     || pessoa != null && pessoa.getTipoUsuario().equals(tipoUsuario)
-                    && pessoa.getNomePessoa().equals(nome.toUpperCase()) 
-                    ||pessoa != null && pessoa.getNomePessoa().equals(nome.toLowerCase())) {
-
+                    && pessoa.getNomePessoa().equals(nome.toUpperCase())
+                    || pessoa != null && pessoa.getNomePessoa().equals(nome.toLowerCase())
+                    || pessoa != null && pessoa.getCpf().equals(cpf)) {
                 return true;
             }
 
@@ -148,7 +148,7 @@ public class PessoaDAO {
     }
 
     public boolean atualizaLoginPessoa(String login, String novoLogin, String tipoUsuario) {
-        if (!verificaSeloginEstaSendoUsado(login) == true) {
+        if (!verificaSeloginEstaSendoUsado(novoLogin) == true) {
             for (Pessoa pessoa : vetorPessoa) {
 
                 if (pessoa != null && pessoa.getLoginPessoa().equals(login) && pessoa.getTipoUsuario().equals(tipoUsuario)) {
