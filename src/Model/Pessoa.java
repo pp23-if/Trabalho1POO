@@ -22,10 +22,6 @@ public class Pessoa {
         return idPessoa;
     }
 
-    public void setId(int id) {
-        this.idPessoa = id;
-    }
-
     public String getNomePessoa() {
         return nomePessoa;
     }
@@ -76,10 +72,6 @@ public class Pessoa {
 
     public String getTipoUsuario() {
         return tipoUsuario;
-    }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
     }
 
     public LocalDateTime getDataCriacao() {

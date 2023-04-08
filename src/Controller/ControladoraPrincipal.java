@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.MedicoDAO;
 import Model.Pessoa;
 import Model.PessoaDAO;
 import View.MenuTitulos;
@@ -9,8 +10,14 @@ import java.util.Scanner;
 public class ControladoraPrincipal {
 
     Scanner scanner = new Scanner(System.in);
+
     MenuTitulos Tela = new MenuTitulos();
+
+    /*Instanciando os DAO.*/
     PessoaDAO pessoaDAO = new PessoaDAO();
+    MedicoDAO medicoDAO = new MedicoDAO(pessoaDAO);
+    
+    /*Instanciando as Controladoras.*/
 
     public ControladoraPrincipal() {
 
@@ -34,6 +41,8 @@ public class ControladoraPrincipal {
                 case 3: {
                     System.out.println("\nMostrando Todas as Pessoas Cadastradas: ");
                     pessoaDAO.mostraTodasPessoas();
+                    System.out.println("\nMostrando Todas os Medicos Cadastrados: " + "\n");
+                    medicoDAO.mostraTodosMedicos();
                     break;
                 }
 

@@ -12,8 +12,16 @@ public class PessoaDAO {
 
         Pessoa pessoa = new Pessoa("pedro", "123", "1", "1",
                 "1", "1", "Paciente", agora);
-
         adicionaPessoa(pessoa);
+        
+        Pessoa pessoa2 = new Pessoa("Lucas", "7272", "rua 32", "9999",
+                "lu123", "2", "Paciente", agora);
+        adicionaPessoa(pessoa2);
+        
+         Pessoa pessoa3 = new Pessoa("Lucas", "7272", "rua 32", "9999",
+                "lm23", "456", "Medico", agora);
+        adicionaPessoa(pessoa3);
+        
     }
 
     private int proximaPosilivrePessoa() {

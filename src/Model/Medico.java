@@ -1,0 +1,117 @@
+package Model;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
+
+public class Medico {
+
+    private static int serial = 1;
+    private int idMedico;
+    private String crm;
+    private Pessoa pessoa;
+    private String especialidade;
+    private LocalDateTime dataCriacao;
+    private LocalDateTime dataModificacao;
+
+    public Medico(String crm, Pessoa pessoa, String especialidade,
+            LocalDateTime dataCriacao) {
+        this.idMedico = serial++;
+        this.crm = crm;
+        this.pessoa = pessoa;
+        this.especialidade = especialidade;
+        this.dataCriacao = dataCriacao;
+    }
+
+    public int getIdMedico() {
+        return idMedico;
+    }
+
+    public String getCrm() {
+        return crm;
+    }
+
+    public void setCrm(String crm) {
+        this.crm = crm;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public String getEspecialidade() {
+        return especialidade;
+    }
+
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
+    }
+
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public void setDataCriacao(LocalDateTime dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public LocalDateTime getDataModificacao() {
+        return dataModificacao;
+    }
+
+    public void setDataModificacao(LocalDateTime dataModificacao) {
+        this.dataModificacao = dataModificacao;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + this.idMedico;
+        hash = 89 * hash + Objects.hashCode(this.crm);
+        hash = 89 * hash + Objects.hashCode(this.pessoa);
+        hash = 89 * hash + Objects.hashCode(this.especialidade);
+        hash = 89 * hash + Objects.hashCode(this.dataCriacao);
+        hash = 89 * hash + Objects.hashCode(this.dataModificacao);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Medico other = (Medico) obj;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+
+        DateTimeFormatter fd = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+        if (dataModificacao == null) {
+            return "Medico: " + this.getPessoa().getNomePessoa() + "\n"
+                    + "Crm: " + this.crm + "\n"
+                    + "Especialidade: " + this.especialidade + "\n"
+                    + "Data e Hora de Criacao: " + fd.format(this.dataCriacao) + "\n";
+        } else {
+            return "Medico: " + this.getPessoa().getNomePessoa() + "\n"
+                    + "Crm: " + this.crm + "\n"
+                    + "Especialidade: " + this.especialidade + "\n"
+                    + "Data e Hora de Criacao: " + fd.format(this.dataCriacao) + "\n"
+                    + "Data e Hora de Modificacao: " + fd.format(this.dataModificacao) + "\n";
+        }
+
+    }
+
+}
