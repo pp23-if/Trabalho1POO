@@ -17,9 +17,8 @@ public class ControladoraPrincipal {
     /*Instanciando os DAO.*/
     PessoaDAO pessoaDAO = new PessoaDAO();
     MedicoDAO medicoDAO = new MedicoDAO(pessoaDAO);
-    
-    /*Instanciando as Controladoras.*/
 
+    /*Instanciando as Controladoras.*/
     public ControladoraPrincipal() {
 
         int opcao;
@@ -122,13 +121,11 @@ public class ControladoraPrincipal {
             if (pessoaLogada.getTipoUsuario().equals("Paciente")) {
 
                 menuOpcoesPaciente(pessoaLogada);
-            }
-            else if(pessoaLogada.getTipoUsuario().equals("Medico"))
-            {
-                Medico medico = medicoDAO.mostraDadosMedicoLogado(pessoaLogada.getLoginPessoa(), 
+            } else if (pessoaLogada.getTipoUsuario().equals("Medico")) {
+                Medico medico = medicoDAO.mostraDadosMedicoLogado(pessoaLogada.getLoginPessoa(),
                         pessoaLogada.getSenhaPessoa());
-                
-               MedicoControladora medicoControladora = new MedicoControladora(medico,medicoDAO);
+
+                MedicoControladora medicoControladora = new MedicoControladora(medico, medicoDAO);
             }
 
         } else {
@@ -172,7 +169,7 @@ public class ControladoraPrincipal {
                     String novoNomePessoa = scanner.nextLine();
 
                     if (pessoaDAO.atualizaNomePessoa(pessoa.getNomePessoa(), novoNomePessoa) == true) {
-                        System.out.println("O Nome Foi Alterado Com Sucesso!");
+                        System.out.println("O Nome Foi Atualizado Com Sucesso!");
                     } else {
                         System.out.println("Nome Informado Ja Se Encontra Cadastrado.");
                     }
@@ -183,7 +180,7 @@ public class ControladoraPrincipal {
                     String novoCpf = scanner.nextLine();
 
                     if (pessoaDAO.atualizaCpfPessoa(pessoa.getCpf(), novoCpf) == true) {
-                        System.out.println("O Cpf Foi Alterado Com Sucesso!");
+                        System.out.println("O Cpf Foi Atualizado Com Sucesso!");
                     } else {
                         System.out.println("Cpf Informado Ja Se Encontra Cadastrado.");
                     }
@@ -196,9 +193,9 @@ public class ControladoraPrincipal {
                     String novoEndereco = scanner.nextLine();
 
                     if (pessoaDAO.atualizaEnderecoPessoa(pessoa.getEnderecoPessoa(), novoEndereco) == true) {
-                        System.out.println("O Endereco Foi Alterado Com Sucesso!");
+                        System.out.println("O Endereco Foi Atualizado Com Sucesso!");
                     } else {
-                        System.out.println("Nao Foi Possivel Alterar O Endereco");
+                        System.out.println("Nao Foi Possivel Atualizar O Endereco");
                     }
                     break;
                 }
@@ -208,7 +205,7 @@ public class ControladoraPrincipal {
                     String novoTelefone = scanner.nextLine();
 
                     if (pessoaDAO.atualizaTelefonePessoa(pessoa.getTelefonePessoa(), novoTelefone) == true) {
-                        System.out.println("O Telefone Foi Alterado Com Sucesso!");
+                        System.out.println("O Telefone Foi Atualizado Com Sucesso!");
                     } else {
                         System.out.println("Telefone Informado Ja Se Encontra Cadastrado.");
                     }
@@ -220,7 +217,7 @@ public class ControladoraPrincipal {
                     String novoLogin = scanner.nextLine();
 
                     if (pessoaDAO.atualizaLoginPessoa(pessoa.getLoginPessoa(), novoLogin, pessoa.getTipoUsuario()) == true) {
-                        System.out.println("O Login Foi Alterado Com Sucesso!");
+                        System.out.println("O Login Foi Atualizado Com Sucesso!");
                     } else {
                         System.out.println("Login Informado Ja Se Encontra Cadastrado.");
                     }
@@ -234,9 +231,9 @@ public class ControladoraPrincipal {
 
                     if (pessoaDAO.atualizaSenhaPessoa(pessoa.getSenhaPessoa(), pessoa.getLoginPessoa(),
                             novaSenha, pessoa.getTipoUsuario()) == true) {
-                        System.out.println("A Senha Foi Alterada Com Sucesso!");
+                        System.out.println("A Senha Foi Atualizada Com Sucesso!");
                     } else {
-                        System.out.println("Nao Foi Possivel Alterar A Senha");
+                        System.out.println("Nao Foi Possivel Atualizar A Senha");
                     }
                     break;
                 }

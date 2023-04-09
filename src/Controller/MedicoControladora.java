@@ -47,18 +47,26 @@ public class MedicoControladora {
             switch (opcao) {
                 case 1: {
 
-                    System.out.println("Informe o Novo login Do Medico: ");
+                    System.out.println("Informe o Novo login De Medico: ");
                     String novologinMedico = scanner.nextLine();
 
                     if (medicoDAO.atualizaLoginMedico(medico.getPessoa().getLoginPessoa(), novologinMedico) == true) {
-                        System.out.println("O Login De Medico Foi Alterado Com Sucesso!");
+                        System.out.println("O Login De Medico Foi Atualizado Com Sucesso!");
                     } else {
-                        System.out.println("O Login De Medico Informado Ja Se Encontra Cadastrado.");
+                        System.out.println("O Login De Medico Informado, Ja Se Encontra Cadastrado.");
                     }
                     break;
                 }
                 case 2: {
+                    System.out.println("Informe a Nova Senha Do Medico: ");
+                    String novaSenhaMedico = scanner.nextLine();
 
+                    if (medicoDAO.atualizaSenhaMedico(medico.getPessoa().getLoginPessoa(),
+                            medico.getPessoa().getSenhaPessoa(), novaSenhaMedico) == true) {
+                        System.out.println("A Senha De Medico Foi Atualizada Com Sucesso!");
+                    } else {
+                        System.out.println("Nao Foi Possivel Atualizar a Senha de Medico.");
+                    }
                     break;
                 }
             }

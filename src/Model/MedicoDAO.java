@@ -59,14 +59,16 @@ public class MedicoDAO {
 
     public boolean atualizaLoginMedico(String login, String novoLogin) {
 
-        for (Medico medico : vetorMedico) {
+        if (!verificaSeloginEstaSendoUsado(novoLogin) == true) {
+            for (Medico medico : vetorMedico) {
 
-            if (medico != null && medico.getPessoa().getLoginPessoa().equals(login)) {
-                medico.getPessoa().setLoginPessoa(novoLogin);
-                medico.getPessoa().setDataModificacao(LocalDateTime.now());
-                return true;
+                if (medico != null && medico.getPessoa().getLoginPessoa().equals(login)) {
+                    medico.getPessoa().setLoginPessoa(novoLogin);
+                    medico.getPessoa().setDataModificacao(LocalDateTime.now());
+                    return true;
+                }
+
             }
-
         }
 
         return false;
@@ -84,6 +86,15 @@ public class MedicoDAO {
             }
         }
 
+        return false;
+    }
+
+    private boolean verificaSeloginEstaSendoUsado(String login) {
+        for (Medico medico : vetorMedico) {
+            if (medico != null && medico.getPessoa().getLoginPessoa().equals(login)) {
+                return true;
+            }
+        }
         return false;
     }
 
