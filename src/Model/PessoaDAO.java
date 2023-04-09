@@ -29,6 +29,14 @@ public class PessoaDAO {
         Pessoa pessoa5 = new Pessoa("Juliana", "789101010", "rua da batata", "3333",
                 "ju25", "123", "Medico", agora);
         adicionaPessoa(pessoa5);
+        
+        Pessoa pessoa6 = new Pessoa("Eduardo Cornelio", "456666", "Rua do Arrombado", "2424",
+                "edu69", "12", "Paciente", agora);
+        adicionaPessoa(pessoa6);
+        
+        Pessoa pessoa7 = new Pessoa("Eduardo Cornelio", "456666", "Rua do Arrombado" , "2424",
+                "capeta", "24", "Dono de Franquia", agora);
+        adicionaPessoa(pessoa7);
 
     }
 

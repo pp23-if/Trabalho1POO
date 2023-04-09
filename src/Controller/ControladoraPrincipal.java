@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.FranquiaDAO;
 import Model.Medico;
 import Model.MedicoDAO;
 import Model.Pessoa;
@@ -17,6 +18,7 @@ public class ControladoraPrincipal {
     /*Instanciando os DAO.*/
     PessoaDAO pessoaDAO = new PessoaDAO();
     MedicoDAO medicoDAO = new MedicoDAO(pessoaDAO);
+    FranquiaDAO franquiaDAO = new FranquiaDAO(pessoaDAO);
 
     public ControladoraPrincipal() {
 
@@ -42,6 +44,8 @@ public class ControladoraPrincipal {
                     pessoaDAO.mostraTodasPessoas();
                     System.out.println("\nMostrando Todas os Medicos Cadastrados: " + "\n");
                     medicoDAO.mostraTodosMedicos();
+                    System.out.println("\nMostrando Todas as Franquias Cadastradas: " + "\n");
+                    franquiaDAO.mostraTodasFranquias();
                     break;
                 }
 

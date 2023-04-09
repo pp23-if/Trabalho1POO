@@ -24,8 +24,6 @@ public class MedicoDAO {
             adicionaMedico(medico2);
         }
         
-        
-        
     }
     
     
