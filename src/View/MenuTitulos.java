@@ -45,14 +45,14 @@ public class MenuTitulos {
 
         StringBuilder builder = new StringBuilder("");
 
-        builder.append("\n============ Menu Alteracao De Dados Paciente ===========");
+        builder.append("\n============ Menu Atualizacao De Dados Paciente ===========");
         builder.append("\n0 - Para sair");
-        builder.append("\n1 - Alterar nome: ");
-        builder.append("\n2 - Alterar Cpf: ");
-        builder.append("\n3 - Alterar Endereco: ");
-        builder.append("\n4 - Alterar Telefone: ");
-        builder.append("\n5 - Alterar Login: ");
-        builder.append("\n6 - Alterar Senha: ");
+        builder.append("\n1 - Atualizar Nome: ");
+        builder.append("\n2 - Atualizar Cpf: ");
+        builder.append("\n3 - Atualizar Endereco: ");
+        builder.append("\n4 - Atualizar Telefone: ");
+        builder.append("\n5 - Atualizar Login: ");
+        builder.append("\n6 - Atualizar Senha: ");
         builder.append("\n\nOpcao: ");
 
         System.out.print(builder.toString());

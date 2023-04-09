@@ -31,10 +31,11 @@ public class MenuTitulosMedico {
 
         StringBuilder builder = new StringBuilder("");
 
-        builder.append("\n============ Menu Alteracao De Dados Medico ===========");
+        builder.append("\n============ Menu Atualizacao De Dados Medico ===========");
         builder.append("\n0 - Para sair");
-        builder.append("\n1 - Alterar Login Medico: ");
-        builder.append("\n2 - Alterar Senha Medico: ");
+        builder.append("\n1 - Atualizar Login Medico: ");
+        builder.append("\n2 - Atualizar Senha Medico: ");
+        builder.append("\n3 - Atualizar Telefone Medico: ");
         builder.append("\n\nOpcao: ");
 
         System.out.print(builder.toString());

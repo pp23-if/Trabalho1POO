@@ -22,6 +22,14 @@ public class PessoaDAO {
                 "lm23", "456", "Medico", agora);
         adicionaPessoa(pessoa3);
         
+         Pessoa pessoa4 = new Pessoa("Juliana", "789101010", "rua da batata", "3333",
+                "ju", "10", "Paciente", agora);
+        adicionaPessoa(pessoa4);
+        
+        Pessoa pessoa5 = new Pessoa("Juliana", "789101010", "rua da batata", "3333",
+                "ju25", "123", "Medico", agora);
+        adicionaPessoa(pessoa5);
+        
     }
 
     private int proximaPosilivrePessoa() {
@@ -99,7 +107,7 @@ public class PessoaDAO {
                 if (pessoa != null && pessoa.getNomePessoa().equals(nomePessoa)) {
                     pessoa.setNomePessoa(novoNomePessoa);
                     pessoa.setDataModificacao(LocalDateTime.now());
-                    return true;
+                    //return true;
 
                 }
 
@@ -138,15 +146,16 @@ public class PessoaDAO {
         return false;
     }
 
-    public boolean atualizaTelefonePessoa(String telefone, String novoTelefone) {
+    public boolean atualizaTelefonePessoa(String telefone, String novoTelefone, String tipoUsuario) {
 
         if (!verificaSeTelefoneEstaSendoUsado(novoTelefone) == true) {
             for (Pessoa pessoa : vetorPessoa) {
 
-                if (pessoa != null && pessoa.getTelefonePessoa().equals(telefone)) {
+                if (pessoa != null && pessoa.getTelefonePessoa().equals(telefone) 
+                        && pessoa.getTipoUsuario().equals(tipoUsuario)) {
                     pessoa.setTelefonePessoa(novoTelefone);
                     pessoa.setDataModificacao(LocalDateTime.now());
-                    return true;
+                    //return true;
                 }
 
             }

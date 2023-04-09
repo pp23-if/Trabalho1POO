@@ -58,7 +58,7 @@ public class MedicoControladora {
                     break;
                 }
                 case 2: {
-                    System.out.println("Informe a Nova Senha Do Medico: ");
+                    System.out.println("Informe a Nova Senha De Medico: ");
                     String novaSenhaMedico = scanner.nextLine();
 
                     if (medicoDAO.atualizaSenhaMedico(medico.getPessoa().getLoginPessoa(),
@@ -66,6 +66,19 @@ public class MedicoControladora {
                         System.out.println("A Senha De Medico Foi Atualizada Com Sucesso!");
                     } else {
                         System.out.println("Nao Foi Possivel Atualizar a Senha de Medico.");
+                    }
+                    break;
+                }
+                
+                case 3: {
+                    System.out.println("Informe o Novo Telefone De Medico: ");
+                    String novaSenhaMedico = scanner.nextLine();
+
+                    if (medicoDAO.atualizaTelefoneMedico(medico.getPessoa().getTelefonePessoa(),
+                           novaSenhaMedico) == true) {
+                        System.out.println("O Telefone De Medico Foi Atualizado Com Sucesso!");
+                    } else {
+                        System.out.println("Nao Foi Possivel Atualizar o Telefone de Medico.");
                     }
                     break;
                 }

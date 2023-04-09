@@ -6,15 +6,29 @@ public class MedicoDAO {
 
     private Medico[] vetorMedico = new Medico[20];
 
-    public MedicoDAO(PessoaDAO pessoaDAO) {
+    public MedicoDAO(PessoaDAO pessoaDAO) 
+    {
 
-        Pessoa pessoaMedico = pessoaDAO.buscaPessoaCadastrada("lm23", "456");
+        Pessoa pessoaMedico1 = pessoaDAO.buscaPessoaCadastrada("lm23", "456");
 
-        if (pessoaMedico != null) {
-            Medico medico = new Medico("ABC-123", pessoaMedico, "Ortopedista", LocalDateTime.now());
-            adicionaMedico(medico);
+        if (pessoaMedico1 != null) {
+            Medico medico1 = new Medico("ABC-123", pessoaMedico1, "Ortopedista", LocalDateTime.now());
+            adicionaMedico(medico1);
         }
+        
+        
+        Pessoa pessoaMedico2 = pessoaDAO.buscaPessoaCadastrada("ju25", "123");
+
+        if (pessoaMedico2 != null) {
+            Medico medico2 = new Medico("DEF-456", pessoaMedico2, "Nutricionista", LocalDateTime.now());
+            adicionaMedico(medico2);
+        }
+        
+        
+        
     }
+    
+    
 
     private int proximaPosilivreMedico() {
         for (int i = 0; i < vetorMedico.length; i++) {
@@ -88,6 +102,22 @@ public class MedicoDAO {
 
         return false;
     }
+    
+     public boolean atualizaTelefoneMedico(String telefone, String novoTelefone) {
+
+        for (Medico medico : vetorMedico) {
+
+           if(medico != null && medico.getPessoa().getTelefonePessoa().equals(telefone))
+           {
+               medico.getPessoa().setTelefonePessoa(novoTelefone);
+               medico.getPessoa().setDataModificacao(LocalDateTime.now());
+               return true;
+           }
+        }
+
+        return false;
+    }
+    
 
     private boolean verificaSeloginEstaSendoUsado(String login) {
         for (Medico medico : vetorMedico) {

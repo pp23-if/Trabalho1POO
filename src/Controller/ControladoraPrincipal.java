@@ -204,7 +204,8 @@ public class ControladoraPrincipal {
                     System.out.println("Informe o Novo Telefone: ");
                     String novoTelefone = scanner.nextLine();
 
-                    if (pessoaDAO.atualizaTelefonePessoa(pessoa.getTelefonePessoa(), novoTelefone) == true) {
+                    if (pessoaDAO.atualizaTelefonePessoa(pessoa.getTelefonePessoa(), novoTelefone, 
+                            pessoa.getTipoUsuario()) == true) {
                         System.out.println("O Telefone Foi Atualizado Com Sucesso!");
                     } else {
                         System.out.println("Telefone Informado Ja Se Encontra Cadastrado.");
