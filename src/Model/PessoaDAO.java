@@ -13,23 +13,23 @@ public class PessoaDAO {
         Pessoa pessoa = new Pessoa("pedro", "123", "1", "1",
                 "1", "1", "Paciente", agora);
         adicionaPessoa(pessoa);
-        
+
         Pessoa pessoa2 = new Pessoa("Lucas", "7272", "rua 32", "9999",
                 "lu123", "2", "Paciente", agora);
         adicionaPessoa(pessoa2);
-        
-         Pessoa pessoa3 = new Pessoa("Lucas", "7272", "rua 32", "9999",
+
+        Pessoa pessoa3 = new Pessoa("Lucas", "7272", "rua 32", "9999",
                 "lm23", "456", "Medico", agora);
         adicionaPessoa(pessoa3);
-        
-         Pessoa pessoa4 = new Pessoa("Juliana", "789101010", "rua da batata", "3333",
+
+        Pessoa pessoa4 = new Pessoa("Juliana", "789101010", "rua da batata", "3333",
                 "ju", "10", "Paciente", agora);
         adicionaPessoa(pessoa4);
-        
+
         Pessoa pessoa5 = new Pessoa("Juliana", "789101010", "rua da batata", "3333",
                 "ju25", "123", "Medico", agora);
         adicionaPessoa(pessoa5);
-        
+
     }
 
     private int proximaPosilivrePessoa() {
@@ -98,52 +98,60 @@ public class PessoaDAO {
         return null;
     }
 
-    public boolean atualizaNomePessoa(String nomePessoa, String novoNomePessoa) {
+    public boolean atualizaNomePessoa(String nomePessoa, String novoNomePessoa, String cpf) {
 
+          boolean atualizado = false;
+          
         if (!verificaSeNomeEstaSendoUsado(novoNomePessoa) == true) {
 
             for (Pessoa pessoa : vetorPessoa) {
 
-                if (pessoa != null && pessoa.getNomePessoa().equals(nomePessoa)) {
+                if (pessoa != null && pessoa.getNomePessoa().equals(nomePessoa) && 
+                        pessoa.getCpf().equals(cpf)) {
                     pessoa.setNomePessoa(novoNomePessoa);
                     pessoa.setDataModificacao(LocalDateTime.now());
-                    //return true;
+                    atualizado = true;
 
                 }
 
             }
         }
-        return false;
+        return atualizado;
 
     }
 
     public boolean atualizaCpfPessoa(String cpf, String novoCpf) {
-
+        
+          boolean atualizado = false;
+          
         if (!verificaSeCpfEstaSendoUsado(novoCpf) == true) {
             for (Pessoa pessoa : vetorPessoa) {
                 if (pessoa != null && pessoa.getCpf().equals(cpf)) {
                     pessoa.setCpf(novoCpf);
                     pessoa.setDataModificacao(LocalDateTime.now());
-                    return true;
+                    atualizado = true;
                 }
 
             }
         }
 
-        return false;
+        return atualizado;
     }
 
     public boolean atualizaEnderecoPessoa(String endereco, String novoEndereco) {
+        
+        boolean atualizado = false;
+        
         for (Pessoa pessoa : vetorPessoa) {
 
             if (pessoa != null && pessoa.getEnderecoPessoa().equals(endereco)) {
                 pessoa.setEnderecoPessoa(novoEndereco);
                 pessoa.setDataModificacao(LocalDateTime.now());
-                return true;
+                atualizado = true;
             }
 
         }
-        return false;
+        return atualizado;
     }
 
     public boolean atualizaTelefonePessoa(String telefone, String novoTelefone, String tipoUsuario) {
@@ -151,13 +159,12 @@ public class PessoaDAO {
         if (!verificaSeTelefoneEstaSendoUsado(novoTelefone) == true) {
             for (Pessoa pessoa : vetorPessoa) {
 
-                if (pessoa != null && pessoa.getTelefonePessoa().equals(telefone) 
+                if (pessoa != null && pessoa.getTelefonePessoa().equals(telefone)
                         && pessoa.getTipoUsuario().equals(tipoUsuario)) {
                     pessoa.setTelefonePessoa(novoTelefone);
                     pessoa.setDataModificacao(LocalDateTime.now());
-                    //return true;
+                    return true;
                 }
-
             }
         }
 

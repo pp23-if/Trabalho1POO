@@ -39,7 +39,7 @@ public class ControladoraPrincipal {
                 }
 
                 case 3: {
-                    System.out.println("\nMostrando Todas as Pessoas Cadastradas: ");
+                    System.out.println("\nMostrando Todas as Pessoas Cadastradas: " + "\n");
                     pessoaDAO.mostraTodasPessoas();
                     System.out.println("\nMostrando Todas os Medicos Cadastrados: " + "\n");
                     medicoDAO.mostraTodosMedicos();
@@ -168,7 +168,7 @@ public class ControladoraPrincipal {
                     System.out.println("Informe o Novo Nome: ");
                     String novoNomePessoa = scanner.nextLine();
 
-                    if (pessoaDAO.atualizaNomePessoa(pessoa.getNomePessoa(), novoNomePessoa) == true) {
+                    if (pessoaDAO.atualizaNomePessoa(pessoa.getNomePessoa(), novoNomePessoa,pessoa.getCpf()) == true) {
                         System.out.println("O Nome Foi Atualizado Com Sucesso!");
                     } else {
                         System.out.println("Nome Informado Ja Se Encontra Cadastrado.");
