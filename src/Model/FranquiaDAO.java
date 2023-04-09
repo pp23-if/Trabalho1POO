@@ -19,7 +19,17 @@ public class FranquiaDAO {
         }
     }
 
-    
+    public Franquia buscaFranquia(String login, String senha)
+    {
+        for (Franquia franquia : vetorFranquia) {
+            if(franquia != null && franquia.getPessoa().getLoginPessoa().equals(login) &&
+                    franquia.getPessoa().getSenhaPessoa().equals(senha))
+            {
+               return franquia; 
+            }
+        }
+        return null;
+    }
     
     public boolean adicionaFranquia(Franquia franquia) {
         int proxima = proximaPosilivreFranquia();

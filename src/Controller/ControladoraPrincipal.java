@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Franquia;
 import Model.FranquiaDAO;
 import Model.Medico;
 import Model.MedicoDAO;
@@ -131,6 +132,13 @@ public class ControladoraPrincipal {
                         pessoaLogada.getSenhaPessoa());
 
                 MedicoControladora medicoControladora = new MedicoControladora(medico, medicoDAO);
+            }
+            
+            else if(pessoaLogada.getTipoUsuario().equals("Dono de Franquia"))
+            {
+                Franquia franquia = franquiaDAO.buscaFranquia(pessoaLogada.getLoginPessoa(),pessoaLogada.getSenhaPessoa());
+                
+                FranquiaControladora franquiaControladora = new FranquiaControladora(franquia, franquiaDAO);
             }
 
         } else {

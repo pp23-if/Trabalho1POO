@@ -1,6 +1,7 @@
 package Model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Franquia {
@@ -118,27 +119,27 @@ public class Franquia {
     @Override
     public String toString() {
 
+        DateTimeFormatter fd = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
         if (dataModificacao == null) {
             return "ID - Franquia: " + this.idFranquia + "\n"
                     + "Franquia: " + this.nomeFranquia + "\n"
                     + "Cnpj: " + this.cnpj + "\n"
                     + "Cidade: " + this.cidade + "\n"
-                    + "Endereco" + this.enderecoFranquia + "\n"
-                    + "Dono:" + "\n"
-                    + pessoa.getNomePessoa() + "\n"
-                    + pessoa.getCpf() + "\n"
-                    + "Data e Hora de Criacao: " + this.dataCriacao + "\n";
+                    + "Endereco: " + this.enderecoFranquia + "\n"
+                    + "Dono: " + pessoa.getNomePessoa() + "\n"
+                    + "Cpf: " + pessoa.getCpf() + "\n"
+                    + "Data e Hora de Criacao: " + fd.format(dataCriacao) + "\n";
         } else {
             return "ID - Franquia: " + this.idFranquia + "\n"
                     + "Franquia: " + this.nomeFranquia + "\n"
                     + "Cnpj: " + this.cnpj + "\n"
                     + "Cidade: " + this.cidade + "\n"
-                    + "Endereco" + this.enderecoFranquia + "\n"
-                    + "Dono:" + "\n"
-                    + pessoa.getNomePessoa() + "\n"
-                    + pessoa.getCpf() + "\n"
-                    + "Data e Hora de Criacao: " + this.dataCriacao + "\n"
-                    + "Data e hora de Modificacao: " + this.dataModificacao + "\n";
+                    + "Endereco: " + this.enderecoFranquia + "\n"
+                    + "Dono: " + pessoa.getNomePessoa() + "\n"
+                    + "Cpf: " + pessoa.getCpf() + "\n"
+                    + "Data e Hora de Criacao: " + fd.format(dataCriacao) + "\n"
+                    + "Data e hora de Modificacao: " + fd.format(dataModificacao) + "\n";
         }
 
     }
