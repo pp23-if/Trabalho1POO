@@ -1,0 +1,146 @@
+package Model;
+
+import java.time.LocalDateTime;
+import java.util.Objects;
+
+public class Franquia {
+
+    private static int sequence = 1;
+    private int idFranquia;
+    private String nomeFranquia;
+    private String cnpj;
+    private String cidade;
+    private String enderecoFranquia;
+    private Pessoa pessoa;
+    private LocalDateTime dataCriacao;
+    private LocalDateTime dataModificacao;
+
+    public int getIdFranquia() {
+        return idFranquia;
+    }
+
+    public String getNomeFranquia() {
+        return nomeFranquia;
+    }
+
+    public void setNomeFranquia(String nomeFranquia) {
+        this.nomeFranquia = nomeFranquia;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getEnderecoFranquia() {
+        return enderecoFranquia;
+    }
+
+    public void setEnderecoFranquia(String enderecoFranquia) {
+        this.enderecoFranquia = enderecoFranquia;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public void setDataCriacao(LocalDateTime dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public LocalDateTime getDataModificacao() {
+        return dataModificacao;
+    }
+
+    public void setDataModificacao(LocalDateTime dataModificacao) {
+        this.dataModificacao = dataModificacao;
+    }
+
+    public Franquia(String nomeFranquia, String cnpj, String cidade,
+            String enderecoFranquia, Pessoa pessoa, LocalDateTime dataCriacao) {
+        this.idFranquia = sequence++;
+        this.nomeFranquia = nomeFranquia;
+        this.cnpj = cnpj;
+        this.cidade = cidade;
+        this.enderecoFranquia = enderecoFranquia;
+        this.pessoa = pessoa;
+        this.dataCriacao = dataCriacao;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + this.idFranquia;
+        hash = 97 * hash + Objects.hashCode(this.nomeFranquia);
+        hash = 97 * hash + Objects.hashCode(this.cnpj);
+        hash = 97 * hash + Objects.hashCode(this.cidade);
+        hash = 97 * hash + Objects.hashCode(this.enderecoFranquia);
+        hash = 97 * hash + Objects.hashCode(this.pessoa);
+        hash = 97 * hash + Objects.hashCode(this.dataCriacao);
+        hash = 97 * hash + Objects.hashCode(this.dataModificacao);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Franquia other = (Franquia) obj;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+
+        if (dataModificacao == null) {
+            return "ID - Franquia: " + this.idFranquia + "\n"
+                    + "Franquia: " + this.nomeFranquia + "\n"
+                    + "Cnpj: " + this.cnpj + "\n"
+                    + "Cidade: " + this.cidade + "\n"
+                    + "Endereco" + this.enderecoFranquia + "\n"
+                    + "Dono:" + "\n"
+                    + pessoa.getNomePessoa() + "\n"
+                    + pessoa.getCpf() + "\n"
+                    + "Data e Hora de Criacao: " + this.dataCriacao + "\n";
+        } else {
+            return "ID - Franquia: " + this.idFranquia + "\n"
+                    + "Franquia: " + this.nomeFranquia + "\n"
+                    + "Cnpj: " + this.cnpj + "\n"
+                    + "Cidade: " + this.cidade + "\n"
+                    + "Endereco" + this.enderecoFranquia + "\n"
+                    + "Dono:" + "\n"
+                    + pessoa.getNomePessoa() + "\n"
+                    + pessoa.getCpf() + "\n"
+                    + "Data e Hora de Criacao: " + this.dataCriacao + "\n"
+                    + "Data e hora de Modificacao: " + this.dataModificacao + "\n";
+        }
+
+    }
+
+}

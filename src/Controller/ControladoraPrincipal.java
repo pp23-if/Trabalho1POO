@@ -18,7 +18,6 @@ public class ControladoraPrincipal {
     PessoaDAO pessoaDAO = new PessoaDAO();
     MedicoDAO medicoDAO = new MedicoDAO(pessoaDAO);
 
-    /*Instanciando as Controladoras.*/
     public ControladoraPrincipal() {
 
         int opcao;
@@ -121,7 +120,9 @@ public class ControladoraPrincipal {
             if (pessoaLogada.getTipoUsuario().equals("Paciente")) {
 
                 menuOpcoesPaciente(pessoaLogada);
+
             } else if (pessoaLogada.getTipoUsuario().equals("Medico")) {
+
                 Medico medico = medicoDAO.mostraDadosMedicoLogado(pessoaLogada.getLoginPessoa(),
                         pessoaLogada.getSenhaPessoa());
 
@@ -168,7 +169,7 @@ public class ControladoraPrincipal {
                     System.out.println("Informe o Novo Nome: ");
                     String novoNomePessoa = scanner.nextLine();
 
-                    if (pessoaDAO.atualizaNomePessoa(pessoa.getNomePessoa(), novoNomePessoa,pessoa.getCpf()) == true) {
+                    if (pessoaDAO.atualizaNomePessoa(pessoa.getNomePessoa(), novoNomePessoa, pessoa.getCpf()) == true) {
                         System.out.println("O Nome Foi Atualizado Com Sucesso!");
                     } else {
                         System.out.println("Nome Informado Ja Se Encontra Cadastrado.");
@@ -204,7 +205,7 @@ public class ControladoraPrincipal {
                     System.out.println("Informe o Novo Telefone: ");
                     String novoTelefone = scanner.nextLine();
 
-                    if (pessoaDAO.atualizaTelefonePessoa(pessoa.getTelefonePessoa(), novoTelefone, 
+                    if (pessoaDAO.atualizaTelefonePessoa(pessoa.getTelefonePessoa(), novoTelefone,
                             pessoa.getTipoUsuario()) == true) {
                         System.out.println("O Telefone Foi Atualizado Com Sucesso!");
                     } else {
