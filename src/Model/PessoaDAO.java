@@ -54,7 +54,7 @@ public class PessoaDAO {
         }
     }
 
-    public Pessoa mostraDadosPessoaLogada(String login, String senha) {
+    public Pessoa buscaPessoaCadastrada(String login, String senha) {
         for (Pessoa pessoa : vetorPessoa) {
 
             if (pessoa != null && pessoa.getLoginPessoa().equals(login)

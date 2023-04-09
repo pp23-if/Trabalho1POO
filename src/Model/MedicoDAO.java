@@ -8,7 +8,7 @@ public class MedicoDAO {
 
     public MedicoDAO(PessoaDAO pessoaDAO) {
 
-        Pessoa pessoaMedico = pessoaDAO.mostraDadosPessoaLogada("lm23", "456");
+        Pessoa pessoaMedico = pessoaDAO.buscaPessoaCadastrada("lm23", "456");
 
         if (pessoaMedico != null) {
             Medico medico = new Medico("ABC-123", pessoaMedico, "Ortopedista", LocalDateTime.now());

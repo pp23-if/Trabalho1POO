@@ -146,7 +146,7 @@ public class ControladoraPrincipal {
 
             switch (opcao) {
                 case 1: {
-                    System.out.println("\n" + pessoaDAO.mostraDadosPessoaLogada(pessoa.getLoginPessoa(),
+                    System.out.println("\n" + pessoaDAO.buscaPessoaCadastrada(pessoa.getLoginPessoa(),
                             pessoa.getSenhaPessoa()));
                     break;
                 }
