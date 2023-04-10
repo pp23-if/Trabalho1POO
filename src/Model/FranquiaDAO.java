@@ -12,21 +12,12 @@ public class FranquiaDAO {
         
         if(donoDeFranquia != null)
         {
-            Franquia franquia = new Franquia("Unimed", "123456789-30", "Patos de Minas",
+            Franquia franquia = new Franquia("Unimed".toUpperCase(), "123456789-30", "Patos de Minas",
                     "Rua Principal - Centro", donoDeFranquia, LocalDateTime.now());
             
             adicionaFranquia(franquia);
         }
         
-        Pessoa donoDeFranquia2 = pessoaDAO.buscaPessoaCadastrada("pp23", "lula13");
-        
-        if(donoDeFranquia2 != null)
-        {
-            Franquia franquia2 = new Franquia("Unimed", "123456789-30", "Patos de Minas",
-                    "Rua Principal - Centro", donoDeFranquia2, LocalDateTime.now());
-            
-            adicionaFranquia(franquia2);
-        }
     }
 
     public Franquia buscaFranquia(Franquia f)

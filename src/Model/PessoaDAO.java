@@ -37,10 +37,6 @@ public class PessoaDAO {
                 "Edu28", "24", "Dono de Franquia", agora);
         adicionaPessoa(pessoa7);
         
-         Pessoa pessoa8 = new Pessoa("pedro Augusto", "456666", "Rua dos Limoes" , "33112020",
-                "pp23", "lula13", "Dono de Franquia", agora);
-        adicionaPessoa(pessoa8);
-
     }
 
     private int proximaPosilivrePessoa() {
