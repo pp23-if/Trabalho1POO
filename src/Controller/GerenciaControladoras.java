@@ -56,9 +56,7 @@ public class GerenciaControladoras {
 
     }
 
-    
-    
-     private void cadastrarPessoa() {
+    private void cadastrarPessoa() {
         LocalDateTime agora = LocalDateTime.now();
 
         System.out.println("Informe o Nome da Pessoa: ");
@@ -103,9 +101,8 @@ public class GerenciaControladoras {
         }
 
     }
-    
-    
-     private void fazLogin() {
+
+    private void fazLogin() {
         System.out.println("\nLogin: ");
         String login = scanner.nextLine();
         System.out.println("\n");
@@ -119,25 +116,25 @@ public class GerenciaControladoras {
         gerenciaControladoras(pessoaLogada);
 
     }
-    
-    
+
     private void gerenciaControladoras(Pessoa pessoaLogada) {
+        
         if (pessoaLogada != null) {
             System.out.println("Login efetuado Com Sucesso!");
             System.out.println("Logado Como: " + pessoaLogada.getTipoUsuario());
 
             if (pessoaLogada.getTipoUsuario().equals("Paciente")) {
 
-                //menuOpcoesPaciente(pessoaLogada);
+                PacienteControladora pacienteControladora = new PacienteControladora(pessoaLogada, pessoaDAO);
 
             } else if (pessoaLogada.getTipoUsuario().equals("Medico")) {
 
                 Medico medico = medicoDAO.buscaMedicoAtravesdaPessoaVinculada(pessoaLogada);
 
                 MedicoControladora medicoControladora = new MedicoControladora(medico, medicoDAO);
-                
+
             } else if (pessoaLogada.getTipoUsuario().equals("Dono de Franquia")) {
-                
+
                 Franquia franquia = franquiaDAO.buscaFranquiaAtravesDaPessoaVinculada(pessoaLogada);
 
                 FranquiaControladora franquiaControladora = new FranquiaControladora(franquia, franquiaDAO);
@@ -148,9 +145,5 @@ public class GerenciaControladoras {
                     + "Nao Cadastrado.");
         }
     }
-    
-    
-    
-    
-    
+
 }

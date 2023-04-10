@@ -12,18 +12,14 @@ import java.util.Scanner;
 
 public class ControladoraPrincipal {
 
-    Scanner scanner = new Scanner(System.in);
+    /*Scanner scanner = new Scanner(System.in);
 
     MenuTitulos Tela = new MenuTitulos();
 
-    /*Instanciando os DAO.*/
-    PessoaDAO pessoaDAO = new PessoaDAO();
-    MedicoDAO medicoDAO = new MedicoDAO(pessoaDAO);
-    FranquiaDAO franquiaDAO = new FranquiaDAO(pessoaDAO);
-
+   
     public ControladoraPrincipal() {
 
-        /*int opcao;
+        int opcao;
 
         do {
 
@@ -52,11 +48,11 @@ public class ControladoraPrincipal {
 
             }
 
-        } while (opcao != 0);*/
+        } while (opcao != 0);
 
     }
 
-    /*private void cadastrarPessoa() {
+    private void cadastrarPessoa() {
         LocalDateTime agora = LocalDateTime.now();
 
         System.out.println("Informe o Nome da Pessoa: ");
@@ -143,9 +139,9 @@ public class ControladoraPrincipal {
             System.out.println("Nao Foi Possivel Fazer Login: Usuario Nao Encontrado OU "
                     + "Nao Cadastrado.");
         }
-    }*/
+    }
 
-    private void menuOpcoesPaciente(Pessoa pessoa) {
+   private void menuOpcoesPaciente(Pessoa pessoa) {
 
         int opcao;
 
@@ -252,6 +248,6 @@ public class ControladoraPrincipal {
             }
 
         } while (opcao != 0);
-    }
+    }*/
 
 }
