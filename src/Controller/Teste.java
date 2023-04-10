@@ -7,7 +7,7 @@ public class Teste {
     
     public static void main(String[] args) {
       
-        ControladoraPrincipal controladoraPrincipal = new ControladoraPrincipal();
+       GerenciaControladoras gerenciaControladoras = new GerenciaControladoras();
     }
     
 }

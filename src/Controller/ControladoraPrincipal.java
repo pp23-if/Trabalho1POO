@@ -23,7 +23,7 @@ public class ControladoraPrincipal {
 
     public ControladoraPrincipal() {
 
-        int opcao;
+        /*int opcao;
 
         do {
 
@@ -52,11 +52,11 @@ public class ControladoraPrincipal {
 
             }
 
-        } while (opcao != 0);
+        } while (opcao != 0);*/
 
     }
 
-    private void cadastrarPessoa() {
+    /*private void cadastrarPessoa() {
         LocalDateTime agora = LocalDateTime.now();
 
         System.out.println("Informe o Nome da Pessoa: ");
@@ -127,24 +127,15 @@ public class ControladoraPrincipal {
                 menuOpcoesPaciente(pessoaLogada);
 
             } else if (pessoaLogada.getTipoUsuario().equals("Medico")) {
-                
-                System.out.println("\nA pessoa que ENTROU foi: " + pessoaLogada);    
-                
-                Medico medico = medicoDAO.buscaMedicoAtravesdaPessoaVinculada(pessoaLogada);
-                
-                 System.out.println("\n O Medico RETORNADO foi: " + medico); 
-                 
-                 boolean saoIguais = medico.getPessoa().equals(pessoaLogada);
-                 
-                 System.out.println(saoIguais);
 
-                //MedicoControladora medicoControladora = new MedicoControladora(medico, medicoDAO);
-            }
-            
-            else if(pessoaLogada.getTipoUsuario().equals("Dono de Franquia"))
-            {
-                Franquia franquia = franquiaDAO.buscaFranquiaAtravesDaPessoaVinculada(pessoaLogada);
+                Medico medico = medicoDAO.buscaMedicoAtravesdaPessoaVinculada(pessoaLogada);
+
+                MedicoControladora medicoControladora = new MedicoControladora(medico, medicoDAO);
                 
+            } else if (pessoaLogada.getTipoUsuario().equals("Dono de Franquia")) {
+                
+                Franquia franquia = franquiaDAO.buscaFranquiaAtravesDaPessoaVinculada(pessoaLogada);
+
                 FranquiaControladora franquiaControladora = new FranquiaControladora(franquia, franquiaDAO);
             }
 
@@ -152,7 +143,7 @@ public class ControladoraPrincipal {
             System.out.println("Nao Foi Possivel Fazer Login: Usuario Nao Encontrado OU "
                     + "Nao Cadastrado.");
         }
-    }
+    }*/
 
     private void menuOpcoesPaciente(Pessoa pessoa) {
 

@@ -14,9 +14,9 @@ public class MenuTitulosMedico {
 
         builder.append("\n============ Menu Medico ===========");
         builder.append("\n0 - Para Sair");
-        builder.append("\n1 - Ver Meu Cadastro Medico");
-        builder.append("\n2 - Atualizar Meus Dados: ");
-        builder.append("\n3 - Excluir Meus Dados: ");
+        builder.append("\n1 - Ver Cadastro de Medico");
+        builder.append("\n2 - Atualizar Dados de Medico: ");
+        builder.append("\n3 - Excluir Dados de Medico: ");
         builder.append("\n4 - : ");
         builder.append("\n5 - : ");
         builder.append("\n6 - : ");

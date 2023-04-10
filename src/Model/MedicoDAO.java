@@ -6,8 +6,7 @@ public class MedicoDAO {
 
     private Medico[] vetorMedico = new Medico[20];
 
-    public MedicoDAO(PessoaDAO pessoaDAO) 
-    {
+    public MedicoDAO(PessoaDAO pessoaDAO) {
 
         Pessoa pessoaMedico1 = pessoaDAO.buscaPessoaCadastrada("lm23", "456");
 
@@ -15,18 +14,15 @@ public class MedicoDAO {
             Medico medico1 = new Medico("ABC-123", pessoaMedico1, "Ortopedista", LocalDateTime.now());
             adicionaMedico(medico1);
         }
-        
-        
+
         Pessoa pessoaMedico2 = pessoaDAO.buscaPessoaCadastrada("ju25", "123");
 
         if (pessoaMedico2 != null) {
             Medico medico2 = new Medico("DEF-456", pessoaMedico2, "Nutricionista", LocalDateTime.now());
             adicionaMedico(medico2);
         }
-        
+
     }
-    
-    
 
     private int proximaPosilivreMedico() {
         for (int i = 0; i < vetorMedico.length; i++) {
@@ -60,42 +56,31 @@ public class MedicoDAO {
     public Medico buscaMedico(Medico m) {
 
         for (Medico medico : vetorMedico) {
-            
-            if(medico != null && medico.equals(m))
-            {
+
+            if (medico != null && medico.equals(m)) {
                 return medico;
             }
         }
         return null;
     }
-    
-     public Medico buscaMedicoAtravesdaPessoaVinculada(Pessoa pessoaLogada) {
 
-          for (Medico medico : vetorMedico) {
-           if(medico != null && medico.getPessoa().equals(pessoaLogada))
-           {
-               return medico;
-           }
+    public Medico buscaMedicoAtravesdaPessoaVinculada(Pessoa pessoaLogada) {
+
+        for (Medico medico : vetorMedico) {
+            if (medico != null && medico.getPessoa().equals(pessoaLogada)) {
+                return medico;
+            }
         }
-         
-         
-        /*for (Medico medico : vetorMedico) {
-           if(medico != null && medico.getPessoa().getLoginPessoa().equals(pessoaLogada.getLoginPessoa()) && 
-                   medico.getPessoa().getSenhaPessoa().equals(pessoaLogada.getSenhaPessoa()))
-           {
-               return medico;
-           }
-        }*/
+
         return null;
     }
 
-
-    public boolean atualizaLoginMedico(String login, String novoLogin) {
+    public boolean atualizaLoginMedico(Medico m, String novoLogin) {
 
         if (!verificaSeloginEstaSendoUsado(novoLogin) == true) {
             for (Medico medico : vetorMedico) {
 
-                if (medico != null && medico.getPessoa().getLoginPessoa().equals(login)) {
+                if (medico != null && medico.equals(m)) {
                     medico.getPessoa().setLoginPessoa(novoLogin);
                     medico.getPessoa().setDataModificacao(LocalDateTime.now());
                     return true;
@@ -107,12 +92,11 @@ public class MedicoDAO {
         return false;
     }
 
-    public boolean atualizaSenhaMedico(String login, String senha, String novaSenha) {
+    public boolean atualizaSenhaMedico(Medico m, String novaSenha) {
 
         for (Medico medico : vetorMedico) {
 
-            if (medico != null && medico.getPessoa().getLoginPessoa().equals(login)
-                    && medico.getPessoa().getSenhaPessoa().equals(senha)) {
+            if (medico != null && medico.equals(m)) {
                 medico.getPessoa().setSenhaPessoa(novaSenha);
                 medico.getPessoa().setDataModificacao(LocalDateTime.now());
                 return true;
@@ -121,26 +105,35 @@ public class MedicoDAO {
 
         return false;
     }
-    
-     public boolean atualizaTelefoneMedico(String telefone, String novoTelefone) {
 
-        for (Medico medico : vetorMedico) {
+    public boolean atualizaTelefoneMedico(Medico m, String novoTelefone) {
 
-           if(medico != null && medico.getPessoa().getTelefonePessoa().equals(telefone))
-           {
-               medico.getPessoa().setTelefonePessoa(novoTelefone);
-               medico.getPessoa().setDataModificacao(LocalDateTime.now());
-               return true;
-           }
+        if (!verificaSeTelefoneEstaSendoUsado(novoTelefone) == true) {
+            for (Medico medico : vetorMedico) {
+
+                if (medico != null && medico.equals(m)) {
+                    medico.getPessoa().setTelefonePessoa(novoTelefone);
+                    medico.getPessoa().setDataModificacao(LocalDateTime.now());
+                    return true;
+                }
+            }
         }
 
         return false;
     }
-    
 
     private boolean verificaSeloginEstaSendoUsado(String login) {
         for (Medico medico : vetorMedico) {
             if (medico != null && medico.getPessoa().getLoginPessoa().equals(login)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean verificaSeTelefoneEstaSendoUsado(String telefone) {
+        for (Medico medico : vetorMedico) {
+            if (medico != null && medico.getPessoa().getTelefonePessoa().equals(telefone)) {
                 return true;
             }
         }
