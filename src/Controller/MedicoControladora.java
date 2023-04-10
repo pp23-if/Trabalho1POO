@@ -25,8 +25,7 @@ public class MedicoControladora {
 
             switch (opcao) {
                 case 1: {
-                    System.out.println("\n" + medicoDAO.mostraDadosMedicoLogado(medico.getPessoa().getLoginPessoa(),
-                            medico.getPessoa().getSenhaPessoa()));
+                    System.out.println("\n" + medicoDAO.buscaMedico(medico));
                     break;
                 }
                 case 2: {

@@ -1,7 +1,6 @@
 package Model;
 
 import java.time.LocalDateTime;
-import java.util.Locale;
 
 public class PessoaDAO {
 
@@ -30,13 +29,17 @@ public class PessoaDAO {
                 "ju25", "123", "Medico", agora);
         adicionaPessoa(pessoa5);
         
-        Pessoa pessoa6 = new Pessoa("Eduardo Cornelio", "456666", "Rua do Arrombado", "2424",
-                "edu69", "12", "Paciente", agora);
+        Pessoa pessoa6 = new Pessoa("Eduardo Silvestre", "456666", "Rua dos Limoes", "33112020",
+                "dudu10", "12", "Paciente", agora);
         adicionaPessoa(pessoa6);
         
-        Pessoa pessoa7 = new Pessoa("Eduardo Cornelio", "456666", "Rua do Arrombado" , "2424",
-                "capeta", "24", "Dono de Franquia", agora);
+        Pessoa pessoa7 = new Pessoa("Eduardo Silvestre", "456666", "Rua dos Limoes" , "33112020",
+                "Edu28", "24", "Dono de Franquia", agora);
         adicionaPessoa(pessoa7);
+        
+         Pessoa pessoa8 = new Pessoa("pedro Augusto", "456666", "Rua dos Limoes" , "33112020",
+                "pp23", "lula13", "Dono de Franquia", agora);
+        adicionaPessoa(pessoa8);
 
     }
 

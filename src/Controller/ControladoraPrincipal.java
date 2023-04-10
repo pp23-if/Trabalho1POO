@@ -127,16 +127,23 @@ public class ControladoraPrincipal {
                 menuOpcoesPaciente(pessoaLogada);
 
             } else if (pessoaLogada.getTipoUsuario().equals("Medico")) {
+                
+                System.out.println("\nA pessoa que ENTROU foi: " + pessoaLogada);    
+                
+                Medico medico = medicoDAO.buscaMedicoAtravesdaPessoaVinculada(pessoaLogada);
+                
+                 System.out.println("\n O Medico RETORNADO foi: " + medico); 
+                 
+                 boolean saoIguais = medico.getPessoa().equals(pessoaLogada);
+                 
+                 System.out.println(saoIguais);
 
-                Medico medico = medicoDAO.mostraDadosMedicoLogado(pessoaLogada.getLoginPessoa(),
-                        pessoaLogada.getSenhaPessoa());
-
-                MedicoControladora medicoControladora = new MedicoControladora(medico, medicoDAO);
+                //MedicoControladora medicoControladora = new MedicoControladora(medico, medicoDAO);
             }
             
             else if(pessoaLogada.getTipoUsuario().equals("Dono de Franquia"))
             {
-                Franquia franquia = franquiaDAO.buscaFranquia(pessoaLogada.getLoginPessoa(),pessoaLogada.getSenhaPessoa());
+                Franquia franquia = franquiaDAO.buscaFranquiaAtravesDaPessoaVinculada(pessoaLogada);
                 
                 FranquiaControladora franquiaControladora = new FranquiaControladora(franquia, franquiaDAO);
             }

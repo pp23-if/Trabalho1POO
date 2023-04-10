@@ -57,17 +57,38 @@ public class MedicoDAO {
         }
     }
 
-    public Medico mostraDadosMedicoLogado(String login, String senha) {
+    public Medico buscaMedico(Medico m) {
 
         for (Medico medico : vetorMedico) {
-
-            if (medico != null && medico.getPessoa().getLoginPessoa().equals(login)
-                    && medico.getPessoa().getSenhaPessoa().equals(senha)) {
+            
+            if(medico != null && medico.equals(m))
+            {
                 return medico;
             }
         }
         return null;
     }
+    
+     public Medico buscaMedicoAtravesdaPessoaVinculada(Pessoa pessoaLogada) {
+
+          for (Medico medico : vetorMedico) {
+           if(medico != null && medico.getPessoa().equals(pessoaLogada))
+           {
+               return medico;
+           }
+        }
+         
+         
+        /*for (Medico medico : vetorMedico) {
+           if(medico != null && medico.getPessoa().getLoginPessoa().equals(pessoaLogada.getLoginPessoa()) && 
+                   medico.getPessoa().getSenhaPessoa().equals(pessoaLogada.getSenhaPessoa()))
+           {
+               return medico;
+           }
+        }*/
+        return null;
+    }
+
 
     public boolean atualizaLoginMedico(String login, String novoLogin) {
 

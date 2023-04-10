@@ -113,8 +113,34 @@ public class Franquia {
             return false;
         }
         final Franquia other = (Franquia) obj;
+        if (this.idFranquia != other.idFranquia) {
+            return false;
+        }
+        if (!Objects.equals(this.nomeFranquia, other.nomeFranquia)) {
+            return false;
+        }
+        if (!Objects.equals(this.cnpj, other.cnpj)) {
+            return false;
+        }
+        if (!Objects.equals(this.cidade, other.cidade)) {
+            return false;
+        }
+        if (!Objects.equals(this.enderecoFranquia, other.enderecoFranquia)) {
+            return false;
+        }
+        if (!Objects.equals(this.pessoa, other.pessoa)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataCriacao, other.dataCriacao)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataModificacao, other.dataModificacao)) {
+            return false;
+        }
         return true;
     }
+
+    
 
     @Override
     public String toString() {

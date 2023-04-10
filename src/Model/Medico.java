@@ -91,8 +91,29 @@ public class Medico {
             return false;
         }
         final Medico other = (Medico) obj;
+        if (this.idMedico != other.idMedico) {
+            return false;
+        }
+        if (!Objects.equals(this.crm, other.crm)) {
+            return false;
+        }
+        if (!Objects.equals(this.especialidade, other.especialidade)) {
+            return false;
+        }
+        if (!Objects.equals(this.pessoa, other.pessoa)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataCriacao, other.dataCriacao)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataModificacao, other.dataModificacao)) {
+            return false;
+        }
         return true;
     }
+
+    
+   
 
     @Override
     public String toString() {

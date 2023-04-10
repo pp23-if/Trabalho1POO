@@ -8,7 +8,7 @@ public class FranquiaDAO {
 
     public FranquiaDAO(PessoaDAO pessoaDAO) 
     {
-        Pessoa donoDeFranquia = pessoaDAO.buscaPessoaCadastrada("capeta", "24");
+        Pessoa donoDeFranquia = pessoaDAO.buscaPessoaCadastrada("Edu28", "24");
         
         if(donoDeFranquia != null)
         {
@@ -17,19 +17,42 @@ public class FranquiaDAO {
             
             adicionaFranquia(franquia);
         }
+        
+        Pessoa donoDeFranquia2 = pessoaDAO.buscaPessoaCadastrada("pp23", "lula13");
+        
+        if(donoDeFranquia2 != null)
+        {
+            Franquia franquia2 = new Franquia("Unimed", "123456789-30", "Patos de Minas",
+                    "Rua Principal - Centro", donoDeFranquia2, LocalDateTime.now());
+            
+            adicionaFranquia(franquia2);
+        }
     }
 
-    public Franquia buscaFranquia(String login, String senha)
+    public Franquia buscaFranquia(Franquia f)
     {
         for (Franquia franquia : vetorFranquia) {
-            if(franquia != null && franquia.getPessoa().getLoginPessoa().equals(login) &&
-                    franquia.getPessoa().getSenhaPessoa().equals(senha))
+            
+            if(franquia != null && franquia.equals(f))
             {
-               return franquia; 
+                return franquia;
             }
         }
         return null;
     }
+    
+    public Franquia buscaFranquiaAtravesDaPessoaVinculada(Pessoa pessoaLogada)
+    {
+        for (Franquia franquia : vetorFranquia) {
+            
+           if(franquia != null && franquia.getPessoa().equals(pessoaLogada))
+           {
+               return franquia;
+           }
+        }
+        return null;
+    }
+    
     
     public boolean adicionaFranquia(Franquia franquia) {
         int proxima = proximaPosilivreFranquia();

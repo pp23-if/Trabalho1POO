@@ -26,8 +26,7 @@ public class FranquiaControladora {
 
             switch (opcao) {
                 case 1: {
-                    System.out.println("\n" + franquiaDAO.buscaFranquia(franquia.getPessoa().getLoginPessoa(),
-                            franquia.getPessoa().getSenhaPessoa()));
+                    System.out.println("\n" + franquiaDAO.buscaFranquia(franquia));
                     break;
                 }
                 case 2: {
