@@ -133,7 +133,7 @@ public class GerenciaControladoras {
 
                 MedicoControladora medicoControladora = new MedicoControladora(medico, medicoDAO);
 
-            } else if (pessoaLogada.getTipoUsuario().equals("Dono de Franquia")) {
+            } else if (pessoaLogada.getTipoUsuario().equals("DonodeFranquia")) {
 
                 Franquia franquia = franquiaDAO.buscaFranquiaAtravesDaPessoaVinculada(pessoaLogada);
 

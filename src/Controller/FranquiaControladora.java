@@ -65,7 +65,7 @@ public class FranquiaControladora {
         Pessoa pessoa = pessoaDAO.buscaPessoaPorId(idPessoa);
         
         Pessoa pessoaDonoFranquia = new Pessoa(pessoa.getNomePessoa(), pessoa.getCpf(), pessoa.getEnderecoPessoa(), 
-                pessoa.getTelefonePessoa(), loginDonoFranquia, senhaDonoFranquia, "Dono de Franquia", LocalDateTime.now());
+                pessoa.getTelefonePessoa(), loginDonoFranquia, senhaDonoFranquia, "DonodeFranquia", LocalDateTime.now());
 
          pessoaDAO.adicionaPessoa(pessoaDonoFranquia);
         

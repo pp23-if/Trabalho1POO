@@ -34,7 +34,7 @@ public class PessoaDAO {
         adicionaPessoa(pessoa6);
 
         Pessoa pessoa7 = new Pessoa("Eduardo Silvestre", "456666", "Rua dos Limoes", "33112020",
-                "Edu28", "24", "Dono de Franquia", agora);
+                "Edu28", "24", "DonodeFranquia", agora);
         adicionaPessoa(pessoa7);
 
     }
@@ -241,42 +241,50 @@ public class PessoaDAO {
     }
 
     public Pessoa filtraPessoasQueNaoSaoDonosDeFranquia() {
-
-        String cpfDonoDeFranquia = buscaDonoDeFranquia();
-
+          String aux = null;
         for (Pessoa pessoa : vetorPessoa) {
-            if (pessoa != null) {
-                if (!pessoa.getCpf().equals(cpfDonoDeFranquia) && !pessoa.getTipoUsuario().equals("Medico")) {
-                    System.out.println(pessoa);
-                }
-            }
+           if(pessoa != null && pessoa.getTipoUsuario().equals("DonodeFranquia"))
+           {
+              aux = pessoa.getCpf();
+              
+              if(!pessoa.getCpf().equals(aux))
+              {
+                 System.out.println(pessoa);  
+              }
+           }
         }
-
-        return null;
-
-    }
-
-    private String buscaDonoDeFranquia() {
-        for (Pessoa pessoa : vetorPessoa) {
-            if (pessoa != null && pessoa.getTipoUsuario().equals("Dono de Franquia")) {
-                return pessoa.getCpf();
-            }
-
-        }
-        return null;
-    }
-    
-    public Pessoa buscaPessoaPorId(int idPessoa)
-    {
-        for (Pessoa pessoa : vetorPessoa) {
-            
-            if(pessoa != null && pessoa.getId() == idPessoa)
+        
+        /*for (Pessoa pessoa : vetorPessoa) {
+            if(pessoa != null && pessoa.getCpf().equals(aux))
             {
+                System.out.println(pessoa);
+            }
+        }*/
+        return null;
+
+    }
+
+    /*public String buscaDonoDeFranquia() {
+      
+        for (Pessoa pessoa : vetorPessoa) {
+            if (pessoa != null && !pessoa.getTipoUsuario().equals("DonodeFranquia") 
+                    || pessoa != null &&! pessoa.getTipoUsuario().equals("Medico")) {
+                filtraPessoasQueNaoSaoDonosDeFranquia(pessoa.getCpf());
+            }
+
+        }
+        return null;
+    }*/
+
+    public Pessoa buscaPessoaPorId(int idPessoa) {
+        for (Pessoa pessoa : vetorPessoa) {
+
+            if (pessoa != null && pessoa.getId() == idPessoa) {
                 return pessoa;
             }
         }
         return null;
-  
+
     }
     /*private boolean verificaSeNomeEstaSendoUsado(String nome) {
         for (Pessoa pessoa : vetorPessoa) {
