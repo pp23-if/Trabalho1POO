@@ -1,4 +1,3 @@
-
 package Controller;
 
 import Model.Franquia;
@@ -9,18 +8,17 @@ import View.MenuTitulosFranquia;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-
 public class FranquiaControladora {
-    
+
     Scanner scanner = new Scanner(System.in);
     MenuTitulosFranquia telaFranquia = new MenuTitulosFranquia();
 
     public FranquiaControladora(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO) {
-        
-        menuOpcoesFranquia(franquia, franquiaDAO,pessoaDAO);
+
+        menuOpcoesFranquia(franquia, franquiaDAO, pessoaDAO);
     }
-    
-     private void menuOpcoesFranquia(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO) {
+
+    private void menuOpcoesFranquia(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO) {
 
         int opcao;
 
@@ -33,19 +31,16 @@ public class FranquiaControladora {
                     break;
                 }
                 case 2: {
-                    cadastraNovaFranquia(franquiaDAO,pessoaDAO);
+                    cadastraNovaFranquia(franquiaDAO, pessoaDAO);
                     break;
                 }
-                case 3:
-                {
+                case 3: {
                     break;
                 }
-                case 4:
-                {
+                case 4: {
                     break;
                 }
-                case 5:
-                {
+                case 5: {
                     System.out.println("======== VETOR DE FRANQUIAS ===========\n");
                     franquiaDAO.mostraTodasFranquias();
                 }
@@ -53,55 +48,60 @@ public class FranquiaControladora {
 
         } while (opcao != 0);
     }
-     
-    private void cadastraNovaFranquia(FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO)
-    {
-        
-        
+
+    private void cadastraNovaFranquia(FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO) {
+
         pessoaDAO.filtraPessoasQueNaoSaoDonosDeFranquia();
+
+        System.out.println("Informe o Id da pessoa que Sera a Dona da Franquia: ");
+        int idPessoa = Integer.parseInt(scanner.nextLine());
         
+        System.out.println("Informe o Login de Dono de Franquia: ");
+        String loginDonoFranquia = scanner.nextLine();
         
+        System.out.println("Informe a Senha de Dono de Franquia: ");
+        String senhaDonoFranquia = scanner.nextLine();
         
+        Pessoa pessoa = pessoaDAO.buscaPessoaPorId(idPessoa);
         
-        /*System.out.println("Informe o Nome da Franquia: ");
-        String nomeFranquia = scanner.nextLine();
+        Pessoa pessoaDonoFranquia = new Pessoa(pessoa.getNomePessoa(), pessoa.getCpf(), pessoa.getEnderecoPessoa(), 
+                pessoa.getTelefonePessoa(), loginDonoFranquia, senhaDonoFranquia, "Dono de Franquia", LocalDateTime.now());
+
+         pessoaDAO.adicionaPessoa(pessoaDonoFranquia);
         
-        System.out.println("Informe o Cnpj da Franquia: ");
-        String cnpjFranquia = scanner.nextLine();
-        
-        System.out.println("Informe a Cidade da Franquia: ");
-        String cidadeFranquia = scanner.nextLine();
-        
-        System.out.println("Informe o Endereco da Franquia: ");
-        String enderecoFranquia = scanner.nextLine();
-        
-        if(franquiaDAO.verificaSeFranquiaExiste(nomeFranquia, cnpjFranquia) == true)
-        {
-            System.out.println("\nA Franquia Ja Existe");
+        // bom lugar para validacao.
+        if (pessoa != null) {
+            System.out.println("Informe o Nome da Franquia: ");
+            String nomeFranquia = scanner.nextLine();
+
+            System.out.println("Informe o Cnpj da Franquia: ");
+            String cnpjFranquia = scanner.nextLine();
+
+            System.out.println("Informe a Cidade da Franquia: ");
+            String cidadeFranquia = scanner.nextLine();
+
+            System.out.println("Informe o Endereco da Franquia: ");
+            String enderecoFranquia = scanner.nextLine();
+
+            if (franquiaDAO.verificaSeFranquiaExiste(nomeFranquia, cnpjFranquia) == true) {
+                System.out.println("\nA Franquia Ja Existe");
+            } else {
+                Franquia franquia = new Franquia(nomeFranquia, cnpjFranquia,
+                        cidadeFranquia, enderecoFranquia, pessoaDonoFranquia, LocalDateTime.now());
+
+                boolean franquiaAdicionada = franquiaDAO.adicionaFranquia(franquia);
+
+                if (franquiaAdicionada == true) {
+                    System.out.println("Franquia Cadastrada Com Sucesso!");
+                } else {
+                    System.out.println("\nNao Foi Possivel Cadastrar a Franquia.");
+                }
+            }
+
+        } else {
+            System.out.println("\npessoa nao encontrada\n");
         }
-         else
-        {
-            Pessoa pessoa = new Pessoa("Carlos Alberto", "2020", "Rua 55", 
-               "35358899", "A", "1", "Dono de Franquia", LocalDateTime.now());
-            
-            Franquia franquia = new Franquia(nomeFranquia, cnpjFranquia, 
-                    cidadeFranquia, enderecoFranquia, pessoa, LocalDateTime.now());
-            
-            boolean franquiaAdicionada = franquiaDAO.adicionaFranquia(franquia);
-            
-            if(franquiaAdicionada == true)
-            {
-                System.out.println("\nFranquia Cadastrada Com Sucesso!");
-            }
-            else
-            {
-                System.out.println("\nNao Foi Possivel Cadastrar a Franquia.");
-            }
-        }*/
-        
-      
-       
-        
+
     }
-    
+
 }
