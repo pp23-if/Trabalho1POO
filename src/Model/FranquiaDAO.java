@@ -76,6 +76,18 @@ public class FranquiaDAO {
     }
     
     
-    
+    public boolean verificaSeFranquiaExiste(String nomeFranquia, String cnpj)
+    {
+        for (Franquia franquia : vetorFranquia) {
+            
+            if(franquia != null && franquia.getNomeFranquia().equals(nomeFranquia.toUpperCase()) ||
+               franquia != null && franquia.getNomeFranquia().equals(nomeFranquia.toLowerCase()) || 
+               franquia != null && franquia.getCnpj().equals(cnpj))
+            {
+               return true; 
+            }
+        }
+        return false;
+    }
     
 }
