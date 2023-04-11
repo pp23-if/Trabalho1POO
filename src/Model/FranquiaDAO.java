@@ -90,4 +90,17 @@ public class FranquiaDAO {
         return false;
     }
     
+    public Franquia filtraDonosDeFranquia(Pessoa pessoa)
+    {
+        for (Franquia franquia : vetorFranquia) {
+            
+            if(franquia != null && franquia.getPessoa() != pessoa)
+            {
+                System.out.println(franquia.getPessoa());
+            }
+        }
+        return null;
+    }
+            
+        
 }

@@ -4,6 +4,7 @@ package Controller;
 import Model.Franquia;
 import Model.FranquiaDAO;
 import Model.Pessoa;
+import Model.PessoaDAO;
 import View.MenuTitulosFranquia;
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -14,12 +15,12 @@ public class FranquiaControladora {
     Scanner scanner = new Scanner(System.in);
     MenuTitulosFranquia telaFranquia = new MenuTitulosFranquia();
 
-    public FranquiaControladora(Franquia franquia, FranquiaDAO franquiaDAO) {
+    public FranquiaControladora(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO) {
         
-        menuOpcoesFranquia(franquia, franquiaDAO);
+        menuOpcoesFranquia(franquia, franquiaDAO,pessoaDAO);
     }
     
-     private void menuOpcoesFranquia(Franquia franquia, FranquiaDAO franquiaDAO) {
+     private void menuOpcoesFranquia(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO) {
 
         int opcao;
 
@@ -32,7 +33,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 2: {
-                    cadastraNovaFranquia(franquiaDAO);
+                    cadastraNovaFranquia(franquiaDAO,pessoaDAO);
                     break;
                 }
                 case 3:
@@ -53,9 +54,16 @@ public class FranquiaControladora {
         } while (opcao != 0);
     }
      
-    private void cadastraNovaFranquia(FranquiaDAO franquiaDAO)
+    private void cadastraNovaFranquia(FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO)
     {
-        System.out.println("Informe o Nome da Franquia: ");
+        
+        
+        pessoaDAO.filtraPessoasQueNaoSaoDonosDeFranquia();
+        
+        
+        
+        
+        /*System.out.println("Informe o Nome da Franquia: ");
         String nomeFranquia = scanner.nextLine();
         
         System.out.println("Informe o Cnpj da Franquia: ");
@@ -89,7 +97,7 @@ public class FranquiaControladora {
             {
                 System.out.println("\nNao Foi Possivel Cadastrar a Franquia.");
             }
-        }
+        }*/
         
       
        

@@ -28,15 +28,15 @@ public class PessoaDAO {
         Pessoa pessoa5 = new Pessoa("Juliana", "789101010", "rua da batata", "3333",
                 "ju25", "123", "Medico", agora);
         adicionaPessoa(pessoa5);
-        
+
         Pessoa pessoa6 = new Pessoa("Eduardo Silvestre", "456666", "Rua dos Limoes", "33112020",
                 "dudu10", "12", "Paciente", agora);
         adicionaPessoa(pessoa6);
-        
-        Pessoa pessoa7 = new Pessoa("Eduardo Silvestre", "456666", "Rua dos Limoes" , "33112020",
+
+        Pessoa pessoa7 = new Pessoa("Eduardo Silvestre", "456666", "Rua dos Limoes", "33112020",
                 "Edu28", "24", "Dono de Franquia", agora);
         adicionaPessoa(pessoa7);
-        
+
     }
 
     private int proximaPosilivrePessoa() {
@@ -82,8 +82,8 @@ public class PessoaDAO {
 
     public boolean verificaSePessoaExiste(String login, String cpf) {
         for (Pessoa pessoa : vetorPessoa) {
-            if (pessoa != null && pessoa.getLoginPessoa().equals(login) || 
-                    pessoa != null && pessoa.getCpf().equals(cpf)) {
+            if (pessoa != null && pessoa.getLoginPessoa().equals(login)
+                    || pessoa != null && pessoa.getCpf().equals(cpf)) {
                 return true;
             }
 
@@ -103,14 +103,14 @@ public class PessoaDAO {
 
     public boolean atualizaNomePessoa(String nomePessoa, String novoNomePessoa, String cpf) {
 
-          boolean atualizado = false;
-          
+        boolean atualizado = false;
+
         if (!verificaSeNomeEstaSendoUsado(novoNomePessoa) == true) {
 
             for (Pessoa pessoa : vetorPessoa) {
 
-                if (pessoa != null && pessoa.getNomePessoa().equals(nomePessoa) && 
-                        pessoa.getCpf().equals(cpf)) {
+                if (pessoa != null && pessoa.getNomePessoa().equals(nomePessoa)
+                        && pessoa.getCpf().equals(cpf)) {
                     pessoa.setNomePessoa(novoNomePessoa);
                     pessoa.setDataModificacao(LocalDateTime.now());
                     atualizado = true;
@@ -124,9 +124,9 @@ public class PessoaDAO {
     }
 
     public boolean atualizaCpfPessoa(String cpf, String novoCpf) {
-        
-          boolean atualizado = false;
-          
+
+        boolean atualizado = false;
+
         if (!verificaSeCpfEstaSendoUsado(novoCpf) == true) {
             for (Pessoa pessoa : vetorPessoa) {
                 if (pessoa != null && pessoa.getCpf().equals(cpf)) {
@@ -142,9 +142,9 @@ public class PessoaDAO {
     }
 
     public boolean atualizaEnderecoPessoa(String endereco, String novoEndereco) {
-        
+
         boolean atualizado = false;
-        
+
         for (Pessoa pessoa : vetorPessoa) {
 
             if (pessoa != null && pessoa.getEnderecoPessoa().equals(endereco)) {
@@ -238,6 +238,32 @@ public class PessoaDAO {
             }
         }
         return false;
+    }
+
+    public Pessoa filtraPessoasQueNaoSaoDonosDeFranquia() {
+
+        String cpfDonoDeFranquia = buscaDonoDeFranquia();
+
+        for (Pessoa pessoa : vetorPessoa) {
+            if (pessoa != null) {
+                if (!pessoa.getCpf().equals(cpfDonoDeFranquia)) {
+                    System.out.println(pessoa);
+                }
+            }
+        }
+
+        return null;
+
+    }
+
+    private String buscaDonoDeFranquia() {
+        for (Pessoa pessoa : vetorPessoa) {
+            if (pessoa != null && pessoa.getTipoUsuario().equals("Dono de Franquia")) {
+                return pessoa.getCpf();
+            }
+
+        }
+        return null;
     }
     /*private boolean verificaSeNomeEstaSendoUsado(String nome) {
         for (Pessoa pessoa : vetorPessoa) {
