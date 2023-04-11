@@ -80,14 +80,10 @@ public class PessoaDAO {
         return null;
     }
 
-    public boolean verificaSePessoaExiste(String login, String tipoUsuario, String nome, String cpf) {
+    public boolean verificaSePessoaExiste(String login, String cpf) {
         for (Pessoa pessoa : vetorPessoa) {
-            if (pessoa != null && pessoa.getLoginPessoa().equals(login.toUpperCase())
-                    || pessoa != null && pessoa.getLoginPessoa().equals(login.toLowerCase())
-                    || pessoa != null && pessoa.getTipoUsuario().equals(tipoUsuario)
-                    && pessoa.getNomePessoa().equals(nome.toUpperCase())
-                    || pessoa != null && pessoa.getNomePessoa().equals(nome.toLowerCase())
-                    || pessoa != null && pessoa.getCpf().equals(cpf)) {
+            if (pessoa != null && pessoa.getLoginPessoa().equals(login) || 
+                    pessoa != null && pessoa.getCpf().equals(cpf)) {
                 return true;
             }
 

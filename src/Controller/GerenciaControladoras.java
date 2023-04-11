@@ -82,7 +82,7 @@ public class GerenciaControladoras {
         boolean existePessoa;
         boolean adicionado;
 
-        existePessoa = pessoaDAO.verificaSePessoaExiste(loginPessoa, tipoUsuario, nomePessoa, cpf);
+        existePessoa = pessoaDAO.verificaSePessoaExiste(loginPessoa, cpf);
 
         if (existePessoa == true) {
             System.out.println("\nPessoa ja Cadastrada");
