@@ -64,6 +64,7 @@ public class GerenciaControladoras {
 
         System.out.println("Informe o Nome da Pessoa: ");
         String nomePessoa = scanner.nextLine();
+        nomePessoa = vd.validaNome(nomePessoa);
 
         System.out.println("Informe o Cpf da Pessoa: ");
         String cpf = scanner.nextLine();
