@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class PessoaDAO {
 
-    private Pessoa vetorPessoa[] = new Pessoa[20];
+    private Pessoa vetorPessoa[] = new Pessoa[50];
 
     public PessoaDAO() {
         LocalDateTime agora = LocalDateTime.now();

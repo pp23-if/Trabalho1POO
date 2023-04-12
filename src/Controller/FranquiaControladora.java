@@ -53,23 +53,22 @@ public class FranquiaControladora {
 
         pessoaDAO.filtraPessoasQueNaoSaoDonosDeFranquia();
 
-        System.out.println("Informe o Id da pessoa que Sera a Dona da Franquia: ");
+        System.out.println("\nInforme o Id da pessoa que Sera a Dona da Franquia: ");
         int idPessoa = Integer.parseInt(scanner.nextLine());
-
-        System.out.println("Informe o Login de Dono de Franquia: ");
-        String loginDonoFranquia = scanner.nextLine();
-
-        System.out.println("Informe a Senha de Dono de Franquia: ");
-        String senhaDonoFranquia = scanner.nextLine();
 
         Pessoa pessoa = pessoaDAO.buscaPessoaPorId(idPessoa);
 
         if (pessoa == null) {
             System.out.println("\nPessoa Nao Encontrada");
         } else {
+            System.out.println("\nInforme o Login de Dono de Franquia: ");
+            String loginDonoFranquia = scanner.nextLine();
+
+            System.out.println("\nInforme a Senha de Dono de Franquia: ");
+            String senhaDonoFranquia = scanner.nextLine();
+
             if (franquiaDAO.verificaDonosDeFranquia(pessoa) == true) {
                 System.out.println("\nPessoa ja Cadastrada Como Dono de Franquia\n");
-
             } else {
                 Pessoa pessoaDonoFranquia = new Pessoa(pessoa.getNomePessoa(), pessoa.getCpf(), pessoa.getEnderecoPessoa(),
                         pessoa.getTelefonePessoa(), loginDonoFranquia, senhaDonoFranquia, "DonodeFranquia", LocalDateTime.now());
@@ -103,13 +102,10 @@ public class FranquiaControladora {
                     }
 
                 }
+
             }
 
         }
-
     }
+
 }
-
-
-
-

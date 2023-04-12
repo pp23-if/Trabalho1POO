@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class MedicoDAO {
 
-    private Medico[] vetorMedico = new Medico[20];
+    private Medico[] vetorMedico = new Medico[50];
 
     public MedicoDAO(PessoaDAO pessoaDAO) {
 

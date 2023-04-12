@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class FranquiaDAO {
 
-    private Franquia[] vetorFranquia = new Franquia[20];
+    private Franquia[] vetorFranquia = new Franquia[50];
 
     public FranquiaDAO(PessoaDAO pessoaDAO) 
     {
