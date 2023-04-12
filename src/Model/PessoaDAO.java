@@ -241,7 +241,7 @@ public class PessoaDAO {
     }
 
     public Pessoa filtraPessoasQueNaoSaoDonosDeFranquia() {
-          String aux = null;
+          /*String aux;
         for (Pessoa pessoa : vetorPessoa) {
            if(pessoa != null && pessoa.getTipoUsuario().equals("DonodeFranquia"))
            {
@@ -252,29 +252,20 @@ public class PessoaDAO {
                  System.out.println(pessoa);  
               }
            }
-        }
-        
-        /*for (Pessoa pessoa : vetorPessoa) {
-            if(pessoa != null && pessoa.getCpf().equals(aux))
+        }*/
+          
+          for (Pessoa pessoa : vetorPessoa) {
+            if(pessoa != null && pessoa.getTipoUsuario().equals("Paciente"))
             {
                 System.out.println(pessoa);
             }
-        }*/
+        }
+      
         return null;
 
     }
 
-    /*public String buscaDonoDeFranquia() {
-      
-        for (Pessoa pessoa : vetorPessoa) {
-            if (pessoa != null && !pessoa.getTipoUsuario().equals("DonodeFranquia") 
-                    || pessoa != null &&! pessoa.getTipoUsuario().equals("Medico")) {
-                filtraPessoasQueNaoSaoDonosDeFranquia(pessoa.getCpf());
-            }
-
-        }
-        return null;
-    }*/
+    
 
     public Pessoa buscaPessoaPorId(int idPessoa) {
         for (Pessoa pessoa : vetorPessoa) {
