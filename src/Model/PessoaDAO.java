@@ -241,31 +241,22 @@ public class PessoaDAO {
     }
 
     public Pessoa filtraPessoasQueNaoSaoDonosDeFranquia() {
-          /*String aux;
+
+        String cpfDono = null;
+
         for (Pessoa pessoa : vetorPessoa) {
-           if(pessoa != null && pessoa.getTipoUsuario().equals("DonodeFranquia"))
-           {
-              aux = pessoa.getCpf();
-              
-              if(!pessoa.getCpf().equals(aux))
-              {
-                 System.out.println(pessoa);  
-              }
-           }
-        }*/
-          
-          for (Pessoa pessoa : vetorPessoa) {
-            if(pessoa != null && pessoa.getTipoUsuario().equals("Paciente"))
-            {
+            if (pessoa != null && pessoa.getTipoUsuario().equals("DonodeFranquia")) {
+                cpfDono = pessoa.getCpf();
+            }
+            if (pessoa != null && !pessoa.getTipoUsuario().equals("Medico")
+                    && !pessoa.getCpf().equals(cpfDono)) {
                 System.out.println(pessoa);
             }
+
         }
-      
+
         return null;
-
     }
-
-    
 
     public Pessoa buscaPessoaPorId(int idPessoa) {
         for (Pessoa pessoa : vetorPessoa) {

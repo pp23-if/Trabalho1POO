@@ -75,28 +75,28 @@ public class FranquiaControladora {
 
                 pessoaDAO.adicionaPessoa(pessoaDonoFranquia);
 
-                System.out.println("Informe o Nome da Franquia: ");
+                System.out.println("\nInforme o Nome da Franquia: ");
                 String nomeFranquia = scanner.nextLine();
 
-                System.out.println("Informe o Cnpj da Franquia: ");
+                System.out.println("\nInforme o Cnpj da Franquia: ");
                 String cnpjFranquia = scanner.nextLine();
 
-                System.out.println("Informe a Cidade da Franquia: ");
+                System.out.println("\nInforme a Cidade da Franquia: ");
                 String cidadeFranquia = scanner.nextLine();
 
-                System.out.println("Informe o Endereco da Franquia: ");
+                System.out.println("\nInforme o Endereco da Franquia: ");
                 String enderecoFranquia = scanner.nextLine();
 
                 if (franquiaDAO.verificaSeFranquiaExiste(nomeFranquia, cnpjFranquia) == true) {
                     System.out.println("\nA Franquia Ja Existe");
                 } else {
-                    Franquia franquia = new Franquia(nomeFranquia, cnpjFranquia,
+                    Franquia franquia = new Franquia(nomeFranquia.toUpperCase(), cnpjFranquia,
                             cidadeFranquia, enderecoFranquia, pessoaDonoFranquia, LocalDateTime.now());
 
                     boolean franquiaAdicionada = franquiaDAO.adicionaFranquia(franquia);
 
                     if (franquiaAdicionada == true) {
-                        System.out.println("Franquia Cadastrada Com Sucesso!");
+                        System.out.println("\nFranquia Cadastrada Com Sucesso!");
                     } else {
                         System.out.println("\nNao Foi Possivel Cadastrar a Franquia.");
                     }
