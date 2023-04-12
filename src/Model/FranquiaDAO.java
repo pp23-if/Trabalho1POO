@@ -101,5 +101,63 @@ public class FranquiaDAO {
        }
         return false;
    }
-        
+   
+   public boolean atualizarNomeFranquia(Franquia f, String novoNomeFranquia)
+   {
+       for (Franquia franquia : vetorFranquia) {
+           
+           if(franquia != null && franquia.equals(f))
+           {
+               franquia.setNomeFranquia(novoNomeFranquia);
+               franquia.setDataModificacao(LocalDateTime.now());
+               return true;
+           }
+       }
+       return false;
+   }
+   
+   
+   public boolean atualizarCnpjFranquia(Franquia f, String novoCnpjFranquia)
+   {
+       for (Franquia franquia : vetorFranquia) {
+           
+           if(franquia != null && franquia.equals(f))
+           {
+               franquia.setCnpj(novoCnpjFranquia);
+               franquia.setDataModificacao(LocalDateTime.now());
+               return true;
+           }
+       }
+       return false;
+   }
+   
+   
+   public boolean atualizarCidadeFranquia(Franquia f, String novaCidadeFranquia)
+   {
+       for (Franquia franquia : vetorFranquia) {
+           
+           if(franquia != null && franquia.equals(f))
+           {
+               franquia.setCidade(novaCidadeFranquia);
+               franquia.setDataModificacao(LocalDateTime.now());
+               return true;
+           }
+       }
+       return false;
+   }
+   
+   public boolean atualizarEnderecoFranquia(Franquia f, String novoEnderecoFranquia)
+   {
+       for (Franquia franquia : vetorFranquia) {
+           
+           if(franquia != null && franquia.equals(f))
+           {
+               franquia.setEnderecoFranquia(novoEnderecoFranquia);
+               franquia.setDataModificacao(LocalDateTime.now());
+               return true;
+           }
+       }
+       return false;
+   }     
+   
 }

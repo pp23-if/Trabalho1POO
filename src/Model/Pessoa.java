@@ -140,10 +140,31 @@ public class Pessoa {
         if (!Objects.equals(this.cpf, other.cpf)) {
             return false;
         }
-       
+        if (!Objects.equals(this.enderecoPessoa, other.enderecoPessoa)) {
+            return false;
+        }
+        if (!Objects.equals(this.telefonePessoa, other.telefonePessoa)) {
+            return false;
+        }
+        if (!Objects.equals(this.loginPessoa, other.loginPessoa)) {
+            return false;
+        }
+        if (!Objects.equals(this.senhaPessoa, other.senhaPessoa)) {
+            return false;
+        }
+        if (!Objects.equals(this.tipoUsuario, other.tipoUsuario)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataCriacao, other.dataCriacao)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataModificacao, other.dataModificacao)) {
+            return false;
+        }
         return true;
     }
 
+   
     
     @Override
     public String toString() {

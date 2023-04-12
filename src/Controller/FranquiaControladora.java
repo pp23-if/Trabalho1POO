@@ -35,6 +35,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 3: {
+                    menuOpcoesAtualizarDadosFranquia(franquia, franquiaDAO);
                     break;
                 }
                 case 4: {
@@ -106,6 +107,71 @@ public class FranquiaControladora {
             }
 
         }
+    }
+
+    private void menuOpcoesAtualizarDadosFranquia(Franquia franquia, FranquiaDAO franquiaDAO) {
+        int opcao;
+
+        do {
+            opcao = telaFranquia.menuAtualizacaoDeDadosFranquia();
+
+            switch (opcao) {
+                case 1: {
+                    System.out.println("Informe o Novo Nome da Franquia: ");
+                    String novoNomeFranquia = scanner.nextLine();
+
+                    if (franquiaDAO.atualizarNomeFranquia(franquia, novoNomeFranquia) == true) {
+                        System.out.println("\nNome Da Franquia Atualizado Com Sucesso!");
+                    } else {
+                        System.out.println("\nNao Foi Possivel Atualizar O Nome Da Franquia.");
+                    }
+
+                    break;
+                }
+                case 2: {
+                    System.out.println("Informe o Novo Cnpj da Franquia: ");
+                    String novoCnpjFranquia = scanner.nextLine();
+
+                    if (franquiaDAO.atualizarCnpjFranquia(franquia, novoCnpjFranquia) == true) {
+                        System.out.println("\nCnpj Da Franquia Atualizado Com Sucesso!");
+                    } else {
+                        System.out.println("\nNao Foi Possivel Atualizar O Cnpj Da Franquia.");
+                    }
+
+                    break;
+                }
+                case 3: {
+                     System.out.println("Informe a Nova Cidade da Franquia: ");
+                     String novaCidadeFranquia = scanner.nextLine();
+                     
+                     if(franquiaDAO.atualizarCidadeFranquia(franquia, novaCidadeFranquia) == true)
+                     {
+                       System.out.println("\nCidade Da Franquia Atualizado Com Sucesso!");  
+                     }
+                     else
+                     {
+                        System.out.println("\nNao Foi Possivel Atualizar A Cidade Da Franquia.");  
+                     }
+                    break;
+                }
+                case 4: 
+                {
+                     System.out.println("Informe o Novo Endereco Cidade da Franquia: ");
+                     String novoEnderecoFranquia = scanner.nextLine();
+                     
+                     if(franquiaDAO.atualizarEnderecoFranquia(franquia, novoEnderecoFranquia) == true)
+                     {
+                       System.out.println("\nEndereco Da Franquia Atualizado Com Sucesso!");  
+                     }
+                     else
+                     {
+                        System.out.println("\nNao Foi Possivel Atualizar O Endereco Da Franquia.");  
+                     }
+                    break;
+                }
+            }
+
+        } while (opcao != 0);
     }
 
 }
