@@ -15,6 +15,9 @@ public class GerenciaControladoras {
     Scanner scanner = new Scanner(System.in);
 
     MenuTitulos Tela = new MenuTitulos();
+    
+    /*Instanciando a Classe de Validacao de dados.*/
+    ValidacaoEntradaDados vd = new ValidacaoEntradaDados();
 
     /*Instanciando os DAO.*/
     PessoaDAO pessoaDAO = new PessoaDAO();
