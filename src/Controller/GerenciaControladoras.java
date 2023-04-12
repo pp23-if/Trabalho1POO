@@ -64,22 +64,27 @@ public class GerenciaControladoras {
 
         System.out.println("Informe o Nome da Pessoa: ");
         String nomePessoa = scanner.nextLine();
-        nomePessoa = vd.validaNome(nomePessoa);
+        nomePessoa = vd.validaString(nomePessoa);
 
         System.out.println("Informe o Cpf da Pessoa: ");
         String cpf = scanner.nextLine();
+        cpf = vd.validaString(cpf);
 
         System.out.println("Informe o Endereco da Pessoa: ");
         String enderecoPessoa = scanner.nextLine();
+        enderecoPessoa = vd.validaString(enderecoPessoa);
 
         System.out.println("Informe o login da Pessoa: ");
         String loginPessoa = scanner.nextLine();
+        loginPessoa = vd.validaString(loginPessoa);
 
         System.out.println("Informe a Senha da Pessoa: ");
         String senhaPessoa = scanner.nextLine();
+        senhaPessoa = vd.validaString(senhaPessoa);
 
         System.out.println("Informe o Telefone da Pessoa: ");
         String telefonePessoa = scanner.nextLine();
+        telefonePessoa = vd.validaString(telefonePessoa);
 
         String tipoUsuario = "Paciente";
 
@@ -109,11 +114,13 @@ public class GerenciaControladoras {
     private void fazLogin() {
         System.out.println("\nLogin: ");
         String login = scanner.nextLine();
-        System.out.println("\n");
+        login = vd.validaString(login);
+        //System.out.println("\n");
 
         System.out.println("\nSenha: ");
         String senha = scanner.nextLine();
-        System.out.println("\n");
+        senha = vd.validaString(senha);
+        //System.out.println("\n");
 
         Pessoa pessoaLogada = pessoaDAO.buscaPessoaQuerendoLogar(login, senha);
 

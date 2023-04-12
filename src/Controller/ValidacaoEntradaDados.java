@@ -9,11 +9,11 @@ public class ValidacaoEntradaDados {
     
    /*Todos os metodos dessa classe serao Publicos.*/
     
-    public String validaNome(String nome)
+    public String validaString(String nome)
     {
         while(nome.equals("") || nome.equals(" "))
         {
-            System.out.println("nome incorreto!");
+            System.out.println("entrada incorreta!");
             System.out.println("Informe o Nome da Pessoa: ");
             nome = scanner.nextLine();
 
