@@ -11,3 +11,7 @@ public class Teste {
     }
     
 }
+//FAZER
+//Melhorar os Print
+//fazar os metodos de validacao 
+//Lucas Rocha
