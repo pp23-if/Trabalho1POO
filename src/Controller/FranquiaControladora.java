@@ -6,6 +6,7 @@ import Model.Medico;
 import Model.MedicoDAO;
 import Model.Pessoa;
 import Model.PessoaDAO;
+import Model.UnidadeFranquiaDAO;
 import View.MenuTitulosFranquia;
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -16,13 +17,13 @@ public class FranquiaControladora {
     MenuTitulosFranquia telaFranquia = new MenuTitulosFranquia();
 
     public FranquiaControladora(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO,
-            MedicoDAO medicoDAO) {
+            MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO) {
 
-        menuOpcoesFranquia(franquia, franquiaDAO, pessoaDAO, medicoDAO);
+        menuOpcoesFranquia(franquia, franquiaDAO, pessoaDAO, medicoDAO, unidadeFranquiaDAO);
     }
 
     private void menuOpcoesFranquia(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO,
-            MedicoDAO medicoDAO) {
+            MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO) {
 
         int opcao;
 
@@ -46,7 +47,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 5: {
-                    System.out.println("======== VETOR DE FRANQUIAS ===========\n");
+                    System.out.println("\n======== VETOR DE FRANQUIAS ===========\n");
                     franquiaDAO.mostraTodasFranquias();
                     break;
                 }
@@ -56,6 +57,16 @@ public class FranquiaControladora {
                 }
                 case 7: {
                     medicoDAO.mostraTodosMedicos();
+                    break;
+                }
+                case 8:
+                {
+                    cadastraUnidadeFranquia(pessoaDAO, franquiaDAO, unidadeFranquiaDAO);
+                    break;
+                }
+                case 9:
+                {
+                    unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(franquia);
                     break;
                 }
             }
@@ -275,4 +286,9 @@ public class FranquiaControladora {
         }
     }
 
+    private void cadastraUnidadeFranquia(PessoaDAO pessoaDAO, FranquiaDAO franquiaDAO, 
+            UnidadeFranquiaDAO unidadeFranquiaDAO)
+    {
+        pessoaDAO.filtraPessoaCandidatasADonoUnidadeFranquia();
+    }
 }

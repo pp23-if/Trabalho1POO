@@ -48,7 +48,7 @@ public class MedicoDAO {
     public void mostraTodosMedicos() {
         for (Medico medico : vetorMedico) {
             if (medico != null) {
-                System.out.println(medico);
+                System.out.println(medico + "\n");
             }
         }
     }

@@ -258,7 +258,7 @@ public class PessoaDAO {
             }
             if (pessoa != null && !pessoa.getTipoUsuario().equals("Medico")
                     && !pessoa.getCpf().equals(cpfDono)) {
-                System.out.println(pessoa);
+                System.out.println(pessoa + "\n");
             }
 
         }
@@ -284,13 +284,26 @@ public class PessoaDAO {
             if(pessoa != null && !pessoa.getTipoUsuario().equals("Medico") 
                     && !pessoa.getTipoUsuario().equals("DonodeFranquia"))
             {
-                System.out.println(pessoa);
+                System.out.println(pessoa + "\n");
             }
         }
 
         return null;
     }
       
+    public Pessoa filtraPessoaCandidatasADonoUnidadeFranquia()
+    {
+        for (Pessoa pessoa : vetorPessoa) {
+            
+            if(pessoa != null && !pessoa.getTipoUsuario().equals("Medico") &&
+               !pessoa.getTipoUsuario().equals("DonodeFranquia")  && 
+               !pessoa.getTipoUsuario().equals("DonoDeUnidadeDeFranquia"))
+            {
+                System.out.println(pessoa + "\n");
+            }
+        }
+        return null;
+    }
      
     /*private boolean verificaSeNomeEstaSendoUsado(String nome) {
         for (Pessoa pessoa : vetorPessoa) {

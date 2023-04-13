@@ -82,6 +82,17 @@ public class UnidadeFranquiaDAO {
      
      
      
+     public UnidadeFranquia buscaUnidadeFranquiaAtravesDaFranquiaVinculada(Franquia franquia)
+     {
+         for (UnidadeFranquia unidadeFranquia : vetorUnidadeFranquia) {
+             
+             if(unidadeFranquia != null && unidadeFranquia.getFranquia().equals(franquia))
+             {
+                 System.out.println(unidadeFranquia + "\n");
+             }
+         }
+        return null;
+     }
      
     
 }

@@ -112,22 +112,19 @@ public class Medico {
         return true;
     }
 
-    
-   
-
     @Override
     public String toString() {
 
         DateTimeFormatter fd = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
         if (dataModificacao == null) {
-            return this.getPessoa()
+            return this.getPessoa() + "\n"
                     + "ID - Medico: " + this.idMedico + "\n"
                     + "Crm: " + this.crm + "\n"
                     + "Especialidade: " + this.especialidade + "\n"
                     + "Data e Hora de Criacao: " + fd.format(this.dataCriacao) + "\n";
         } else {
-            return this.getPessoa()
+            return this.getPessoa() + "\n"
                     + "ID - Medico: " + this.idMedico + "\n"
                     + "Crm: " + this.crm + "\n"
                     + "Especialidade: " + this.especialidade + "\n"

@@ -138,7 +138,7 @@ public class UnidadeFranquia {
                     + "Franquia: " + this.franquia.getNomeFranquia() + "\n"
                     + "Cidade: " + this.cidadeUnidadeFranquia + "\n"
                     + "Endereco: " + this.enderecoUnidadeFranquia + "\n"
-                    + "Data e Hora de Criacao: " + fd.format(dataCriacao) + "\n";
+                    + "Data e Hora de Criacao: " + fd.format(dataCriacao);
         } else {
             return "ID - UnidadeFranquia: " + this.idUnidadeFranquia + "\n"
                     + "Dono Da Unidade: " + this.getPessoa().getNomePessoa() + "\n"

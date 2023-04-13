@@ -21,8 +21,8 @@ public class MenuTitulosFranquia {
         builder.append("\n5 - Exibir Todas As Franquias: ");
         builder.append("\n6 - Cadastrar Medico: ");
         builder.append("\n7 - Exibir Todos Os Medicos: ");
-        builder.append("\n8 - : ");
-        builder.append("\n9 - : ");
+        builder.append("\n8 - Cadastar Unidade De Franquia: ");
+        builder.append("\n9 - Exibir Unidades Franquia: ");
         builder.append("\n\nOpcao: ");
        
         System.out.print(builder.toString());
