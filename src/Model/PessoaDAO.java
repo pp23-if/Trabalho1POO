@@ -240,7 +240,7 @@ public class PessoaDAO {
         return false;
     }
 
-    public Pessoa filtraPessoasQueNaoSaoDonosDeFranquia() {
+    public Pessoa filtraPessoasCandidatasADonoDeFranquia() {
 
         String cpfDono = null;
 
@@ -268,6 +268,22 @@ public class PessoaDAO {
         return null;
 
     }
+    
+      public Pessoa filtraPessoasCandidatasAMedico() {
+
+        for (Pessoa pessoa : vetorPessoa) {
+            
+            if(pessoa != null && !pessoa.getTipoUsuario().equals("Medico") 
+                    && !pessoa.getTipoUsuario().equals("DonodeFranquia"))
+            {
+                System.out.println(pessoa);
+            }
+        }
+
+        return null;
+    }
+      
+     
     /*private boolean verificaSeNomeEstaSendoUsado(String nome) {
         for (Pessoa pessoa : vetorPessoa) {
             if (pessoa != null && pessoa.getNomePessoa().equals(nome.toUpperCase(Locale.US)) || 

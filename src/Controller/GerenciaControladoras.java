@@ -148,7 +148,8 @@ public class GerenciaControladoras {
 
                 Franquia franquia = franquiaDAO.buscaFranquiaAtravesDaPessoaVinculada(pessoaLogada);
 
-                FranquiaControladora franquiaControladora = new FranquiaControladora(franquia, franquiaDAO,pessoaDAO);
+                FranquiaControladora franquiaControladora 
+                     = new FranquiaControladora(franquia, franquiaDAO, pessoaDAO, medicoDAO);
             }
 
         } else {

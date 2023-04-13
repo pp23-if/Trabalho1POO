@@ -12,14 +12,17 @@ public class MenuTitulosFranquia {
 
         StringBuilder builder = new StringBuilder("");
 
-        builder.append("\n============ Menu Franquia ===========");
+        builder.append("\n============ Menu Dono De Franquia ===========");
         builder.append("\n0 - Para Sair");
         builder.append("\n1 - Ver Cadastro da Franquia");
         builder.append("\n2 - Cadastrar Nova Franquia ");
         builder.append("\n3 - Atualizar Dados da Franquia: ");
         builder.append("\n4 - Excluir Dados da Franquia: ");
         builder.append("\n5 - Exibir Todas As Franquias: ");
-        builder.append("\n6 - : ");
+        builder.append("\n6 - Cadastrar Medico: ");
+        builder.append("\n7 - Exibir Todos Os Medicos: ");
+        builder.append("\n8 - : ");
+        builder.append("\n9 - : ");
         builder.append("\n\nOpcao: ");
        
         System.out.print(builder.toString());

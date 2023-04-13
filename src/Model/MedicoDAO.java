@@ -139,5 +139,17 @@ public class MedicoDAO {
         }
         return false;
     }
+    
+    public boolean verificaSeMedicoExiste(Pessoa p)
+    {
+        for (Medico medico : vetorMedico) {
+            
+            if(medico != null && medico.getPessoa().getCpf().equals(p.getCpf()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

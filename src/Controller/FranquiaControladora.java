@@ -2,6 +2,8 @@ package Controller;
 
 import Model.Franquia;
 import Model.FranquiaDAO;
+import Model.Medico;
+import Model.MedicoDAO;
 import Model.Pessoa;
 import Model.PessoaDAO;
 import View.MenuTitulosFranquia;
@@ -13,12 +15,14 @@ public class FranquiaControladora {
     Scanner scanner = new Scanner(System.in);
     MenuTitulosFranquia telaFranquia = new MenuTitulosFranquia();
 
-    public FranquiaControladora(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO) {
+    public FranquiaControladora(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO,
+            MedicoDAO medicoDAO) {
 
-        menuOpcoesFranquia(franquia, franquiaDAO, pessoaDAO);
+        menuOpcoesFranquia(franquia, franquiaDAO, pessoaDAO, medicoDAO);
     }
 
-    private void menuOpcoesFranquia(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO) {
+    private void menuOpcoesFranquia(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO,
+            MedicoDAO medicoDAO) {
 
         int opcao;
 
@@ -44,6 +48,15 @@ public class FranquiaControladora {
                 case 5: {
                     System.out.println("======== VETOR DE FRANQUIAS ===========\n");
                     franquiaDAO.mostraTodasFranquias();
+                    break;
+                }
+                case 6: {
+                    cadastraMedico(pessoaDAO, medicoDAO);
+                    break;
+                }
+                case 7: {
+                    medicoDAO.mostraTodosMedicos();
+                    break;
                 }
             }
 
@@ -52,7 +65,7 @@ public class FranquiaControladora {
 
     private void cadastraNovaFranquia(FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO) {
 
-        pessoaDAO.filtraPessoasQueNaoSaoDonosDeFranquia();
+        pessoaDAO.filtraPessoasCandidatasADonoDeFranquia();
 
         System.out.println("\nInforme o Id da pessoa que Sera a Dona da Franquia: ");
         int idPessoa = Integer.parseInt(scanner.nextLine());
@@ -141,87 +154,118 @@ public class FranquiaControladora {
                     break;
                 }
                 case 3: {
-                     System.out.println("Informe a Nova Cidade da Franquia: ");
-                     String novaCidadeFranquia = scanner.nextLine();
-                     
-                     if(franquiaDAO.atualizarCidadeFranquia(franquia, novaCidadeFranquia) == true)
-                     {
-                       System.out.println("\nCidade Da Franquia Atualizado Com Sucesso!");  
-                     }
-                     else
-                     {
-                        System.out.println("\nNao Foi Possivel Atualizar A Cidade Da Franquia.");  
-                     }
+                    System.out.println("Informe a Nova Cidade da Franquia: ");
+                    String novaCidadeFranquia = scanner.nextLine();
+
+                    if (franquiaDAO.atualizarCidadeFranquia(franquia, novaCidadeFranquia) == true) {
+                        System.out.println("\nCidade Da Franquia Atualizado Com Sucesso!");
+                    } else {
+                        System.out.println("\nNao Foi Possivel Atualizar A Cidade Da Franquia.");
+                    }
                     break;
                 }
-                case 4: 
-                {
-                     System.out.println("Informe o Novo Endereco Cidade da Franquia: ");
-                     String novoEnderecoFranquia = scanner.nextLine();
-                     
-                     if(franquiaDAO.atualizarEnderecoFranquia(franquia, novoEnderecoFranquia) == true)
-                     {
-                       System.out.println("\nEndereco Da Franquia Atualizado Com Sucesso!");  
-                     }
-                     else
-                     {
-                        System.out.println("\nNao Foi Possivel Atualizar O Endereco Da Franquia.");  
-                     }
+                case 4: {
+                    System.out.println("Informe o Novo Endereco Cidade da Franquia: ");
+                    String novoEnderecoFranquia = scanner.nextLine();
+
+                    if (franquiaDAO.atualizarEnderecoFranquia(franquia, novoEnderecoFranquia) == true) {
+                        System.out.println("\nEndereco Da Franquia Atualizado Com Sucesso!");
+                    } else {
+                        System.out.println("\nNao Foi Possivel Atualizar O Endereco Da Franquia.");
+                    }
                     break;
                 }
-                
-                case 5:
-                {
+
+                case 5: {
                     System.out.println("Informe o Novo Login De Dono De Franquia: ");
                     String novoLoginDonoFranquia = scanner.nextLine();
-                    
-                    if(franquiaDAO.atualizaLoginDonoDeFranquia(franquia, novoLoginDonoFranquia) == true)
-                    {
-                      System.out.println("\nLogin De Dono De Franquia Atualizado Com Sucesso!");    
+
+                    if (franquiaDAO.atualizaLoginDonoDeFranquia(franquia, novoLoginDonoFranquia) == true) {
+                        System.out.println("\nLogin De Dono De Franquia Atualizado Com Sucesso!");
+                    } else {
+                        System.out.println("\nNao Foi Possivel Atualizar o Login De Dono De Franquia.");
                     }
-                    else
-                    {
-                       System.out.println("\nNao Foi Possivel Atualizar o Login De Dono De Franquia.");   
-                    }
-                    
-                    
+
                     break;
                 }
-                
-                case 6:
-                {
+
+                case 6: {
                     System.out.println("Informe a Nova Senha De Dono De Franquia: ");
                     String novaSenhaDonoFranquia = scanner.nextLine();
-                    
-                    if(franquiaDAO.atualizaSenhaDonoDeFranquia(franquia, novaSenhaDonoFranquia) == true)
-                    {
-                      System.out.println("\nSenha De Dono De Franquia Atualizado Com Sucesso!");      
-                    }
-                    else
-                    {
-                      System.out.println("\nNao Foi Possivel Atualizar a Senha De Dono De Franquia.");    
+
+                    if (franquiaDAO.atualizaSenhaDonoDeFranquia(franquia, novaSenhaDonoFranquia) == true) {
+                        System.out.println("\nSenha De Dono De Franquia Atualizado Com Sucesso!");
+                    } else {
+                        System.out.println("\nNao Foi Possivel Atualizar a Senha De Dono De Franquia.");
                     }
                     break;
                 }
-                
-                case 7:
-                {
+
+                case 7: {
                     System.out.println("Informe o Novo Telefone De Dono De Franquia: ");
                     String novoTelefoneDonoFranquia = scanner.nextLine();
-                    
-                    if(franquiaDAO.atualizaTelefoneDonoDeFranquia(franquia, novoTelefoneDonoFranquia) == true)
-                    {
-                      System.out.println("\nTelefone De Dono De Franquia Atualizado Com Sucesso!");   
-                    }
-                    else
-                    {
-                      System.out.println("\nNao Foi Possivel Atualizar o Telefone De Dono De Franquia.");  
+
+                    if (franquiaDAO.atualizaTelefoneDonoDeFranquia(franquia, novoTelefoneDonoFranquia) == true) {
+                        System.out.println("\nTelefone De Dono De Franquia Atualizado Com Sucesso!");
+                    } else {
+                        System.out.println("\nNao Foi Possivel Atualizar o Telefone De Dono De Franquia.");
                     }
                     break;
                 }
             }
 
         } while (opcao != 0);
+    }
+
+    private void cadastraMedico(PessoaDAO pessoaDAO, MedicoDAO medicoDAO) {
+        System.out.println("\n");
+        pessoaDAO.filtraPessoasCandidatasAMedico();
+
+        System.out.println("\nInforme o Id da pessoa que Sera Medico: ");
+        int idPessoa = Integer.parseInt(scanner.nextLine());
+
+        Pessoa pessoaEncontrada = pessoaDAO.buscaPessoaPorId(idPessoa);
+
+        if (pessoaEncontrada == null) {
+            System.out.println("\nPessoa Nao Encontrada");
+        } else {
+
+            if (medicoDAO.verificaSeMedicoExiste(pessoaEncontrada) == true) {
+                System.out.println("\nPessoa ja Cadastrada Como Medico.");
+            } else {
+
+                System.out.println("\nInforme O Crm do Medico: ");
+                String crm = scanner.nextLine();
+
+                System.out.println("\nInforme A Especialidade do Medico: ");
+                String medicoEspecialidade = scanner.nextLine();
+
+                System.out.println("\nInforme O Login De Medico: ");
+                String LoginMedico = scanner.nextLine();
+
+                System.out.println("\nInforme A Senha De Medico: ");
+                String senhaMedico = scanner.nextLine();
+
+                Pessoa pessoaMedico = new Pessoa(pessoaEncontrada.getNomePessoa(),
+                        pessoaEncontrada.getCpf(), pessoaEncontrada.getEnderecoPessoa(),
+                        pessoaEncontrada.getTelefonePessoa(), LoginMedico, senhaMedico, "Medico", LocalDateTime.now());
+
+                if (pessoaDAO.adicionaPessoa(pessoaMedico) == true) {
+
+                    Medico medico = new Medico(crm, pessoaMedico, medicoEspecialidade, LocalDateTime.now());
+
+                    if (medicoDAO.adicionaMedico(medico) == true) {
+                        System.out.println("\nMedico Cadastrado Com Sucesso!");
+                    } else {
+                        System.out.println("\nNao Foi Possivel Cadastrar o Medico.");
+                    }
+                } else {
+                    System.out.println("\n Erro ao Cadastrar medico.");
+                }
+
+            }
+
+        }
     }
 
 }
