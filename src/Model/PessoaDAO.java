@@ -256,7 +256,8 @@ public class PessoaDAO {
             if (pessoa != null && pessoa.getTipoUsuario().equals("DonodeFranquia")) {
                 cpfDono = pessoa.getCpf();
             }
-            if (pessoa != null && !pessoa.getTipoUsuario().equals("Medico")
+            if (pessoa != null && !pessoa.getTipoUsuario().equals("DonoDeUnidadeDeFranquia") 
+                    && !pessoa.getTipoUsuario().equals("Medico")
                     && !pessoa.getCpf().equals(cpfDono)) {
                 System.out.println(pessoa + "\n");
             }
@@ -282,7 +283,8 @@ public class PessoaDAO {
         for (Pessoa pessoa : vetorPessoa) {
             
             if(pessoa != null && !pessoa.getTipoUsuario().equals("Medico") 
-                    && !pessoa.getTipoUsuario().equals("DonodeFranquia"))
+                    && !pessoa.getTipoUsuario().equals("DonodeFranquia") 
+                    && !pessoa.getTipoUsuario().equals("DonoDeUnidadeDeFranquia"))
             {
                 System.out.println(pessoa + "\n");
             }
