@@ -237,30 +237,36 @@ public class FranquiaControladora {
                 System.out.println("\nInforme O Crm do Medico: ");
                 String crm = scanner.nextLine();
 
-                System.out.println("\nInforme A Especialidade do Medico: ");
-                String medicoEspecialidade = scanner.nextLine();
+                if (medicoDAO.verificaCrm(crm) == true) {
+                    System.out.println("O Crm Informado Ja Esta Sendo Usado.");
+                }
+                else
+                {
+                    System.out.println("\nInforme A Especialidade do Medico: ");
+                    String medicoEspecialidade = scanner.nextLine();
 
-                System.out.println("\nInforme O Login De Medico: ");
-                String LoginMedico = scanner.nextLine();
+                    System.out.println("\nInforme O Login De Medico: ");
+                    String LoginMedico = scanner.nextLine();
 
-                System.out.println("\nInforme A Senha De Medico: ");
-                String senhaMedico = scanner.nextLine();
+                    System.out.println("\nInforme A Senha De Medico: ");
+                    String senhaMedico = scanner.nextLine();
 
-                Pessoa pessoaMedico = new Pessoa(pessoaEncontrada.getNomePessoa(),
-                        pessoaEncontrada.getCpf(), pessoaEncontrada.getEnderecoPessoa(),
-                        pessoaEncontrada.getTelefonePessoa(), LoginMedico, senhaMedico, "Medico", LocalDateTime.now());
+                    Pessoa pessoaMedico = new Pessoa(pessoaEncontrada.getNomePessoa(),
+                            pessoaEncontrada.getCpf(), pessoaEncontrada.getEnderecoPessoa(),
+                            pessoaEncontrada.getTelefonePessoa(), LoginMedico, senhaMedico, "Medico", LocalDateTime.now());
 
-                if (pessoaDAO.adicionaPessoa(pessoaMedico) == true) {
+                    if (pessoaDAO.adicionaPessoa(pessoaMedico) == true) {
 
-                    Medico medico = new Medico(crm, pessoaMedico, medicoEspecialidade, LocalDateTime.now());
+                        Medico medico = new Medico(crm, pessoaMedico, medicoEspecialidade, LocalDateTime.now());
 
-                    if (medicoDAO.adicionaMedico(medico) == true) {
-                        System.out.println("\nMedico Cadastrado Com Sucesso!");
+                        if (medicoDAO.adicionaMedico(medico) == true) {
+                            System.out.println("\nMedico Cadastrado Com Sucesso!");
+                        } else {
+                            System.out.println("\nNao Foi Possivel Cadastrar o Medico.");
+                        }
                     } else {
-                        System.out.println("\nNao Foi Possivel Cadastrar o Medico.");
+                        System.out.println("\n Erro ao Cadastrar medico.");
                     }
-                } else {
-                    System.out.println("\n Erro ao Cadastrar medico.");
                 }
 
             }

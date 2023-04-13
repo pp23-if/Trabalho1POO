@@ -151,5 +151,18 @@ public class MedicoDAO {
         }
         return false;
     }
+    
+    public boolean verificaCrm(String Crm)
+    {
+        for (Medico medico : vetorMedico) {
+            
+            if(medico != null && medico.getCrm().equals(Crm.toUpperCase()) ||
+               medico != null && medico.getCrm().equals(Crm.toLowerCase()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
