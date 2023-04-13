@@ -36,6 +36,14 @@ public class PessoaDAO {
         Pessoa pessoa7 = new Pessoa("Eduardo Silvestre", "456666", "Rua dos Limoes", "33112020",
                 "Edu28", "24", "DonodeFranquia", agora);
         adicionaPessoa(pessoa7);
+        
+        Pessoa pessoa8 = new Pessoa("Roberto Gomes", "332288", "Rua das uvas - 17", "32985427",
+                "gb35", "50", "Paciente", agora);
+        adicionaPessoa(pessoa8);
+        
+        Pessoa pessoa9 = new Pessoa("Roberto Gomes", "332288", "Rua das uvas - 17", "32985427",
+                "rgd", "30", "DonoDeUnidadeDeFranquia", agora);
+        adicionaPessoa(pessoa9);
 
     }
 
@@ -64,7 +72,7 @@ public class PessoaDAO {
         for (Pessoa pessoa : vetorPessoa) {
 
             if (pessoa != null) {
-                System.out.println(pessoa);
+                System.out.println(pessoa + "\n");
             }
         }
     }

@@ -180,7 +180,7 @@ public class Pessoa {
                     + "Senha: " + this.senhaPessoa + "\n"
                     + "Telefone: " + this.telefonePessoa + "\n"
                     + "Tipo de Usuario: " + this.tipoUsuario + "\n"
-                    + "Data e Hora da Criacao: " + fd.format(this.dataCriacao) + "\n";
+                    + "Data e Hora da Criacao: " + fd.format(this.dataCriacao);
         } else {
             return "ID - Pessoa: " + this.idPessoa + "\n"
                     + "Nome: " + this.nomePessoa + "\n"
@@ -191,7 +191,7 @@ public class Pessoa {
                     + "Telefone: " + this.telefonePessoa + "\n"
                     + "Tipo de Usuario: " + this.tipoUsuario + "\n"
                     + "Data e Hora da Criacao: " + fd.format(this.dataCriacao) + "\n"
-                    + "Data e Hora da Modificacao: " + fd.format(this.dataModificacao) + "\n";
+                    + "Data e Hora da Modificacao: " + fd.format(this.dataModificacao);
         }
 
     }

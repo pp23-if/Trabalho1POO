@@ -6,6 +6,7 @@ import Model.Medico;
 import Model.MedicoDAO;
 import Model.Pessoa;
 import Model.PessoaDAO;
+import Model.UnidadeFranquiaDAO;
 import View.MenuTitulos;
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -23,6 +24,7 @@ public class GerenciaControladoras {
     PessoaDAO pessoaDAO = new PessoaDAO();
     MedicoDAO medicoDAO = new MedicoDAO(pessoaDAO);
     FranquiaDAO franquiaDAO = new FranquiaDAO(pessoaDAO);
+    UnidadeFranquiaDAO unidadeFranquiaDAO = new UnidadeFranquiaDAO(pessoaDAO, franquiaDAO);
 
     public GerenciaControladoras() {
 
@@ -44,12 +46,14 @@ public class GerenciaControladoras {
                 }
 
                 case 3: {
-                    System.out.println("\nMostrando Todas as Pessoas Cadastradas: " + "\n");
+                    System.out.println("\nMostrando Todas as PESSOAS Cadastradas: " + "\n");
                     pessoaDAO.mostraTodasPessoas();
-                    System.out.println("\nMostrando Todas os Medicos Cadastrados: " + "\n");
+                    System.out.println("\nMostrando TodOS os MEDICOS Cadastrados: " + "\n");
                     medicoDAO.mostraTodosMedicos();
-                    System.out.println("\nMostrando Todas as Franquias Cadastradas: " + "\n");
+                    System.out.println("\nMostrando Todas as FRANQUIAS Cadastradas: " + "\n");
                     franquiaDAO.mostraTodasFranquias();
+                    System.out.println("\nMostrando Todas as UNIDADES DE FRANQUIAS Cadastradas: " + "\n");
+                    unidadeFranquiaDAO.MostraTodasUnidadesDeFranquia();
                     break;
                 }
 

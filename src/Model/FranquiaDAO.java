@@ -231,5 +231,17 @@ public class FranquiaDAO {
         }
         return false;
     }
+    
+   public Franquia buscaFranquiaPorCnpj(String cnpjFranquia)
+   {
+       for (Franquia franquia : vetorFranquia) {
+           
+           if(franquia != null && franquia.getCnpj().equals(cnpjFranquia))
+           {
+               return franquia;
+           }
+       }
+        return null;
+   }
 
 }

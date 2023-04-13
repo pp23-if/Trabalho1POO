@@ -133,14 +133,16 @@ public class UnidadeFranquia {
 
         if (dataModificacao == null) {
             return "ID - UnidadeFranquia: " + this.idUnidadeFranquia + "\n"
-                    + "Dono Da Unidade: " + this.pessoa + "\n"
+                    + "Dono Da Unidade: " + "\n"
+                    + this.pessoa + "\n"
                     + "Franquia: " + this.franquia.getNomeFranquia() + "\n"
                     + "Cidade: " + this.cidadeUnidadeFranquia + "\n"
                     + "Endereco: " + this.enderecoUnidadeFranquia + "\n"
                     + "Data e Hora de Criacao: " + fd.format(dataCriacao) + "\n";
         } else {
             return "ID - UnidadeFranquia: " + this.idUnidadeFranquia + "\n"
-                    + "Dono Da Unidade: " + this.pessoa + "\n"
+                    + "Dono Da Unidade: " + "\n"
+                    + this.pessoa + "\n"
                     + "Franquia: " + this.franquia.getNomeFranquia() + "\n"
                     + "Cidade: " + this.cidadeUnidadeFranquia + "\n"
                     + "Endereco: " + this.enderecoUnidadeFranquia + "\n"
