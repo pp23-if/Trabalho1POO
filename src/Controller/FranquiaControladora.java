@@ -172,16 +172,51 @@ public class FranquiaControladora {
                 
                 case 5:
                 {
+                    System.out.println("Informe o Novo Login De Dono De Franquia: ");
+                    String novoLoginDonoFranquia = scanner.nextLine();
+                    
+                    if(franquiaDAO.atualizaLoginDonoDeFranquia(franquia, novoLoginDonoFranquia) == true)
+                    {
+                      System.out.println("\nLogin De Dono De Franquia Atualizado Com Sucesso!");    
+                    }
+                    else
+                    {
+                       System.out.println("\nNao Foi Possivel Atualizar o Login De Dono De Franquia.");   
+                    }
+                    
+                    
                     break;
                 }
                 
                 case 6:
                 {
+                    System.out.println("Informe a Nova Senha De Dono De Franquia: ");
+                    String novaSenhaDonoFranquia = scanner.nextLine();
+                    
+                    if(franquiaDAO.atualizaSenhaDonoDeFranquia(franquia, novaSenhaDonoFranquia) == true)
+                    {
+                      System.out.println("\nSenha De Dono De Franquia Atualizado Com Sucesso!");      
+                    }
+                    else
+                    {
+                      System.out.println("\nNao Foi Possivel Atualizar a Senha De Dono De Franquia.");    
+                    }
                     break;
                 }
                 
                 case 7:
                 {
+                    System.out.println("Informe o Novo Telefone De Dono De Franquia: ");
+                    String novoTelefoneDonoFranquia = scanner.nextLine();
+                    
+                    if(franquiaDAO.atualizaTelefoneDonoDeFranquia(franquia, novoTelefoneDonoFranquia) == true)
+                    {
+                      System.out.println("\nTelefone De Dono De Franquia Atualizado Com Sucesso!");   
+                    }
+                    else
+                    {
+                      System.out.println("\nNao Foi Possivel Atualizar o Telefone De Dono De Franquia.");  
+                    }
                     break;
                 }
             }

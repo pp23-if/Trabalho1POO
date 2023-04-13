@@ -96,7 +96,7 @@ public class FranquiaDAO {
             for (Franquia franquia : vetorFranquia) {
 
                 if (franquia != null && franquia.equals(f)) {
-                    franquia.setNomeFranquia(novoNomeFranquia);
+                    franquia.setNomeFranquia(novoNomeFranquia.toUpperCase());
                     franquia.setDataModificacao(LocalDateTime.now());
                     return true;
                 }
