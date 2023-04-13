@@ -60,7 +60,7 @@ public class UnidadeFranquiaDAO {
              
              if(unidadeFranquia != null)
              {
-                 System.out.println(unidadeFranquia);
+                 System.out.println(unidadeFranquia + "\n");
              }
          }
         return null;
@@ -68,7 +68,17 @@ public class UnidadeFranquiaDAO {
      
      
      
-     
+     public UnidadeFranquia buscaUnidadeFranquiaAtravesDaPessoaVinculada(Pessoa pessoa)
+     {
+         for (UnidadeFranquia unidadeFranquia : vetorUnidadeFranquia) {
+             
+             if(unidadeFranquia != null && unidadeFranquia.getPessoa().equals(pessoa))
+             {
+                 return unidadeFranquia;
+             }
+         }
+        return null;
+     }
      
      
      

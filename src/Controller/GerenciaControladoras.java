@@ -6,6 +6,7 @@ import Model.Medico;
 import Model.MedicoDAO;
 import Model.Pessoa;
 import Model.PessoaDAO;
+import Model.UnidadeFranquia;
 import Model.UnidadeFranquiaDAO;
 import View.MenuTitulos;
 import java.time.LocalDateTime;
@@ -154,6 +155,14 @@ public class GerenciaControladoras {
 
                 FranquiaControladora franquiaControladora 
                      = new FranquiaControladora(franquia, franquiaDAO, pessoaDAO, medicoDAO);
+            }
+            else if(pessoaLogada.getTipoUsuario().equals("DonoDeUnidadeDeFranquia"))
+            {
+                UnidadeFranquia unidadeFranquia = 
+                        unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaPessoaVinculada(pessoaLogada);
+                
+                UnidadeFranquiaControladora unidadeFranquiaControladora = 
+                        new UnidadeFranquiaControladora(unidadeFranquia, unidadeFranquiaDAO);
             }
 
         } else {
