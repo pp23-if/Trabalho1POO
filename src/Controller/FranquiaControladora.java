@@ -218,6 +218,7 @@ public class FranquiaControladora {
     }
 
     private void cadastraMedico(PessoaDAO pessoaDAO, MedicoDAO medicoDAO) {
+        
         System.out.println("\n");
         pessoaDAO.filtraPessoasCandidatasAMedico();
 
