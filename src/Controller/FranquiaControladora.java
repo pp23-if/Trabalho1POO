@@ -169,6 +169,21 @@ public class FranquiaControladora {
                      }
                     break;
                 }
+                
+                case 5:
+                {
+                    break;
+                }
+                
+                case 6:
+                {
+                    break;
+                }
+                
+                case 7:
+                {
+                    break;
+                }
             }
 
         } while (opcao != 0);
