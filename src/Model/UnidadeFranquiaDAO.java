@@ -84,4 +84,18 @@ public class UnidadeFranquiaDAO {
         return false;
     }
     
+    public UnidadeFranquia buscaUnidadeDeFranquia(UnidadeFranquia uniFran)
+    {
+        for (UnidadeFranquia unidadeFranquia : vetorUnidadeFranquia) {
+            
+            if(unidadeFranquia != null && unidadeFranquia.equals(uniFran))
+            {
+                return unidadeFranquia;
+            }
+        }
+        return null;
+    }
+    
+    
+    
 }
