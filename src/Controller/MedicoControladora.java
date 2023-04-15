@@ -10,13 +10,13 @@ public class MedicoControladora {
     Scanner scanner = new Scanner(System.in);
     MenuTitulosMedico telaMedico = new MenuTitulosMedico();
 
-    public MedicoControladora(Medico medico, MedicoDAO medicoDAO) {
+    public MedicoControladora(Medico medico, MedicoDAO medicoDAO, ValidacaoEntradaDados vd) {
 
-        menuOpcoesMedico(medico, medicoDAO);
+        menuOpcoesMedico(medico, medicoDAO, vd);
 
     }
 
-    private void menuOpcoesMedico(Medico medico, MedicoDAO medicoDAO) {
+    private void menuOpcoesMedico(Medico medico, MedicoDAO medicoDAO, ValidacaoEntradaDados vd) {
 
         int opcao;
 
@@ -29,7 +29,7 @@ public class MedicoControladora {
                     break;
                 }
                 case 2: {
-                    menuOpcoesAtualizarDadosMedico(medico, medicoDAO);
+                    menuOpcoesAtualizarDadosMedico(medico, medicoDAO, vd);
                     break;
                 }
             }
@@ -37,7 +37,7 @@ public class MedicoControladora {
         } while (opcao != 0);
     }
 
-    private void menuOpcoesAtualizarDadosMedico(Medico medico, MedicoDAO medicoDAO) {
+    private void menuOpcoesAtualizarDadosMedico(Medico medico, MedicoDAO medicoDAO, ValidacaoEntradaDados vd) {
         int opcao;
 
         do {

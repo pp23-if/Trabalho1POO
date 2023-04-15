@@ -14,11 +14,14 @@ public class UnidadeFranquiaControladora {
     Scanner scanner = new Scanner(System.in);
     MenuTitulosUnidadeFranquia menuTitulosUnidadeFranquia = new MenuTitulosUnidadeFranquia();
 
-    public UnidadeFranquiaControladora(UnidadeFranquia unidadeFranquia, UnidadeFranquiaDAO unidadeFranquiaDAO) {
-        menuOpcoesUnidadeFranquia(unidadeFranquia, unidadeFranquiaDAO);
+    public UnidadeFranquiaControladora(UnidadeFranquia unidadeFranquia, UnidadeFranquiaDAO unidadeFranquiaDAO, 
+            MedicoDAO medicoDAO, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd) {
+        
+        menuOpcoesUnidadeFranquia(unidadeFranquia, unidadeFranquiaDAO, vd);
     }
 
-    private void menuOpcoesUnidadeFranquia(UnidadeFranquia unidadeFranquia, UnidadeFranquiaDAO unidadeFranquiaDAO) {
+    private void menuOpcoesUnidadeFranquia(UnidadeFranquia unidadeFranquia, 
+            UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd) {
 
         int opcao;
 
@@ -31,7 +34,7 @@ public class UnidadeFranquiaControladora {
                     break;
                 }
                 case 2: {
-                    menuOpcoesAtualizaDadosUnidadeFranquia(unidadeFranquia, unidadeFranquiaDAO);
+                    menuOpcoesAtualizaDadosUnidadeFranquia(unidadeFranquia, unidadeFranquiaDAO, vd);
                     break;
                 }
                 case 3: {
@@ -68,7 +71,7 @@ public class UnidadeFranquiaControladora {
     }
 
     private void menuOpcoesAtualizaDadosUnidadeFranquia(UnidadeFranquia unidadeFranquia,
-            UnidadeFranquiaDAO unidadeFranquiaDAO) {
+            UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd) {
 
         int opcao;
 

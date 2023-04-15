@@ -11,12 +11,12 @@ public class PacienteControladora {
 
     MenuTitulosPaciente telaPaciente = new MenuTitulosPaciente();
 
-    public PacienteControladora(Pessoa pessoa, PessoaDAO pessoaDAO) 
+    public PacienteControladora(Pessoa pessoa, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd) 
     {
-        menuOpcoesPaciente(pessoa, pessoaDAO);
+        menuOpcoesPaciente(pessoa, pessoaDAO, vd);
     }
 
-    private void menuOpcoesPaciente(Pessoa pessoa, PessoaDAO pessoaDAO) {
+    private void menuOpcoesPaciente(Pessoa pessoa, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd) {
 
         int opcao;
 
@@ -30,7 +30,7 @@ public class PacienteControladora {
                     break;
                 }
                 case 2: {
-                    menuOpcoesAtualizarDadosPaciente(pessoa, pessoaDAO);
+                    menuOpcoesAtualizarDadosPaciente(pessoa, pessoaDAO, vd);
                     break;
                 }
             }
@@ -38,7 +38,7 @@ public class PacienteControladora {
         } while (opcao != 0);
     }
 
-    private void menuOpcoesAtualizarDadosPaciente(Pessoa pessoa, PessoaDAO pessoaDAO) {
+    private void menuOpcoesAtualizarDadosPaciente(Pessoa pessoa, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd) {
 
         int opcao;
 
@@ -49,7 +49,7 @@ public class PacienteControladora {
                 case 1: {
                     System.out.println("Informe o Novo Nome: ");
                     String novoNomePessoa = scanner.nextLine();
-
+                    
                     if (pessoaDAO.atualizaNomePessoa(pessoa.getNomePessoa(), novoNomePessoa, pessoa.getCpf()) == true) {
                         System.out.println("O Nome Foi Atualizado Com Sucesso!");
                     } else {

@@ -141,20 +141,21 @@ public class GerenciaControladoras {
 
             if (pessoaLogada.getTipoUsuario().equals("Paciente")) {
 
-                PacienteControladora pacienteControladora = new PacienteControladora(pessoaLogada, pessoaDAO);
+                PacienteControladora pacienteControladora = new PacienteControladora(pessoaLogada, pessoaDAO, vd);
 
             } else if (pessoaLogada.getTipoUsuario().equals("Medico")) {
 
                 Medico medico = medicoDAO.buscaMedicoAtravesdaPessoaVinculada(pessoaLogada);
 
-                MedicoControladora medicoControladora = new MedicoControladora(medico, medicoDAO);
+                MedicoControladora medicoControladora = new MedicoControladora(medico, medicoDAO, vd);
 
             } else if (pessoaLogada.getTipoUsuario().equals("DonodeFranquia")) {
 
                 Franquia franquia = franquiaDAO.buscaFranquiaAtravesDaPessoaVinculada(pessoaLogada);
 
                 FranquiaControladora franquiaControladora 
-                     = new FranquiaControladora(franquia, franquiaDAO, pessoaDAO, medicoDAO, unidadeFranquiaDAO);
+                     = new FranquiaControladora(franquia, franquiaDAO, pessoaDAO, 
+                             medicoDAO, unidadeFranquiaDAO, vd);
             }
             else if(pessoaLogada.getTipoUsuario().equals("DonoDeUnidadeDeFranquia"))
             {
@@ -162,7 +163,7 @@ public class GerenciaControladoras {
                         unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaPessoaVinculada(pessoaLogada);
                 
                 UnidadeFranquiaControladora unidadeFranquiaControladora = 
-                        new UnidadeFranquiaControladora(unidadeFranquia, unidadeFranquiaDAO);
+                        new UnidadeFranquiaControladora(unidadeFranquia, unidadeFranquiaDAO, medicoDAO, pessoaDAO, vd);
             }
 
         } else {

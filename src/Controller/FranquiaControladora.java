@@ -18,13 +18,13 @@ public class FranquiaControladora {
     MenuTitulosFranquia telaFranquia = new MenuTitulosFranquia();
 
     public FranquiaControladora(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO,
-            MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO) {
+            MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd) {
 
-        menuOpcoesFranquia(franquia, franquiaDAO, pessoaDAO, medicoDAO, unidadeFranquiaDAO);
+        menuOpcoesFranquia(franquia, franquiaDAO, pessoaDAO, medicoDAO, unidadeFranquiaDAO, vd);
     }
 
     private void menuOpcoesFranquia(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO,
-            MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO) {
+            MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd) {
 
         int opcao;
 
@@ -37,11 +37,11 @@ public class FranquiaControladora {
                     break;
                 }
                 case 2: {
-                    cadastraNovaFranquia(franquiaDAO, pessoaDAO);
+                    cadastraNovaFranquia(franquiaDAO, pessoaDAO, vd);
                     break;
                 }
                 case 3: {
-                    menuOpcoesAtualizarDadosFranquia(franquia, franquiaDAO);
+                    menuOpcoesAtualizarDadosFranquia(franquia, franquiaDAO, vd);
                     break;
                 }
                 case 4: {
@@ -53,7 +53,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 6: {
-                    cadastraMedico(pessoaDAO, medicoDAO);
+                    cadastraMedico(pessoaDAO, medicoDAO, vd);
                     break;
                 }
                 case 7: {
@@ -61,7 +61,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 8: {
-                    cadastraUnidadeFranquia(pessoaDAO, unidadeFranquiaDAO, franquia);
+                    cadastraUnidadeFranquia(pessoaDAO, unidadeFranquiaDAO, franquia, vd);
                     break;
                 }
                 case 9: {
@@ -73,7 +73,7 @@ public class FranquiaControladora {
         } while (opcao != 0);
     }
 
-    private void cadastraNovaFranquia(FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO) {
+    private void cadastraNovaFranquia(FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd) {
 
         pessoaDAO.filtraPessoasCandidatasADonoDeFranquia();
 
@@ -132,7 +132,7 @@ public class FranquiaControladora {
         }
     }
 
-    private void menuOpcoesAtualizarDadosFranquia(Franquia franquia, FranquiaDAO franquiaDAO) {
+    private void menuOpcoesAtualizarDadosFranquia(Franquia franquia, FranquiaDAO franquiaDAO, ValidacaoEntradaDados vd) {
         int opcao;
 
         do {
@@ -216,7 +216,7 @@ public class FranquiaControladora {
         } while (opcao != 0);
     }
 
-    private void cadastraMedico(PessoaDAO pessoaDAO, MedicoDAO medicoDAO) {
+    private void cadastraMedico(PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ValidacaoEntradaDados vd) {
 
         System.out.println("\n");
         pessoaDAO.filtraPessoasCandidatasAMedico();
@@ -273,7 +273,7 @@ public class FranquiaControladora {
     }
 
     private void cadastraUnidadeFranquia(PessoaDAO pessoaDAO,
-            UnidadeFranquiaDAO unidadeFranquiaDAO, Franquia franquia) {
+            UnidadeFranquiaDAO unidadeFranquiaDAO, Franquia franquia, ValidacaoEntradaDados vd) {
         pessoaDAO.filtraPessoaCandidatasADonoUnidadeFranquia();
 
         System.out.println("\nInforme o Id da Pessoa Que Sera Dono De Unidade De Franquia: ");
