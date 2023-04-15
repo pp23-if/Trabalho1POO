@@ -1,4 +1,3 @@
-
 package Controller;
 
 import Model.Franquia;
@@ -10,20 +9,15 @@ import Model.UnidadeFranquiaDAO;
 import View.MenuTitulosUnidadeFranquia;
 import java.util.Scanner;
 
-
 public class UnidadeFranquiaControladora {
 
     Scanner scanner = new Scanner(System.in);
     MenuTitulosUnidadeFranquia menuTitulosUnidadeFranquia = new MenuTitulosUnidadeFranquia();
-    
-    
-    public UnidadeFranquiaControladora(UnidadeFranquia unidadeFranquia, UnidadeFranquiaDAO 
-            unidadeFranquiaDAO) 
-    {
+
+    public UnidadeFranquiaControladora(UnidadeFranquia unidadeFranquia, UnidadeFranquiaDAO unidadeFranquiaDAO) {
         menuOpcoesUnidadeFranquia(unidadeFranquia, unidadeFranquiaDAO);
     }
-    
-    
+
     private void menuOpcoesUnidadeFranquia(UnidadeFranquia unidadeFranquia, UnidadeFranquiaDAO unidadeFranquiaDAO) {
 
         int opcao;
@@ -37,11 +31,11 @@ public class UnidadeFranquiaControladora {
                     break;
                 }
                 case 2: {
-                    
+                    menuOpcoesAtualizaDadosUnidadeFranquia(unidadeFranquia, unidadeFranquiaDAO);
                     break;
                 }
                 case 3: {
-                      unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(unidadeFranquia.getFranquia());
+                    unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(unidadeFranquia.getFranquia());
                     break;
                 }
                 case 4: {
@@ -49,28 +43,113 @@ public class UnidadeFranquiaControladora {
                 }
                 case 5: {
                     System.out.println("\n======== VETOR DE MEDICOS ===========\n");
-                    
+
                     break;
                 }
                 case 6: {
-                   
+
                     break;
                 }
                 case 7: {
-                    
+
                     break;
                 }
                 case 8: {
-                    
+
                     break;
                 }
                 case 9: {
-                    
+
                     break;
                 }
             }
 
         } while (opcao != 0);
     }
-    
+
+    private void menuOpcoesAtualizaDadosUnidadeFranquia(UnidadeFranquia unidadeFranquia,
+            UnidadeFranquiaDAO unidadeFranquiaDAO) {
+
+        int opcao;
+
+        do {
+            opcao = menuTitulosUnidadeFranquia.menuAtualizacaoDeDadosUnidadeFranquia();
+
+            switch (opcao) {
+                case 1: {
+                    System.out.println("Informe o Nova Cidade da Unidade De Franquia: ");
+                    String novaCidadeUnidadeFranquia = scanner.nextLine();
+
+                    if (unidadeFranquiaDAO.atualizaCidadeUnidadeFranquia(unidadeFranquia,
+                            novaCidadeUnidadeFranquia) == true) {
+                        System.out.println("Cidade Da Unidade De Franquia Atualizada Com Sucesso!");
+                    } else {
+                        System.out.println("Nao Foi Possivel Atualizar A Cidade Da Unidade De Franquia.");
+                    }
+                    break;
+                }
+                case 2: {
+                    System.out.println("Informe o Novo Endereco da Unidade De Franquia: ");
+                    String novoEnderecoUnidadeFranquia = scanner.nextLine();
+
+                    if (unidadeFranquiaDAO.atualizaEnderecoUnidadeDeFranquia(unidadeFranquia,
+                            novoEnderecoUnidadeFranquia) == true) {
+                        System.out.println("Endereco Da Unidade De Franquia Atualizada Com Sucesso!");
+                    } else {
+                        System.out.println("Nao Foi Possivel Atualizar O Endereco Da Unidade De Franquia.");
+                    }
+                    break;
+                }
+                case 3: {
+                    System.out.println("Informe o Novo Login Dono De Unidade De Franquia: ");
+                    String novoLoginDonoUnidadeFranquia = scanner.nextLine();
+                    
+                    if(unidadeFranquiaDAO.atualizaLoginDonoDeUnidadeDeFranquia(unidadeFranquia, 
+                            novoLoginDonoUnidadeFranquia) == true)
+                    {
+                      System.out.println("Login Dono Unidade De Franquia Atualizada Com Sucesso!");  
+                    }
+                    else
+                    {
+                      System.out.println("Nao Foi Possivel Atualizar O Login Dono Da Unidade De Franquia.");  
+                    }
+                    break;
+                }
+                case 4: {
+                    System.out.println("Informe o Nova Senha Dono De Unidade De Franquia: ");
+                    String novaSenhaDonoUnidadeFranquia = scanner.nextLine();
+                    
+                    if(unidadeFranquiaDAO.atualizaSenhaDonoDeUnidadeDeFranquia(unidadeFranquia,
+                            novaSenhaDonoUnidadeFranquia) == true)
+                    {
+                       System.out.println("Senha Dono Unidade De Franquia Atualizada Com Sucesso!");    
+                    }
+                    else
+                    {
+                      System.out.println("Nao Foi Possivel Atualizar A Senha Dono Da Unidade De Franquia.");    
+                    }
+                    break;
+                }
+                case 5: {
+                    System.out.println("Informe o Novo Telefone Dono De Unidade De Franquia: ");
+                    String novoTelefoneDonoUnidadeFranquia = scanner.nextLine();
+                    
+                    if(unidadeFranquiaDAO.atualizaTelefoneDonoDeUnidadeDeFranquia(unidadeFranquia, 
+                            novoTelefoneDonoUnidadeFranquia) == true)
+                    {
+                      System.out.println("Telefone Dono Unidade De Franquia Atualizada Com Sucesso!");     
+                    }
+                    else
+                    {
+                       System.out.println("Nao Foi Possivel Atualizar O Telefone Dono Da Unidade De Franquia.");       
+                    }
+                    break;
+
+                }
+
+            }
+        } while (opcao != 0);
+
+    }
+
 }

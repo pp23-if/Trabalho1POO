@@ -119,7 +119,7 @@ public class UnidadeFranquiaDAO {
     }
 
     public boolean atualizaLoginDonoDeUnidadeDeFranquia(UnidadeFranquia uf, String novoLoginDonoDeUnidadeFranquia) {
-        
+
         if (!verificaSeLoginDonoDeUnidadeFranquiaEstaEmUso(novoLoginDonoDeUnidadeFranquia) == true) {
             for (UnidadeFranquia unidadeFranquia : vetorUnidadeFranquia) {
 
@@ -133,24 +133,24 @@ public class UnidadeFranquiaDAO {
 
         return false;
     }
-    
-    public boolean atualizaSenhaDonoDeUnidadeDeFranquia(UnidadeFranquia uf, String novaSenhaDonoDeUnidadeFranquia) {
-        
-            for (UnidadeFranquia unidadeFranquia : vetorUnidadeFranquia) {
 
-                if (unidadeFranquia != null && unidadeFranquia.equals(uf)) {
-                    unidadeFranquia.getPessoa().setSenhaPessoa(novaSenhaDonoDeUnidadeFranquia);
-                    unidadeFranquia.getPessoa().setDataModificacao(LocalDateTime.now());
-                    return true;
-                }
+    public boolean atualizaSenhaDonoDeUnidadeDeFranquia(UnidadeFranquia uf, String novaSenhaDonoDeUnidadeFranquia) {
+
+        for (UnidadeFranquia unidadeFranquia : vetorUnidadeFranquia) {
+
+            if (unidadeFranquia != null && unidadeFranquia.equals(uf)) {
+                unidadeFranquia.getPessoa().setSenhaPessoa(novaSenhaDonoDeUnidadeFranquia);
+                unidadeFranquia.getPessoa().setDataModificacao(LocalDateTime.now());
+                return true;
             }
-        
+        }
 
         return false;
     }
-   
+
     public boolean atualizaTelefoneDonoDeUnidadeDeFranquia(UnidadeFranquia uf, String novoTelefoneDonoDeUnidadeFranquia) {
-        
+
+        if (!verificaSeTelefoneDonoDeUnidadeFranquiaEstaEmUso(novoTelefoneDonoDeUnidadeFranquia) == true) {
             for (UnidadeFranquia unidadeFranquia : vetorUnidadeFranquia) {
 
                 if (unidadeFranquia != null && unidadeFranquia.equals(uf)) {
@@ -159,12 +159,12 @@ public class UnidadeFranquiaDAO {
                     return true;
                 }
             }
-        
+
+        }
 
         return false;
     }
-   
-    
+
     public boolean verificaSeLoginDonoDeUnidadeFranquiaEstaEmUso(String novoLoginDonoUnidadeFranquia) {
         for (UnidadeFranquia unidadeFranquia : vetorUnidadeFranquia) {
 
