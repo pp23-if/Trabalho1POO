@@ -16,3 +16,6 @@ public class Teste {
 //fazar os metodos de validacao 
 //Lucas Rocha
 
+
+//Teste de Commit apos Reinstalar  o Net Beans
+
