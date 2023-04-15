@@ -190,7 +190,7 @@ public class FranquiaDAO {
 
    
 
-    private boolean verificaSeLoginDonoFranquiaEstaSendoUsado(String novoLoginDonoFranquia) {
+    public boolean verificaSeLoginDonoFranquiaEstaSendoUsado(String novoLoginDonoFranquia) {
         for (Franquia franquia : vetorFranquia) {
 
             if (franquia != null && franquia.getPessoa().getLoginPessoa().equals(novoLoginDonoFranquia)) {

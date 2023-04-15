@@ -84,52 +84,57 @@ public class FranquiaControladora {
 
         if (pessoa == null) {
             System.out.println("\nPessoa Nao Encontrada");
+        } else if (franquiaDAO.verificaDonosDeFranquia(pessoa) == true) {
+            System.out.println("\nPessoa ja Cadastrada Como Dono de Franquia\n");
         } else {
             System.out.println("\nInforme o Login de Dono de Franquia: ");
             String loginDonoFranquia = scanner.nextLine();
-
-            System.out.println("\nInforme a Senha de Dono de Franquia: ");
-            String senhaDonoFranquia = scanner.nextLine();
-
-            if (franquiaDAO.verificaDonosDeFranquia(pessoa) == true) {
-                System.out.println("\nPessoa ja Cadastrada Como Dono de Franquia\n");
+            //colocar a validacao da entrada de dados nessa linha.
+            if (franquiaDAO.verificaSeLoginDonoFranquiaEstaSendoUsado(loginDonoFranquia) == true) {
+                System.out.println("\nLogin Dono De Franquia Ja Esta Sendo Usado!");
             } else {
+
+                System.out.println("\nInforme a Senha de Dono de Franquia: ");
+                String senhaDonoFranquia = scanner.nextLine();
+
                 Pessoa pessoaDonoFranquia = new Pessoa(pessoa.getNomePessoa(), pessoa.getCpf(), pessoa.getEnderecoPessoa(),
                         pessoa.getTelefonePessoa(), loginDonoFranquia, senhaDonoFranquia, "DonodeFranquia", LocalDateTime.now());
 
-                pessoaDAO.adicionaPessoa(pessoaDonoFranquia);
+                if (pessoaDAO.adicionaPessoa(pessoaDonoFranquia) == true) {
+                    System.out.println("\nInforme o Nome da Franquia: ");
+                    String nomeFranquia = scanner.nextLine();
 
-                System.out.println("\nInforme o Nome da Franquia: ");
-                String nomeFranquia = scanner.nextLine();
+                    System.out.println("\nInforme o Cnpj da Franquia: ");
+                    String cnpjFranquia = scanner.nextLine();
 
-                System.out.println("\nInforme o Cnpj da Franquia: ");
-                String cnpjFranquia = scanner.nextLine();
+                    System.out.println("\nInforme a Cidade da Franquia: ");
+                    String cidadeFranquia = scanner.nextLine();
 
-                System.out.println("\nInforme a Cidade da Franquia: ");
-                String cidadeFranquia = scanner.nextLine();
+                    System.out.println("\nInforme o Endereco da Franquia: ");
+                    String enderecoFranquia = scanner.nextLine();
 
-                System.out.println("\nInforme o Endereco da Franquia: ");
-                String enderecoFranquia = scanner.nextLine();
-
-                if (franquiaDAO.verificaSeFranquiaExiste(nomeFranquia, cnpjFranquia) == true) {
-                    System.out.println("\nA Franquia Ja Existe");
-                } else {
-                    Franquia franquia = new Franquia(nomeFranquia.toUpperCase(), cnpjFranquia,
-                            cidadeFranquia, enderecoFranquia, pessoaDonoFranquia, LocalDateTime.now());
-
-                    boolean franquiaAdicionada = franquiaDAO.adicionaFranquia(franquia);
-
-                    if (franquiaAdicionada == true) {
-                        System.out.println("\nFranquia Cadastrada Com Sucesso!");
+                    if (franquiaDAO.verificaSeFranquiaExiste(nomeFranquia, cnpjFranquia) == true) {
+                        System.out.println("\nA Franquia Ja Existe");
                     } else {
-                        System.out.println("\nNao Foi Possivel Cadastrar a Franquia.");
+                        Franquia franquia = new Franquia(nomeFranquia.toUpperCase(), cnpjFranquia,
+                                cidadeFranquia, enderecoFranquia, pessoaDonoFranquia, LocalDateTime.now());
+
+                        boolean franquiaAdicionada = franquiaDAO.adicionaFranquia(franquia);
+
+                        if (franquiaAdicionada == true) {
+                            System.out.println("\nFranquia Cadastrada Com Sucesso!");
+                        } else {
+                            System.out.println("\nNao Foi Possivel Cadastrar a Franquia.");
+                        }
                     }
 
+                } else {
+                    System.out.println("\nErro Ao Cadastrar Franquia.");
                 }
-
             }
 
         }
+
     }
 
     private void menuOpcoesAtualizarDadosFranquia(Franquia franquia, FranquiaDAO franquiaDAO, ValidacaoEntradaDados vd) {
@@ -151,7 +156,7 @@ public class FranquiaControladora {
 
                     break;
                 }
-              
+
                 case 2: {
                     System.out.println("Informe a Nova Cidade da Franquia: ");
                     String novaCidadeFranquia = scanner.nextLine();
@@ -245,26 +250,31 @@ public class FranquiaControladora {
 
                     System.out.println("\nInforme O Login De Medico: ");
                     String LoginMedico = scanner.nextLine();
-
-                    System.out.println("\nInforme A Senha De Medico: ");
-                    String senhaMedico = scanner.nextLine();
-
-                    Pessoa pessoaMedico = new Pessoa(pessoaEncontrada.getNomePessoa(),
-                            pessoaEncontrada.getCpf(), pessoaEncontrada.getEnderecoPessoa(),
-                            pessoaEncontrada.getTelefonePessoa(), LoginMedico, senhaMedico, "Medico", LocalDateTime.now());
-
-                    if (pessoaDAO.adicionaPessoa(pessoaMedico) == true) {
-
-                        Medico medico = new Medico(crm, pessoaMedico, medicoEspecialidade, LocalDateTime.now());
-
-                        if (medicoDAO.adicionaMedico(medico) == true) {
-                            System.out.println("\nMedico Cadastrado Com Sucesso!");
-                        } else {
-                            System.out.println("\nNao Foi Possivel Cadastrar o Medico.");
-                        }
+                    //colocar a validacao da entrada de dados nessa linha.
+                    if (medicoDAO.verificaSeloginEstaSendoUsado(LoginMedico) == true) {
+                        System.out.println("\nLogin De Medico Ja Esta Sendo Usado!");
                     } else {
-                        System.out.println("\n Erro ao Cadastrar medico.");
+                        System.out.println("\nInforme A Senha De Medico: ");
+                        String senhaMedico = scanner.nextLine();
+
+                        Pessoa pessoaMedico = new Pessoa(pessoaEncontrada.getNomePessoa(),
+                                pessoaEncontrada.getCpf(), pessoaEncontrada.getEnderecoPessoa(),
+                                pessoaEncontrada.getTelefonePessoa(), LoginMedico, senhaMedico, "Medico", LocalDateTime.now());
+
+                        if (pessoaDAO.adicionaPessoa(pessoaMedico) == true) {
+
+                            Medico medico = new Medico(crm, pessoaMedico, medicoEspecialidade, LocalDateTime.now());
+
+                            if (medicoDAO.adicionaMedico(medico) == true) {
+                                System.out.println("\nMedico Cadastrado Com Sucesso!");
+                            } else {
+                                System.out.println("\nNao Foi Possivel Cadastrar o Medico.");
+                            }
+                        } else {
+                            System.out.println("\n Erro ao Cadastrar medico.");
+                        }
                     }
+
                 }
 
             }
@@ -295,37 +305,36 @@ public class FranquiaControladora {
 
                 System.out.println("\nInforme O Login Dono De Unidade De Franquia: ");
                 String LoginDonoUnidadeFranquia = scanner.nextLine();
+                //colocar a validacao da entrada de dados nessa linha.
+                if (unidadeFranquiaDAO.verificaSeLoginDonoDeUnidadeFranquiaEstaEmUso(LoginDonoUnidadeFranquia) == true) {
+                    System.out.println("\nLogin De Dono Unidade Franquia Ja Esta Sendo Usado!");
+                } else {
+                    System.out.println("\nInforme A Senha De Dono De Unidade De Franquia: ");
+                    String senhaDonoUnidadeFranquia = scanner.nextLine();
 
-                System.out.println("\nInforme A Senha De Dono De Unidade De Franquia: ");
-                String senhaDonoUnidadeFranquia = scanner.nextLine();
-                
-                Pessoa donoUnidadeFranquia = new Pessoa(pessoaEncontrada.getNomePessoa(),
-                        pessoaEncontrada.getCpf(), pessoaEncontrada.getEnderecoPessoa(), 
-                        pessoaEncontrada.getTelefonePessoa(), 
-                        LoginDonoUnidadeFranquia, senhaDonoUnidadeFranquia, 
-                        "DonoDeUnidadeDeFranquia", LocalDateTime.now());
-                
-                if(pessoaDAO.adicionaPessoa(donoUnidadeFranquia) == true)
-                {
-                    UnidadeFranquia unidadeFranquia = new UnidadeFranquia(franquia, 
-                            cidadeUnidadeFranquia, enderecoUnidadeFranquia, donoUnidadeFranquia, LocalDateTime.now());
-                    
-                    if(unidadeFranquiaDAO.adicionaUnidadeFranquia(unidadeFranquia) == true)
-                    {
-                      System.out.println("\nUnidade De Franquia Cadastrada Com Sucesso!");   
+                    Pessoa donoUnidadeFranquia = new Pessoa(pessoaEncontrada.getNomePessoa(),
+                            pessoaEncontrada.getCpf(), pessoaEncontrada.getEnderecoPessoa(),
+                            pessoaEncontrada.getTelefonePessoa(),
+                            LoginDonoUnidadeFranquia, senhaDonoUnidadeFranquia,
+                            "DonoDeUnidadeDeFranquia", LocalDateTime.now());
+
+                    if (pessoaDAO.adicionaPessoa(donoUnidadeFranquia) == true) {
+                        UnidadeFranquia unidadeFranquia = new UnidadeFranquia(franquia,
+                                cidadeUnidadeFranquia, enderecoUnidadeFranquia, donoUnidadeFranquia, LocalDateTime.now());
+
+                        if (unidadeFranquiaDAO.adicionaUnidadeFranquia(unidadeFranquia) == true) {
+                            System.out.println("\nUnidade De Franquia Cadastrada Com Sucesso!");
+                        } else {
+                            System.out.println("\nNao Foi Possivel Cadastrar A Unidade De Franquia.");
+                        }
+                    } else {
+                        System.out.println("\n Erro ao Cadastrar Dono De Unidade Franquia.");
                     }
-                    else
-                    {
-                      System.out.println("\nNao Foi Possivel Cadastrar A Unidade De Franquia.");   
-                    }
+
                 }
-                else
-                {
-                  System.out.println("\n Erro ao Cadastrar Dono De Unidade Franquia.");  
-                }
-                
+
             }
-            
+
         }
 
     }

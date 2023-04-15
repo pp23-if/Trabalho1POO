@@ -122,7 +122,7 @@ public class MedicoDAO {
         return false;
     }
 
-    private boolean verificaSeloginEstaSendoUsado(String login) {
+    public boolean verificaSeloginEstaSendoUsado(String login) {
         for (Medico medico : vetorMedico) {
             if (medico != null && medico.getPessoa().getLoginPessoa().equals(login)) {
                 return true;
