@@ -151,19 +151,8 @@ public class FranquiaControladora {
 
                     break;
                 }
+              
                 case 2: {
-                    System.out.println("Informe o Novo Cnpj da Franquia: ");
-                    String novoCnpjFranquia = scanner.nextLine();
-
-                    if (franquiaDAO.atualizarCnpjFranquia(franquia, novoCnpjFranquia) == true) {
-                        System.out.println("\nCnpj Da Franquia Atualizado Com Sucesso!");
-                    } else {
-                        System.out.println("\nNao Foi Possivel Atualizar O Cnpj Da Franquia.");
-                    }
-
-                    break;
-                }
-                case 3: {
                     System.out.println("Informe a Nova Cidade da Franquia: ");
                     String novaCidadeFranquia = scanner.nextLine();
 
@@ -174,7 +163,7 @@ public class FranquiaControladora {
                     }
                     break;
                 }
-                case 4: {
+                case 3: {
                     System.out.println("Informe o Novo Endereco Cidade da Franquia: ");
                     String novoEnderecoFranquia = scanner.nextLine();
 
@@ -186,7 +175,7 @@ public class FranquiaControladora {
                     break;
                 }
 
-                case 5: {
+                case 4: {
                     System.out.println("Informe o Novo Login De Dono De Franquia: ");
                     String novoLoginDonoFranquia = scanner.nextLine();
 
@@ -199,7 +188,7 @@ public class FranquiaControladora {
                     break;
                 }
 
-                case 6: {
+                case 5: {
                     System.out.println("Informe a Nova Senha De Dono De Franquia: ");
                     String novaSenhaDonoFranquia = scanner.nextLine();
 
@@ -211,7 +200,7 @@ public class FranquiaControladora {
                     break;
                 }
 
-                case 7: {
+                case 6: {
                     System.out.println("Informe o Novo Telefone De Dono De Franquia: ");
                     String novoTelefoneDonoFranquia = scanner.nextLine();
 

@@ -106,21 +106,7 @@ public class FranquiaDAO {
         return false;
     }
 
-    public boolean atualizarCnpjFranquia(Franquia f, String novoCnpjFranquia) {
-
-        if (!verificaSeCnpjFranquiaEstaSendoUsado(novoCnpjFranquia) == true) {
-            for (Franquia franquia : vetorFranquia) {
-
-                if (franquia != null && franquia.equals(f)) {
-                    franquia.setCnpj(novoCnpjFranquia);
-                    franquia.setDataModificacao(LocalDateTime.now());
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
+    
 
     public boolean atualizarCidadeFranquia(Franquia f, String novaCidadeFranquia) {
         for (Franquia franquia : vetorFranquia) {
@@ -202,15 +188,7 @@ public class FranquiaDAO {
         return false;
     }
 
-    private boolean verificaSeCnpjFranquiaEstaSendoUsado(String novoCnpjFranquia) {
-        for (Franquia franquia : vetorFranquia) {
-
-            if (franquia != null && franquia.getCnpj().equals(novoCnpjFranquia)) {
-                return true;
-            }
-        }
-        return false;
-    }
+   
 
     private boolean verificaSeLoginDonoFranquiaEstaSendoUsado(String novoLoginDonoFranquia) {
         for (Franquia franquia : vetorFranquia) {

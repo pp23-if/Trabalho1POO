@@ -32,11 +32,11 @@ public class MenuTitulosUnidadeFranquia {
 
         builder.append("\n============ Menu Atualizacao De Dados Unidade Franquia ===========");
         builder.append("\n0 - Para Sair");
-        builder.append("\n3 - Atualizar Cidade da Unidade De Franquia: ");
-        builder.append("\n4 - Atualizar Endereco Da Unidade De Franquia: ");
-        builder.append("\n5 - Atualizar Login Dono Unidade Franquia: ");
-        builder.append("\n6 - Atualizar Senha Dono Unidade Franquia: ");
-        builder.append("\n7 - Atualizar Telefone Dono Unidade De Franquia: ");
+        builder.append("\n1 - Atualizar Cidade da Unidade De Franquia: ");
+        builder.append("\n2 - Atualizar Endereco Da Unidade De Franquia: ");
+        builder.append("\n3 - Atualizar Login Dono Unidade Franquia: ");
+        builder.append("\n4 - Atualizar Senha Dono Unidade Franquia: ");
+        builder.append("\n5 - Atualizar Telefone Dono Unidade De Franquia: ");
 
         builder.append("\n\nOpcao: ");
 

@@ -38,12 +38,11 @@ public class MenuTitulosFranquia {
         builder.append("\n============ Menu Atualizacao De Dados Franquia ===========");
         builder.append("\n0 - Para Sair");
         builder.append("\n1 - Atualizar Nome Da Franquia");
-        builder.append("\n2 - Atualizar Cnpj Da Franquia ");
-        builder.append("\n3 - Atualizar Cidade da Franquia: ");
-        builder.append("\n4 - Atualizar Endereco Da Franquia: ");
-        builder.append("\n5 - Atualizar Login Dono De Franquia: ");
-        builder.append("\n6 - Atualizar Senha Dono De Franquia: ");
-        builder.append("\n7 - Atualizar Telefone Dono De Franquia: ");
+        builder.append("\n2 - Atualizar Cidade da Franquia: ");
+        builder.append("\n3 - Atualizar Endereco Da Franquia: ");
+        builder.append("\n4 - Atualizar Login Dono De Franquia: ");
+        builder.append("\n5 - Atualizar Senha Dono De Franquia: ");
+        builder.append("\n6 - Atualizar Telefone Dono De Franquia: ");
       
         builder.append("\n\nOpcao: ");
        
