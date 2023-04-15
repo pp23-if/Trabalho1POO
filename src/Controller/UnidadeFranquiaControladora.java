@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Franquia;
 import Model.FranquiaDAO;
+import Model.Medico;
 import Model.MedicoDAO;
 import Model.PessoaDAO;
 import Model.UnidadeFranquia;
@@ -17,11 +18,12 @@ public class UnidadeFranquiaControladora {
     public UnidadeFranquiaControladora(UnidadeFranquia unidadeFranquia, UnidadeFranquiaDAO unidadeFranquiaDAO, 
             MedicoDAO medicoDAO, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd) {
         
-        menuOpcoesUnidadeFranquia(unidadeFranquia, unidadeFranquiaDAO, vd);
+        menuOpcoesUnidadeFranquia(unidadeFranquia, unidadeFranquiaDAO, vd, medicoDAO, pessoaDAO);
     }
 
     private void menuOpcoesUnidadeFranquia(UnidadeFranquia unidadeFranquia, 
-            UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd) {
+            UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd, 
+            MedicoDAO medicoDAO, PessoaDAO pessoaDAO) {
 
         int opcao;
 
@@ -42,11 +44,12 @@ public class UnidadeFranquiaControladora {
                     break;
                 }
                 case 4: {
+                    cadastraMedicos(medicoDAO, pessoaDAO);
                     break;
                 }
                 case 5: {
                     System.out.println("\n======== VETOR DE MEDICOS ===========\n");
-
+                    medicoDAO.mostraTodosMedicos();
                     break;
                 }
                 case 6: {
@@ -153,6 +156,11 @@ public class UnidadeFranquiaControladora {
             }
         } while (opcao != 0);
 
+    }
+    
+    private void cadastraMedicos(MedicoDAO medicoDAO, PessoaDAO pessoaDAO)
+    {
+        
     }
 
 }
