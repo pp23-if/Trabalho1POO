@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Consulta;
+import Model.ConsultaDAO;
 import Model.Franquia;
 import Model.FranquiaDAO;
 import Model.Medico;
@@ -9,6 +11,10 @@ import Model.PessoaDAO;
 import Model.UnidadeFranquia;
 import Model.UnidadeFranquiaDAO;
 import View.MenuTitulosPaciente;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class PacienteControladora {
@@ -18,14 +24,15 @@ public class PacienteControladora {
     MenuTitulosPaciente telaPaciente = new MenuTitulosPaciente();
 
     public PacienteControladora(Pessoa pessoa, PessoaDAO pessoaDAO,
-            ValidacaoEntradaDados vd, MedicoDAO medicoDAO, FranquiaDAO franquiaDAO, 
-            UnidadeFranquiaDAO unidadeFranquiaDAO) 
-    {
-        menuOpcoesPaciente(pessoa, pessoaDAO, vd, medicoDAO, franquiaDAO, unidadeFranquiaDAO);
+            ValidacaoEntradaDados vd, MedicoDAO medicoDAO, FranquiaDAO franquiaDAO,
+            UnidadeFranquiaDAO unidadeFranquiaDAO, ConsultaDAO consultaDAO) {
+        
+        menuOpcoesPaciente(pessoa, pessoaDAO, vd, medicoDAO, franquiaDAO, unidadeFranquiaDAO, consultaDAO);
     }
 
-    private void menuOpcoesPaciente(Pessoa pessoa, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd, 
-            MedicoDAO medicoDAO, FranquiaDAO franquiaDAO, UnidadeFranquiaDAO unidadeFranquiaDAO) {
+    private void menuOpcoesPaciente(Pessoa pessoa, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd,
+            MedicoDAO medicoDAO, FranquiaDAO franquiaDAO, UnidadeFranquiaDAO unidadeFranquiaDAO, 
+            ConsultaDAO consultaDAO) {
 
         int opcao;
 
@@ -42,17 +49,15 @@ public class PacienteControladora {
                     menuOpcoesAtualizarDadosPaciente(pessoa, pessoaDAO, vd);
                     break;
                 }
-                case 3:
-                {
-                    marcarConsulta(pessoa, pessoaDAO, vd, medicoDAO, franquiaDAO, unidadeFranquiaDAO);
+                case 3: {
+                    menuOpcoesConsulta(pessoa, vd, medicoDAO, franquiaDAO, unidadeFranquiaDAO, consultaDAO);
                     break;
                 }
-                case 4:
-                {
+                case 4: {
+                   
                     break;
                 }
-                case 5:
-                {
+                case 5: {
                     break;
                 }
             }
@@ -71,7 +76,7 @@ public class PacienteControladora {
                 case 1: {
                     System.out.println("Informe o Novo Nome: ");
                     String novoNomePessoa = scanner.nextLine();
-                    
+
                     if (pessoaDAO.atualizaNomePessoa(pessoa.getNomePessoa(), novoNomePessoa, pessoa.getCpf()) == true) {
                         System.out.println("O Nome Foi Atualizado Com Sucesso!");
                     } else {
@@ -146,62 +151,113 @@ public class PacienteControladora {
 
         } while (opcao != 0);
     }
+
     
-    private void marcarConsulta(Pessoa pessoa, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd, 
-            MedicoDAO medicoDAO, FranquiaDAO franquiaDAO, UnidadeFranquiaDAO unidadeFranquiaDAO)
+    private void menuOpcoesConsulta(Pessoa pessoa, ValidacaoEntradaDados vd,
+            MedicoDAO medicoDAO, FranquiaDAO franquiaDAO, UnidadeFranquiaDAO unidadeFranquiaDAO, 
+            ConsultaDAO consultaDAO)
     {
-       franquiaDAO.mostraTodasFranquias();
-       
+      int opcao;
+
+        do {
+            opcao = telaPaciente.menuConsultaPaciente();
+
+            switch (opcao) {
+                case 1: {
+                    marcarConsulta(pessoa, vd, medicoDAO, franquiaDAO, unidadeFranquiaDAO, consultaDAO);
+                    break;
+                }
+                case 2: {
+                    consultaDAO.buscaConsultaAtravesDaPessoaVinculada(pessoa);
+                    break;
+                }
+                case 3: {
+                    
+                    break;
+                }
+                case 4: {
+                    
+                    break;
+                }
+                case 5: {
+                    break;
+                }
+            }
+
+        } while (opcao != 0);  
+    }
+    
+    private void marcarConsulta(Pessoa pessoa, ValidacaoEntradaDados vd,
+            MedicoDAO medicoDAO, FranquiaDAO franquiaDAO, UnidadeFranquiaDAO unidadeFranquiaDAO, 
+            ConsultaDAO consultaDAO) 
+    {
+        franquiaDAO.mostraTodasFranquias();
+
         System.out.println("\nEscolha Uma Franquia Informando o ID - Franquia: ");
         int idFranquia = Integer.parseInt(scanner.nextLine());
-        
-         System.out.println("\n");
-         Franquia franquiaSelecionada = franquiaDAO.buscaFranquiaPorId(idFranquia);
-         
-       if(franquiaSelecionada == null)
-       {
-           System.out.println("\nFranquia Nao Encontrada!");
-       }
-       else
-       {
-           System.out.println("\n");
-           unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(franquiaSelecionada);
-           
+
+        System.out.println("\n");
+        Franquia franquiaSelecionada = franquiaDAO.buscaFranquiaPorId(idFranquia);
+
+        if (franquiaSelecionada == null) {
+            System.out.println("\nFranquia Nao Encontrada!");
+        } else {
+            System.out.println("\n");
+            unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(franquiaSelecionada);
+
             System.out.println("\nEscolha Uma Unidade DE Franquia Informando o ID - Unidade De Franquia: ");
             int idUnidadeFranquia = Integer.parseInt(scanner.nextLine());
-            
+
             UnidadeFranquia unidadeFranquiaSelecionada = unidadeFranquiaDAO.buscaUnidadeFranquiaPorId(idUnidadeFranquia);
-            
-            if(unidadeFranquiaSelecionada == null)
-            {
-              System.out.println("\nUnidade De Franquia Nao Encontrada!");  
-            }
-            else
-            {
+
+            if (unidadeFranquiaSelecionada == null) {
+                System.out.println("\nUnidade De Franquia Nao Encontrada!");
+            } else {
                 System.out.println("\n");
                 medicoDAO.mostraTodosMedicos();
-                
+
                 System.out.println("Informe O ID - MEDICO Do Qual Deseja Se Consultar: ");
                 int idMedico = Integer.parseInt(scanner.nextLine());
-                
+
                 Medico medicoSelecionado = medicoDAO.buscaMedicoPorId(idMedico);
-                
-                if(medicoSelecionado == null)
-                {
-                  System.out.println("\nMedico Nao Encontrado!");   
-                }
-                else
-                {
-                    double valorConsulta = medicoDAO.verificaValorConsulta(medicoSelecionado);
-                    
-                    System.out.println("\nO Valor da Consulta Sera: " + valorConsulta + "\n"); 
-                    
-                    System.out.println("1 - Continuar: ");
-                    System.out.println("2 - Sair: ");
-                    
+
+                if (medicoSelecionado == null) {
+                    System.out.println("\nMedico Nao Encontrado!");
+                } else {
+                    if (pessoa.getCpf().equals(medicoSelecionado.getPessoa().getCpf())) {
+                        System.out.println("\nO Paciente E O Medico Sao A Mesma Pessoa, "
+                                + "Consulta Nao Pode Ser Marcada." + "\n");
+                    } else {
+                        double valorConsulta = medicoDAO.verificaValorConsulta(medicoSelecionado);
+
+                        DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                        
+                        System.out.println("Informe a Data Da Consulta No Seguinte Formato, Dia/Mes/Ano:  ");
+                        String dia = scanner.nextLine();
+                        LocalDate diaConsulta = LocalDate.parse(dia, fdia);
+                        
+                        System.out.println("Informe a Hora Da Consulta No Seguinte Formato, Horas:Minutos......: ");
+                        String Hora = scanner.nextLine();
+                        LocalTime horaConsulta = LocalTime.parse(Hora);
+                        
+                        Consulta consulta = new Consulta(diaConsulta, horaConsulta, medicoSelecionado, 
+                                pessoa, unidadeFranquiaSelecionada, valorConsulta, "Agendada" ,LocalDateTime.now());
+                        
+                       if(consultaDAO.adicionaConsulta(consulta) == true)
+                       {
+                           System.out.println("\nConsulta Marcada Com Sucesso!");
+                       }
+                       else
+                       {
+                          System.out.println("\nNao Foi Possivel Marcar A Consulta.");  
+                       }
+                        
+
+                    }
+
                 }
             }
-       }
+        }
     }
 
 }

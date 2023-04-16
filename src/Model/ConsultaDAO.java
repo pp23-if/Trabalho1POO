@@ -39,5 +39,17 @@ public class ConsultaDAO {
          }
         return null;
     }
+     
+     public Consulta buscaConsultaAtravesDaPessoaVinculada(Pessoa p)
+     {
+         for (Consulta consulta : vetorConsulta) {
+             
+             if(consulta != null && consulta.getPessoa().equals(p))
+             {
+                 System.out.println(consulta + "\n");
+             }
+         }
+        return null;
+     }
 
 }

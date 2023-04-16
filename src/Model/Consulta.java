@@ -98,7 +98,7 @@ public class Consulta {
 
     public Consulta(LocalDate diaConsulta, LocalTime horaConsulta, Medico medico,
             Pessoa pessoa, UnidadeFranquia unidadeFranquia,
-            double valor, LocalDateTime dataCriacao) {
+            double valor, String estado, LocalDateTime dataCriacao) {
 
         this.idConsulta = serial++;
         this.diaConsulta = diaConsulta;
@@ -107,6 +107,7 @@ public class Consulta {
         this.pessoa = pessoa;
         this.unidadeFranquia = unidadeFranquia;
         this.valor = valor;
+        this.estadoConsulta = estado;
         this.dataCriacao = dataCriacao;
     }
 
@@ -176,7 +177,7 @@ public class Consulta {
 
         DateTimeFormatter fd = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        DateTimeFormatter fdhora = DateTimeFormatter.ofPattern("HH:mm:ss");
+        DateTimeFormatter fdhora = DateTimeFormatter.ofPattern("HH:mm");
 
         if (dataModificacao == null) {
             return "ID - Consulta: " + this.idConsulta + "\n"
@@ -185,10 +186,13 @@ public class Consulta {
                     + "Medico: " + this.medico.getPessoa().getNomePessoa() + "\n"
                     + "Crm: " + this.medico.getCrm() + "\n"
                     + "Especialidade: " + this.medico.getEspecialidade() + "\n"
-                    + "Unidade De Franquia: " + this.unidadeFranquia + "\n"
+                    + "Unidade De Franquia: " + this.unidadeFranquia.getFranquia().getNomeFranquia() + "\n"
+                    + "Cidade: " + this.unidadeFranquia.getCidadeUnidadeFranquia() + "\n"
+                    + "Endereco: " + this.unidadeFranquia.getEnderecoUnidadeFranquia() + "\n"
                     + "Dia: " + fdia.format(this.diaConsulta) + "\n"
                     + "Hora: " + fdhora.format(this.horaConsulta) + "\n"
                     + "Valor: " + this.valor + "\n"
+                    + "Estado: " + this.estadoConsulta + "\n"
                     + "Data e Hora De Criacao: " + fd.format(this.dataCriacao);
 
         } else {
@@ -198,12 +202,15 @@ public class Consulta {
                     + "Medico: " + this.medico.getPessoa().getNomePessoa() + "\n"
                     + "Crm: " + this.medico.getCrm() + "\n"
                     + "Especialidade: " + this.medico.getEspecialidade() + "\n"
-                    + "Unidade De Franquia: " + this.unidadeFranquia + "\n"
+                    + "Unidade De Franquia: " + this.unidadeFranquia.getFranquia().getNomeFranquia() + "\n"
+                    + "Cidade: " + this.unidadeFranquia.getCidadeUnidadeFranquia() + "\n"
+                    + "Endereco: " + this.unidadeFranquia.getEnderecoUnidadeFranquia() + "\n"
                     + "Dia: " + fdia.format(this.diaConsulta) + "\n"
                     + "Hora: " + fdhora.format(this.horaConsulta) + "\n"
                     + "Valor: " + this.valor + "\n"
+                    + "Estado: " + this.estadoConsulta + "\n"
                     + "Data e Hora De Criacao: " + fd.format(this.dataCriacao) + "\n"
-                    + "Data e Hora De Modificacao: " + fd.format(this.dataModificacao);
+                    + "Data e Hora De Modificacao: " + fd.format(dataModificacao);
 
         }
     }

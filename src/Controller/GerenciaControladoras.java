@@ -144,7 +144,7 @@ public class GerenciaControladoras {
             if (pessoaLogada.getTipoUsuario().equals("Paciente")) {
 
                 PacienteControladora pacienteControladora = new PacienteControladora(pessoaLogada, pessoaDAO, vd, 
-                medicoDAO, franquiaDAO, unidadeFranquiaDAO);
+                medicoDAO, franquiaDAO, unidadeFranquiaDAO, consultaDAO);
 
             } else if (pessoaLogada.getTipoUsuario().equals("Medico")) {
 

@@ -14,10 +14,9 @@ public class MenuTitulosPaciente {
         builder.append("\n0 - Para Sair");
         builder.append("\n1 - Ver Meu Cadastro");
         builder.append("\n2 - Atualizar Meus Dados: ");
-        builder.append("\n3 - Marcar Consulta: ");
-        builder.append("\n4 - Ver Consultas Marcadas: ");
+        builder.append("\n3 - Consulta: ");
+        builder.append("\n4 - : ");
         builder.append("\n5 - : ");
-        builder.append("\n6 - : ");
         builder.append("\n\nOpcao: ");
 
         System.out.print(builder.toString());
@@ -37,6 +36,24 @@ public class MenuTitulosPaciente {
         builder.append("\n4 - Atualizar Telefone: ");
         builder.append("\n5 - Atualizar Login: ");
         builder.append("\n6 - Atualizar Senha: ");
+        builder.append("\n\nOpcao: ");
+
+        System.out.print(builder.toString());
+
+        return Integer.parseInt(scanner.nextLine());
+    }
+    
+     public int menuConsultaPaciente() {
+
+        StringBuilder builder = new StringBuilder("");
+
+        builder.append("\n============ Menu Consulta Paciente ===========");
+        builder.append("\n0 - Para sair");
+        builder.append("\n1 - Marcar Consulta: ");
+        builder.append("\n2 - Ver Consultas Marcadas: ");
+        builder.append("\n3 - Cancelar Consulta: ");
+        builder.append("\n4 - Remarcar Consulta: ");
+      
         builder.append("\n\nOpcao: ");
 
         System.out.print(builder.toString());
