@@ -44,6 +44,14 @@ public class PessoaDAO {
         Pessoa pessoa9 = new Pessoa("Roberto Gomes", "332288", "Rua das uvas - 17", "32985427",
                 "rgd", "30", "DonoDeUnidadeDeFranquia", agora);
         adicionaPessoa(pessoa9);
+        
+         Pessoa pessoa10 = new Pessoa("Marcos Pereira Faria", "3315152626", "Rua das Bananas - 600", "999612854",
+                "mp22", "36", "Paciente", agora);
+        adicionaPessoa(pessoa10);
+        
+        Pessoa pessoa11 = new Pessoa("Marcos Pereira Faria", "3315152626", "Rua das Bananas - 600", "999612854",
+                "mpm", "100", "Medico", agora);
+        adicionaPessoa(pessoa11);
 
     }
 
@@ -306,6 +314,8 @@ public class PessoaDAO {
         }
         return null;
     }
+    
+   
      
     /*private boolean verificaSeNomeEstaSendoUsado(String nome) {
         for (Pessoa pessoa : vetorPessoa) {

@@ -14,8 +14,8 @@ public class MenuTitulosPaciente {
         builder.append("\n0 - Para Sair");
         builder.append("\n1 - Ver Meu Cadastro");
         builder.append("\n2 - Atualizar Meus Dados: ");
-        builder.append("\n3 - Excluir Meus Dados: ");
-        builder.append("\n4 - : ");
+        builder.append("\n3 - Marcar Consulta: ");
+        builder.append("\n4 - Ver Consultas Marcadas: ");
         builder.append("\n5 - : ");
         builder.append("\n6 - : ");
         builder.append("\n\nOpcao: ");

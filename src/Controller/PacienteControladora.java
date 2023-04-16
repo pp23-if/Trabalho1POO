@@ -1,7 +1,13 @@
 package Controller;
 
+import Model.Franquia;
+import Model.FranquiaDAO;
+import Model.Medico;
+import Model.MedicoDAO;
 import Model.Pessoa;
 import Model.PessoaDAO;
+import Model.UnidadeFranquia;
+import Model.UnidadeFranquiaDAO;
 import View.MenuTitulosPaciente;
 import java.util.Scanner;
 
@@ -11,12 +17,15 @@ public class PacienteControladora {
 
     MenuTitulosPaciente telaPaciente = new MenuTitulosPaciente();
 
-    public PacienteControladora(Pessoa pessoa, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd) 
+    public PacienteControladora(Pessoa pessoa, PessoaDAO pessoaDAO,
+            ValidacaoEntradaDados vd, MedicoDAO medicoDAO, FranquiaDAO franquiaDAO, 
+            UnidadeFranquiaDAO unidadeFranquiaDAO) 
     {
-        menuOpcoesPaciente(pessoa, pessoaDAO, vd);
+        menuOpcoesPaciente(pessoa, pessoaDAO, vd, medicoDAO, franquiaDAO, unidadeFranquiaDAO);
     }
 
-    private void menuOpcoesPaciente(Pessoa pessoa, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd) {
+    private void menuOpcoesPaciente(Pessoa pessoa, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd, 
+            MedicoDAO medicoDAO, FranquiaDAO franquiaDAO, UnidadeFranquiaDAO unidadeFranquiaDAO) {
 
         int opcao;
 
@@ -31,6 +40,19 @@ public class PacienteControladora {
                 }
                 case 2: {
                     menuOpcoesAtualizarDadosPaciente(pessoa, pessoaDAO, vd);
+                    break;
+                }
+                case 3:
+                {
+                    marcarConsulta(pessoa, pessoaDAO, vd, medicoDAO, franquiaDAO, unidadeFranquiaDAO);
+                    break;
+                }
+                case 4:
+                {
+                    break;
+                }
+                case 5:
+                {
                     break;
                 }
             }
@@ -123,6 +145,63 @@ public class PacienteControladora {
             }
 
         } while (opcao != 0);
+    }
+    
+    private void marcarConsulta(Pessoa pessoa, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd, 
+            MedicoDAO medicoDAO, FranquiaDAO franquiaDAO, UnidadeFranquiaDAO unidadeFranquiaDAO)
+    {
+       franquiaDAO.mostraTodasFranquias();
+       
+        System.out.println("\nEscolha Uma Franquia Informando o ID - Franquia: ");
+        int idFranquia = Integer.parseInt(scanner.nextLine());
+        
+         System.out.println("\n");
+         Franquia franquiaSelecionada = franquiaDAO.buscaFranquiaPorId(idFranquia);
+         
+       if(franquiaSelecionada == null)
+       {
+           System.out.println("\nFranquia Nao Encontrada!");
+       }
+       else
+       {
+           System.out.println("\n");
+           unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(franquiaSelecionada);
+           
+            System.out.println("\nEscolha Uma Unidade DE Franquia Informando o ID - Unidade De Franquia: ");
+            int idUnidadeFranquia = Integer.parseInt(scanner.nextLine());
+            
+            UnidadeFranquia unidadeFranquiaSelecionada = unidadeFranquiaDAO.buscaUnidadeFranquiaPorId(idUnidadeFranquia);
+            
+            if(unidadeFranquiaSelecionada == null)
+            {
+              System.out.println("\nUnidade De Franquia Nao Encontrada!");  
+            }
+            else
+            {
+                System.out.println("\n");
+                medicoDAO.mostraTodosMedicos();
+                
+                System.out.println("Informe O ID - MEDICO Do Qual Deseja Se Consultar: ");
+                int idMedico = Integer.parseInt(scanner.nextLine());
+                
+                Medico medicoSelecionado = medicoDAO.buscaMedicoPorId(idMedico);
+                
+                if(medicoSelecionado == null)
+                {
+                  System.out.println("\nMedico Nao Encontrado!");   
+                }
+                else
+                {
+                    double valorConsulta = medicoDAO.verificaValorConsulta(medicoSelecionado);
+                    
+                    System.out.println("\nO Valor da Consulta Sera: " + valorConsulta + "\n"); 
+                    
+                    System.out.println("1 - Continuar: ");
+                    System.out.println("2 - Sair: ");
+                    
+                }
+            }
+       }
     }
 
 }

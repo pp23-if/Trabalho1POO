@@ -221,5 +221,17 @@ public class FranquiaDAO {
        }
         return null;
    }
+   
+   public Franquia buscaFranquiaPorId(int idFranquia)
+   {
+       for (Franquia franquia : vetorFranquia) {
+           
+           if(franquia != null && franquia.getIdFranquia() == idFranquia)
+           {
+               return franquia;
+           }
+       }
+        return null;
+   }
 
 }

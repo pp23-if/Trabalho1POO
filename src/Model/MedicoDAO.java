@@ -22,6 +22,13 @@ public class MedicoDAO {
             adicionaMedico(medico2);
         }
 
+        Pessoa pessoaMedico3 = pessoaDAO.buscaPessoaCadastrada("mpm", "100");
+
+        if (pessoaMedico3 != null) {
+            Medico medico3 = new Medico("GHI-789", pessoaMedico3, "Cardiologista", LocalDateTime.now());
+            adicionaMedico(medico3);
+        }
+
     }
 
     private int proximaPosilivreMedico() {
@@ -139,30 +146,48 @@ public class MedicoDAO {
         }
         return false;
     }
-    
-    public boolean verificaSeMedicoExiste(Pessoa p)
-    {
+
+    public boolean verificaSeMedicoExiste(Pessoa p) {
         for (Medico medico : vetorMedico) {
-            
-            if(medico != null && medico.getPessoa().getCpf().equals(p.getCpf()))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    public boolean verificaCrm(String Crm)
-    {
-        for (Medico medico : vetorMedico) {
-            
-            if(medico != null && medico.getCrm().equals(Crm.toUpperCase()) ||
-               medico != null && medico.getCrm().equals(Crm.toLowerCase()))
-            {
+
+            if (medico != null && medico.getPessoa().getCpf().equals(p.getCpf())) {
                 return true;
             }
         }
         return false;
     }
 
+    public boolean verificaCrm(String Crm) {
+        for (Medico medico : vetorMedico) {
+
+            if (medico != null && medico.getCrm().equals(Crm.toUpperCase())
+                    || medico != null && medico.getCrm().equals(Crm.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Medico buscaMedicoPorId(int idMedico) {
+        for (Medico medico : vetorMedico) {
+
+            if (medico != null && medico.getIdMedico() == idMedico) {
+                return medico;
+            }
+        }
+        return null;
+    }
+
+    public double verificaValorConsulta(Medico medico) {
+        if (medico.getEspecialidade().equals("Ortopedista")) {
+            return 500;
+        } else if (medico.getEspecialidade().equals("Nutricionista")) {
+            return 1000;
+        } else if (medico.getEspecialidade().equals("Cardiologista")) {
+            return 1200;
+        } else {
+            return 1500;
+        }
+
+    }
 }

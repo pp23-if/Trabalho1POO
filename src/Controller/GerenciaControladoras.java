@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.ConsultaDAO;
 import Model.Franquia;
 import Model.FranquiaDAO;
 import Model.Medico;
@@ -26,6 +27,7 @@ public class GerenciaControladoras {
     MedicoDAO medicoDAO = new MedicoDAO(pessoaDAO);
     FranquiaDAO franquiaDAO = new FranquiaDAO(pessoaDAO);
     UnidadeFranquiaDAO unidadeFranquiaDAO = new UnidadeFranquiaDAO(pessoaDAO, franquiaDAO);
+    ConsultaDAO consultaDAO = new ConsultaDAO();
 
     public GerenciaControladoras() {
 
@@ -141,7 +143,8 @@ public class GerenciaControladoras {
 
             if (pessoaLogada.getTipoUsuario().equals("Paciente")) {
 
-                PacienteControladora pacienteControladora = new PacienteControladora(pessoaLogada, pessoaDAO, vd);
+                PacienteControladora pacienteControladora = new PacienteControladora(pessoaLogada, pessoaDAO, vd, 
+                medicoDAO, franquiaDAO, unidadeFranquiaDAO);
 
             } else if (pessoaLogada.getTipoUsuario().equals("Medico")) {
 
