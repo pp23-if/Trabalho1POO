@@ -1,5 +1,9 @@
 package Model;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 public class ConsultaDAO {
 
     private Consulta vetorConsulta[] = new Consulta[50];
@@ -27,29 +31,68 @@ public class ConsultaDAO {
         }
 
     }
-    
-     public Consulta mostraTodasConsultas() {
-         
-         for (Consulta consulta : vetorConsulta) {
-             
-             if(consulta != null)
-             {
-                 System.out.println(consulta + "\n");
-             }
-         }
+
+    public Consulta mostraTodasConsultas() {
+
+        for (Consulta consulta : vetorConsulta) {
+
+            if (consulta != null) {
+                System.out.println(consulta + "\n");
+            }
+        }
         return null;
     }
-     
-     public Consulta buscaConsultaAtravesDaPessoaVinculada(Pessoa p)
-     {
-         for (Consulta consulta : vetorConsulta) {
-             
-             if(consulta != null && consulta.getPessoa().equals(p))
-             {
-                 System.out.println(consulta + "\n");
-             }
-         }
+
+    public Consulta buscaConsultaAtravesDaPessoaVinculada(Pessoa p) {
+        for (Consulta consulta : vetorConsulta) {
+
+            if (consulta != null && consulta.getPessoa().equals(p)) {
+                System.out.println(consulta + "\n");
+            }
+        }
         return null;
-     }
+    }
+
+    public Consulta buscaConsultaPorId(int idConsulta) {
+        for (Consulta consulta : vetorConsulta) {
+
+            if (consulta != null && consulta.getIdConsulta() == idConsulta) {
+                return consulta;
+            }
+        }
+        return null;
+    }
+
+    public boolean buscaConsultaParaCancelar(Consulta consulta) {
+        if (consulta != null) {
+            consulta.setEstadoConsulta("Cancelada");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean buscaConsultaParaRemarcar(LocalDate novoDiaConsulta, LocalTime novaHoraConsulta) {
+
+        for (Consulta consulta : vetorConsulta) {
+
+            if (consulta != null && consulta.getDiaConsulta().equals(novoDiaConsulta)
+                    && consulta.getHoraConsulta().equals(novaHoraConsulta)) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    public boolean atualizaDiaEHoraConsulta(LocalDate novoDiaConsulta,
+            LocalTime novaHoraConsulta, Consulta consulta) {
+        if (consulta != null) {
+            consulta.setDiaConsulta(novoDiaConsulta);
+            consulta.setHoraConsulta(novaHoraConsulta);
+            consulta.setDataModificacao(LocalDateTime.now());
+            return true;
+        }
+        return false;
+    }
 
 }
