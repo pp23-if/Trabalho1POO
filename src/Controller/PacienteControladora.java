@@ -170,11 +170,11 @@ public class PacienteControladora {
                     break;
                 }
                 case 3: {
-                    cancelarConsulta(pessoa, consultaDAO);
+                    cancelarConsulta(pessoa, consultaDAO, vd);
                     break;
                 }
                 case 4: {
-                    remarcarConsulta(consultaDAO, pessoa);
+                    remarcarConsulta(consultaDAO, pessoa, vd);
                     break;
                 }
                 case 5: {
@@ -253,7 +253,7 @@ public class PacienteControladora {
         }
     }
 
-    private void cancelarConsulta(Pessoa pessoa, ConsultaDAO consultaDAO) {
+    private void cancelarConsulta(Pessoa pessoa, ConsultaDAO consultaDAO,  ValidacaoEntradaDados vd) {
         consultaDAO.buscaConsultaAtravesDaPessoaVinculada(pessoa);
 
         System.out.println("\nInforme O ID Consulta Que Deseja Cancelar: ");
@@ -272,7 +272,7 @@ public class PacienteControladora {
         }
     }
 
-    private void remarcarConsulta(ConsultaDAO consultaDAO, Pessoa pessoa) {
+    private void remarcarConsulta(ConsultaDAO consultaDAO, Pessoa pessoa,  ValidacaoEntradaDados vd) {
 
         consultaDAO.buscaConsultaAtravesDaPessoaVinculada(pessoa);
 
