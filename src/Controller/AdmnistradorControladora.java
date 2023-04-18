@@ -93,7 +93,7 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 3: {
-
+                    cancelarConsulta(consultaDAO, admnistrador, vd);
                     break;
                 }
                 case 4: {
@@ -177,35 +177,33 @@ public class AdmnistradorControladora {
                 }
             }
 
-//            if (pessoaEncontrada == null) {
-//                
-//                System.out.println("Pessoa nao encontrada");
-//                medicoDAO.mostraTodosMedicos();
-//
-//                System.out.println("Informe o ID Do Medico que deseja se consultar: ");
-//                int idMedico = Integer.parseInt(scanner.nextLine());
-//                idMedico = vd.validarINT(idMedico);
-//
-//                Medico medicoEncontrado = medicoDAO.buscaMedicoPorId(idMedico);
-//
-//                if (medicoEncontrado != null) {
-////                    DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-////
-////                    System.out.println("Informe a Nova Data Da Consulta No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
-////                    String dia = scanner.nextLine();
-////                    LocalDate novoDiaConsulta = LocalDate.parse(dia, fdia);
-////                    
-////                    System.out.println("Informe a Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
-////                    String Hora = scanner.nextLine();
-////                    LocalTime horaConsulta = LocalTime.parse(Hora);
-//                    
-//                   
-//                    
-//                }
-//
-//            }
+//            
         }
 
+    }
+
+    private void cancelarConsulta(ConsultaDAO consultaDAO,
+            Admnistrador admnistrador, ValidacaoEntradaDados vd) {
+
+        consultaDAO.buscaConsultaPorFranquia(admnistrador.getFranquia());
+
+        System.out.println("Informe o ID da Consulta que deseja cancelar: ");
+        int idConsulta = Integer.parseInt(scanner.nextLine());
+        idConsulta = vd.validarINT(idConsulta);
+
+        Consulta consultaEncontra = consultaDAO.buscaConsultaPorId(idConsulta);
+
+        if (consultaEncontra == null) {
+            System.out.println("\nConsulta nao Encontrada");
+        } else {
+            if (consultaDAO.buscaConsultaParaCancelar(consultaEncontra) == true) {
+                System.out.println("\nConsulta cancelada com sucesso.");
+
+            } else {
+                System.out.println("\nNao foi Possivel cancelar Consulta..");
+            }
+
+        }
     }
 
 }

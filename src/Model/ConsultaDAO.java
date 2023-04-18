@@ -66,6 +66,7 @@ public class ConsultaDAO {
     public boolean buscaConsultaParaCancelar(Consulta consulta) {
         if (consulta != null) {
             consulta.setEstadoConsulta("Cancelada");
+            consulta.setDataModificacao(LocalDateTime.now());
             return true;
         }
         return false;
