@@ -10,7 +10,7 @@ public class MenuTitulosUnidadeFranquia {
 
         StringBuilder builder = new StringBuilder("");
 
-        builder.append("\n============ Menu Unidade De Franquia ===========");
+        builder.append("\n============ MENU UNIDADE DE FRANQUIA ===========");
         builder.append("\n0 - Para Sair..............................: ");
         builder.append("\n1 - Ver Cadastro Unidade De Franquia.......: ");
         builder.append("\n2 - Atualizar Dados Unidade De Franquia....: ");
@@ -30,7 +30,7 @@ public class MenuTitulosUnidadeFranquia {
 
         StringBuilder builder = new StringBuilder("");
 
-        builder.append("\n============ Menu Atualizacao De Dados Unidade Franquia ===========");
+        builder.append("\n============ MENU ATUALIZACAO DE DADOS UNIDADES FRANQUIA ===========");
         builder.append("\n0 - Para Sair......................................: ");
         builder.append("\n1 - Atualizar Cidade da Unidade De Franquia........: ");
         builder.append("\n2 - Atualizar Endereco Da Unidade De Franquia......: ");

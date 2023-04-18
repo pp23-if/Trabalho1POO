@@ -12,7 +12,7 @@ public class MenuTitulosFranquia {
 
         StringBuilder builder = new StringBuilder("");
 
-        builder.append("\n============ Menu Dono De Franquia ===========");
+        builder.append("\n============ MENU DONO DE FRANQUIA ===========");
         builder.append("\n0 - Para Sair");
         builder.append("\n1 - Ver Cadastro da Franquia.........: ");
         builder.append("\n2 - Cadastrar Nova Franquia..........: ");
@@ -35,7 +35,7 @@ public class MenuTitulosFranquia {
 
         StringBuilder builder = new StringBuilder("");
 
-        builder.append("\n============ Menu Atualizacao De Dados Franquia ===========");
+        builder.append("\n============ MENU ATUALIZACAO DE DADOS FRANQUIA ===========");
         builder.append("\n0 - Para Sair");
         builder.append("\n1 - Atualizar Nome Da Franquia..................: ");
         builder.append("\n2 - Atualizar Cidade da Franquia................: ");

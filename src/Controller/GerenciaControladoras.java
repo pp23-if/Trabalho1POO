@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Admnistrador;
+import Model.AdmnistradorDAO;
 import Model.ConsultaDAO;
 import Model.Franquia;
 import Model.FranquiaDAO;
@@ -28,6 +30,7 @@ public class GerenciaControladoras {
     FranquiaDAO franquiaDAO = new FranquiaDAO(pessoaDAO);
     UnidadeFranquiaDAO unidadeFranquiaDAO = new UnidadeFranquiaDAO(pessoaDAO, franquiaDAO);
     ConsultaDAO consultaDAO = new ConsultaDAO();
+    AdmnistradorDAO admnistradorDAO = new AdmnistradorDAO(pessoaDAO, franquiaDAO);
 
     public GerenciaControladoras() {
 
@@ -163,6 +166,16 @@ public class GerenciaControladoras {
                 
                 UnidadeFranquiaControladora unidadeFranquiaControladora = 
                         new UnidadeFranquiaControladora(unidadeFranquia, unidadeFranquiaDAO, medicoDAO, pessoaDAO, vd);
+            }
+            else if(pessoaLogada.getTipoUsuario().equals("Admnistrador")){
+                Admnistrador admnistradorEncontrado =
+                        admnistradorDAO.buscaAdmnistradorAtravesPessoaVinculada(pessoaLogada);
+                        
+                        AdmnistradorControladora admnistradorControladora = 
+                                new AdmnistradorControladora(pessoaDAO, 
+                                        admnistradorDAO, unidadeFranquiaDAO, 
+                                        consultaDAO, vd, 
+                                        admnistradorEncontrado);
             }
 
         } else {
