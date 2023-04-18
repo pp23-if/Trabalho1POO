@@ -244,13 +244,14 @@ public class PacienteControladora {
                         System.out.println("Informe a Data Da Consulta No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
                         String dia = scanner.nextLine();
                         LocalDate diaConsulta = LocalDate.parse(dia, fdia);
-                        //vou arrumar validação  ainda deu errado
+                       
 
                         System.out.println("Informe a Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
                         String Hora = scanner.nextLine();
                         LocalTime horaConsulta = LocalTime.parse(Hora);
-                        //vou arrumar validação  ainda deu errado
-
+                        String horaConsultateclado = scanner.nextLine();
+                        
+                        
                         Consulta consulta = new Consulta(diaConsulta, horaConsulta, medicoSelecionado,
                                 pessoa, unidadeFranquiaSelecionada, valorConsulta, "Agendada", LocalDateTime.now());
 
@@ -307,12 +308,12 @@ public class PacienteControladora {
             System.out.println("Informe a Nova Data Da Consulta No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
             String dia = scanner.nextLine();
             LocalDate novoDiaConsulta = LocalDate.parse(dia, fdia);
-            //vou arrumar validação ainda deu errado
+         
             
             System.out.println("Informe a Nova Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
             String Hora = scanner.nextLine();
             LocalTime novaHoraConsulta = LocalTime.parse(Hora);
-             //vou arrumar validação ainda deu errado
+            
 
             
             if (consultaDAO.buscaConsultaParaRemarcar(novoDiaConsulta, novaHoraConsulta) == true) {

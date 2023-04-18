@@ -11,11 +11,4 @@ public class Teste {
     }
     
 }
-//FAZER
-//Melhorar os Print
-//fazar os metodos de validacao 
-//Lucas Rocha
 
-
-//Teste de Commit apos Reinstalar  o Net Beans
-//testando commit apos clonar 
