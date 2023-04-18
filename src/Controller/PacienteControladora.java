@@ -42,7 +42,7 @@ public class PacienteControladora {
                     break;
                 }
                 case 3: {
-
+                        consultaDAO.buscaConsultaAtravesDaPessoaVinculada(pessoa);
                     break;
                 }
                 case 4: {

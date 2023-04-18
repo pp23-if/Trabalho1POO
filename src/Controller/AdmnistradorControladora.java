@@ -84,12 +84,12 @@ public class AdmnistradorControladora {
             switch (opcao) {
                 case 1: {
                     marcarConsulta(admnistrador, unidadeFranquiaDAO, vd,
-                            pessoaDAO, medicoDAO);
+                            pessoaDAO, medicoDAO, consultaDAO);
 
                     break;
                 }
                 case 2: {
-
+                    consultaDAO.buscaConsultaPorFranquia(admnistrador.getFranquia());
                     break;
                 }
                 case 3: {
@@ -108,7 +108,7 @@ public class AdmnistradorControladora {
 
     private void marcarConsulta(Admnistrador admnistrador,
             UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd,
-            PessoaDAO pessoaDAO, MedicoDAO medicoDAO) {
+            PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ConsultaDAO consultaDAO) {
 
         unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(admnistrador.getFranquia());
 
@@ -122,7 +122,7 @@ public class AdmnistradorControladora {
         if (unidadeEncontrada == null) {
             System.out.println("\nUnidade de franquia nao encontrada.");
         } else {
-            pessoaDAO.mostraTodasPessoas();
+            pessoaDAO.filtraPacientes();
 
             System.out.println("Informe o ID Da pessoa que deseja marcar para consulta: ");
             int idPessoaConsulta = Integer.parseInt(scanner.nextLine());
@@ -131,8 +131,9 @@ public class AdmnistradorControladora {
             Pessoa pessoaEncontrada = pessoaDAO.buscaPessoaPorId(idPessoaConsulta);
 
             if (pessoaEncontrada == null) {
-                
-                System.out.println("Pessoa nao encontrada");
+                System.out.println("\nPessoa nao encontrada");
+            } else {
+
                 medicoDAO.mostraTodosMedicos();
 
                 System.out.println("Informe o ID Do Medico que deseja se consultar: ");
@@ -141,23 +142,68 @@ public class AdmnistradorControladora {
 
                 Medico medicoEncontrado = medicoDAO.buscaMedicoPorId(idMedico);
 
-                if (medicoEncontrado != null) {
-//                    DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//
-//                    System.out.println("Informe a Nova Data Da Consulta No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
-//                    String dia = scanner.nextLine();
-//                    LocalDate novoDiaConsulta = LocalDate.parse(dia, fdia);
-//                    
-//                    System.out.println("Informe a Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
-//                    String Hora = scanner.nextLine();
-//                    LocalTime horaConsulta = LocalTime.parse(Hora);
-                    
-                   
-                    
-                }
+                if (medicoEncontrado == null) {
+                    System.out.println("\nmedico nao encontrado");
+                } else {
+                    if (medicoDAO.vericaSeMedicoEPacienteSaoIguais(pessoaEncontrada,
+                            medicoEncontrado) == true) {
 
+                        System.out.println("\nMedico e Paciente sao as Mesmas Pessoas..");
+                    } else {
+                        double valorConsulta = medicoDAO.verificaValorConsulta(medicoEncontrado);
+
+                        DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+                        System.out.println("Informe a Nova Data Da Consulta No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
+                        String dia = scanner.nextLine();
+                        LocalDate diaConsulta = LocalDate.parse(dia, fdia);
+
+                        System.out.println("Informe a Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
+                        String Hora = scanner.nextLine();
+                        LocalTime horaConsulta = LocalTime.parse(Hora);
+
+                        Consulta novaConsulta = new Consulta(diaConsulta, horaConsulta,
+                                medicoEncontrado, pessoaEncontrada, unidadeEncontrada,
+                                valorConsulta, "Agendada", LocalDateTime.now());
+
+                        if (consultaDAO.adicionaConsulta(novaConsulta) == true) {
+                            System.out.println("\nConsulta marcada com sucesso.");
+                        } else {
+                            System.out.println("\nNao foi possivel marcar Consulta");
+                        }
+
+                    }
+
+                }
             }
 
+//            if (pessoaEncontrada == null) {
+//                
+//                System.out.println("Pessoa nao encontrada");
+//                medicoDAO.mostraTodosMedicos();
+//
+//                System.out.println("Informe o ID Do Medico que deseja se consultar: ");
+//                int idMedico = Integer.parseInt(scanner.nextLine());
+//                idMedico = vd.validarINT(idMedico);
+//
+//                Medico medicoEncontrado = medicoDAO.buscaMedicoPorId(idMedico);
+//
+//                if (medicoEncontrado != null) {
+////                    DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+////
+////                    System.out.println("Informe a Nova Data Da Consulta No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
+////                    String dia = scanner.nextLine();
+////                    LocalDate novoDiaConsulta = LocalDate.parse(dia, fdia);
+////                    
+////                    System.out.println("Informe a Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
+////                    String Hora = scanner.nextLine();
+////                    LocalTime horaConsulta = LocalTime.parse(Hora);
+//                    
+//                   
+//                    
+//                }
+//
+//            }
         }
 
     }

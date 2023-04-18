@@ -71,7 +71,7 @@ public class ConsultaDAO {
         return false;
     }
 
-    public boolean buscaConsultaParaRemarcar(LocalDate novoDiaConsulta, 
+    public boolean buscaConsultaParaRemarcar(LocalDate novoDiaConsulta,
             LocalTime novaHoraConsulta) {
 
         for (Consulta consulta : vetorConsulta) {
@@ -94,6 +94,18 @@ public class ConsultaDAO {
             return true;
         }
         return false;
+    }
+
+    public Consulta buscaConsultaPorFranquia(Franquia franquia) {
+        for (Consulta consulta : vetorConsulta) {
+            if (consulta != null
+                    && consulta.getUnidadeFranquia().getFranquia().equals(franquia)) {
+
+                System.out.println(consulta + "\n");
+            }
+        }
+        return null;
+
     }
 
 }

@@ -323,6 +323,15 @@ public class PessoaDAO {
         return null;
     }
     
+    public Pessoa filtraPacientes(){
+        for (Pessoa pessoa : vetorPessoa) {
+            if(pessoa != null && pessoa.getTipoUsuario().equals("Paciente")){
+                System.out.println(pessoa + "\n");
+            }
+        }
+        return null;
+    }
+    
    
      
     /*private boolean verificaSeNomeEstaSendoUsado(String nome) {

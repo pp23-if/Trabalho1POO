@@ -190,4 +190,13 @@ public class MedicoDAO {
         }
 
     }
+
+    public boolean vericaSeMedicoEPacienteSaoIguais(Pessoa pessoa, Medico medico) {
+        if (pessoa != null && medico != null && medico.
+                getPessoa().getCpf().equals(pessoa.getCpf())) {
+
+            return true;
+        }
+        return false;
+    }
 }
