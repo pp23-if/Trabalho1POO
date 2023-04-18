@@ -97,6 +97,8 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 4: {
+                    remarcarConsulta(admnistrador, unidadeFranquiaDAO, vd,
+                            pessoaDAO, medicoDAO, consultaDAO);
                     break;
                 }
 
@@ -201,6 +203,47 @@ public class AdmnistradorControladora {
 
             } else {
                 System.out.println("\nNao foi Possivel cancelar Consulta..");
+            }
+
+        }
+    }
+
+    private void remarcarConsulta(Admnistrador admnistrador,
+            UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd,
+            PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ConsultaDAO consultaDAO) {
+
+        consultaDAO.buscaConsultaPorFranquia(admnistrador.getFranquia());
+
+        System.out.println("Informe o ID da consulta que desaja remarcar: ");
+        int idConsulta = Integer.parseInt(scanner.nextLine());
+        idConsulta = vd.validarINT(idConsulta);
+
+        Consulta consultaEncontrada = consultaDAO.buscaConsultaPorId(idConsulta);
+
+        if (consultaEncontrada == null) {
+            System.out.println("\nConsulta nao encontrada");
+        } else {
+            DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            System.out.println("Informe a Nova Data Da Consulta No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
+            String dia = scanner.nextLine();
+            LocalDate diaConsulta = LocalDate.parse(dia, fdia);
+
+            System.out.println("Informe a Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
+            String Hora = scanner.nextLine();
+            LocalTime horaConsulta = LocalTime.parse(Hora);
+
+            if (consultaDAO.buscaConsultaParaRemarcar(diaConsulta, horaConsulta) == true) {
+                System.out.println("Dia e hora informada indisponiveis.");
+            } else {
+
+                if (consultaDAO.atualizaDiaEHoraConsulta(diaConsulta, horaConsulta,
+                        consultaEncontrada) == true) {
+
+                    System.out.println("\nConsulta remarcada com sucesso.");
+                } else {
+                    System.out.println("\nNao foi possivel remarcar consulta");
+                }
             }
 
         }

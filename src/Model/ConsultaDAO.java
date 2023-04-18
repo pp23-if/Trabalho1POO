@@ -109,4 +109,29 @@ public class ConsultaDAO {
 
     }
 
+    public Consulta buscaConsultaPorMedico(Medico medico) {
+        for (Consulta consulta : vetorConsulta) {
+            if (consulta != null && consulta.getMedico().equals(medico)) {
+                System.out.println(consulta + "\n");
+
+            }
+        }
+        return null;
+    }
+
+    public boolean atenderConsulta(Medico medico) {
+        for (Consulta consulta : vetorConsulta) {
+            if (consulta != null
+                    && consulta.getMedico().equals(medico)
+                    && consulta.getEstadoConsulta().equals("Agendada")) {
+
+                consulta.setEstadoConsulta("Realizada");
+                consulta.setDataModificacao(LocalDateTime.now());
+
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
