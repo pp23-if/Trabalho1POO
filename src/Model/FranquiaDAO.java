@@ -10,8 +10,10 @@ public class FranquiaDAO {
         Pessoa donoDeFranquia = pessoaDAO.buscaPessoaCadastrada("Edu28", "24");
 
         if (donoDeFranquia != null) {
-            Franquia franquia = new Franquia("Unimed".toUpperCase(), "123456789-30", "Patos de Minas",
-                    "Rua Principal - Centro", donoDeFranquia, LocalDateTime.now());
+            Franquia franquia = new Franquia("Unimed".toUpperCase(), 
+                    "123456789-30", "Patos de Minas",
+                    "Rua Principal - Centro", donoDeFranquia, 
+                    LocalDateTime.now());
 
             adicionaFranquia(franquia);
         }
@@ -160,7 +162,8 @@ public class FranquiaDAO {
         return false;
     }
 
-    public boolean atualizaTelefoneDonoDeFranquia(Franquia f, String novoTelefoneDonoFranquia) {
+    public boolean atualizaTelefoneDonoDeFranquia(Franquia f, 
+            String novoTelefoneDonoFranquia) {
 
         if (!verificaSeTelefoneDonoFranquiaEstaSendoUsado(novoTelefoneDonoFranquia) == true) {
 

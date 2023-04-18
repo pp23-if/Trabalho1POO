@@ -22,6 +22,9 @@ public class PacienteControladora {
     Scanner scanner = new Scanner(System.in);
 
     MenuTitulosPaciente telaPaciente = new MenuTitulosPaciente();
+    
+    /*Instanciando a Classe de Validacao de dados.*/
+    ValidacaoEntradaDados vd = new ValidacaoEntradaDados();
 
     public PacienteControladora(Pessoa pessoa, PessoaDAO pessoaDAO,
             ValidacaoEntradaDados vd, MedicoDAO medicoDAO, FranquiaDAO franquiaDAO,
@@ -76,6 +79,7 @@ public class PacienteControladora {
                 case 1: {
                     System.out.println("Informe o Novo Nome: ");
                     String novoNomePessoa = scanner.nextLine();
+                    novoNomePessoa = vd.validaString(novoNomePessoa);
 
                     if (pessoaDAO.atualizaNomePessoa(pessoa.getNomePessoa(), novoNomePessoa, pessoa.getCpf()) == true) {
                         System.out.println("O Nome Foi Atualizado Com Sucesso!");
@@ -87,6 +91,7 @@ public class PacienteControladora {
                 case 2: {
                     System.out.println("Informe o Novo Cpf: ");
                     String novoCpf = scanner.nextLine();
+                    novoCpf = vd.validaString(novoCpf);
 
                     if (pessoaDAO.atualizaCpfPessoa(pessoa.getCpf(), novoCpf) == true) {
                         System.out.println("O Cpf Foi Atualizado Com Sucesso!");
@@ -100,6 +105,7 @@ public class PacienteControladora {
                 case 3: {
                     System.out.println("Informe o Novo Endereco: ");
                     String novoEndereco = scanner.nextLine();
+                    novoEndereco = vd.validaString(novoEndereco);
 
                     if (pessoaDAO.atualizaEnderecoPessoa(pessoa.getEnderecoPessoa(), novoEndereco) == true) {
                         System.out.println("O Endereco Foi Atualizado Com Sucesso!");
@@ -112,7 +118,8 @@ public class PacienteControladora {
                 case 4: {
                     System.out.println("Informe o Novo Telefone: ");
                     String novoTelefone = scanner.nextLine();
-
+                    novoTelefone = vd.validaString(novoTelefone);
+                    
                     if (pessoaDAO.atualizaTelefonePessoa(pessoa.getTelefonePessoa(), novoTelefone,
                             pessoa.getTipoUsuario()) == true) {
                         System.out.println("O Telefone Foi Atualizado Com Sucesso!");
@@ -125,6 +132,7 @@ public class PacienteControladora {
                 case 5: {
                     System.out.println("Informe o Novo Login: ");
                     String novoLogin = scanner.nextLine();
+                    novoLogin = vd.validaString(novoLogin);
 
                     if (pessoaDAO.atualizaLoginPessoa(pessoa.getLoginPessoa(), novoLogin, pessoa.getTipoUsuario()) == true) {
                         System.out.println("O Login Foi Atualizado Com Sucesso!");
@@ -138,6 +146,7 @@ public class PacienteControladora {
                 case 6: {
                     System.out.println("Informe a Nova Senha: ");
                     String novaSenha = scanner.nextLine();
+                    novaSenha = vd.validaString(novaSenha);
 
                     if (pessoaDAO.atualizaSenhaPessoa(pessoa.getSenhaPessoa(), pessoa.getLoginPessoa(),
                             novaSenha, pessoa.getTipoUsuario()) == true) {
@@ -192,7 +201,8 @@ public class PacienteControladora {
 
         System.out.println("\nEscolha Uma Franquia Informando o ID - Franquia: ");
         int idFranquia = Integer.parseInt(scanner.nextLine());
-
+        idFranquia = vd.validarINT(idFranquia);
+        
         System.out.println("\n");
         Franquia franquiaSelecionada = franquiaDAO.buscaFranquiaPorId(idFranquia);
 
@@ -204,6 +214,7 @@ public class PacienteControladora {
 
             System.out.println("\nEscolha Uma Unidade DE Franquia Informando o ID - Unidade De Franquia: ");
             int idUnidadeFranquia = Integer.parseInt(scanner.nextLine());
+            idUnidadeFranquia = vd.validarINT(idUnidadeFranquia);
 
             UnidadeFranquia unidadeFranquiaSelecionada = unidadeFranquiaDAO.buscaUnidadeFranquiaPorId(idUnidadeFranquia);
 
@@ -215,7 +226,8 @@ public class PacienteControladora {
 
                 System.out.println("Informe O ID - MEDICO Do Qual Deseja Se Consultar: ");
                 int idMedico = Integer.parseInt(scanner.nextLine());
-
+                idMedico = vd.validarINT(idMedico);
+                
                 Medico medicoSelecionado = medicoDAO.buscaMedicoPorId(idMedico);
 
                 if (medicoSelecionado == null) {
@@ -232,10 +244,12 @@ public class PacienteControladora {
                         System.out.println("Informe a Data Da Consulta No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
                         String dia = scanner.nextLine();
                         LocalDate diaConsulta = LocalDate.parse(dia, fdia);
+                        //vou arrumar validação  ainda deu errado
 
                         System.out.println("Informe a Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
                         String Hora = scanner.nextLine();
                         LocalTime horaConsulta = LocalTime.parse(Hora);
+                        //vou arrumar validação  ainda deu errado
 
                         Consulta consulta = new Consulta(diaConsulta, horaConsulta, medicoSelecionado,
                                 pessoa, unidadeFranquiaSelecionada, valorConsulta, "Agendada", LocalDateTime.now());
@@ -254,10 +268,12 @@ public class PacienteControladora {
     }
 
     private void cancelarConsulta(Pessoa pessoa, ConsultaDAO consultaDAO,  ValidacaoEntradaDados vd) {
+        
         consultaDAO.buscaConsultaAtravesDaPessoaVinculada(pessoa);
 
         System.out.println("\nInforme O ID Consulta Que Deseja Cancelar: ");
         int idConsulta = Integer.parseInt(scanner.nextLine());
+        idConsulta = vd.validarINT(idConsulta);
 
         Consulta consultaEncontrada = consultaDAO.buscaConsultaPorId(idConsulta);
 
@@ -278,6 +294,7 @@ public class PacienteControladora {
 
         System.out.println("\nInforme O ID Consulta Que Deseja Remarcar: ");
         int idConsulta = Integer.parseInt(scanner.nextLine());
+        idConsulta = vd.validarINT(idConsulta);
 
         Consulta consultaEncontrada = consultaDAO.buscaConsultaPorId(idConsulta);
 
@@ -290,10 +307,12 @@ public class PacienteControladora {
             System.out.println("Informe a Nova Data Da Consulta No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
             String dia = scanner.nextLine();
             LocalDate novoDiaConsulta = LocalDate.parse(dia, fdia);
-
+            //vou arrumar validação ainda deu errado
+            
             System.out.println("Informe a Nova Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
             String Hora = scanner.nextLine();
             LocalTime novaHoraConsulta = LocalTime.parse(Hora);
+             //vou arrumar validação ainda deu errado
 
             
             if (consultaDAO.buscaConsultaParaRemarcar(novoDiaConsulta, novaHoraConsulta) == true) {

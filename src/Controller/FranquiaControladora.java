@@ -16,6 +16,9 @@ public class FranquiaControladora {
 
     Scanner scanner = new Scanner(System.in);
     MenuTitulosFranquia telaFranquia = new MenuTitulosFranquia();
+    
+     /*Instanciando a Classe de Validacao de dados.*/
+    ValidacaoEntradaDados vd = new ValidacaoEntradaDados();
 
     public FranquiaControladora(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO,
             MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd) {

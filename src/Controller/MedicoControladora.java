@@ -9,6 +9,9 @@ public class MedicoControladora {
 
     Scanner scanner = new Scanner(System.in);
     MenuTitulosMedico telaMedico = new MenuTitulosMedico();
+    
+    /*Instanciando a Classe de Validacao de dados.*/
+    ValidacaoEntradaDados vd = new ValidacaoEntradaDados();
 
     public MedicoControladora(Medico medico, MedicoDAO medicoDAO, ValidacaoEntradaDados vd) {
 
@@ -48,6 +51,7 @@ public class MedicoControladora {
 
                     System.out.println("Informe o Novo login De Medico: ");
                     String novologinMedico = scanner.nextLine();
+                    novologinMedico = vd.validaString(novologinMedico);
 
                     if (medicoDAO.atualizaLoginMedico(medico, novologinMedico) == true) {
                         System.out.println("O Login De Medico Foi Atualizado Com Sucesso!");
@@ -59,6 +63,7 @@ public class MedicoControladora {
                 case 2: {
                     System.out.println("Informe a Nova Senha De Medico: ");
                     String novaSenhaMedico = scanner.nextLine();
+                    novaSenhaMedico = vd.validaString(novaSenhaMedico);
 
                     if (medicoDAO.atualizaSenhaMedico(medico, novaSenhaMedico) == true) {
                         System.out.println("A Senha De Medico Foi Atualizada Com Sucesso!");
@@ -71,6 +76,7 @@ public class MedicoControladora {
                 case 3: {
                     System.out.println("Informe o Novo Telefone De Medico: ");
                     String novoTelefoneMedico = scanner.nextLine();
+                    novoTelefoneMedico = vd.validaString(novoTelefoneMedico);
 
                     if (medicoDAO.atualizaTelefoneMedico(medico, novoTelefoneMedico) == true) {
                         System.out.println("O Telefone De Medico Foi Atualizado Com Sucesso!");

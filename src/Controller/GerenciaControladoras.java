@@ -115,24 +115,20 @@ public class GerenciaControladoras {
                 System.out.println("\nNao Foi Possivel Cadastrar a Pessoa.");
             }
         }
-
     }
 
     private void fazLogin() {
         System.out.println("\nLogin: ");
         String login = scanner.nextLine();
         login = vd.validaString(login);
-        //System.out.println("\n");
-
+        
         System.out.println("\nSenha: ");
         String senha = scanner.nextLine();
         senha = vd.validaString(senha);
-        //System.out.println("\n");
-
+        
         Pessoa pessoaLogada = pessoaDAO.buscaPessoaQuerendoLogar(login, senha);
 
         gerenciaControladoras(pessoaLogada);
-
     }
 
     private void gerenciaControladoras(Pessoa pessoaLogada) {

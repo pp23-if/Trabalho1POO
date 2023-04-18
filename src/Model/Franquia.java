@@ -78,6 +78,7 @@ public class Franquia {
 
     public Franquia(String nomeFranquia, String cnpj, String cidade,
             String enderecoFranquia, Pessoa pessoa, LocalDateTime dataCriacao) {
+        
         this.idFranquia = sequence++;
         this.nomeFranquia = nomeFranquia;
         this.cnpj = cnpj;

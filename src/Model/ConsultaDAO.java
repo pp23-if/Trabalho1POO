@@ -71,7 +71,8 @@ public class ConsultaDAO {
         return false;
     }
 
-    public boolean buscaConsultaParaRemarcar(LocalDate novoDiaConsulta, LocalTime novaHoraConsulta) {
+    public boolean buscaConsultaParaRemarcar(LocalDate novoDiaConsulta, 
+            LocalTime novaHoraConsulta) {
 
         for (Consulta consulta : vetorConsulta) {
 

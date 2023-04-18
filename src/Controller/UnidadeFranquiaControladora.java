@@ -16,6 +16,9 @@ public class UnidadeFranquiaControladora {
 
     Scanner scanner = new Scanner(System.in);
     MenuTitulosUnidadeFranquia menuTitulosUnidadeFranquia = new MenuTitulosUnidadeFranquia();
+    
+    /*Instanciando a Classe de Validacao de dados.*/
+    ValidacaoEntradaDados vd = new ValidacaoEntradaDados();
 
     public UnidadeFranquiaControladora(UnidadeFranquia unidadeFranquia, UnidadeFranquiaDAO unidadeFranquiaDAO,
             MedicoDAO medicoDAO, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd) {
@@ -87,6 +90,7 @@ public class UnidadeFranquiaControladora {
                 case 1: {
                     System.out.println("Informe o Nova Cidade da Unidade De Franquia: ");
                     String novaCidadeUnidadeFranquia = scanner.nextLine();
+                    novaCidadeUnidadeFranquia = vd.validaString(novaCidadeUnidadeFranquia);
 
                     if (unidadeFranquiaDAO.atualizaCidadeUnidadeFranquia(unidadeFranquia,
                             novaCidadeUnidadeFranquia) == true) {
@@ -99,6 +103,7 @@ public class UnidadeFranquiaControladora {
                 case 2: {
                     System.out.println("Informe o Novo Endereco da Unidade De Franquia: ");
                     String novoEnderecoUnidadeFranquia = scanner.nextLine();
+                    novoEnderecoUnidadeFranquia = vd.validaString(novoEnderecoUnidadeFranquia);
 
                     if (unidadeFranquiaDAO.atualizaEnderecoUnidadeDeFranquia(unidadeFranquia,
                             novoEnderecoUnidadeFranquia) == true) {
@@ -111,6 +116,7 @@ public class UnidadeFranquiaControladora {
                 case 3: {
                     System.out.println("Informe o Novo Login Dono De Unidade De Franquia: ");
                     String novoLoginDonoUnidadeFranquia = scanner.nextLine();
+                    novoLoginDonoUnidadeFranquia = vd.validaString(novoLoginDonoUnidadeFranquia);
 
                     if (unidadeFranquiaDAO.atualizaLoginDonoDeUnidadeDeFranquia(unidadeFranquia,
                             novoLoginDonoUnidadeFranquia) == true) {
@@ -123,6 +129,7 @@ public class UnidadeFranquiaControladora {
                 case 4: {
                     System.out.println("Informe o Nova Senha Dono De Unidade De Franquia: ");
                     String novaSenhaDonoUnidadeFranquia = scanner.nextLine();
+                    novaSenhaDonoUnidadeFranquia = vd.validaString(novaSenhaDonoUnidadeFranquia);
 
                     if (unidadeFranquiaDAO.atualizaSenhaDonoDeUnidadeDeFranquia(unidadeFranquia,
                             novaSenhaDonoUnidadeFranquia) == true) {
@@ -135,6 +142,7 @@ public class UnidadeFranquiaControladora {
                 case 5: {
                     System.out.println("Informe o Novo Telefone Dono De Unidade De Franquia: ");
                     String novoTelefoneDonoUnidadeFranquia = scanner.nextLine();
+                    novoTelefoneDonoUnidadeFranquia = vd.validaString(novoTelefoneDonoUnidadeFranquia);
 
                     if (unidadeFranquiaDAO.atualizaTelefoneDonoDeUnidadeDeFranquia(unidadeFranquia,
                             novoTelefoneDonoUnidadeFranquia) == true) {
