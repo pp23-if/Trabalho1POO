@@ -165,7 +165,8 @@ public class GerenciaControladoras {
                         unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaPessoaVinculada(pessoaLogada);
                 
                 UnidadeFranquiaControladora unidadeFranquiaControladora = 
-                        new UnidadeFranquiaControladora(unidadeFranquia, unidadeFranquiaDAO, medicoDAO, pessoaDAO, vd);
+                        new UnidadeFranquiaControladora(unidadeFranquia, unidadeFranquiaDAO, 
+                                medicoDAO, pessoaDAO, vd);
             }
             else if(pessoaLogada.getTipoUsuario().equals("Admnistrador")){
                 Admnistrador admnistradorEncontrado =
@@ -175,7 +176,7 @@ public class GerenciaControladoras {
                                 new AdmnistradorControladora(pessoaDAO, 
                                         admnistradorDAO, unidadeFranquiaDAO, 
                                         consultaDAO, vd, 
-                                        admnistradorEncontrado);
+                                        admnistradorEncontrado, medicoDAO);
             }
 
         } else {
