@@ -51,7 +51,7 @@ public class MenuTitulosMedico {
         builder.append("\n0 - Para sair.........................: ");
         builder.append("\n1 - Atender Consultas.................: ");
         builder.append("\n2 - Ver consultas.....................: ");
-        builder.append("\n3 - ...: ");
+        builder.append("\n3 - Ver Informacoes De Consultas...: ");
         builder.append("\n\nOpcao: ");
 
         System.out.print(builder.toString());
