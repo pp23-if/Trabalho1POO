@@ -5,6 +5,7 @@ import Model.AdmnistradorDAO;
 import Model.ConsultaDAO;
 import Model.Franquia;
 import Model.FranquiaDAO;
+import Model.InfoConsultaDAO;
 import Model.Medico;
 import Model.MedicoDAO;
 import Model.Pessoa;
@@ -31,6 +32,7 @@ public class GerenciaControladoras {
     UnidadeFranquiaDAO unidadeFranquiaDAO = new UnidadeFranquiaDAO(pessoaDAO, franquiaDAO);
     ConsultaDAO consultaDAO = new ConsultaDAO();
     AdmnistradorDAO admnistradorDAO = new AdmnistradorDAO(pessoaDAO, franquiaDAO);
+    InfoConsultaDAO infoConsultaDAO = new InfoConsultaDAO();
 
     public GerenciaControladoras() {
 
@@ -150,7 +152,7 @@ public class GerenciaControladoras {
                 Medico medico = medicoDAO.buscaMedicoAtravesdaPessoaVinculada(pessoaLogada);
 
                 MedicoControladora medicoControladora = new MedicoControladora(medico, 
-                        medicoDAO, vd, consultaDAO);
+                        medicoDAO, vd, consultaDAO, infoConsultaDAO);
 
             } else if (pessoaLogada.getTipoUsuario().equals("DonodeFranquia")) {
 

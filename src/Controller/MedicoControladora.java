@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.ConsultaDAO;
+import Model.InfoConsultaDAO;
 import Model.Medico;
 import Model.MedicoDAO;
 import View.MenuTitulosMedico;
@@ -11,14 +12,15 @@ public class MedicoControladora {
     Scanner scanner = new Scanner(System.in);
     MenuTitulosMedico telaMedico = new MenuTitulosMedico();
 
-    public MedicoControladora(Medico medico, MedicoDAO medicoDAO, ValidacaoEntradaDados vd, ConsultaDAO consultaDAO) {
+    public MedicoControladora(Medico medico, MedicoDAO medicoDAO, ValidacaoEntradaDados vd, 
+            ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO) {
 
-        menuOpcoesMedico(medico, medicoDAO, vd, consultaDAO);
+        menuOpcoesMedico(medico, medicoDAO, vd, consultaDAO, infoConsultaDAO);
 
     }
 
     private void menuOpcoesMedico(Medico medico, MedicoDAO medicoDAO,
-            ValidacaoEntradaDados vd, ConsultaDAO consultaDAO) {
+            ValidacaoEntradaDados vd, ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO) {
 
         int opcao;
 
@@ -36,7 +38,7 @@ public class MedicoControladora {
                 }
                 case 3: {
 
-                    menuOpcoesConsultaMedico(medico, consultaDAO);
+                    menuOpcoesConsultaMedico(medico, consultaDAO, infoConsultaDAO);
                     break;
                 }
             }
@@ -95,7 +97,7 @@ public class MedicoControladora {
 
     }
 
-    private void menuOpcoesConsultaMedico(Medico medico, ConsultaDAO consultaDAO) {
+    private void menuOpcoesConsultaMedico(Medico medico, ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO) {
 
         int opcao;
 
@@ -105,7 +107,7 @@ public class MedicoControladora {
             switch (opcao) {
                 case 1: {
 
-                    if (consultaDAO.atenderConsulta(medico) == true) {
+                    if (consultaDAO.atenderConsulta(medico, infoConsultaDAO) == true) {
                         System.out.println("\nConsulta atendida com sucesso.");
                     }else{
                         System.out.println("\nNao existe mais consultas marcadas.");
@@ -114,6 +116,11 @@ public class MedicoControladora {
                 }
                 case 2: {
                     consultaDAO.buscaConsultaPorMedico(medico);
+                    break;
+                }
+                case 3:
+                {
+                    infoConsultaDAO.buscaInfoConsultasPorMedico(medico);
                     break;
                 }
             }

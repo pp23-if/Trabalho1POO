@@ -119,7 +119,7 @@ public class ConsultaDAO {
         return null;
     }
 
-    public boolean atenderConsulta(Medico medico) {
+    public boolean atenderConsulta(Medico medico, InfoConsultaDAO infoConsultaDAO) {
         for (Consulta consulta : vetorConsulta) {
             if (consulta != null
                     && consulta.getMedico().equals(medico)
@@ -127,6 +127,10 @@ public class ConsultaDAO {
 
                 consulta.setEstadoConsulta("Realizada");
                 consulta.setDataModificacao(LocalDateTime.now());
+
+                InfoConsulta infoConsulta = new InfoConsulta(consulta, "", LocalDateTime.now());
+
+                infoConsultaDAO.adicionaInfoConsulta(infoConsulta);
 
                 return true;
             }
