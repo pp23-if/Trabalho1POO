@@ -12,7 +12,7 @@ public class MenuTitulosMedico {
 
         StringBuilder builder = new StringBuilder("");
 
-        builder.append("\n============ Menu Medico ===========");
+        builder.append("\n============ MENU MEDICO  ===========");
         builder.append("\n0 - Para Sair.................: ");
         builder.append("\n1 - Ver Cadastro de Medico....: ");
         builder.append("\n2 - Atualizar Dados de Medico.: ");
@@ -31,7 +31,7 @@ public class MenuTitulosMedico {
 
         StringBuilder builder = new StringBuilder("");
 
-        builder.append("\n============ Menu ATUALIZACAO DE DADOS MEDICO ===========");
+        builder.append("\n=== MENU ATUALIZACAO DE DADOS MEDICO ===");
         builder.append("\n0 - Para sair.........................: ");
         builder.append("\n1 - Atualizar Login Medico............: ");
         builder.append("\n2 - Atualizar Senha Medico............: ");
