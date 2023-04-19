@@ -1,5 +1,7 @@
 package Model;
 
+import java.time.LocalDateTime;
+
 public class InfoConsultaDAO {
 
     private InfoConsulta vetorInfoConsulta[] = new InfoConsulta[50];
@@ -47,5 +49,27 @@ public class InfoConsultaDAO {
         }
         return null;
     }
+    
+    public InfoConsulta buscaInfoConsultaPorId(int idInfoConsulta)
+    {
+        for (InfoConsulta infoConsulta : vetorInfoConsulta) {
+            
+            if(infoConsulta != null && infoConsulta.getIdInfoConsulta() == idInfoConsulta)
+            {
+                return infoConsulta;
+            }
+        }
+        return null;
+    }
 
+    public boolean atualizaDescricaoInfoConsulta(InfoConsulta infoConsulta, String descricao)
+    {
+        if(infoConsulta != null)
+        {
+            infoConsulta.setDescricao(descricao);
+            infoConsulta.setDataModificacao(LocalDateTime.now());
+            return true;
+        }
+        return false;
+    }
 }

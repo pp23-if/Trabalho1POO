@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.ConsultaDAO;
+import Model.InfoConsulta;
 import Model.InfoConsultaDAO;
 import Model.Medico;
 import Model.MedicoDAO;
@@ -12,7 +13,7 @@ public class MedicoControladora {
     Scanner scanner = new Scanner(System.in);
     MenuTitulosMedico telaMedico = new MenuTitulosMedico();
 
-    public MedicoControladora(Medico medico, MedicoDAO medicoDAO, ValidacaoEntradaDados vd, 
+    public MedicoControladora(Medico medico, MedicoDAO medicoDAO, ValidacaoEntradaDados vd,
             ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO) {
 
         menuOpcoesMedico(medico, medicoDAO, vd, consultaDAO, infoConsultaDAO);
@@ -38,7 +39,7 @@ public class MedicoControladora {
                 }
                 case 3: {
 
-                    menuOpcoesConsultaMedico(medico, consultaDAO, infoConsultaDAO);
+                    menuOpcoesConsultaMedico(medico, consultaDAO, infoConsultaDAO, vd);
                     break;
                 }
             }
@@ -97,7 +98,8 @@ public class MedicoControladora {
 
     }
 
-    private void menuOpcoesConsultaMedico(Medico medico, ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO) {
+    private void menuOpcoesConsultaMedico(Medico medico, ConsultaDAO consultaDAO,
+            InfoConsultaDAO infoConsultaDAO, ValidacaoEntradaDados vd) {
 
         int opcao;
 
@@ -109,18 +111,23 @@ public class MedicoControladora {
 
                     if (consultaDAO.atenderConsulta(medico, infoConsultaDAO) == true) {
                         System.out.println("\nConsulta atendida com sucesso.");
-                    }else{
+                    } else {
                         System.out.println("\nNao existe mais consultas marcadas.");
                     }
                     break;
                 }
                 case 2: {
+                    System.out.println("\n");
                     consultaDAO.buscaConsultaPorMedico(medico);
                     break;
                 }
-                case 3:
-                {
+                case 3: {
+                    System.out.println("\n");
                     infoConsultaDAO.buscaInfoConsultasPorMedico(medico);
+                    break;
+                }
+                case 4: {
+                    atualizaInfoConsulta(medico, infoConsultaDAO, vd);
                     break;
                 }
             }
@@ -128,4 +135,27 @@ public class MedicoControladora {
         } while (opcao != 0);
     }
 
+    private void atualizaInfoConsulta(Medico medico, InfoConsultaDAO infoConsultaDAO, ValidacaoEntradaDados vd) {
+        System.out.println("\n");
+        infoConsultaDAO.buscaInfoConsultasPorMedico(medico);
+
+        System.out.println("\nInforme o ID - InfoConsulta Que Deseja Atualizar: ");
+        int idInfoConsulta = Integer.parseInt(scanner.nextLine());
+        idInfoConsulta = vd.validarINT(idInfoConsulta);
+
+        InfoConsulta infoConsulta = infoConsultaDAO.buscaInfoConsultaPorId(idInfoConsulta);
+
+        if (infoConsulta == null) {
+            System.out.println("\nInfo Consulta Nao Encontrada.");
+        } else {
+            System.out.println("\nInforme A Descricao Da Info Consulta: ");
+            String descricao = scanner.nextLine();
+
+            if (infoConsultaDAO.atualizaDescricaoInfoConsulta(infoConsulta, descricao) == true) {
+                System.out.println("\nDescricao Da Info Consulta Atualizada Com Sucesso!");
+            } else {
+                System.out.println("\nNao Foi Possivel Atualizar A Descricao Da Info Consulta.");
+            }
+        }
+    }
 }
