@@ -36,7 +36,7 @@ public class MenuTitulosMedico {
         builder.append("\n1 - Atualizar Login Medico............: ");
         builder.append("\n2 - Atualizar Senha Medico............: ");
         builder.append("\n3 - Atualizar Telefone Medico.........: ");
-        builder.append("\n\nInforme Opcao.................: ");
+        builder.append("\n\nInforme Opcao.........................: ");
 
         System.out.print(builder.toString());
         
@@ -47,13 +47,13 @@ public class MenuTitulosMedico {
 
         StringBuilder builder = new StringBuilder("");
 
-        builder.append("\n============ MENU GERENCIA CONSULTA ===========");
-        builder.append("\n0 - Para sair.........................: ");
-        builder.append("\n1 - Atender Consultas.................: ");
-        builder.append("\n2 - Ver consultas.....................: ");
-        builder.append("\n3 - Ver Informacoes De Consultas......: ");
+        builder.append("\n============= MENU GERENCIA CONSULTA ============");
+        builder.append("\n0 - Para sair....................................: ");
+        builder.append("\n1 - Atender Consultas............................: ");
+        builder.append("\n2 - Ver consultas................................: ");
+        builder.append("\n3 - Ver Informacoes De Consultas.................: ");
         builder.append("\n4 - Atualizar Descricao De Info De Consulta......: ");
-        builder.append("\n\nInforme Opcao.................: ");
+        builder.append("\n\nInforme Opcao....................................: ");
 
         System.out.print(builder.toString());
         
