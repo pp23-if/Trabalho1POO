@@ -137,7 +137,7 @@ public class GerenciaControladoras {
     private void gerenciaControladoras(Pessoa pessoaLogada) {
         
         if (pessoaLogada != null) {
-            System.out.println("Login efetuado Com Sucesso!");
+            System.out.println("\nLogin efetuado Com Sucesso!");
             System.out.println("Logado Como: " + pessoaLogada.getTipoUsuario());
 
             if (pessoaLogada.getTipoUsuario().equals("Paciente")) {
@@ -181,7 +181,7 @@ public class GerenciaControladoras {
             }
 
         } else {
-            System.out.println("Nao Foi Possivel Fazer Login: Usuario Nao Encontrado OU "
+            System.out.println("\nNao Foi Possivel Fazer Login: Usuario Nao Encontrado OU "
                     + "Nao Cadastrado.");
         }
     }
