@@ -78,7 +78,7 @@ public class Franquia {
 
     public Franquia(String nomeFranquia, String cnpj, String cidade,
             String enderecoFranquia, Pessoa pessoa, LocalDateTime dataCriacao) {
-        
+
         this.idFranquia = sequence++;
         this.nomeFranquia = nomeFranquia;
         this.cnpj = cnpj;
@@ -141,32 +141,30 @@ public class Franquia {
         return true;
     }
 
-    
-
     @Override
     public String toString() {
 
         DateTimeFormatter fd = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
         if (dataModificacao == null) {
-            return "ID - Franquia: " + this.idFranquia + "\n"
-                    + "Franquia: " + this.nomeFranquia + "\n"
-                    + "Cnpj: " + this.cnpj + "\n"
-                    + "Cidade: " + this.cidade + "\n"
+            return "ID - Franquia: " + this.idFranquia + "," + " "
+                    + "Franquia: " + this.nomeFranquia + "," + " "
+                    + "Cnpj: " + this.cnpj + "," + " "
+                    + "Cidade: " + this.cidade + "," + " "
                     + "Endereco: " + this.enderecoFranquia + "\n"
-                    + "Dono: " + pessoa.getNomePessoa() + "\n"
-                    + "Cpf: " + pessoa.getCpf() + "\n"
-                    + "Data e Hora de Criacao: " + fd.format(dataCriacao);
+                    + "Dono: " + pessoa.getNomePessoa() + "," + " "
+                    + "Cpf: " + pessoa.getCpf() + "," + " "
+                    + "Data e Hora de Criacao: " + fd.format(dataCriacao) + "," + " ";
         } else {
-            return "ID - Franquia: " + this.idFranquia + "\n"
-                    + "Franquia: " + this.nomeFranquia + "\n"
-                    + "Cnpj: " + this.cnpj + "\n"
-                    + "Cidade: " + this.cidade + "\n"
+            return "ID - Franquia: " + this.idFranquia + "," + " "
+                    + "Franquia: " + this.nomeFranquia + "," + " "
+                    + "Cnpj: " + this.cnpj + "," + " "
+                    + "Cidade: " + this.cidade + "," + " "
                     + "Endereco: " + this.enderecoFranquia + "\n"
-                    + "Dono: " + pessoa.getNomePessoa() + "\n"
-                    + "Cpf: " + pessoa.getCpf() + "\n"
-                    + "Data e Hora de Criacao: " + fd.format(dataCriacao) + "\n"
-                    + "Data e hora de Modificacao: " + fd.format(dataModificacao);
+                    + "Dono: " + pessoa.getNomePessoa() + "," + " "
+                    + "Cpf: " + pessoa.getCpf() + "," + " "
+                    + "Data e Hora de Criacao: " + fd.format(dataCriacao) + "," + " "
+                    + "Data e Hora de Modificacao: " + fd.format(dataModificacao) + "," + " ";
         }
 
     }
