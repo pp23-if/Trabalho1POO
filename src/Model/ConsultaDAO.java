@@ -64,7 +64,7 @@ public class ConsultaDAO {
     }
 
     public boolean buscaConsultaParaCancelar(Consulta consulta) {
-        if (consulta != null) {
+        if (consulta != null && consulta.getEstadoConsulta().equals("Agendada")) {
             consulta.setEstadoConsulta("Cancelada");
             consulta.setDataModificacao(LocalDateTime.now());
             return true;
@@ -88,7 +88,7 @@ public class ConsultaDAO {
 
     public boolean atualizaDiaEHoraConsulta(LocalDate novoDiaConsulta,
             LocalTime novaHoraConsulta, Consulta consulta) {
-        if (consulta != null) {
+        if (consulta != null && consulta.getEstadoConsulta().equals("Agendada")) {
             consulta.setDiaConsulta(novoDiaConsulta);
             consulta.setHoraConsulta(novaHoraConsulta);
             consulta.setDataModificacao(LocalDateTime.now());

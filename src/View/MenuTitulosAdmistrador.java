@@ -31,10 +31,10 @@ public class MenuTitulosAdmistrador {
         builder.append("\n============ MENU CONSULTAS ===========");
         builder.append("\n0 - Para sair do programa.........: ");
         builder.append("\n1 - Marcar Consulta...............: ");
-        builder.append("\n2 - Ver Consulta Marcada..........: ");
+        builder.append("\n2 - Ver Consultas Marcadas........: ");
         builder.append("\n3 - Cancelar Consulta.............: ");
         builder.append("\n4 - Remarcar Consulta.............: ");
-        builder.append("\n\nInforme Opcao.....................: ");
+        builder.append("\n\nInforme Opcao...................: ");
 
         System.out.print(builder.toString());
 
@@ -48,7 +48,7 @@ public class MenuTitulosAdmistrador {
         builder.append("\n============ MENU PROCEDIMENTOS ===========");
         builder.append("\n0 - Para sair do programa.........: ");
         builder.append("\n1 - Marcar Procedimento...........: ");
-        builder.append("\n2 - Ver Procedimento Marcado......: ");
+        builder.append("\n2 - Ver Procedimentos Marcados....: ");
         builder.append("\n3 - Cancelar Procedimento.........: ");
         builder.append("\n4 - Remarcar Procedimento.........: ");
         builder.append("\n\nInforme Opcao...................: ");

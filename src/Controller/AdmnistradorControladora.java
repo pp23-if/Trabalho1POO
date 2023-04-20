@@ -89,6 +89,7 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 2: {
+                    System.out.println("\n");
                     consultaDAO.buscaConsultaPorFranquia(admnistrador.getFranquia());
                     break;
                 }
@@ -112,9 +113,10 @@ public class AdmnistradorControladora {
             UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd,
             PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ConsultaDAO consultaDAO) {
 
+        System.out.println("\n");
         unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(admnistrador.getFranquia());
 
-        System.out.println("Informe o ID da Unidade da Franquia que deseja realizar a consulta: ");
+        System.out.println("\nInforme o ID da Unidade da Franquia que deseja realizar a consulta: ");
         int idUnidadeFranquia = Integer.parseInt(scanner.nextLine());
         idUnidadeFranquia = vd.validarINT(idUnidadeFranquia);
 
@@ -124,12 +126,15 @@ public class AdmnistradorControladora {
         if (unidadeEncontrada == null) {
             System.out.println("\nUnidade de franquia nao encontrada.");
         } else {
+            
+            System.out.println("\n");
             pessoaDAO.filtraPacientes();
 
-            System.out.println("Informe o ID Da pessoa que deseja marcar para consulta: ");
+            System.out.println("\nInforme o ID Da pessoa que deseja marcar para consulta: ");
             int idPessoaConsulta = Integer.parseInt(scanner.nextLine());
             idPessoaConsulta = vd.validarINT(idPessoaConsulta);
-
+            
+            System.out.println("\n");
             Pessoa pessoaEncontrada = pessoaDAO.buscaPessoaPorId(idPessoaConsulta);
 
             if (pessoaEncontrada == null) {
@@ -138,10 +143,11 @@ public class AdmnistradorControladora {
 
                 medicoDAO.mostraTodosMedicos();
 
-                System.out.println("Informe o ID Do Medico que deseja se consultar: ");
+                System.out.println("\nInforme o ID Do Medico que deseja se consultar: ");
                 int idMedico = Integer.parseInt(scanner.nextLine());
                 idMedico = vd.validarINT(idMedico);
 
+                
                 Medico medicoEncontrado = medicoDAO.buscaMedicoPorId(idMedico);
 
                 if (medicoEncontrado == null) {
@@ -156,11 +162,11 @@ public class AdmnistradorControladora {
 
                         DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-                        System.out.println("Informe a Nova Data Da Consulta No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
+                        System.out.println("\nInforme a Data Da Consulta No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
                         String dia = scanner.nextLine();
                         LocalDate diaConsulta = LocalDate.parse(dia, fdia);
 
-                        System.out.println("Informe a Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
+                        System.out.println("\nInforme a Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
                         String Hora = scanner.nextLine();
                         LocalTime horaConsulta = LocalTime.parse(Hora);
 
@@ -186,9 +192,10 @@ public class AdmnistradorControladora {
     private void cancelarConsulta(ConsultaDAO consultaDAO,
             Admnistrador admnistrador, ValidacaoEntradaDados vd) {
 
+        System.out.println("\n");
         consultaDAO.buscaConsultaPorFranquia(admnistrador.getFranquia());
 
-        System.out.println("Informe o ID da Consulta que deseja cancelar: ");
+        System.out.println("\nInforme o ID da Consulta que deseja cancelar: ");
         int idConsulta = Integer.parseInt(scanner.nextLine());
         idConsulta = vd.validarINT(idConsulta);
 
@@ -207,41 +214,41 @@ public class AdmnistradorControladora {
         }
     }
 
-    private void remarcarConsulta(Admnistrador admnistrador,
-            UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd,
-            PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ConsultaDAO consultaDAO) {
+    private void remarcarConsulta(Admnistrador admnistrador,UnidadeFranquiaDAO unidadeFranquiaDAO, 
+            ValidacaoEntradaDados vd, PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ConsultaDAO consultaDAO) {
 
+        System.out.println("\n");
         consultaDAO.buscaConsultaPorFranquia(admnistrador.getFranquia());
 
-        System.out.println("Informe o ID da consulta que desaja remarcar: ");
+        System.out.println("\nInforme o ID da consulta que desaja remarcar: ");
         int idConsulta = Integer.parseInt(scanner.nextLine());
         idConsulta = vd.validarINT(idConsulta);
 
         Consulta consultaEncontrada = consultaDAO.buscaConsultaPorId(idConsulta);
 
         if (consultaEncontrada == null) {
-            System.out.println("\nConsulta nao encontrada");
+            System.out.println("\nConsulta Nao Encontrada");
         } else {
             DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-            System.out.println("Informe a Nova Data Da Consulta No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
+            System.out.println("\nInforme a Nova Data Da Consulta No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
             String dia = scanner.nextLine();
             LocalDate diaConsulta = LocalDate.parse(dia, fdia);
 
-            System.out.println("Informe a Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
+            System.out.println("\nInforme a Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
             String Hora = scanner.nextLine();
             LocalTime horaConsulta = LocalTime.parse(Hora);
 
             if (consultaDAO.buscaConsultaParaRemarcar(diaConsulta, horaConsulta) == true) {
-                System.out.println("Dia e hora informada indisponiveis.");
+                System.out.println("\nDia e Hora Informados Indisponiveis.");
             } else {
 
                 if (consultaDAO.atualizaDiaEHoraConsulta(diaConsulta, horaConsulta,
                         consultaEncontrada) == true) {
 
-                    System.out.println("\nConsulta remarcada com sucesso.");
+                    System.out.println("\nConsulta Remarcada Com Sucesso.");
                 } else {
-                    System.out.println("\nNao foi possivel remarcar consulta");
+                    System.out.println("\nNao Foi Possivel Remarcar a Consulta, Conulta Realizada Ou Cancelada.");
                 }
             }
 

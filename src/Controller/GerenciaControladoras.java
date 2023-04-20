@@ -21,7 +21,7 @@ public class GerenciaControladoras {
     Scanner scanner = new Scanner(System.in);
 
     MenuTitulos Tela = new MenuTitulos();
-    
+
     /*Instanciando a Classe de Validacao de dados.*/
     ValidacaoEntradaDados vd = new ValidacaoEntradaDados();
 
@@ -74,27 +74,27 @@ public class GerenciaControladoras {
     private void cadastrarPessoa() {
         LocalDateTime agora = LocalDateTime.now();
 
-        System.out.println("Informe o Nome da Pessoa: ");
+        System.out.println("\nInforme o Nome da Pessoa: ");
         String nomePessoa = scanner.nextLine();
         nomePessoa = vd.validaString(nomePessoa);
 
-        System.out.println("Informe o Cpf da Pessoa: ");
+        System.out.println("\nInforme o Cpf da Pessoa: ");
         String cpf = scanner.nextLine();
         cpf = vd.validaString(cpf);
 
-        System.out.println("Informe o Endereco da Pessoa: ");
+        System.out.println("\nInforme o Endereco da Pessoa: ");
         String enderecoPessoa = scanner.nextLine();
         enderecoPessoa = vd.validaString(enderecoPessoa);
 
-        System.out.println("Informe o login da Pessoa: ");
+        System.out.println("\nInforme o login da Pessoa: ");
         String loginPessoa = scanner.nextLine();
         loginPessoa = vd.validaString(loginPessoa);
 
-        System.out.println("Informe a Senha da Pessoa: ");
+        System.out.println("\nInforme a Senha da Pessoa: ");
         String senhaPessoa = scanner.nextLine();
         senhaPessoa = vd.validaString(senhaPessoa);
 
-        System.out.println("Informe o Telefone da Pessoa: ");
+        System.out.println("\nInforme o Telefone da Pessoa: ");
         String telefonePessoa = scanner.nextLine();
         telefonePessoa = vd.validaString(telefonePessoa);
 
@@ -123,63 +123,62 @@ public class GerenciaControladoras {
     }
 
     private void fazLogin() {
-        System.out.println("\nLogin: ");
+        System.out.println("\nLogin...: ");
         String login = scanner.nextLine();
         login = vd.validaString(login);
-        
-        System.out.println("\nSenha: ");
+
+        System.out.println("\nSenha...: ");
         String senha = scanner.nextLine();
         senha = vd.validaString(senha);
-        
+
         Pessoa pessoaLogada = pessoaDAO.buscaPessoaQuerendoLogar(login, senha);
 
         gerenciaControladoras(pessoaLogada);
     }
 
     private void gerenciaControladoras(Pessoa pessoaLogada) {
-        
+
         if (pessoaLogada != null) {
             System.out.println("\nLogin efetuado Com Sucesso!");
             System.out.println("Logado Como: " + pessoaLogada.getTipoUsuario());
 
             if (pessoaLogada.getTipoUsuario().equals("Paciente")) {
 
-                PacienteControladora pacienteControladora = new PacienteControladora(pessoaLogada, pessoaDAO, vd, 
-                medicoDAO, franquiaDAO, unidadeFranquiaDAO, consultaDAO);
+                PacienteControladora pacienteControladora = new PacienteControladora(pessoaLogada, pessoaDAO, vd,
+                        medicoDAO, franquiaDAO, unidadeFranquiaDAO, consultaDAO);
 
             } else if (pessoaLogada.getTipoUsuario().equals("Medico")) {
 
                 Medico medico = medicoDAO.buscaMedicoAtravesdaPessoaVinculada(pessoaLogada);
 
-                MedicoControladora medicoControladora = new MedicoControladora(medico, 
+                MedicoControladora medicoControladora = new MedicoControladora(medico,
                         medicoDAO, vd, consultaDAO, infoConsultaDAO);
 
             } else if (pessoaLogada.getTipoUsuario().equals("DonodeFranquia")) {
 
                 Franquia franquia = franquiaDAO.buscaFranquiaAtravesDaPessoaVinculada(pessoaLogada);
 
-                FranquiaControladora franquiaControladora 
-                     = new FranquiaControladora(franquia, franquiaDAO, pessoaDAO, 
-                             medicoDAO, unidadeFranquiaDAO, vd);
-            }
-            else if(pessoaLogada.getTipoUsuario().equals("DonoDeUnidadeDeFranquia"))
-            {
-                UnidadeFranquia unidadeFranquia = 
-                        unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaPessoaVinculada(pessoaLogada);
+                FranquiaControladora franquiaControladora
+                        = new FranquiaControladora(franquia, franquiaDAO, pessoaDAO, medicoDAO,
+                                unidadeFranquiaDAO, vd);
                 
-                UnidadeFranquiaControladora unidadeFranquiaControladora = 
-                        new UnidadeFranquiaControladora(unidadeFranquia, unidadeFranquiaDAO, 
-                                medicoDAO, pessoaDAO, vd);
-            }
-            else if(pessoaLogada.getTipoUsuario().equals("Admnistrador")){
-                Admnistrador admnistradorEncontrado =
-                        admnistradorDAO.buscaAdmnistradorAtravesPessoaVinculada(pessoaLogada);
-                        
-                        AdmnistradorControladora admnistradorControladora = 
-                                new AdmnistradorControladora(pessoaDAO, 
-                                        admnistradorDAO, unidadeFranquiaDAO, 
-                                        consultaDAO, vd, 
-                                        admnistradorEncontrado, medicoDAO);
+            } else if (pessoaLogada.getTipoUsuario().equals("DonoDeUnidadeDeFranquia")) {
+                
+                UnidadeFranquia unidadeFranquia
+                        = unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaPessoaVinculada(pessoaLogada);
+
+                UnidadeFranquiaControladora unidadeFranquiaControladora
+                        = new UnidadeFranquiaControladora(unidadeFranquia, unidadeFranquiaDAO, medicoDAO,
+                                pessoaDAO, vd);
+                
+            } else if (pessoaLogada.getTipoUsuario().equals("Admnistrador")) {
+                
+                Admnistrador admnistradorEncontrado
+                        = admnistradorDAO.buscaAdmnistradorAtravesPessoaVinculada(pessoaLogada);
+
+                AdmnistradorControladora admnistradorControladora
+                        = new AdmnistradorControladora(pessoaDAO, admnistradorDAO, unidadeFranquiaDAO,
+                                consultaDAO, vd, admnistradorEncontrado, medicoDAO);
             }
 
         } else {
