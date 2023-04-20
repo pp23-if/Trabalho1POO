@@ -119,17 +119,17 @@ public class Medico {
 
         if (dataModificacao == null) {
             return this.getPessoa() + "\n"
-                    + "ID - Medico: " + this.idMedico + "\n"
-                    + "Crm: " + this.crm + "\n"
-                    + "Especialidade: " + this.especialidade + "\n"
-                    + "Data e Hora de Criacao: " + fd.format(this.dataCriacao) + "\n";
+                    + "ID - Medico: " + this.idMedico  + "," + " "
+                    + "Crm: " + this.crm  + "," + " "
+                    + "Especialidade: " + this.especialidade  + "," + " "
+                    + "Data e Hora de Criacao: " + fd.format(this.dataCriacao)  + "," + " ";
         } else {
             return this.getPessoa() + "\n"
-                    + "ID - Medico: " + this.idMedico + "\n"
-                    + "Crm: " + this.crm + "\n"
-                    + "Especialidade: " + this.especialidade + "\n"
-                    + "Data e Hora de Criacao: " + fd.format(this.dataCriacao) + "\n"
-                    + "Data e Hora de Modificacao: " + fd.format(this.dataModificacao) + "\n";
+                    + "ID - Medico: " + this.idMedico  + "," + " "
+                    + "Crm: " + this.crm  + "," + " "
+                    + "Especialidade: " + this.especialidade  + "," + " "
+                    + "Data e Hora de Criacao: " + fd.format(this.dataCriacao)  + "," + " "
+                    + "Data e Hora de Modificacao: " + fd.format(this.dataModificacao)  + "," + " ";
         }
 
     }

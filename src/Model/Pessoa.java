@@ -172,26 +172,26 @@ public class Pessoa {
         DateTimeFormatter fd = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
         if (this.dataModificacao == null) {
-            return "ID - Pessoa: " + this.idPessoa + "\n"
-                    + "Nome: " + this.nomePessoa + "\n"
-                    + "Cpf: " + this.cpf + "\n"
-                    + "Endereco: " + this.enderecoPessoa + "\n"
-                    + "Login: " + this.loginPessoa + "\n"
-                    + "Senha: " + this.senhaPessoa + "\n"
-                    + "Telefone: " + this.telefonePessoa + "\n"
-                    + "Tipo de Usuario: " + this.tipoUsuario + "\n"
-                    + "Data e Hora da Criacao: " + fd.format(this.dataCriacao);
+            return "ID - Pessoa: " + this.idPessoa + "," + " "
+                    + "Nome: " + this.nomePessoa + "," + " "
+                    + "Cpf: " + this.cpf + "," + " "
+                    + "Endereco: " + this.enderecoPessoa + "," + " "
+                    + "Login: " + this.loginPessoa + "," + " "
+                    + "Senha: " + this.senhaPessoa + "," + " "
+                    + "Telefone: " + this.telefonePessoa + "," + " "
+                    + "Tipo de Usuario: " + this.tipoUsuario + "," + " "
+                    + "Data e Hora da Criacao: " + fd.format(this.dataCriacao) + "," + " ";
         } else {
-            return "ID - Pessoa: " + this.idPessoa + "\n"
-                    + "Nome: " + this.nomePessoa + "\n"
-                    + "Cpf: " + this.cpf + "\n"
-                    + "Endereco: " + this.enderecoPessoa + "\n"
-                    + "Login: " + this.loginPessoa + "\n"
-                    + "Senha: " + this.senhaPessoa + "\n"
-                    + "Telefone: " + this.telefonePessoa + "\n"
-                    + "Tipo de Usuario: " + this.tipoUsuario + "\n"
-                    + "Data e Hora da Criacao: " + fd.format(this.dataCriacao) + "\n"
-                    + "Data e Hora da Modificacao: " + fd.format(this.dataModificacao);
+            return "ID - Pessoa: " + this.idPessoa + "," + " "
+                    + "Nome: " + this.nomePessoa + "," + " "
+                    + "Cpf: " + this.cpf + "," + " "
+                    + "Endereco: " + this.enderecoPessoa + "," + " "
+                    + "Login: " + this.loginPessoa + "," + " "
+                    + "Senha: " + this.senhaPessoa + "," + " "
+                    + "Telefone: " + this.telefonePessoa + "," + " "
+                    + "Tipo de Usuario: " + this.tipoUsuario + "," + " "
+                    + "Data e Hora da Criacao: " + fd.format(this.dataCriacao) + "," + " "
+                    + "Data e Hora da Modificacao: " + fd.format(this.dataModificacao) + "," + " ";
         }
 
     }

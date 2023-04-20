@@ -247,5 +247,10 @@ public class AdmnistradorControladora {
 
         }
     }
+    
+    private void marcarProcedimento()
+    {
+        
+    }
 
 }
