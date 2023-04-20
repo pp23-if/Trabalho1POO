@@ -178,51 +178,33 @@ public class Procedimento {
         DateTimeFormatter fd = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
         if (dataModificacao == null) {
-            if (consulta == null) {
-                return "ID - Procedimento: " + this.idProcedimento + "\n"
-                        + "Procedimeto: " + this.nomeProcedimento + "\n"
-                        + "Dia: " + fdia.format(this.diaProcedimento) + "\n"
-                        + "Hora: " + fdhora.format(this.horaProcedimento) + "\n"
-                        + "Estado Procedimento: " + this.estadoProcedimento + "\n"
-                        + "Valor Procedimento: " + this.valorProcedimento + "\n"
-                        + "Laudo: " + this.laudo + "\n"
-                        + "Data e Hora De Criacao: " + fd.format(dataCriacao);
-            } else {
-                return "ID - Procedimento: " + this.idProcedimento + "\n"
-                        + "Procedimeto: " + this.nomeProcedimento + "\n"
-                        + this.consulta + "\n"
-                        + "Dia: " + fdia.format(this.diaProcedimento) + "\n"
-                        + "Hora: " + fdhora.format(this.horaProcedimento) + "\n"
-                        + "Estado Procedimento: " + this.estadoProcedimento + "\n"
-                        + "Valor Procedimento: " + this.valorProcedimento + "\n"
-                        + "Laudo: " + this.laudo + "\n"
-                        + "Data e Hora De Criacao: " + fd.format(dataCriacao);
-            }
-        } else {
-            if (consulta == null) {
-                return "ID - Procedimento: " + this.idProcedimento + "\n"
-                        + "Procedimeto: " + this.nomeProcedimento + "\n"
-                        + "Dia: " + fdia.format(this.diaProcedimento) + "\n"
-                        + "Hora: " + fdhora.format(this.horaProcedimento) + "\n"
-                        + "Estado Procedimento: " + this.estadoProcedimento + "\n"
-                        + "Valor Procedimento: " + this.valorProcedimento + "\n"
-                        + "Laudo: " + this.laudo + "\n"
-                        + "Data e Hora De Criacao: " + fd.format(dataCriacao) + "\n"
-                        + "Data e Hora De Modificacao: " + fd.format(dataModificacao);
-            } else {
-                return "ID - Procedimento: " + this.idProcedimento + "\n"
-                        + "Procedimeto: " + this.nomeProcedimento + "\n"
-                        + this.consulta + "\n"
-                        + "Dia: " + fdia.format(this.diaProcedimento) + "\n"
-                        + "Hora: " + fdhora.format(this.horaProcedimento) + "\n"
-                        + "Estado Procedimento: " + this.estadoProcedimento + "\n"
-                        + "Valor Procedimento: " + this.valorProcedimento + "\n"
-                        + "Laudo: " + this.laudo + "\n"
-                        + "Data e Hora De Criacao: " + fd.format(dataCriacao) + "\n"
-                        + "Data e Hora De Modificacao: " + fd.format(dataModificacao);
-            }
-        }
 
+            return "ID - Procedimento: " + this.idProcedimento + "\n"
+                    + "Consulta Vinculada: " + "\n"
+                    + this.consulta + "\n"
+                    + "Procediemnto: " + this.nomeProcedimento + "," + " "
+                    + "Dia: " + fdia.format(this.diaProcedimento) + "," + " "
+                    + "Hora: " + fdhora.format(this.horaProcedimento) + "," + " "
+                    + "Estado: " + this.estadoProcedimento + "," + " "
+                    + "Valor: " + this.valorProcedimento + "\n"
+                    + "Laudo: " + "\n"
+                    + this.laudo + "\n"
+                    + "Data de criacao: " + fd.format(this.dataCriacao) + "," + " ";
+
+        } else {
+            return "ID - Procedimento: " + this.idProcedimento + "\n"
+                    + "Consulta Vinculada: " + "\n"
+                    + this.consulta + "\n"
+                    + "Procediemnto: " + this.nomeProcedimento + "," + " "
+                    + "Dia: " + fdia.format(this.diaProcedimento) + "," + " "
+                    + "Hora: " + fdhora.format(this.horaProcedimento) + "," + " "
+                    + "Estado: " + this.estadoProcedimento + "," + " "
+                    + "Valor: " + this.valorProcedimento + "\n"
+                    + "Laudo: " + "\n"
+                    + this.laudo + "\n"
+                    + "Data de Criacao: " + fd.format(this.dataCriacao) + "," + " "
+                    + "Data e Hora de Modificacao: " + fd.format(this.dataModificacao) + "," + " ";
+        }
     }
 
 }

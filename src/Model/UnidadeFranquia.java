@@ -132,22 +132,22 @@ public class UnidadeFranquia {
         DateTimeFormatter fd = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
         if (dataModificacao == null) {
-            return "ID - UnidadeFranquia: " + this.idUnidadeFranquia + "\n"
-                    + "Dono Da Unidade: " + this.getPessoa().getNomePessoa() + "\n"
-                    + "Cpf: " + this.getPessoa().getCpf() + "\n"
+            return "ID - UnidadeFranquia: " + this.idUnidadeFranquia + "," + " "
+                    + "Dono Da Unidade: " + this.getPessoa().getNomePessoa() + "," + " "
+                    + "Cpf: " + this.getPessoa().getCpf() + "," + " "
                     + "Franquia: " + this.franquia.getNomeFranquia() + "\n"
-                    + "Cidade: " + this.cidadeUnidadeFranquia + "\n"
-                    + "Endereco: " + this.enderecoUnidadeFranquia + "\n"
-                    + "Data e Hora de Criacao: " + fd.format(dataCriacao);
+                    + "Cidade: " + this.cidadeUnidadeFranquia + "," + " "
+                    + "Endereco: " + this.enderecoUnidadeFranquia + "," + " "
+                    + "Data e Hora de Criacao: " + fd.format(this.dataCriacao) + "," + " ";
         } else {
-            return "ID - UnidadeFranquia: " + this.idUnidadeFranquia + "\n"
-                    + "Dono Da Unidade: " + this.getPessoa().getNomePessoa() + "\n"
-                    + "Cpf: " + this.getPessoa().getCpf() + "\n"
+            return "ID - UnidadeFranquia: " + this.idUnidadeFranquia + "," + " "
+                    + "Dono Da Unidade: " + this.getPessoa().getNomePessoa() + "," + " "
+                    + "Cpf: " + this.getPessoa().getCpf() + "," + " "
                     + "Franquia: " + this.franquia.getNomeFranquia() + "\n"
-                    + "Cidade: " + this.cidadeUnidadeFranquia + "\n"
-                    + "Endereco: " + this.enderecoUnidadeFranquia + "\n"
-                    + "Data e Hora de Criacao: " + fd.format(dataCriacao) + "\n"
-                    + "Data e Hora de Modificacao: " + fd.format(dataModificacao);
+                    + "Cidade: " + this.cidadeUnidadeFranquia + "," + " "
+                    + "Endereco: " + this.enderecoUnidadeFranquia + "," + " "
+                    + "Data e Hora de Criacao: " + fd.format(this.dataCriacao) + "," + " "
+                    + "Data e Hora de Modificacao: " + fd.format(this.dataModificacao) + "," + " ";
         }
     }
 

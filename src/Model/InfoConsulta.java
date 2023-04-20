@@ -105,14 +105,16 @@ public class InfoConsulta {
         if (dataModificacao == null) {
             return "ID - InfoConsulta: " + this.idInfoConsulta + "\n"
                     + this.consulta + "\n"
-                    + "Descricao: " + this.descricao + "\n"
+                    + "Descricao: " + "\n"
+                    + this.descricao + "\n"
                     + "Data e Hora De Criacao: " + fd.format(this.dataCriacao);
         } else {
             return "ID - InfoConsulta: " + this.idInfoConsulta + "\n"
                     + this.consulta + "\n"
-                    + "Descricao: " + this.descricao + "\n"
-                    + "Data e Hora De Criacao: " + fd.format(this.dataCriacao) + "\n"
-                    + "Data e Hora De Modificacao: " + fd.format(this.dataModificacao);
+                    + "Descricao: " + "\n"
+                    + this.descricao + "\n"
+                    + "Data e Hora De Criacao: " + fd.format(this.dataCriacao) + "," + " "
+                    + "Data e Hora De Modificacao: " + fd.format(this.dataModificacao) + "," + " ";
         }
     }
 
