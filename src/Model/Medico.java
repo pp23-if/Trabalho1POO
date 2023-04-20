@@ -118,18 +118,18 @@ public class Medico {
         DateTimeFormatter fd = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
         if (dataModificacao == null) {
-            return this.getPessoa() + "\n"
-                    + "ID - Medico: " + this.idMedico  + "," + " "
-                    + "Crm: " + this.crm  + "," + " "
-                    + "Especialidade: " + this.especialidade  + "," + " "
-                    + "Data e Hora de Criacao: " + fd.format(this.dataCriacao)  + "," + " ";
+            return "Medico(a): " + this.getPessoa().getNomePessoa() + "\n"
+                    + "ID - Medico: " + this.idMedico + "," + " "
+                    + "Crm: " + this.crm + "," + " "
+                    + "Especialidade: " + this.especialidade + "," + " "
+                    + "Data e Hora de Criacao: " + fd.format(this.dataCriacao) + "," + " ";
         } else {
-            return this.getPessoa() + "\n"
-                    + "ID - Medico: " + this.idMedico  + "," + " "
-                    + "Crm: " + this.crm  + "," + " "
-                    + "Especialidade: " + this.especialidade  + "," + " "
-                    + "Data e Hora de Criacao: " + fd.format(this.dataCriacao)  + "," + " "
-                    + "Data e Hora de Modificacao: " + fd.format(this.dataModificacao)  + "," + " ";
+            return "Medico(a): " + this.getPessoa().getNomePessoa() + "\n"
+                    + "ID - Medico: " + this.idMedico + "," + " "
+                    + "Crm: " + this.crm + "," + " "
+                    + "Especialidade: " + this.especialidade + "," + " "
+                    + "Data e Hora de Criacao: " + fd.format(this.dataCriacao) + "," + " "
+                    + "Data e Hora de Modificacao: " + fd.format(this.dataModificacao) + "," + " ";
         }
 
     }

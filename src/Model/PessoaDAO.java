@@ -9,23 +9,23 @@ public class PessoaDAO {
     public PessoaDAO() {
         LocalDateTime agora = LocalDateTime.now();
 
-        Pessoa pessoa = new Pessoa("pedro", "123", "1", "1",
+        Pessoa pessoa = new Pessoa("Pedro Augusto Rodrigues", "123", "1", "1",
                 "1", "1", "Paciente", agora);
         adicionaPessoa(pessoa);
 
-        Pessoa pessoa2 = new Pessoa("Lucas", "7272", "rua 32", "9999",
+        Pessoa pessoa2 = new Pessoa("Lucas Rocha Pereira", "7272", "rua 32", "9999",
                 "lu123", "2", "Paciente", agora);
         adicionaPessoa(pessoa2);
 
-        Pessoa pessoa3 = new Pessoa("Lucas", "7272", "rua 32", "9999",
+        Pessoa pessoa3 = new Pessoa("Lucas Rocha Pereira", "7272", "rua 32", "9999",
                 "lm23", "456", "Medico", agora);
         adicionaPessoa(pessoa3);
 
-        Pessoa pessoa4 = new Pessoa("Juliana", "789101010", "rua da batata", "3333",
+        Pessoa pessoa4 = new Pessoa("Juliana Carla De Souza", "789101010", "rua da batata", "3333",
                 "ju", "10", "Paciente", agora);
         adicionaPessoa(pessoa4);
 
-        Pessoa pessoa5 = new Pessoa("Juliana", "789101010", "rua da batata", "3333",
+        Pessoa pessoa5 = new Pessoa("Juliana Carla De Souza", "789101010", "rua da batata", "3333",
                 "ju25", "123", "Medico", agora);
         adicionaPessoa(pessoa5);
 
