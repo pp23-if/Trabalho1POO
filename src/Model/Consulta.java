@@ -180,37 +180,37 @@ public class Consulta {
         DateTimeFormatter fdhora = DateTimeFormatter.ofPattern("HH:mm");
 
         if (dataModificacao == null) {
-            return "ID - Consulta: " + this.idConsulta + "\n"
-                    + "Paciente: " + this.pessoa.getNomePessoa() + "\n"
-                    + "Cpf: " + this.pessoa.getCpf() + "\n"
-                    + "Medico: " + this.medico.getPessoa().getNomePessoa() + "\n"
-                    + "Crm: " + this.medico.getCrm() + "\n"
-                    + "Especialidade: " + this.medico.getEspecialidade() + "\n"
-                    + "Unidade De Franquia Pertecente A: " + this.unidadeFranquia.getFranquia().getNomeFranquia() + "\n"
-                    + "Cidade: " + this.unidadeFranquia.getCidadeUnidadeFranquia() + "\n"
-                    + "Endereco: " + this.unidadeFranquia.getEnderecoUnidadeFranquia() + "\n"
-                    + "Dia: " + fdia.format(this.diaConsulta) + "\n"
-                    + "Hora: " + fdhora.format(this.horaConsulta) + "\n"
-                    + "Valor: " + this.valor + "\n"
-                    + "Estado: " + this.estadoConsulta + "\n"
-                    + "Data e Hora De Criacao: " + fd.format(this.dataCriacao);
+            return "ID - Consulta: " + this.idConsulta + "," + " "
+                    + "Paciente: " + this.pessoa.getNomePessoa() + "," + " "
+                    + "Cpf: " + this.pessoa.getCpf() + "," + " "
+                    + "Medico: " + this.medico.getPessoa().getNomePessoa() + "," + " "
+                    + "Crm: " + this.medico.getCrm() + "," + " "
+                    + "Especialidade: " + this.medico.getEspecialidade() + "," + " " + "\n"
+                    + "Unidade Da Franquia: " + this.unidadeFranquia.getFranquia().getNomeFranquia() + "," + " "
+                    + "Cidade: " + this.unidadeFranquia.getCidadeUnidadeFranquia() + "," + " "
+                    + "Endereco: " + this.unidadeFranquia.getEnderecoUnidadeFranquia() + "," + " " + "\n"
+                    + "Dia: " + fdia.format(this.diaConsulta) + "," + " "
+                    + "Hora: " + fdhora.format(this.horaConsulta) + "," + " "
+                    + "Valor: " + this.valor + "," + " "
+                    + "Estado: " + this.estadoConsulta + "," + " "
+                    + "Data e Hora De Criacao: " + fd.format(this.dataCriacao) + "," + " ";
 
         } else {
-            return "ID - Consulta: " + this.idConsulta + "\n"
-                    + "Paciente: " + this.pessoa.getNomePessoa() + "\n"
-                    + "Cpf: " + this.pessoa.getCpf() + "\n"
-                    + "Medico: " + this.medico.getPessoa().getNomePessoa() + "\n"
-                    + "Crm: " + this.medico.getCrm() + "\n"
-                    + "Especialidade: " + this.medico.getEspecialidade() + "\n"
-                    + "Unidade De Franquia Pertecente A: " + this.unidadeFranquia.getFranquia().getNomeFranquia() + "\n"
-                    + "Cidade: " + this.unidadeFranquia.getCidadeUnidadeFranquia() + "\n"
-                    + "Endereco: " + this.unidadeFranquia.getEnderecoUnidadeFranquia() + "\n"
-                    + "Dia: " + fdia.format(this.diaConsulta) + "\n"
-                    + "Hora: " + fdhora.format(this.horaConsulta) + "\n"
-                    + "Valor: " + this.valor + "\n"
-                    + "Estado: " + this.estadoConsulta + "\n"
-                    + "Data e Hora De Criacao: " + fd.format(this.dataCriacao) + "\n"
-                    + "Data e Hora De Modificacao: " + fd.format(dataModificacao);
+            return "ID - Consulta: " + this.idConsulta + "," + " "
+                    + "Paciente: " + this.pessoa.getNomePessoa() + "," + " "
+                    + "Cpf: " + this.pessoa.getCpf() + "," + " "
+                    + "Medico: " + this.medico.getPessoa().getNomePessoa() + "," + " "
+                    + "Crm: " + this.medico.getCrm() + "," + " "
+                    + "Especialidade: " + this.medico.getEspecialidade() + "," + " " + "\n"
+                    + "Unidade Da Franquia: " + this.unidadeFranquia.getFranquia().getNomeFranquia() + "," + " "
+                    + "Cidade: " + this.unidadeFranquia.getCidadeUnidadeFranquia() + "," + " "
+                    + "Endereco: " + this.unidadeFranquia.getEnderecoUnidadeFranquia() + "," + " " + "\n"
+                    + "Dia: " + fdia.format(this.diaConsulta) + "," + " "
+                    + "Hora: " + fdhora.format(this.horaConsulta) + "," + " "
+                    + "Valor: " + this.valor + "," + " "
+                    + "Estado: " + this.estadoConsulta + "," + " "
+                    + "Data e Hora De Criacao: " + fd.format(this.dataCriacao) + "," + " "
+                    + "Data e Hora De Modificacao: " + fd.format(dataModificacao) + "," + " ";
 
         }
     }

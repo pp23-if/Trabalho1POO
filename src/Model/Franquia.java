@@ -156,7 +156,7 @@ public class Franquia {
                     + "Endereco: " + this.enderecoFranquia + "\n"
                     + "Dono: " + pessoa.getNomePessoa() + "\n"
                     + "Cpf: " + pessoa.getCpf() + "\n"
-                    + "Data e Hora de Criacao: " + fd.format(dataCriacao) + "\n";
+                    + "Data e Hora de Criacao: " + fd.format(dataCriacao);
         } else {
             return "ID - Franquia: " + this.idFranquia + "\n"
                     + "Franquia: " + this.nomeFranquia + "\n"
@@ -166,7 +166,7 @@ public class Franquia {
                     + "Dono: " + pessoa.getNomePessoa() + "\n"
                     + "Cpf: " + pessoa.getCpf() + "\n"
                     + "Data e Hora de Criacao: " + fd.format(dataCriacao) + "\n"
-                    + "Data e hora de Modificacao: " + fd.format(dataModificacao) + "\n";
+                    + "Data e hora de Modificacao: " + fd.format(dataModificacao);
         }
 
     }
