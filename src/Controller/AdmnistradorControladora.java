@@ -23,10 +23,8 @@ public class AdmnistradorControladora {
 
     Scanner scanner = new Scanner(System.in);
 
-    public AdmnistradorControladora(PessoaDAO pessoaDAO,
-            AdmnistradorDAO admnistradorDAO,
-            UnidadeFranquiaDAO unidadeFranquiaDAO,
-            ConsultaDAO consultaDAO, ValidacaoEntradaDados vd,
+    public AdmnistradorControladora(PessoaDAO pessoaDAO, AdmnistradorDAO admnistradorDAO,
+           UnidadeFranquiaDAO unidadeFranquiaDAO,ConsultaDAO consultaDAO, ValidacaoEntradaDados vd,
             Admnistrador admnistrador, MedicoDAO medicoDAO) {
 
         menuOpcoesAdmnistrador(pessoaDAO, admnistradorDAO,
