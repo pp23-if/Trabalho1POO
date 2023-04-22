@@ -8,6 +8,7 @@ import Model.Medico;
 import Model.MedicoDAO;
 import Model.Pessoa;
 import Model.PessoaDAO;
+import Model.Procedimento;
 import Model.ProcedimentoDAO;
 import Model.UnidadeFranquia;
 import Model.UnidadeFranquiaDAO;
@@ -271,7 +272,8 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 2: {
-
+                      System.out.println("\n");
+                     procedimentoDAO.buscaProcedimentoPorFranquia(admnistrador.getFranquia());
                     break;
                 }
                 case 3: {
@@ -325,10 +327,37 @@ public class AdmnistradorControladora {
 
                 if (unidadeFranquiaEncontrada == null) {
                     System.out.println("\nUnidade De Franquia Nao Encontrada.");
-                } else 
-                {
-                    Consulta consulta = new Consulta(null, null, medicoEncontrado,
-                            pessoaEncontrada, unidadeFranquiaEncontrada, 0, "", null);
+                } else {
+                    
+                    
+                    DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    
+                    System.out.println("\nQual procedimento Sera Feito: ");
+                    String nomeProcedimento = scanner.nextLine();
+
+                    System.out.println("\nInforme a Data Do Procedimento No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
+                    String dia = scanner.nextLine();
+                    LocalDate diaProcediemnto = LocalDate.parse(dia, fdia);
+
+                    System.out.println("\nInforme a Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
+                    String Hora = scanner.nextLine();
+                    LocalTime horaProcedimento = LocalTime.parse(Hora);
+                    
+                    Consulta consulta = new Consulta(diaProcediemnto, horaProcedimento, medicoEncontrado,
+                            pessoaEncontrada, unidadeFranquiaEncontrada, 0, "", LocalDateTime.now());
+                    
+                    Procedimento procedimento = new Procedimento(nomeProcedimento, consulta, 
+                            diaProcediemnto, horaProcedimento, "Agendado", 1500, "", LocalDateTime.now());
+                    
+                    if(procedimentoDAO.adicionaProcedimento(procedimento) == true)
+                    {
+                        System.out.println("\nProcedimento Marcado Com Sucesso!");
+                    }
+                    else
+                    {
+                      System.out.println("\nNao Foi Possivel Marcar O Procediemnto.");  
+                    }
+
                 }
 
             }
