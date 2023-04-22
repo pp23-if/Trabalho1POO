@@ -56,7 +56,8 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 3: {
-
+                     menuOpcoesProcedimento(consultaDAO, admnistrador, unidadeFranquiaDAO, 
+                             vd, pessoaDAO, medicoDAO);
                     break;
                 }
                 case 4: {
@@ -253,9 +254,42 @@ public class AdmnistradorControladora {
         }
     }
     
-    private void marcarProcedimento()
-    {
-        
+   private void menuOpcoesProcedimento(ConsultaDAO consultaDAO,Admnistrador admnistrador,
+            UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd,PessoaDAO pessoaDAO, 
+            MedicoDAO medicoDAO) {
+
+        int opcao;
+
+        do {
+            opcao = telaAdmistrador.menuProcedimentos();
+
+            switch (opcao) {
+                case 1: {
+                   
+                    break;
+                }
+                case 2: {
+                   
+                    break;
+                }
+                case 3: {
+                   
+                    break;
+                }
+                case 4: {
+                   
+                    break;
+                }
+
+            }
+
+        } while (opcao != 0);
+
     }
+   
+   private void marcarProcedimento(PessoaDAO pessoaDAO, MedicoDAO medicoDAO)
+   {
+       
+   }
 
 }
