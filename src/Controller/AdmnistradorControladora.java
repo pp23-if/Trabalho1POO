@@ -8,6 +8,7 @@ import Model.Medico;
 import Model.MedicoDAO;
 import Model.Pessoa;
 import Model.PessoaDAO;
+import Model.ProcedimentoDAO;
 import Model.UnidadeFranquia;
 import Model.UnidadeFranquiaDAO;
 import View.MenuTitulosAdmistrador;
@@ -24,11 +25,11 @@ public class AdmnistradorControladora {
     Scanner scanner = new Scanner(System.in);
 
     public AdmnistradorControladora(PessoaDAO pessoaDAO, AdmnistradorDAO admnistradorDAO,
-           UnidadeFranquiaDAO unidadeFranquiaDAO,ConsultaDAO consultaDAO, ValidacaoEntradaDados vd,
-            Admnistrador admnistrador, MedicoDAO medicoDAO) {
+            UnidadeFranquiaDAO unidadeFranquiaDAO, ConsultaDAO consultaDAO, ValidacaoEntradaDados vd,
+            Admnistrador admnistrador, MedicoDAO medicoDAO, ProcedimentoDAO procedimentoDAO) {
 
         menuOpcoesAdmnistrador(pessoaDAO, admnistradorDAO,
-                unidadeFranquiaDAO, consultaDAO, vd, admnistrador, medicoDAO);
+                unidadeFranquiaDAO, consultaDAO, vd, admnistrador, medicoDAO, procedimentoDAO);
 
     }
 
@@ -36,7 +37,7 @@ public class AdmnistradorControladora {
             AdmnistradorDAO admnistradorDAO,
             UnidadeFranquiaDAO unidadeFranquiaDAO,
             ConsultaDAO consultaDAO, ValidacaoEntradaDados vd,
-            Admnistrador admnistrador, MedicoDAO medicoDAO) {
+            Admnistrador admnistrador, MedicoDAO medicoDAO, ProcedimentoDAO procedimentoDAO) {
 
         int opcao;
 
@@ -56,8 +57,8 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 3: {
-                     menuOpcoesProcedimento(consultaDAO, admnistrador, unidadeFranquiaDAO, 
-                             vd, pessoaDAO, medicoDAO);
+                    menuOpcoesProcedimento(consultaDAO, admnistrador, unidadeFranquiaDAO,
+                            vd, pessoaDAO, medicoDAO, procedimentoDAO);
                     break;
                 }
                 case 4: {
@@ -125,14 +126,14 @@ public class AdmnistradorControladora {
         if (unidadeEncontrada == null) {
             System.out.println("\nUnidade de franquia nao encontrada.");
         } else {
-            
+
             System.out.println("\n");
             pessoaDAO.filtraPacientes();
 
             System.out.println("\nInforme o ID Da pessoa que deseja marcar para consulta: ");
             int idPessoaConsulta = Integer.parseInt(scanner.nextLine());
             idPessoaConsulta = vd.validarINT(idPessoaConsulta);
-            
+
             System.out.println("\n");
             Pessoa pessoaEncontrada = pessoaDAO.buscaPessoaPorId(idPessoaConsulta);
 
@@ -146,7 +147,6 @@ public class AdmnistradorControladora {
                 int idMedico = Integer.parseInt(scanner.nextLine());
                 idMedico = vd.validarINT(idMedico);
 
-                
                 Medico medicoEncontrado = medicoDAO.buscaMedicoPorId(idMedico);
 
                 if (medicoEncontrado == null) {
@@ -213,7 +213,7 @@ public class AdmnistradorControladora {
         }
     }
 
-    private void remarcarConsulta(Admnistrador admnistrador,UnidadeFranquiaDAO unidadeFranquiaDAO, 
+    private void remarcarConsulta(Admnistrador admnistrador, UnidadeFranquiaDAO unidadeFranquiaDAO,
             ValidacaoEntradaDados vd, PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ConsultaDAO consultaDAO) {
 
         System.out.println("\n");
@@ -253,10 +253,10 @@ public class AdmnistradorControladora {
 
         }
     }
-    
-   private void menuOpcoesProcedimento(ConsultaDAO consultaDAO,Admnistrador admnistrador,
-            UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd,PessoaDAO pessoaDAO, 
-            MedicoDAO medicoDAO) {
+
+    private void menuOpcoesProcedimento(ConsultaDAO consultaDAO, Admnistrador admnistrador,
+            UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd, PessoaDAO pessoaDAO,
+            MedicoDAO medicoDAO, ProcedimentoDAO procedimentoDAO) {
 
         int opcao;
 
@@ -265,19 +265,21 @@ public class AdmnistradorControladora {
 
             switch (opcao) {
                 case 1: {
-                   
+
+                    marcarProcedimento(pessoaDAO, medicoDAO, admnistrador, unidadeFranquiaDAO,
+                            procedimentoDAO, vd);
                     break;
                 }
                 case 2: {
-                   
+
                     break;
                 }
                 case 3: {
-                   
+
                     break;
                 }
                 case 4: {
-                   
+
                     break;
                 }
 
@@ -286,10 +288,52 @@ public class AdmnistradorControladora {
         } while (opcao != 0);
 
     }
-   
-   private void marcarProcedimento(PessoaDAO pessoaDAO, MedicoDAO medicoDAO)
-   {
-       
-   }
+
+    private void marcarProcedimento(PessoaDAO pessoaDAO, MedicoDAO medicoDAO, Admnistrador admnistrador,
+            UnidadeFranquiaDAO unidadeFranquiaDAO, ProcedimentoDAO procedimentoDAO, ValidacaoEntradaDados vd) {
+
+        System.out.println("\n");
+        pessoaDAO.filtraPacientes();
+
+        System.out.println("\nInforme o ID - paciente que Ira Passar pelo Procedimento: ");
+        int idPessoa = Integer.parseInt(scanner.nextLine());
+
+        Pessoa pessoaEncontrada = pessoaDAO.buscaPessoaPorId(idPessoa);
+
+        if (pessoaEncontrada == null) {
+            System.out.println("\nPaciente Nao Encontrado.");
+        } else {
+            System.out.println("\n");
+            medicoDAO.mostraTodosMedicos();
+
+            System.out.println("\nInforme o ID - Medico que Ira Fazer O Procedimento: ");
+            int idMedico = Integer.parseInt(scanner.nextLine());
+
+            Medico medicoEncontrado = medicoDAO.buscaMedicoPorId(idMedico);
+
+            if (medicoEncontrado == null) {
+                System.out.println("\nMedico Nao Encontrado.");
+            } else {
+                System.out.println("\n");
+                unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(admnistrador.getFranquia());
+
+                System.out.println("\nInforme o ID - UnidadeFranquia Onde Ocorrera O Procedimento: ");
+                int idUnidadeFranquia = Integer.parseInt(scanner.nextLine());
+
+                UnidadeFranquia unidadeFranquiaEncontrada
+                        = unidadeFranquiaDAO.buscaUnidadeFranquiaPorId(idUnidadeFranquia);
+
+                if (unidadeFranquiaEncontrada == null) {
+                    System.out.println("\nUnidade De Franquia Nao Encontrada.");
+                } else 
+                {
+                    Consulta consulta = new Consulta(null, null, medicoEncontrado,
+                            pessoaEncontrada, unidadeFranquiaEncontrada, 0, "", null);
+                }
+
+            }
+
+        }
+    }
 
 }

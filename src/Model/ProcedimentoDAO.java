@@ -56,4 +56,17 @@ public class ProcedimentoDAO {
         return null;
     }
     
+    public Procedimento buscaProcedimentoPorFranquia(Franquia franquia)
+    {
+        for (Procedimento procedimento : vetorProcedimento) {
+            
+            if(procedimento != null && procedimento.getConsulta()
+                    .getUnidadeFranquia().getFranquia().equals(franquia))
+            {
+                System.out.println(procedimento + "\n");
+            }
+        }
+        return null;
+    }
+    
 }

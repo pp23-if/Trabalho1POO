@@ -10,6 +10,7 @@ import Model.Medico;
 import Model.MedicoDAO;
 import Model.Pessoa;
 import Model.PessoaDAO;
+import Model.ProcedimentoDAO;
 import Model.UnidadeFranquia;
 import Model.UnidadeFranquiaDAO;
 import View.MenuTitulos;
@@ -33,6 +34,7 @@ public class GerenciaControladoras {
     ConsultaDAO consultaDAO = new ConsultaDAO();
     AdmnistradorDAO admnistradorDAO = new AdmnistradorDAO(pessoaDAO, franquiaDAO);
     InfoConsultaDAO infoConsultaDAO = new InfoConsultaDAO();
+    ProcedimentoDAO procedimentoDAO = new ProcedimentoDAO();
 
     public GerenciaControladoras() {
 
@@ -178,7 +180,7 @@ public class GerenciaControladoras {
 
                 AdmnistradorControladora admnistradorControladora
                         = new AdmnistradorControladora(pessoaDAO, admnistradorDAO, unidadeFranquiaDAO,
-                                consultaDAO, vd, admnistradorEncontrado, medicoDAO);
+                                consultaDAO, vd, admnistradorEncontrado, medicoDAO, procedimentoDAO);
             }
 
         } else {
