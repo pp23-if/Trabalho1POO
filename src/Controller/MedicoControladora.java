@@ -56,39 +56,39 @@ public class MedicoControladora {
             switch (opcao) {
                 case 1: {
 
-                    System.out.println("Informe o Novo login De Medico: ");
+                    System.out.println("\nInforme o Novo login De Medico: ");
                     String novologinMedico = scanner.nextLine();
                     novologinMedico = vd.validaString(novologinMedico);
 
                     if (medicoDAO.atualizaLoginMedico(medico, novologinMedico) == true) {
-                        System.out.println("O Login De Medico Foi Atualizado Com Sucesso!");
+                        System.out.println("\nO Login De Medico Foi Atualizado Com Sucesso!");
                     } else {
-                        System.out.println("O Login De Medico Informado, Ja Se Encontra Cadastrado.");
+                        System.out.println("\nO Login De Medico Informado, Ja Se Encontra Cadastrado.");
                     }
                     break;
                 }
                 case 2: {
-                    System.out.println("Informe a Nova Senha De Medico: ");
+                    System.out.println("\nInforme a Nova Senha De Medico: ");
                     String novaSenhaMedico = scanner.nextLine();
                     novaSenhaMedico = vd.validaString(novaSenhaMedico);
 
                     if (medicoDAO.atualizaSenhaMedico(medico, novaSenhaMedico) == true) {
-                        System.out.println("A Senha De Medico Foi Atualizada Com Sucesso!");
+                        System.out.println("\nA Senha De Medico Foi Atualizada Com Sucesso!");
                     } else {
-                        System.out.println("Nao Foi Possivel Atualizar a Senha de Medico.");
+                        System.out.println("\nNao Foi Possivel Atualizar a Senha de Medico.");
                     }
                     break;
                 }
 
                 case 3: {
-                    System.out.println("Informe o Novo Telefone De Medico: ");
+                    System.out.println("\nInforme o Novo Telefone De Medico: ");
                     String novoTelefoneMedico = scanner.nextLine();
                     novoTelefoneMedico = vd.validaString(novoTelefoneMedico);
 
                     if (medicoDAO.atualizaTelefoneMedico(medico, novoTelefoneMedico) == true) {
-                        System.out.println("O Telefone De Medico Foi Atualizado Com Sucesso!");
+                        System.out.println("\nO Telefone De Medico Foi Atualizado Com Sucesso!");
                     } else {
-                        System.out.println("Nao Foi Possivel Atualizar o Telefone de Medico.");
+                        System.out.println("\nNao Foi Possivel Atualizar o Telefone de Medico.");
                     }
                     break;
                 }
@@ -136,6 +136,7 @@ public class MedicoControladora {
     }
 
     private void atualizaInfoConsulta(Medico medico, InfoConsultaDAO infoConsultaDAO, ValidacaoEntradaDados vd) {
+        
         System.out.println("\n");
         infoConsultaDAO.buscaInfoConsultasPorMedico(medico);
 

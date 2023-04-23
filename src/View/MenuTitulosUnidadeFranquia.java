@@ -19,8 +19,7 @@ public class MenuTitulosUnidadeFranquia {
         builder.append("\n5 - Cadastrar Medico..............................: ");
         builder.append("\n6 - Exibir Todos Os Medicos.......................: ");
         builder.append("\n7 - Excluir??.....................................: ");
-     
-        builder.append("\n\nInforme Opcao..............................: ");
+        builder.append("\n\nInforme Opcao...................................: ");
 
         System.out.print(builder.toString());
 
@@ -38,8 +37,7 @@ public class MenuTitulosUnidadeFranquia {
         builder.append("\n3 - Atualizar Login Dono Unidade Franquia..........: ");
         builder.append("\n4 - Atualizar Senha Dono Unidade Franquia..........: ");
         builder.append("\n5 - Atualizar Telefone Dono Unidade De Franquia....: ");
-
-        builder.append("\n\nInforme Opcao......................................: ");
+        builder.append("\n\nInforme Opcao....................................: ");
         
         System.out.print(builder.toString());
 

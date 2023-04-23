@@ -1,7 +1,5 @@
 package Controller;
 
-import Model.Franquia;
-import Model.FranquiaDAO;
 import Model.Medico;
 import Model.MedicoDAO;
 import Model.Pessoa;
@@ -48,6 +46,7 @@ public class UnidadeFranquiaControladora {
                     break;
                 }
                 case 4: {
+                     System.out.println("\n");
                      unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(unidadeFranquia.getFranquia());
                     break;
                 }
@@ -87,67 +86,67 @@ public class UnidadeFranquiaControladora {
 
             switch (opcao) {
                 case 1: {
-                    System.out.println("Informe o Nova Cidade da Unidade De Franquia: ");
+                    System.out.println("\nInforme o Nova Cidade da Unidade De Franquia: ");
                     String novaCidadeUnidadeFranquia = scanner.nextLine();
                     novaCidadeUnidadeFranquia = vd.validaString(novaCidadeUnidadeFranquia);
 
                     if (unidadeFranquiaDAO.atualizaCidadeUnidadeFranquia(unidadeFranquia,
                             novaCidadeUnidadeFranquia) == true) {
-                        System.out.println("Cidade Da Unidade De Franquia Atualizada Com Sucesso!");
+                        System.out.println("\nCidade Da Unidade De Franquia Atualizada Com Sucesso!");
                     } else {
-                        System.out.println("Nao Foi Possivel Atualizar A Cidade Da Unidade De Franquia.");
+                        System.out.println("\nNao Foi Possivel Atualizar A Cidade Da Unidade De Franquia.");
                     }
                     break;
                 }
                 case 2: {
-                    System.out.println("Informe o Novo Endereco da Unidade De Franquia: ");
+                    System.out.println("\nInforme o Novo Endereco da Unidade De Franquia: ");
                     String novoEnderecoUnidadeFranquia = scanner.nextLine();
                     novoEnderecoUnidadeFranquia = vd.validaString(novoEnderecoUnidadeFranquia);
 
                     if (unidadeFranquiaDAO.atualizaEnderecoUnidadeDeFranquia(unidadeFranquia,
                             novoEnderecoUnidadeFranquia) == true) {
-                        System.out.println("Endereco Da Unidade De Franquia Atualizada Com Sucesso!");
+                        System.out.println("\nEndereco Da Unidade De Franquia Atualizada Com Sucesso!");
                     } else {
-                        System.out.println("Nao Foi Possivel Atualizar O Endereco Da Unidade De Franquia.");
+                        System.out.println("\nNao Foi Possivel Atualizar O Endereco Da Unidade De Franquia.");
                     }
                     break;
                 }
                 case 3: {
-                    System.out.println("Informe o Novo Login Dono De Unidade De Franquia: ");
+                    System.out.println("\nInforme o Novo Login Dono De Unidade De Franquia: ");
                     String novoLoginDonoUnidadeFranquia = scanner.nextLine();
                     novoLoginDonoUnidadeFranquia = vd.validaString(novoLoginDonoUnidadeFranquia);
 
                     if (unidadeFranquiaDAO.atualizaLoginDonoDeUnidadeDeFranquia(unidadeFranquia,
                             novoLoginDonoUnidadeFranquia) == true) {
-                        System.out.println("Login Dono Unidade De Franquia Atualizada Com Sucesso!");
+                        System.out.println("\nLogin Dono Unidade De Franquia Atualizada Com Sucesso!");
                     } else {
-                        System.out.println("Nao Foi Possivel Atualizar O Login Dono Da Unidade De Franquia.");
+                        System.out.println("\nNao Foi Possivel Atualizar O Login Dono Da Unidade De Franquia.");
                     }
                     break;
                 }
                 case 4: {
-                    System.out.println("Informe o Nova Senha Dono De Unidade De Franquia: ");
+                    System.out.println("\nInforme o Nova Senha Dono De Unidade De Franquia: ");
                     String novaSenhaDonoUnidadeFranquia = scanner.nextLine();
                     novaSenhaDonoUnidadeFranquia = vd.validaString(novaSenhaDonoUnidadeFranquia);
 
                     if (unidadeFranquiaDAO.atualizaSenhaDonoDeUnidadeDeFranquia(unidadeFranquia,
                             novaSenhaDonoUnidadeFranquia) == true) {
-                        System.out.println("Senha Dono Unidade De Franquia Atualizada Com Sucesso!");
+                        System.out.println("\nSenha Dono Unidade De Franquia Atualizada Com Sucesso!");
                     } else {
-                        System.out.println("Nao Foi Possivel Atualizar A Senha Dono Da Unidade De Franquia.");
+                        System.out.println("\nNao Foi Possivel Atualizar A Senha Dono Da Unidade De Franquia.");
                     }
                     break;
                 }
                 case 5: {
-                    System.out.println("Informe o Novo Telefone Dono De Unidade De Franquia: ");
+                    System.out.println("\nInforme o Novo Telefone Dono De Unidade De Franquia: ");
                     String novoTelefoneDonoUnidadeFranquia = scanner.nextLine();
                     novoTelefoneDonoUnidadeFranquia = vd.validaString(novoTelefoneDonoUnidadeFranquia);
 
                     if (unidadeFranquiaDAO.atualizaTelefoneDonoDeUnidadeDeFranquia(unidadeFranquia,
                             novoTelefoneDonoUnidadeFranquia) == true) {
-                        System.out.println("Telefone Dono Unidade De Franquia Atualizada Com Sucesso!");
+                        System.out.println("\nTelefone Dono Unidade De Franquia Atualizada Com Sucesso!");
                     } else {
-                        System.out.println("Nao Foi Possivel Atualizar O Telefone Dono Da Unidade De Franquia.");
+                        System.out.println("\nNao Foi Possivel Atualizar O Telefone Dono Da Unidade De Franquia.");
                     }
                     break;
 
@@ -182,7 +181,7 @@ public class UnidadeFranquiaControladora {
                 crm = vd.validaString(crm);
 
                 if (medicoDAO.verificaCrm(crm) == true) {
-                    System.out.println("O Crm Informado Ja Esta Sendo Usado.");
+                    System.out.println("\nO Crm Informado Ja Esta Sendo Usado.");
                 } else {
                     System.out.println("\nInforme A Especialidade do Medico: ");
                     String medicoEspecialidade = scanner.nextLine();

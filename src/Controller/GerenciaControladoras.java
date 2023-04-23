@@ -125,11 +125,11 @@ public class GerenciaControladoras {
     }
 
     private void fazLogin() {
-        System.out.println("\nLogin...: ");
+        System.out.println("\nLogin: ");
         String login = scanner.nextLine();
         login = vd.validaString(login);
 
-        System.out.println("\nSenha...: ");
+        System.out.println("\nSenha: ");
         String senha = scanner.nextLine();
         senha = vd.validaString(senha);
 

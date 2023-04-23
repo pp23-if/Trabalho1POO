@@ -31,7 +31,7 @@ public class MenuTitulosAdmistrador {
         builder.append("\n============ MENU CONSULTAS ===========");
         builder.append("\n0 - Para sair do programa.........: ");
         builder.append("\n1 - Marcar Consulta...............: ");
-        builder.append("\n2 - Ver Consultas........: ");
+        builder.append("\n2 - Ver Consultas.................: ");
         builder.append("\n3 - Cancelar Consulta.............: ");
         builder.append("\n4 - Remarcar Consulta.............: ");
         builder.append("\n\nInforme Opcao...................: ");
