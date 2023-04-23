@@ -16,7 +16,7 @@ public class FranquiaControladora {
 
     Scanner scanner = new Scanner(System.in);
     MenuTitulosFranquia telaFranquia = new MenuTitulosFranquia();
-    
+
     public FranquiaControladora(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO,
             MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd) {
 
@@ -37,35 +37,40 @@ public class FranquiaControladora {
                     break;
                 }
                 case 2: {
-                    cadastraNovaFranquia(franquiaDAO, pessoaDAO, vd);
+                    System.out.println("\n" + franquia.getPessoa());
                     break;
                 }
                 case 3: {
-                    menuOpcoesAtualizarDadosFranquia(franquia, franquiaDAO, vd);
+                    cadastraNovaFranquia(franquiaDAO, pessoaDAO, vd);
                     break;
                 }
                 case 4: {
+                    menuOpcoesAtualizarDadosFranquia(franquia, franquiaDAO, vd);
                     break;
                 }
                 case 5: {
+
+                    break;
+                }
+                case 6: {
                     System.out.println("\n");
                     franquiaDAO.mostraTodasFranquias();
                     break;
                 }
-                case 6: {
+                case 7: {
                     cadastraMedico(pessoaDAO, medicoDAO, vd);
                     break;
                 }
-                case 7: {
+                case 8: {
                     System.out.println("\n");
                     medicoDAO.mostraTodosMedicos();
                     break;
                 }
-                case 8: {
+                case 9: {
                     cadastraUnidadeFranquia(pessoaDAO, unidadeFranquiaDAO, franquia, vd);
                     break;
                 }
-                case 9: {
+                case 10: {
                     System.out.println("\n");
                     unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(franquia);
                     break;
@@ -94,7 +99,7 @@ public class FranquiaControladora {
             System.out.println("\nInforme o Login de Dono de Franquia: ");
             String loginDonoFranquia = scanner.nextLine();
             loginDonoFranquia = vd.validaString(loginDonoFranquia);
-            
+
             if (franquiaDAO.verificaSeLoginDonoFranquiaEstaSendoUsado(loginDonoFranquia) == true) {
                 System.out.println("\nLogin Dono De Franquia Ja Esta Sendo Usado!");
             } else {
@@ -270,7 +275,7 @@ public class FranquiaControladora {
                     System.out.println("\nInforme O Login De Medico: ");
                     String LoginMedico = scanner.nextLine();
                     LoginMedico = vd.validaString(LoginMedico);
-                    
+
                     if (medicoDAO.verificaSeloginEstaSendoUsado(LoginMedico) == true) {
                         System.out.println("\nLogin De Medico Ja Esta Sendo Usado!");
                     } else {
@@ -305,7 +310,7 @@ public class FranquiaControladora {
 
     private void cadastraUnidadeFranquia(PessoaDAO pessoaDAO,
             UnidadeFranquiaDAO unidadeFranquiaDAO, Franquia franquia, ValidacaoEntradaDados vd) {
-        
+
         System.out.println("\n");
         pessoaDAO.filtraPessoaCandidatasADonoUnidadeFranquia();
 
@@ -332,7 +337,7 @@ public class FranquiaControladora {
                 System.out.println("\nInforme O Login Dono De Unidade De Franquia: ");
                 String LoginDonoUnidadeFranquia = scanner.nextLine();
                 LoginDonoUnidadeFranquia = vd.validaString(LoginDonoUnidadeFranquia);
-                
+
                 if (unidadeFranquiaDAO.verificaSeLoginDonoDeUnidadeFranquiaEstaEmUso(LoginDonoUnidadeFranquia) == true) {
                     System.out.println("\nLogin De Dono Unidade Franquia Ja Esta Sendo Usado!");
                 } else {
