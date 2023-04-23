@@ -1,16 +1,15 @@
-
 package Model;
 
+import java.time.LocalDateTime;
 
 public class ProcedimentoDAO {
-    
+
     private Procedimento vetorProcedimento[] = new Procedimento[50];
 
     public ProcedimentoDAO() {
     }
-    
-    
-     public boolean adicionaProcedimento(Procedimento procedimento) {
+
+    public boolean adicionaProcedimento(Procedimento procedimento) {
         int proxima = proximaPosilivreProcedimento();
         if (proxima != -1) {
             vetorProcedimento[proxima] = procedimento;
@@ -20,9 +19,8 @@ public class ProcedimentoDAO {
         }
 
     }
-    
-    
-     private int proximaPosilivreProcedimento() {
+
+    private int proximaPosilivreProcedimento() {
         for (int i = 0; i < vetorProcedimento.length; i++) {
             if (vetorProcedimento[i] == null) {
                 return i;
@@ -31,42 +29,55 @@ public class ProcedimentoDAO {
         }
         return -1;
     }
-    
-    public Procedimento buscaProcedimentoPorPaciente(Pessoa pessoa)
-    {
+
+    public Procedimento buscaProcedimentoPorPaciente(Pessoa pessoa) {
         for (Procedimento procedimento : vetorProcedimento) {
-            
-            if(procedimento != null && procedimento.getConsulta().getPessoa().equals(pessoa))
-            {
+
+            if (procedimento != null && procedimento.getConsulta().getPessoa().equals(pessoa)) {
                 System.out.println(procedimento + "\n");
             }
         }
         return null;
     }
-    
-    public Procedimento buscaProcedimentoPorMedico(Medico medico)
-    {
+
+    public Procedimento buscaProcedimentoPorMedico(Medico medico) {
         for (Procedimento procedimento : vetorProcedimento) {
-            
-            if(procedimento != null && procedimento.getConsulta().getMedico().equals(medico))
-            {
+
+            if (procedimento != null && procedimento.getConsulta().getMedico().equals(medico)) {
                 System.out.println(procedimento + "\n");
             }
         }
         return null;
     }
-    
-    public Procedimento buscaProcedimentoPorFranquia(Franquia franquia)
-    {
+
+    public Procedimento buscaProcedimentoPorFranquia(Franquia franquia) {
         for (Procedimento procedimento : vetorProcedimento) {
-            
-            if(procedimento != null && procedimento.getConsulta()
-                    .getUnidadeFranquia().getFranquia().equals(franquia))
-            {
+
+            if (procedimento != null && procedimento.getConsulta()
+                    .getUnidadeFranquia().getFranquia().equals(franquia)) {
                 System.out.println(procedimento + "\n");
             }
         }
         return null;
     }
-    
+
+    public Procedimento buscaProcedimentoPorId(int idProcediemnto) {
+        for (Procedimento procedimento : vetorProcedimento) {
+
+            if (procedimento != null && procedimento.getIdProcedimento() == idProcediemnto) {
+                return procedimento;
+            }
+        }
+        return null;
+    }
+
+    public boolean recebeProcedimentoECancela(Procedimento procedimento) {
+        if (procedimento != null && procedimento.getEstadoProcedimento().equals("Agendado")) {
+            procedimento.setEstadoProcedimento("Cancelado");
+            procedimento.setDataModificacao(LocalDateTime.now());
+            return true;
+        }
+        return false;
+    }
+
 }

@@ -204,7 +204,7 @@ public class AdmnistradorControladora {
         if (consultaEncontra == null) {
             System.out.println("\nConsulta nao Encontrada");
         } else {
-            if (consultaDAO.buscaConsultaParaCancelar(consultaEncontra) == true) {
+            if (consultaDAO.receConsultaECancela(consultaEncontra) == true) {
                 System.out.println("\nConsulta cancelada com sucesso.");
 
             } else {
@@ -239,7 +239,7 @@ public class AdmnistradorControladora {
             String Hora = scanner.nextLine();
             LocalTime horaConsulta = LocalTime.parse(Hora);
 
-            if (consultaDAO.buscaConsultaParaRemarcar(diaConsulta, horaConsulta) == true) {
+            if (consultaDAO.recebeConsultaERemarca(diaConsulta, horaConsulta) == true) {
                 System.out.println("\nDia e Hora Informados Indisponiveis.");
             } else {
 
@@ -272,12 +272,12 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 2: {
-                      System.out.println("\n");
-                     procedimentoDAO.buscaProcedimentoPorFranquia(admnistrador.getFranquia());
+                    System.out.println("\n");
+                    procedimentoDAO.buscaProcedimentoPorFranquia(admnistrador.getFranquia());
                     break;
                 }
                 case 3: {
-
+                    cancelarProcedimento(procedimentoDAO, admnistrador, vd);
                     break;
                 }
                 case 4: {
@@ -299,6 +299,7 @@ public class AdmnistradorControladora {
 
         System.out.println("\nInforme o ID - paciente que Ira Passar pelo Procedimento: ");
         int idPessoa = Integer.parseInt(scanner.nextLine());
+        idPessoa = vd.validarINT(idPessoa);
 
         Pessoa pessoaEncontrada = pessoaDAO.buscaPessoaPorId(idPessoa);
 
@@ -310,6 +311,7 @@ public class AdmnistradorControladora {
 
             System.out.println("\nInforme o ID - Medico que Ira Fazer O Procedimento: ");
             int idMedico = Integer.parseInt(scanner.nextLine());
+            idMedico = vd.validarINT(idMedico);
 
             Medico medicoEncontrado = medicoDAO.buscaMedicoPorId(idMedico);
 
@@ -321,6 +323,7 @@ public class AdmnistradorControladora {
 
                 System.out.println("\nInforme o ID - UnidadeFranquia Onde Ocorrera O Procedimento: ");
                 int idUnidadeFranquia = Integer.parseInt(scanner.nextLine());
+                idUnidadeFranquia = vd.validarINT(idUnidadeFranquia);
 
                 UnidadeFranquia unidadeFranquiaEncontrada
                         = unidadeFranquiaDAO.buscaUnidadeFranquiaPorId(idUnidadeFranquia);
@@ -328,12 +331,12 @@ public class AdmnistradorControladora {
                 if (unidadeFranquiaEncontrada == null) {
                     System.out.println("\nUnidade De Franquia Nao Encontrada.");
                 } else {
-                    
-                    
+
                     DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    
+
                     System.out.println("\nQual procedimento Sera Feito: ");
                     String nomeProcedimento = scanner.nextLine();
+                    nomeProcedimento = vd.validaString(nomeProcedimento);
 
                     System.out.println("\nInforme a Data Do Procedimento No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
                     String dia = scanner.nextLine();
@@ -342,26 +345,44 @@ public class AdmnistradorControladora {
                     System.out.println("\nInforme a Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
                     String Hora = scanner.nextLine();
                     LocalTime horaProcedimento = LocalTime.parse(Hora);
-                    
+
                     Consulta consulta = new Consulta(diaProcediemnto, horaProcedimento, medicoEncontrado,
                             pessoaEncontrada, unidadeFranquiaEncontrada, 0, "", LocalDateTime.now());
-                    
-                    Procedimento procedimento = new Procedimento(nomeProcedimento, consulta, 
+
+                    Procedimento procedimento = new Procedimento(nomeProcedimento, consulta,
                             diaProcediemnto, horaProcedimento, "Agendado", 1500, "", LocalDateTime.now());
-                    
-                    if(procedimentoDAO.adicionaProcedimento(procedimento) == true)
-                    {
+
+                    if (procedimentoDAO.adicionaProcedimento(procedimento) == true) {
                         System.out.println("\nProcedimento Marcado Com Sucesso!");
-                    }
-                    else
-                    {
-                      System.out.println("\nNao Foi Possivel Marcar O Procediemnto.");  
+                    } else {
+                        System.out.println("\nNao Foi Possivel Marcar O Procediemnto.");
                     }
 
                 }
 
             }
 
+        }
+    }
+
+    private void cancelarProcedimento(ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador, ValidacaoEntradaDados vd) {
+        System.out.println("\n");
+        procedimentoDAO.buscaProcedimentoPorFranquia(admnistrador.getFranquia());
+
+        System.out.println("\nInforme o ID - Procedimento Que Deseja Cancelar: ");
+        int idProcedimento = Integer.parseInt(scanner.nextLine());
+        idProcedimento = vd.validarINT(idProcedimento);
+
+        Procedimento procedimentoEncontrado = procedimentoDAO.buscaProcedimentoPorId(idProcedimento);
+
+        if (procedimentoEncontrado == null) {
+            System.out.println("\nProcedimento Nao Encontrado.");
+        } else {
+            if (procedimentoDAO.recebeProcedimentoECancela(procedimentoEncontrado) == true) {
+                System.out.println("\nProcedimento Cancelado Com Sucesso!");
+            } else {
+                System.out.println("\nNao Foi Possivel Cancelar O Procedimento.");
+            }
         }
     }
 

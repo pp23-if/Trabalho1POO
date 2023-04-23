@@ -63,7 +63,7 @@ public class ConsultaDAO {
         return null;
     }
 
-    public boolean buscaConsultaParaCancelar(Consulta consulta) {
+    public boolean receConsultaECancela(Consulta consulta) {
         if (consulta != null && consulta.getEstadoConsulta().equals("Agendada")) {
             consulta.setEstadoConsulta("Cancelada");
             consulta.setDataModificacao(LocalDateTime.now());
@@ -72,7 +72,7 @@ public class ConsultaDAO {
         return false;
     }
 
-    public boolean buscaConsultaParaRemarcar(LocalDate novoDiaConsulta,
+    public boolean recebeConsultaERemarca(LocalDate novoDiaConsulta,
             LocalTime novaHoraConsulta) {
 
         for (Consulta consulta : vetorConsulta) {
