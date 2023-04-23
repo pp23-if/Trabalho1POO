@@ -67,9 +67,10 @@ public class MenuTitulosMedico {
         builder.append("\n============ MENU PROCEDIMENTOS ===========");
         builder.append("\n0 - Para sair do programa.........: ");
         builder.append("\n1 - Marcar Procedimento...........: ");
-        builder.append("\n2 - Ver Procedimentos.............: ");
-        builder.append("\n3 - Cancelar Procedimento.........: ");
-        builder.append("\n4 - Remarcar Procedimento.........: ");
+        builder.append("\n2 - Realizar Procedimento.........: ");
+        builder.append("\n3 - Ver Procedimentos.............: ");
+        builder.append("\n4 - Cancelar Procedimento.........: ");
+        builder.append("\n5 - Remarcar Procedimento.........: ");
         builder.append("\n\nInforme Opcao...................: ");
 
         System.out.print(builder.toString());

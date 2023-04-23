@@ -185,15 +185,19 @@ public class MedicoControladora {
                     break;
                 }
                 case 2: {
+
+                    break;
+                }
+                case 3: {
                     System.out.println("\n");
                     procedimentoDAO.buscaProcedimentoPorMedico(medico);
                     break;
                 }
-                case 3: {
-
+                case 4: {
+                    cancelarProcedimentoComoMedico(procedimentoDAO, medico, vd);
                     break;
                 }
-                case 4: {
+                case 5: {
 
                     break;
                 }
@@ -238,6 +242,29 @@ public class MedicoControladora {
                 System.out.println("\nProcedimento Marcado Com Sucesso!");
             } else {
                 System.out.println("\nNao Foi Possivel Marcar o Procedimento.");
+            }
+        }
+
+    }
+
+    private void cancelarProcedimentoComoMedico(ProcedimentoDAO procedimentoDAO, Medico medico,
+            ValidacaoEntradaDados vd) {
+        System.out.println("\n");
+        procedimentoDAO.buscaProcedimentoPorMedico(medico);
+
+        System.out.println("\nInforme O ID - Procedimento Que Deseja Cancelar: ");
+        int idProcedimento = Integer.parseInt(scanner.nextLine());
+        idProcedimento = vd.validarINT(idProcedimento);
+
+        Procedimento procedimentoEncontrado = procedimentoDAO.buscaProcedimentoPorId(idProcedimento);
+
+        if (procedimentoEncontrado == null) {
+            System.out.println("\nProcedimento Nao Encontrado.");
+        } else {
+            if (procedimentoDAO.recebeProcedimentoECancela(procedimentoEncontrado) == true) {
+                System.out.println("\nProcedimento Cancelado Com Sucesso!");
+            } else {
+                System.out.println("\nNao Foi Possivel Cancelar O Procedimento.");
             }
         }
 
