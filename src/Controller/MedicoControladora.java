@@ -1,11 +1,18 @@
 package Controller;
 
+import Model.Consulta;
 import Model.ConsultaDAO;
 import Model.InfoConsulta;
 import Model.InfoConsultaDAO;
 import Model.Medico;
 import Model.MedicoDAO;
+import Model.Procedimento;
+import Model.ProcedimentoDAO;
 import View.MenuTitulosMedico;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class MedicoControladora {
@@ -14,14 +21,15 @@ public class MedicoControladora {
     MenuTitulosMedico telaMedico = new MenuTitulosMedico();
 
     public MedicoControladora(Medico medico, MedicoDAO medicoDAO, ValidacaoEntradaDados vd,
-            ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO) {
+            ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO, ProcedimentoDAO procedimentoDAO) {
 
-        menuOpcoesMedico(medico, medicoDAO, vd, consultaDAO, infoConsultaDAO);
+        menuOpcoesMedico(medico, medicoDAO, vd, consultaDAO, infoConsultaDAO, procedimentoDAO);
 
     }
 
     private void menuOpcoesMedico(Medico medico, MedicoDAO medicoDAO,
-            ValidacaoEntradaDados vd, ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO) {
+            ValidacaoEntradaDados vd, ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO,
+            ProcedimentoDAO procedimentoDAO) {
 
         int opcao;
 
@@ -38,8 +46,11 @@ public class MedicoControladora {
                     break;
                 }
                 case 3: {
-
                     menuOpcoesConsultaMedico(medico, consultaDAO, infoConsultaDAO, vd);
+                    break;
+                }
+                case 4: {
+                    menuOpcoesProcedimentosMedico(consultaDAO, procedimentoDAO, medico, vd);
                     break;
                 }
             }
@@ -136,7 +147,7 @@ public class MedicoControladora {
     }
 
     private void atualizaInfoConsulta(Medico medico, InfoConsultaDAO infoConsultaDAO, ValidacaoEntradaDados vd) {
-        
+
         System.out.println("\n");
         infoConsultaDAO.buscaInfoConsultasPorMedico(medico);
 
@@ -158,5 +169,77 @@ public class MedicoControladora {
                 System.out.println("\nNao Foi Possivel Atualizar A Descricao Da Info Consulta.");
             }
         }
+    }
+
+    private void menuOpcoesProcedimentosMedico(ConsultaDAO consultaDAO,
+            ProcedimentoDAO procedimentoDAO, Medico medico, ValidacaoEntradaDados vd) {
+
+        int opcao;
+
+        do {
+            opcao = telaMedico.menuGerenciaProcedimentos();
+
+            switch (opcao) {
+                case 1: {
+                    marcarProcedimentoComoMedico(consultaDAO, procedimentoDAO, medico, vd);
+                    break;
+                }
+                case 2: {
+                    System.out.println("\n");
+                    procedimentoDAO.buscaProcedimentoPorMedico(medico);
+                    break;
+                }
+                case 3: {
+
+                    break;
+                }
+                case 4: {
+
+                    break;
+                }
+            }
+
+        } while (opcao != 0);
+    }
+
+    private void marcarProcedimentoComoMedico(ConsultaDAO consultaDAO,
+            ProcedimentoDAO procedimentoDAO, Medico medico, ValidacaoEntradaDados vd) {
+
+        System.out.println("\n");
+        consultaDAO.buscaConsultaPorMedico(medico);
+
+        System.out.println("\nInforme O ID - Consulta Que deseja Usar: ");
+        int idConsulta = Integer.parseInt(scanner.nextLine());
+        idConsulta = vd.validarINT(idConsulta);
+
+        Consulta consultaEncontrada = consultaDAO.buscaConsultaPorId(idConsulta);
+
+        if (consultaEncontrada == null) {
+            System.out.println("\nConsulta Nao Encontrada.");
+        } else {
+            DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            System.out.println("\nQual procedimento Sera Feito: ");
+            String nomeProcedimento = scanner.nextLine();
+            nomeProcedimento = vd.validaString(nomeProcedimento);
+
+            System.out.println("\nInforme a Data Do Procedimento No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
+            String dia = scanner.nextLine();
+            LocalDate diaProcedimento = LocalDate.parse(dia, fdia);
+
+            System.out.println("\nInforme a Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
+            String Hora = scanner.nextLine();
+            LocalTime horaProcedimento = LocalTime.parse(Hora);
+
+            Procedimento procedimento = new Procedimento(nomeProcedimento, consultaEncontrada, diaProcedimento,
+                    horaProcedimento, "Agendado", 1500, "", LocalDateTime.now());
+
+            if (procedimentoDAO.adicionaProcedimento(procedimento) == true) {
+                System.out.println("\nProcedimento Marcado Com Sucesso!");
+            } else {
+                System.out.println("\nNao Foi Possivel Marcar o Procedimento.");
+            }
+        }
+
     }
 }
