@@ -48,7 +48,7 @@ public class MenuTitulosAdmistrador {
         builder.append("\n============ MENU PROCEDIMENTOS ===========");
         builder.append("\n0 - Para sair do programa.........: ");
         builder.append("\n1 - Marcar Procedimento...........: ");
-        builder.append("\n2 - Ver Procedimentos Marcados....: ");
+        builder.append("\n2 - Ver Procedimentos.............: ");
         builder.append("\n3 - Cancelar Procedimento.........: ");
         builder.append("\n4 - Remarcar Procedimento.........: ");
         builder.append("\n\nInforme Opcao...................: ");

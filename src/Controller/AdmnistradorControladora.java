@@ -235,15 +235,15 @@ public class AdmnistradorControladora {
             String dia = scanner.nextLine();
             LocalDate diaConsulta = LocalDate.parse(dia, fdia);
 
-            System.out.println("\nInforme a Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
+            System.out.println("\nInforme a Nova Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
             String Hora = scanner.nextLine();
             LocalTime horaConsulta = LocalTime.parse(Hora);
 
-            if (consultaDAO.recebeConsultaERemarca(diaConsulta, horaConsulta) == true) {
+            if (consultaDAO.verificaDisponibilidadeDiaEHora(diaConsulta, horaConsulta) == true) {
                 System.out.println("\nDia e Hora Informados Indisponiveis.");
             } else {
 
-                if (consultaDAO.atualizaDiaEHoraConsulta(diaConsulta, horaConsulta,
+                if (consultaDAO.recebeConsultaERemarca(diaConsulta, horaConsulta,
                         consultaEncontrada) == true) {
 
                     System.out.println("\nConsulta Remarcada Com Sucesso.");
@@ -281,7 +281,7 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 4: {
-
+                    remarcarProcedimento(procedimentoDAO, admnistrador, vd);
                     break;
                 }
 
@@ -384,6 +384,45 @@ public class AdmnistradorControladora {
                 System.out.println("\nNao Foi Possivel Cancelar O Procedimento.");
             }
         }
+    }
+
+    private void remarcarProcedimento(ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador, ValidacaoEntradaDados vd) {
+
+        System.out.println("\n");
+        procedimentoDAO.buscaProcedimentoPorFranquia(admnistrador.getFranquia());
+
+        System.out.println("\nInforme o ID - Procedimento Que Deseja Remarcar: ");
+        int idProcedimento = Integer.parseInt(scanner.nextLine());
+        idProcedimento = vd.validarINT(idProcedimento);
+
+        Procedimento procedimentoEncontrado = procedimentoDAO.buscaProcedimentoPorId(idProcedimento);
+
+        if (procedimentoEncontrado == null) {
+            System.out.println("\nProcedimento Nao Encontrado.");
+        } else {
+            DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            System.out.println("\nInforme a Nova Data Do Procedimento No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
+            String dia = scanner.nextLine();
+            LocalDate diaProcedimento = LocalDate.parse(dia, fdia);
+
+            System.out.println("\nInforme a Nova Hora Do Procedimento No Seguinte Formato, Hora:Minutos (00:00)..: ");
+            String Hora = scanner.nextLine();
+            LocalTime horaProcedimento = LocalTime.parse(Hora);
+
+            if (procedimentoDAO.verificaDisponibilidadeDataEHoraProcedimento(diaProcedimento, horaProcedimento) == true) {
+                System.out.println("\nDia e hora Informados, Indisponiveis.");
+            } else {
+                if (procedimentoDAO.recebeProcedimentoERemarca(diaProcedimento,
+                        horaProcedimento, procedimentoEncontrado) == true) {
+                    System.out.println("\nProcedimento Remarcado Com Sucesso!");
+                } else {
+                    System.out.println("\nNao Foi Possivel Remarcar O Procedimento.");
+                }
+            }
+
+        }
+
     }
 
 }

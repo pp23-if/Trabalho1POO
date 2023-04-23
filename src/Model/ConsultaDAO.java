@@ -72,7 +72,7 @@ public class ConsultaDAO {
         return false;
     }
 
-    public boolean recebeConsultaERemarca(LocalDate novoDiaConsulta,
+    public boolean verificaDisponibilidadeDiaEHora(LocalDate novoDiaConsulta,
             LocalTime novaHoraConsulta) {
 
         for (Consulta consulta : vetorConsulta) {
@@ -86,7 +86,7 @@ public class ConsultaDAO {
         return false;
     }
 
-    public boolean atualizaDiaEHoraConsulta(LocalDate novoDiaConsulta,
+    public boolean recebeConsultaERemarca(LocalDate novoDiaConsulta,
             LocalTime novaHoraConsulta, Consulta consulta) {
         if (consulta != null && consulta.getEstadoConsulta().equals("Agendada")) {
             consulta.setDiaConsulta(novoDiaConsulta);
