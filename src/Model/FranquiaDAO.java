@@ -65,7 +65,7 @@ public class FranquiaDAO {
         for (Franquia franquia : vetorFranquia) {
 
             if (franquia != null) {
-                System.out.println(franquia);
+                System.out.println(franquia + "\n");
             }
         }
     }

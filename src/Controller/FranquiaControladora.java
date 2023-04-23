@@ -48,7 +48,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 5: {
-                    System.out.println("\n======== VETOR DE FRANQUIAS ===========\n");
+                    System.out.println("\n");
                     franquiaDAO.mostraTodasFranquias();
                     break;
                 }
@@ -57,6 +57,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 7: {
+                    System.out.println("\n");
                     medicoDAO.mostraTodosMedicos();
                     break;
                 }
@@ -65,6 +66,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 9: {
+                    System.out.println("\n");
                     unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(franquia);
                     break;
                 }
@@ -75,6 +77,7 @@ public class FranquiaControladora {
 
     private void cadastraNovaFranquia(FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd) {
 
+        System.out.println("\n");
         pessoaDAO.filtraPessoasCandidatasADonoDeFranquia();
 
         System.out.println("\nInforme o Id da pessoa que Sera a Dona da Franquia: ");
@@ -92,7 +95,6 @@ public class FranquiaControladora {
             String loginDonoFranquia = scanner.nextLine();
             loginDonoFranquia = vd.validaString(loginDonoFranquia);
             
-            //colocar a validacao da entrada de dados nessa linha.
             if (franquiaDAO.verificaSeLoginDonoFranquiaEstaSendoUsado(loginDonoFranquia) == true) {
                 System.out.println("\nLogin Dono De Franquia Ja Esta Sendo Usado!");
             } else {
@@ -153,7 +155,7 @@ public class FranquiaControladora {
 
             switch (opcao) {
                 case 1: {
-                    System.out.println("Informe o Novo Nome da Franquia: ");
+                    System.out.println("\nInforme o Novo Nome da Franquia: ");
                     String novoNomeFranquia = scanner.nextLine();
                     novoNomeFranquia = vd.validaString(novoNomeFranquia);
 
@@ -167,7 +169,7 @@ public class FranquiaControladora {
                 }
 
                 case 2: {
-                    System.out.println("Informe a Nova Cidade da Franquia: ");
+                    System.out.println("\nInforme a Nova Cidade da Franquia: ");
                     String novaCidadeFranquia = scanner.nextLine();
                     novaCidadeFranquia = vd.validaString(novaCidadeFranquia);
 
@@ -179,7 +181,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 3: {
-                    System.out.println("Informe o Novo Endereco Cidade da Franquia: ");
+                    System.out.println("\nInforme o Novo Endereco Cidade da Franquia: ");
                     String novoEnderecoFranquia = scanner.nextLine();
                     novoEnderecoFranquia = vd.validaString(novoEnderecoFranquia);
 
@@ -192,7 +194,7 @@ public class FranquiaControladora {
                 }
 
                 case 4: {
-                    System.out.println("Informe o Novo Login De Dono De Franquia: ");
+                    System.out.println("\nInforme o Novo Login De Dono De Franquia: ");
                     String novoLoginDonoFranquia = scanner.nextLine();
                     novoLoginDonoFranquia = vd.validaString(novoLoginDonoFranquia);
 
@@ -206,7 +208,7 @@ public class FranquiaControladora {
                 }
 
                 case 5: {
-                    System.out.println("Informe a Nova Senha De Dono De Franquia: ");
+                    System.out.println("\nInforme a Nova Senha De Dono De Franquia: ");
                     String novaSenhaDonoFranquia = scanner.nextLine();
                     novaSenhaDonoFranquia = vd.validaString(novaSenhaDonoFranquia);
 
@@ -219,7 +221,7 @@ public class FranquiaControladora {
                 }
 
                 case 6: {
-                    System.out.println("Informe o Novo Telefone De Dono De Franquia: ");
+                    System.out.println("\nInforme o Novo Telefone De Dono De Franquia: ");
                     String novoTelefoneDonoFranquia = scanner.nextLine();
                     novoTelefoneDonoFranquia = vd.validaString(novoTelefoneDonoFranquia);
 
@@ -259,7 +261,7 @@ public class FranquiaControladora {
                 crm = vd.validaString(crm);
 
                 if (medicoDAO.verificaCrm(crm) == true) {
-                    System.out.println("O Crm Informado Ja Esta Sendo Usado.");
+                    System.out.println("\nO Crm Informado Ja Esta Sendo Usado.");
                 } else {
                     System.out.println("\nInforme A Especialidade do Medico: ");
                     String medicoEspecialidade = scanner.nextLine();
@@ -269,7 +271,6 @@ public class FranquiaControladora {
                     String LoginMedico = scanner.nextLine();
                     LoginMedico = vd.validaString(LoginMedico);
                     
-                    //colocar a validacao da entrada de dados nessa linha.
                     if (medicoDAO.verificaSeloginEstaSendoUsado(LoginMedico) == true) {
                         System.out.println("\nLogin De Medico Ja Esta Sendo Usado!");
                     } else {
@@ -304,6 +305,8 @@ public class FranquiaControladora {
 
     private void cadastraUnidadeFranquia(PessoaDAO pessoaDAO,
             UnidadeFranquiaDAO unidadeFranquiaDAO, Franquia franquia, ValidacaoEntradaDados vd) {
+        
+        System.out.println("\n");
         pessoaDAO.filtraPessoaCandidatasADonoUnidadeFranquia();
 
         System.out.println("\nInforme o Id da Pessoa Que Sera Dono De Unidade De Franquia: ");
@@ -330,8 +333,6 @@ public class FranquiaControladora {
                 String LoginDonoUnidadeFranquia = scanner.nextLine();
                 LoginDonoUnidadeFranquia = vd.validaString(LoginDonoUnidadeFranquia);
                 
-                
-                //colocar a validacao da entrada de dados nessa linha.
                 if (unidadeFranquiaDAO.verificaSeLoginDonoDeUnidadeFranquiaEstaEmUso(LoginDonoUnidadeFranquia) == true) {
                     System.out.println("\nLogin De Dono Unidade Franquia Ja Esta Sendo Usado!");
                 } else {
