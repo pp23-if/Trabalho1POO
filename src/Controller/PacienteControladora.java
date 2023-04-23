@@ -1,11 +1,9 @@
 package Controller;
 
 import Model.ConsultaDAO;
-import Model.FranquiaDAO;
-import Model.MedicoDAO;
 import Model.Pessoa;
 import Model.PessoaDAO;
-import Model.UnidadeFranquiaDAO;
+import Model.ProcedimentoDAO;
 import View.MenuTitulosPaciente;
 import java.util.Scanner;
 
@@ -16,15 +14,13 @@ public class PacienteControladora {
     MenuTitulosPaciente telaPaciente = new MenuTitulosPaciente();
 
     public PacienteControladora(Pessoa pessoa, PessoaDAO pessoaDAO,
-            ValidacaoEntradaDados vd, MedicoDAO medicoDAO, FranquiaDAO franquiaDAO,
-            UnidadeFranquiaDAO unidadeFranquiaDAO, ConsultaDAO consultaDAO) {
+            ValidacaoEntradaDados vd, ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO) {
 
-        menuOpcoesPaciente(pessoa, pessoaDAO, vd, medicoDAO, franquiaDAO, unidadeFranquiaDAO, consultaDAO);
+        menuOpcoesPaciente(pessoa, pessoaDAO, vd, consultaDAO, procedimentoDAO);
     }
 
     private void menuOpcoesPaciente(Pessoa pessoa, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd,
-            MedicoDAO medicoDAO, FranquiaDAO franquiaDAO, UnidadeFranquiaDAO unidadeFranquiaDAO,
-            ConsultaDAO consultaDAO) {
+            ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO) {
 
         int opcao;
 
@@ -42,11 +38,13 @@ public class PacienteControladora {
                     break;
                 }
                 case 3: {
-                        consultaDAO.buscaConsultaAtravesDaPessoaVinculada(pessoa);
+                    System.out.println("\n");
+                    consultaDAO.buscaConsultaAtravesDaPessoaVinculada(pessoa);
                     break;
                 }
                 case 4: {
-
+                     System.out.println("\n");
+                     procedimentoDAO.buscaProcedimentoPorPaciente(pessoa);
                     break;
                 }
                 case 5: {
@@ -149,6 +147,5 @@ public class PacienteControladora {
 
         } while (opcao != 0);
     }
-
 
 }

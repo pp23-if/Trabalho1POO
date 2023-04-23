@@ -15,7 +15,7 @@ public class MenuTitulosPaciente {
         builder.append("\n1 - Ver Meu Cadastro..............:");
         builder.append("\n2 - Atualizar Meus Dados..........: ");
         builder.append("\n3 - Ver Minhas Consultas..........: ");
-        builder.append("\n4 - : ");
+        builder.append("\n4 - Ver Meus Procedimentos........: ");
         builder.append("\n5 - : ");
         builder.append("\n\nInforme Opcao.....................: ");
         
