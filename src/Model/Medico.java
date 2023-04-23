@@ -118,13 +118,15 @@ public class Medico {
         DateTimeFormatter fd = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
         if (dataModificacao == null) {
-            return "Medico(a): " + this.getPessoa().getNomePessoa() + "\n"
+            return "Medico(a): " + this.getPessoa().getNomePessoa() + "," + " "
+                    + "Telefone: " + this.getPessoa().getTelefonePessoa() + "\n"
                     + "ID - Medico: " + this.idMedico + "," + " "
                     + "Crm: " + this.crm + "," + " "
                     + "Especialidade: " + this.especialidade + "," + " "
                     + "Data e Hora de Criacao: " + fd.format(this.dataCriacao) + "," + " ";
         } else {
-            return "Medico(a): " + this.getPessoa().getNomePessoa() + "\n"
+            return "Medico(a): " + this.getPessoa().getNomePessoa() + "," + " "
+                    + "Telefone: " + this.getPessoa().getTelefonePessoa() + "\n"
                     + "ID - Medico: " + this.idMedico + "," + " "
                     + "Crm: " + this.crm + "," + " "
                     + "Especialidade: " + this.especialidade + "," + " "

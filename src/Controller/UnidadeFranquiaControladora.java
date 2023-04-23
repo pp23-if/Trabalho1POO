@@ -40,24 +40,24 @@ public class UnidadeFranquiaControladora {
                     break;
                 }
                 case 2: {
-                    menuOpcoesAtualizaDadosUnidadeFranquia(unidadeFranquia, unidadeFranquiaDAO, vd);
+                    System.out.println("\n" + unidadeFranquia.getPessoa());
                     break;
                 }
                 case 3: {
-                    unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(unidadeFranquia.getFranquia());
+                    menuOpcoesAtualizaDadosUnidadeFranquia(unidadeFranquia, unidadeFranquiaDAO, vd);
                     break;
                 }
                 case 4: {
-                    cadastraMedicos(medicoDAO, pessoaDAO, vd);
+                     unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(unidadeFranquia.getFranquia());
                     break;
                 }
                 case 5: {
-                    System.out.println("\n======== VETOR DE MEDICOS ===========\n");
-                    medicoDAO.mostraTodosMedicos();
+                     cadastraMedicos(medicoDAO, pessoaDAO, vd);
                     break;
                 }
                 case 6: {
-
+                    System.out.println("\n");
+                    medicoDAO.mostraTodosMedicos();
                     break;
                 }
                 case 7: {
@@ -192,7 +192,7 @@ public class UnidadeFranquiaControladora {
                     String LoginMedico = scanner.nextLine();
                     LoginMedico = vd.validaString(LoginMedico);
 
-                    //colocar a validacao da entrada de dados nessa linha.
+      
                     if (medicoDAO.verificaSeloginEstaSendoUsado(LoginMedico) == true) {
                         System.out.println("\nLogin De Medico Ja Esta Sendo Usado!");
                     } else {
