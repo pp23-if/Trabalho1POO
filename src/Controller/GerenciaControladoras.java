@@ -154,7 +154,7 @@ public class GerenciaControladoras {
                 Medico medico = medicoDAO.buscaMedicoAtravesdaPessoaVinculada(pessoaLogada);
 
                 MedicoControladora medicoControladora = new MedicoControladora(medico,
-                        medicoDAO, vd, consultaDAO, infoConsultaDAO, procedimentoDAO);
+                        medicoDAO, vd, consultaDAO, infoConsultaDAO, procedimentoDAO, pessoaDAO);
 
             } else if (pessoaLogada.getTipoUsuario().equals("DonodeFranquia")) {
 

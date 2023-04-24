@@ -108,4 +108,17 @@ public class ProcedimentoDAO {
         
     }
 
+    public Procedimento buscaProcedimentosQueTemMedicoSolicitanteEPacienteEscolhido(Pessoa pessoa, Medico medico)
+    {
+        for (Procedimento procedimento : vetorProcedimento) {
+            
+            if(procedimento != null
+               && procedimento.getConsulta().getMedico().equals(medico)
+               && procedimento.getConsulta().getPessoa().equals(pessoa))
+            {
+                System.out.println(procedimento + "\n");
+            }
+        }
+        return null;
+    }
 }

@@ -13,12 +13,12 @@ public class MenuTitulosMedico {
         StringBuilder builder = new StringBuilder("");
 
         builder.append("\n============ MENU MEDICO  ===========");
-        builder.append("\n0 - Para Sair..................: ");
-        builder.append("\n1 - Ver Cadastro de Medico.....: ");
-        builder.append("\n2 - Atualizar Dados de Medico..: ");
-        builder.append("\n3 - Admnistrar Consultas.......: ");
-        builder.append("\n4 - Admnistrar Procedimentos...: ");
-        builder.append("\n5 - : ");
+        builder.append("\n0 - Para Sair..................................: ");
+        builder.append("\n1 - Ver Cadastro de Medico.....................: ");
+        builder.append("\n2 - Atualizar Dados de Medico..................: ");
+        builder.append("\n3 - Admnistrar Consultas.......................: ");
+        builder.append("\n4 - Admnistrar Procedimentos...................: ");
+        builder.append("\n5 - Gerar Relatorio Consultas/Procedimentos....: ");
         builder.append("\n6 - : ");
         builder.append("\n\nInforme Opcao................: ");
         

@@ -137,5 +137,20 @@ public class ConsultaDAO {
         }
         return false;
     }
+    
+    public Consulta buscaConsultasQueTemMedicoSolicitanteEPacienteEscolhido(Pessoa pessoa, Medico medico)
+    {
+        for (Consulta consulta : vetorConsulta) {
+            
+            if(consulta != null
+               && consulta.getMedico().equals(medico)
+               && consulta.getPessoa().equals(pessoa))
+            {
+                System.out.println(consulta + "\n");
+            }
+        }
+        return null;
+        
+    }
 
 }

@@ -6,6 +6,8 @@ import Model.InfoConsulta;
 import Model.InfoConsultaDAO;
 import Model.Medico;
 import Model.MedicoDAO;
+import Model.Pessoa;
+import Model.PessoaDAO;
 import Model.Procedimento;
 import Model.ProcedimentoDAO;
 import View.MenuTitulosMedico;
@@ -21,15 +23,16 @@ public class MedicoControladora {
     MenuTitulosMedico telaMedico = new MenuTitulosMedico();
 
     public MedicoControladora(Medico medico, MedicoDAO medicoDAO, ValidacaoEntradaDados vd,
-            ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO, ProcedimentoDAO procedimentoDAO) {
+            ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO, 
+            ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO) {
 
-        menuOpcoesMedico(medico, medicoDAO, vd, consultaDAO, infoConsultaDAO, procedimentoDAO);
+        menuOpcoesMedico(medico, medicoDAO, vd, consultaDAO, infoConsultaDAO, procedimentoDAO, pessoaDAO);
 
     }
 
     private void menuOpcoesMedico(Medico medico, MedicoDAO medicoDAO,
             ValidacaoEntradaDados vd, ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO,
-            ProcedimentoDAO procedimentoDAO) {
+            ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO) {
 
         int opcao;
 
@@ -51,6 +54,11 @@ public class MedicoControladora {
                 }
                 case 4: {
                     menuOpcoesProcedimentosMedico(consultaDAO, procedimentoDAO, medico, vd);
+                    break;
+                }
+                case 5:{
+                    gerarRelatorioDeConsultasEProcedimentosDeUmDadoPaciente(consultaDAO, procedimentoDAO, 
+                            pessoaDAO, medico, vd);
                     break;
                 }
             }
@@ -268,5 +276,37 @@ public class MedicoControladora {
             }
         }
 
+    }
+    
+    
+    private void gerarRelatorioDeConsultasEProcedimentosDeUmDadoPaciente(ConsultaDAO consultaDAO, 
+            ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO, Medico medico, ValidacaoEntradaDados vd)
+    {
+        System.out.println("\n");
+        pessoaDAO.filtraPacientes();
+        
+        System.out.println("\nInforme o ID - Pessoa: ");
+        int idPessoa = Integer.parseInt(scanner.nextLine());
+        idPessoa = vd.validarINT(idPessoa);
+        
+        Pessoa pessoaEncontrada = pessoaDAO.buscaPessoaPorId(idPessoa);
+        
+        if(pessoaEncontrada == null)
+        {
+            System.out.println("\nPaciente Nao Encontrado.");
+        }
+        else
+        {
+            System.out.println("\n******* - Paciente: " + pessoaEncontrada.getNomePessoa());
+            System.out.println("\n ....... Consultas ........:");
+            System.out.println("\n");
+            consultaDAO.buscaConsultasQueTemMedicoSolicitanteEPacienteEscolhido(pessoaEncontrada, medico);
+            
+            System.out.println("\n ....... Procedimentos ........:");
+            System.out.println("\n");
+            procedimentoDAO.buscaProcedimentosQueTemMedicoSolicitanteEPacienteEscolhido(pessoaEncontrada, medico);
+            
+        }
+      
     }
 }
