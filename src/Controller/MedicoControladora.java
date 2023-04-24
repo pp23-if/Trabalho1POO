@@ -23,7 +23,7 @@ public class MedicoControladora {
     MenuTitulosMedico telaMedico = new MenuTitulosMedico();
 
     public MedicoControladora(Medico medico, MedicoDAO medicoDAO, ValidacaoEntradaDados vd,
-            ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO, 
+            ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO,
             ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO) {
 
         menuOpcoesMedico(medico, medicoDAO, vd, consultaDAO, infoConsultaDAO, procedimentoDAO, pessoaDAO);
@@ -56,8 +56,8 @@ public class MedicoControladora {
                     menuOpcoesProcedimentosMedico(consultaDAO, procedimentoDAO, medico, vd);
                     break;
                 }
-                case 5:{
-                    gerarRelatorioDeConsultasEProcedimentosDeUmDadoPaciente(consultaDAO, procedimentoDAO, 
+                case 5: {
+                    gerarRelatorioDeConsultasEProcedimentosDeUmDadoPaciente(consultaDAO, procedimentoDAO,
                             pessoaDAO, medico, vd);
                     break;
                 }
@@ -206,7 +206,7 @@ public class MedicoControladora {
                     break;
                 }
                 case 5: {
-
+                    remarcarProcedimentoComoMedico(procedimentoDAO, medico, vd);
                     break;
                 }
             }
@@ -257,6 +257,7 @@ public class MedicoControladora {
 
     private void cancelarProcedimentoComoMedico(ProcedimentoDAO procedimentoDAO, Medico medico,
             ValidacaoEntradaDados vd) {
+
         System.out.println("\n");
         procedimentoDAO.buscaProcedimentoPorMedico(medico);
 
@@ -277,36 +278,74 @@ public class MedicoControladora {
         }
 
     }
-    
-    
-    private void gerarRelatorioDeConsultasEProcedimentosDeUmDadoPaciente(ConsultaDAO consultaDAO, 
-            ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO, Medico medico, ValidacaoEntradaDados vd)
-    {
+
+    private void remarcarProcedimentoComoMedico(ProcedimentoDAO procedimentoDAO, Medico medico,
+            ValidacaoEntradaDados vd) {
+        
+        System.out.println("\n");
+        procedimentoDAO.buscaProcedimentoPorMedico(medico);
+
+        System.out.println("\nInforme O ID - Procedimento Que Deseja Remarcar: ");
+        int idProcedimento = Integer.parseInt(scanner.nextLine());
+        idProcedimento = vd.validarINT(idProcedimento);
+
+        Procedimento procedimentoEncontrado = procedimentoDAO.buscaProcedimentoPorId(idProcedimento);
+
+        if (procedimentoEncontrado == null) {
+            System.out.println("\nProcedimento Nao Encontrado.");
+        } else {
+            DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            System.out.println("\nInforme a Nova Data Do Procedimento No Seguinte Formato, Dia/Mes/Ano (00/00/0000)..: ");
+            String dia = scanner.nextLine();
+            LocalDate diaProcedimento = LocalDate.parse(dia, fdia);
+
+            System.out.println("\nInforme a Nova Hora Do Procedimento No Seguinte Formato, Hora:Minutos (00:00)..: ");
+            String Hora = scanner.nextLine();
+            LocalTime horaProcedimento = LocalTime.parse(Hora);
+
+            if (procedimentoDAO.verificaDisponibilidadeDataEHoraProcedimento(diaProcedimento, horaProcedimento) == true) {
+                System.out.println("\nDia e hora Informados, Indisponiveis.");
+            } else {
+                if (procedimentoDAO.recebeProcedimentoERemarca(diaProcedimento,
+                        horaProcedimento, procedimentoEncontrado) == true) {
+                    System.out.println("\nProcedimento Remarcado Com Sucesso!");
+                } else {
+                    System.out.println("\nNao Foi Possivel Remarcar O Procedimento.");
+                }
+            }
+        }
+    }
+
+    private void realizarProcedimento(ProcedimentoDAO procedimentoDAO, Medico medico,
+            ValidacaoEntradaDados vd) {
+
+    }
+
+    private void gerarRelatorioDeConsultasEProcedimentosDeUmDadoPaciente(ConsultaDAO consultaDAO,
+            ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO, Medico medico, ValidacaoEntradaDados vd) {
         System.out.println("\n");
         pessoaDAO.filtraPacientes();
-        
+
         System.out.println("\nInforme o ID - Pessoa: ");
         int idPessoa = Integer.parseInt(scanner.nextLine());
         idPessoa = vd.validarINT(idPessoa);
-        
+
         Pessoa pessoaEncontrada = pessoaDAO.buscaPessoaPorId(idPessoa);
-        
-        if(pessoaEncontrada == null)
-        {
+
+        if (pessoaEncontrada == null) {
             System.out.println("\nPaciente Nao Encontrado.");
-        }
-        else
-        {
+        } else {
             System.out.println("\n******* - Paciente: " + pessoaEncontrada.getNomePessoa());
             System.out.println("\n ....... Consultas ........:");
             System.out.println("\n");
             consultaDAO.buscaConsultasQueTemMedicoSolicitanteEPacienteEscolhido(pessoaEncontrada, medico);
-            
+
             System.out.println("\n ....... Procedimentos ........:");
             System.out.println("\n");
             procedimentoDAO.buscaProcedimentosQueTemMedicoSolicitanteEPacienteEscolhido(pessoaEncontrada, medico);
-            
+
         }
-      
+
     }
 }

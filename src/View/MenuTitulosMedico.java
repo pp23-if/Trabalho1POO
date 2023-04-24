@@ -31,7 +31,7 @@ public class MenuTitulosMedico {
 
         StringBuilder builder = new StringBuilder("");
 
-        builder.append("\n=== MENU ATUALIZACAO DE DADOS MEDICO ===");
+        builder.append("\n====== MENU ATUALIZACAO DE DADOS MEDICO ===========");
         builder.append("\n0 - Para sair.........................: ");
         builder.append("\n1 - Atualizar Login Medico............: ");
         builder.append("\n2 - Atualizar Senha Medico............: ");
@@ -64,14 +64,14 @@ public class MenuTitulosMedico {
 
         StringBuilder builder = new StringBuilder("");
 
-        builder.append("\n============ MENU PROCEDIMENTOS ===========");
-        builder.append("\n0 - Para sair do programa.........: ");
-        builder.append("\n1 - Marcar Procedimento...........: ");
-        builder.append("\n2 - Realizar Procedimento.........: ");
-        builder.append("\n3 - Ver Procedimentos.............: ");
-        builder.append("\n4 - Cancelar Procedimento.........: ");
-        builder.append("\n5 - Remarcar Procedimento.........: ");
-        builder.append("\n\nInforme Opcao...................: ");
+        builder.append("\n======== MENU GERENCIA PROCEDIMENTOS ===========");
+        builder.append("\n0 - Para sair do programa..............: ");
+        builder.append("\n1 - Marcar Procedimento................: ");
+        builder.append("\n2 - Realizar Procedimento..............: ");
+        builder.append("\n3 - Ver Procedimentos..................: ");
+        builder.append("\n4 - Cancelar Procedimento..............: ");
+        builder.append("\n5 - Remarcar Procedimento..............: ");
+        builder.append("\n\nInforme Opcao........................: ");
 
         System.out.print(builder.toString());
 
