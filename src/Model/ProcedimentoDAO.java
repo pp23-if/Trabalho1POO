@@ -121,4 +121,31 @@ public class ProcedimentoDAO {
         }
         return null;
     }
+    
+    public Procedimento buscaProcedimentoNaoRealizado(Medico medico)
+    {
+        for (Procedimento procedimento : vetorProcedimento) {
+            
+            if(procedimento != null
+               && procedimento.getConsulta().getMedico().equals(medico)
+               && procedimento.getEstadoProcedimento().equals("Agendado"))
+            {
+                return procedimento;
+            }
+               
+        }
+        return null;
+    }
+    
+    public boolean realizarProcedimento(Procedimento procedimento, String laudo)
+    {
+        if(procedimento != null)
+        {
+            procedimento.setEstadoProcedimento("Realizado");
+            procedimento.setLaudo(laudo);
+            procedimento.setDataModificacao(LocalDateTime.now());
+            return true;
+        }
+        return false;
+    }
 }

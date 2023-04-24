@@ -193,7 +193,7 @@ public class MedicoControladora {
                     break;
                 }
                 case 2: {
-
+                     realizarProcedimento(procedimentoDAO, medico, vd);
                     break;
                 }
                 case 3: {
@@ -318,12 +318,39 @@ public class MedicoControladora {
     }
 
     private void realizarProcedimento(ProcedimentoDAO procedimentoDAO, Medico medico,
-            ValidacaoEntradaDados vd) {
-
+            ValidacaoEntradaDados vd) 
+    {
+        System.out.println("\n");
+        Procedimento procedimentoEncontrado = procedimentoDAO.buscaProcedimentoNaoRealizado(medico);
+        
+        if(procedimentoEncontrado == null)
+        {
+            System.out.println("\nNao Existem Procedimentos Agendados.");
+        }
+        else
+        {
+            System.out.println("\n" + procedimentoEncontrado);
+            
+            System.out.println("\nInforme O Laudo Do Procedimento: ");
+            String laudoProcedimento = scanner.nextLine();
+            laudoProcedimento = vd.validaString(laudoProcedimento);
+            
+            if(procedimentoDAO.realizarProcedimento(procedimentoEncontrado, laudoProcedimento) == true)
+            {
+                System.out.println("\nProcedimento Realizado Com Sucesso!");
+            }
+            else
+            {
+               System.out.println("\nNao Foi Possivel Realizar O Procedimento."); 
+            }
+            
+        }
+        
     }
 
     private void gerarRelatorioDeConsultasEProcedimentosDeUmDadoPaciente(ConsultaDAO consultaDAO,
             ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO, Medico medico, ValidacaoEntradaDados vd) {
+        
         System.out.println("\n");
         pessoaDAO.filtraPacientes();
 
