@@ -44,7 +44,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 3: {
-                    cadastraNovaFranquia(franquiaDAO, pessoaDAO, vd);
+                    cadastraNovaFranquia(franquiaDAO, pessoaDAO, vd, calendarioSistema);
                     break;
                 }
                 case 4: {
@@ -83,7 +83,8 @@ public class FranquiaControladora {
         } while (opcao != 0);
     }
 
-    private void cadastraNovaFranquia(FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd) {
+    private void cadastraNovaFranquia(FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd,
+             CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         pessoaDAO.filtraPessoasCandidatasADonoDeFranquia();
@@ -135,7 +136,7 @@ public class FranquiaControladora {
                         System.out.println("\nA Franquia Ja Existe");
                     } else {
                         Franquia franquia = new Franquia(nomeFranquia.toUpperCase(), cnpjFranquia,
-                                cidadeFranquia, enderecoFranquia, pessoaDonoFranquia, LocalDateTime.now());
+                        cidadeFranquia, enderecoFranquia, pessoaDonoFranquia, calendarioSistema.getDataHoraSistema());
 
                         boolean franquiaAdicionada = franquiaDAO.adicionaFranquia(franquia);
 
