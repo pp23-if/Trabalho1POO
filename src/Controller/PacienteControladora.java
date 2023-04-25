@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.CalendarioSistema;
 import Model.ConsultaDAO;
 import Model.Pessoa;
 import Model.PessoaDAO;
@@ -14,13 +15,14 @@ public class PacienteControladora {
     MenuTitulosPaciente telaPaciente = new MenuTitulosPaciente();
 
     public PacienteControladora(Pessoa pessoa, PessoaDAO pessoaDAO,
-            ValidacaoEntradaDados vd, ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO) {
+            ValidacaoEntradaDados vd, ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO, 
+            CalendarioSistema calendarioSistema) {
 
-        menuOpcoesPaciente(pessoa, pessoaDAO, vd, consultaDAO, procedimentoDAO);
+        menuOpcoesPaciente(pessoa, pessoaDAO, vd, consultaDAO, procedimentoDAO, calendarioSistema);
     }
 
     private void menuOpcoesPaciente(Pessoa pessoa, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd,
-            ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO) {
+            ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO, CalendarioSistema calendarioSistema) {
 
         int opcao;
 
@@ -34,7 +36,7 @@ public class PacienteControladora {
                     break;
                 }
                 case 2: {
-                    menuOpcoesAtualizarDadosPaciente(pessoa, pessoaDAO, vd);
+                    menuOpcoesAtualizarDadosPaciente(pessoa, pessoaDAO, vd, calendarioSistema);
                     break;
                 }
                 case 3: {
@@ -55,7 +57,8 @@ public class PacienteControladora {
         } while (opcao != 0);
     }
 
-    private void menuOpcoesAtualizarDadosPaciente(Pessoa pessoa, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd) {
+    private void menuOpcoesAtualizarDadosPaciente(Pessoa pessoa, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd, 
+            CalendarioSistema calendarioSistema) {
 
         int opcao;
 
@@ -68,7 +71,9 @@ public class PacienteControladora {
                     String novoNomePessoa = scanner.nextLine();
                     novoNomePessoa = vd.validaString(novoNomePessoa);
 
-                    if (pessoaDAO.atualizaNomePessoa(pessoa.getNomePessoa(), novoNomePessoa, pessoa.getCpf()) == true) {
+                    if (pessoaDAO.atualizaNomePessoa(pessoa.getNomePessoa(), novoNomePessoa, pessoa.getCpf(), 
+                            calendarioSistema) == true) {
+                        
                         System.out.println("\nO Nome Foi Atualizado Com Sucesso!");
                     } else {
                         System.out.println("\nNome Informado Ja Se Encontra Cadastrado.");
@@ -80,7 +85,7 @@ public class PacienteControladora {
                     String novoCpf = scanner.nextLine();
                     novoCpf = vd.validaString(novoCpf);
 
-                    if (pessoaDAO.atualizaCpfPessoa(pessoa.getCpf(), novoCpf) == true) {
+                    if (pessoaDAO.atualizaCpfPessoa(pessoa.getCpf(), novoCpf, calendarioSistema) == true) {
                         System.out.println("\nO Cpf Foi Atualizado Com Sucesso!");
                     } else {
                         System.out.println("\nCpf Informado Ja Se Encontra Cadastrado.");
@@ -94,7 +99,7 @@ public class PacienteControladora {
                     String novoEndereco = scanner.nextLine();
                     novoEndereco = vd.validaString(novoEndereco);
 
-                    if (pessoaDAO.atualizaEnderecoPessoa(pessoa.getEnderecoPessoa(), novoEndereco) == true) {
+                    if (pessoaDAO.atualizaEnderecoPessoa(pessoa.getEnderecoPessoa(), novoEndereco, calendarioSistema) == true) {
                         System.out.println("\nO Endereco Foi Atualizado Com Sucesso!");
                     } else {
                         System.out.println("\nNao Foi Possivel Atualizar O Endereco");
@@ -108,7 +113,7 @@ public class PacienteControladora {
                     novoTelefone = vd.validaString(novoTelefone);
 
                     if (pessoaDAO.atualizaTelefonePessoa(pessoa.getTelefonePessoa(), novoTelefone,
-                            pessoa.getTipoUsuario()) == true) {
+                            pessoa.getTipoUsuario(), calendarioSistema) == true) {
                         System.out.println("\nO Telefone Foi Atualizado Com Sucesso!");
                     } else {
                         System.out.println("\nTelefone Informado Ja Se Encontra Cadastrado.");
@@ -121,7 +126,8 @@ public class PacienteControladora {
                     String novoLogin = scanner.nextLine();
                     novoLogin = vd.validaString(novoLogin);
 
-                    if (pessoaDAO.atualizaLoginPessoa(pessoa.getLoginPessoa(), novoLogin, pessoa.getTipoUsuario()) == true) {
+                    if (pessoaDAO.atualizaLoginPessoa(pessoa.getLoginPessoa(), novoLogin, 
+                            pessoa.getTipoUsuario(), calendarioSistema) == true) {
                         System.out.println("\nO Login Foi Atualizado Com Sucesso!");
                     } else {
                         System.out.println("\nLogin Informado Ja Se Encontra Cadastrado.");
@@ -136,7 +142,7 @@ public class PacienteControladora {
                     novaSenha = vd.validaString(novaSenha);
 
                     if (pessoaDAO.atualizaSenhaPessoa(pessoa.getSenhaPessoa(), pessoa.getLoginPessoa(),
-                            novaSenha, pessoa.getTipoUsuario()) == true) {
+                            novaSenha, pessoa.getTipoUsuario(), calendarioSistema) == true) {
                         System.out.println("\nA Senha Foi Atualizada Com Sucesso!");
                     } else {
                         System.out.println("\nNao Foi Possivel Atualizar A Senha");

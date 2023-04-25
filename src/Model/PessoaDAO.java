@@ -125,8 +125,9 @@ public class PessoaDAO {
         return null;
     }
 
-    public boolean atualizaNomePessoa(String nomePessoa, String novoNomePessoa, String cpf) {
-
+    public boolean atualizaNomePessoa(String nomePessoa, String novoNomePessoa, 
+            String cpf, CalendarioSistema calendarioSistema) {
+        
         boolean atualizado = false;
 
         if (!verificaSeNomeEstaSendoUsado(novoNomePessoa) == true) {
@@ -136,7 +137,7 @@ public class PessoaDAO {
                 if (pessoa != null && pessoa.getNomePessoa().equals(nomePessoa)
                         && pessoa.getCpf().equals(cpf)) {
                     pessoa.setNomePessoa(novoNomePessoa);
-                    pessoa.setDataModificacao(LocalDateTime.now());
+                    pessoa.setDataModificacao(calendarioSistema.getDataHoraSistema());
                     atualizado = true;
 
                 }
@@ -147,7 +148,8 @@ public class PessoaDAO {
 
     }
 
-    public boolean atualizaCpfPessoa(String cpf, String novoCpf) {
+    public boolean atualizaCpfPessoa(String cpf, String novoCpf, 
+            CalendarioSistema calendarioSistema) {
 
         boolean atualizado = false;
 
@@ -155,7 +157,7 @@ public class PessoaDAO {
             for (Pessoa pessoa : vetorPessoa) {
                 if (pessoa != null && pessoa.getCpf().equals(cpf)) {
                     pessoa.setCpf(novoCpf);
-                    pessoa.setDataModificacao(LocalDateTime.now());
+                    pessoa.setDataModificacao(calendarioSistema.getDataHoraSistema());
                     atualizado = true;
                 }
 
@@ -165,7 +167,8 @@ public class PessoaDAO {
         return atualizado;
     }
 
-    public boolean atualizaEnderecoPessoa(String endereco, String novoEndereco) {
+    public boolean atualizaEnderecoPessoa(String endereco, String novoEndereco, 
+            CalendarioSistema calendarioSistema) {
 
         boolean atualizado = false;
 
@@ -173,7 +176,7 @@ public class PessoaDAO {
 
             if (pessoa != null && pessoa.getEnderecoPessoa().equals(endereco)) {
                 pessoa.setEnderecoPessoa(novoEndereco);
-                pessoa.setDataModificacao(LocalDateTime.now());
+                pessoa.setDataModificacao(calendarioSistema.getDataHoraSistema());
                 atualizado = true;
             }
 
@@ -181,7 +184,8 @@ public class PessoaDAO {
         return atualizado;
     }
 
-    public boolean atualizaTelefonePessoa(String telefone, String novoTelefone, String tipoUsuario) {
+    public boolean atualizaTelefonePessoa(String telefone, String novoTelefone, String tipoUsuario, 
+            CalendarioSistema calendarioSistema) {
 
         if (!verificaSeTelefoneEstaSendoUsado(novoTelefone) == true) {
             for (Pessoa pessoa : vetorPessoa) {
@@ -189,7 +193,7 @@ public class PessoaDAO {
                 if (pessoa != null && pessoa.getTelefonePessoa().equals(telefone)
                         && pessoa.getTipoUsuario().equals(tipoUsuario)) {
                     pessoa.setTelefonePessoa(novoTelefone);
-                    pessoa.setDataModificacao(LocalDateTime.now());
+                    pessoa.setDataModificacao(calendarioSistema.getDataHoraSistema());
                     return true;
                 }
             }
@@ -198,13 +202,14 @@ public class PessoaDAO {
         return false;
     }
 
-    public boolean atualizaLoginPessoa(String login, String novoLogin, String tipoUsuario) {
+    public boolean atualizaLoginPessoa(String login, String novoLogin, String tipoUsuario, 
+            CalendarioSistema calendarioSistema) {
         if (!verificaSeloginEstaSendoUsado(novoLogin) == true) {
             for (Pessoa pessoa : vetorPessoa) {
 
                 if (pessoa != null && pessoa.getLoginPessoa().equals(login) && pessoa.getTipoUsuario().equals(tipoUsuario)) {
                     pessoa.setLoginPessoa(novoLogin);
-                    pessoa.setDataModificacao(LocalDateTime.now());
+                    pessoa.setDataModificacao(calendarioSistema.getDataHoraSistema());
                     return true;
                 }
 
@@ -214,13 +219,14 @@ public class PessoaDAO {
         return false;
     }
 
-    public boolean atualizaSenhaPessoa(String senha, String login, String novaSenha, String tipoUsuario) {
+    public boolean atualizaSenhaPessoa(String senha, String login, String novaSenha, String tipoUsuario, 
+            CalendarioSistema calendarioSistema) {
         for (Pessoa pessoa : vetorPessoa) {
 
             if (pessoa != null && pessoa.getLoginPessoa().equals(login) && pessoa.getSenhaPessoa().equals(senha)
                     && pessoa.getTipoUsuario().equals(tipoUsuario)) {
                 pessoa.setSenhaPessoa(novaSenha);
-                pessoa.setDataModificacao(LocalDateTime.now());
+                pessoa.setDataModificacao(calendarioSistema.getDataHoraSistema());
                 return true;
             }
 
