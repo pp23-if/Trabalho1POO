@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.CalendarioSistema;
 import Model.Consulta;
 import Model.ConsultaDAO;
 import Model.InfoConsulta;
@@ -24,15 +25,16 @@ public class MedicoControladora {
 
     public MedicoControladora(Medico medico, MedicoDAO medicoDAO, ValidacaoEntradaDados vd,
             ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO,
-            ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO) {
+            ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO, CalendarioSistema calendarioSistema) {
 
-        menuOpcoesMedico(medico, medicoDAO, vd, consultaDAO, infoConsultaDAO, procedimentoDAO, pessoaDAO);
+        menuOpcoesMedico(medico, medicoDAO, vd, consultaDAO, infoConsultaDAO, procedimentoDAO, 
+                pessoaDAO, calendarioSistema);
 
     }
 
     private void menuOpcoesMedico(Medico medico, MedicoDAO medicoDAO,
             ValidacaoEntradaDados vd, ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO,
-            ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO) {
+            ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO,  CalendarioSistema calendarioSistema) {
 
         int opcao;
 

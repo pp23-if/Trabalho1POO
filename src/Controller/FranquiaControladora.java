@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.CalendarioSistema;
 import Model.Franquia;
 import Model.FranquiaDAO;
 import Model.Medico;
@@ -18,13 +19,15 @@ public class FranquiaControladora {
     MenuTitulosFranquia telaFranquia = new MenuTitulosFranquia();
 
     public FranquiaControladora(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO,
-            MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd) {
+            MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO, 
+            ValidacaoEntradaDados vd,  CalendarioSistema calendarioSistema) {
 
-        menuOpcoesFranquia(franquia, franquiaDAO, pessoaDAO, medicoDAO, unidadeFranquiaDAO, vd);
+        menuOpcoesFranquia(franquia, franquiaDAO, pessoaDAO, medicoDAO, unidadeFranquiaDAO, vd, calendarioSistema);
     }
 
     private void menuOpcoesFranquia(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO,
-            MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd) {
+            MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd, 
+            CalendarioSistema calendarioSistema) {
 
         int opcao;
 

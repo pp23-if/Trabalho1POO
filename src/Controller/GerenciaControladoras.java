@@ -157,7 +157,7 @@ public class GerenciaControladoras {
                 Medico medico = medicoDAO.buscaMedicoAtravesdaPessoaVinculada(pessoaLogada);
 
                 MedicoControladora medicoControladora = new MedicoControladora(medico,
-                        medicoDAO, vd, consultaDAO, infoConsultaDAO, procedimentoDAO, pessoaDAO);
+                        medicoDAO, vd, consultaDAO, infoConsultaDAO, procedimentoDAO, pessoaDAO, calendarioSistema);
 
             } else if (pessoaLogada.getTipoUsuario().equals("DonodeFranquia")) {
 
@@ -165,7 +165,7 @@ public class GerenciaControladoras {
 
                 FranquiaControladora franquiaControladora
                         = new FranquiaControladora(franquia, franquiaDAO, pessoaDAO, medicoDAO,
-                                unidadeFranquiaDAO, vd);
+                                unidadeFranquiaDAO, vd, calendarioSistema);
                 
             } else if (pessoaLogada.getTipoUsuario().equals("DonoDeUnidadeDeFranquia")) {
                 
@@ -174,7 +174,7 @@ public class GerenciaControladoras {
 
                 UnidadeFranquiaControladora unidadeFranquiaControladora
                         = new UnidadeFranquiaControladora(unidadeFranquia, unidadeFranquiaDAO, medicoDAO,
-                                pessoaDAO, vd);
+                                pessoaDAO, vd, calendarioSistema);
                 
             } else if (pessoaLogada.getTipoUsuario().equals("Admnistrador")) {
                 
@@ -183,7 +183,7 @@ public class GerenciaControladoras {
 
                 AdmnistradorControladora admnistradorControladora
                         = new AdmnistradorControladora(pessoaDAO, admnistradorDAO, unidadeFranquiaDAO,
-                                consultaDAO, vd, admnistradorEncontrado, medicoDAO, procedimentoDAO);
+                                consultaDAO, vd, admnistradorEncontrado, medicoDAO, procedimentoDAO, calendarioSistema);
             }
 
         } else {

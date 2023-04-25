@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Admnistrador;
 import Model.AdmnistradorDAO;
+import Model.CalendarioSistema;
 import Model.Consulta;
 import Model.ConsultaDAO;
 import Model.Medico;
@@ -27,18 +28,18 @@ public class AdmnistradorControladora {
 
     public AdmnistradorControladora(PessoaDAO pessoaDAO, AdmnistradorDAO admnistradorDAO,
             UnidadeFranquiaDAO unidadeFranquiaDAO, ConsultaDAO consultaDAO, ValidacaoEntradaDados vd,
-            Admnistrador admnistrador, MedicoDAO medicoDAO, ProcedimentoDAO procedimentoDAO) {
+            Admnistrador admnistrador, MedicoDAO medicoDAO, ProcedimentoDAO procedimentoDAO, 
+            CalendarioSistema calendarioSistema) {
 
         menuOpcoesAdmnistrador(pessoaDAO, admnistradorDAO,
-                unidadeFranquiaDAO, consultaDAO, vd, admnistrador, medicoDAO, procedimentoDAO);
+        unidadeFranquiaDAO, consultaDAO, vd, admnistrador, medicoDAO, procedimentoDAO, calendarioSistema);
 
     }
 
     private void menuOpcoesAdmnistrador(PessoaDAO pessoaDAO,
-            AdmnistradorDAO admnistradorDAO,
-            UnidadeFranquiaDAO unidadeFranquiaDAO,
-            ConsultaDAO consultaDAO, ValidacaoEntradaDados vd,
-            Admnistrador admnistrador, MedicoDAO medicoDAO, ProcedimentoDAO procedimentoDAO) {
+            AdmnistradorDAO admnistradorDAO,UnidadeFranquiaDAO unidadeFranquiaDAO,
+            ConsultaDAO consultaDAO, ValidacaoEntradaDados vd,Admnistrador admnistrador, 
+            MedicoDAO medicoDAO, ProcedimentoDAO procedimentoDAO, CalendarioSistema calendarioSistema) {
 
         int opcao;
 
