@@ -224,10 +224,10 @@ public class MedicoControladora {
         int idConsulta = Integer.parseInt(scanner.nextLine());
         idConsulta = vd.validarINT(idConsulta);
 
-        Consulta consultaEncontrada = consultaDAO.buscaConsultaPorId(idConsulta);
+        Consulta consultaEncontrada = consultaDAO.buscaConsultaRealizadaPorId(idConsulta);
 
         if (consultaEncontrada == null) {
-            System.out.println("\nConsulta Nao Encontrada.");
+            System.out.println("\nConsulta Nao Encontrada Ou Ainda Nao Realizada.");
         } else {
             DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 

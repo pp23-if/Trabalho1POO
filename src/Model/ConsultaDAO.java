@@ -63,6 +63,19 @@ public class ConsultaDAO {
         return null;
     }
 
+    
+     public Consulta buscaConsultaRealizadaPorId(int idConsulta) {
+        for (Consulta consulta : vetorConsulta) {
+
+            if (consulta != null && consulta.getIdConsulta() == idConsulta 
+                    && consulta.getEstadoConsulta().equals("Realizada")) {
+                return consulta;
+            }
+        }
+        return null;
+    }
+    
+    
     public boolean receConsultaECancela(Consulta consulta) {
         if (consulta != null && consulta.getEstadoConsulta().equals("Agendada")) {
             consulta.setEstadoConsulta("Cancelada");
