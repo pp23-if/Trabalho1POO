@@ -51,7 +51,7 @@ public class MedicoControladora {
                     break;
                 }
                 case 3: {
-                    menuOpcoesConsultaMedico(medico, consultaDAO, infoConsultaDAO, vd);
+                    menuOpcoesConsultaMedico(medico, consultaDAO, infoConsultaDAO, vd, calendarioSistema);
                     break;
                 }
                 case 4: {
@@ -120,7 +120,7 @@ public class MedicoControladora {
     }
 
     private void menuOpcoesConsultaMedico(Medico medico, ConsultaDAO consultaDAO,
-            InfoConsultaDAO infoConsultaDAO, ValidacaoEntradaDados vd) {
+            InfoConsultaDAO infoConsultaDAO, ValidacaoEntradaDados vd,  CalendarioSistema calendarioSistema) {
 
         int opcao;
 
@@ -130,7 +130,7 @@ public class MedicoControladora {
             switch (opcao) {
                 case 1: {
 
-                    if (consultaDAO.atenderConsulta(medico, infoConsultaDAO) == true) {
+                    if (consultaDAO.atenderConsulta(medico, infoConsultaDAO, calendarioSistema) == true) {
                         System.out.println("\nConsulta atendida com sucesso.");
                     } else {
                         System.out.println("\nNao existe mais consultas marcadas.");

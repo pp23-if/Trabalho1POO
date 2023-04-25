@@ -76,10 +76,10 @@ public class ConsultaDAO {
     }
     
     
-    public boolean receConsultaECancela(Consulta consulta) {
+    public boolean receConsultaECancela(Consulta consulta,  CalendarioSistema calendarioSistema) {
         if (consulta != null && consulta.getEstadoConsulta().equals("Agendada")) {
             consulta.setEstadoConsulta("Cancelada");
-            consulta.setDataModificacao(LocalDateTime.now());
+            consulta.setDataModificacao(calendarioSistema.getDataHoraSistema());
             return true;
         }
         return false;
@@ -100,11 +100,11 @@ public class ConsultaDAO {
     }
 
     public boolean recebeConsultaERemarca(LocalDate novoDiaConsulta,
-            LocalTime novaHoraConsulta, Consulta consulta) {
+            LocalTime novaHoraConsulta, Consulta consulta,  CalendarioSistema calendarioSistema) {
         if (consulta != null && consulta.getEstadoConsulta().equals("Agendada")) {
             consulta.setDiaConsulta(novoDiaConsulta);
             consulta.setHoraConsulta(novaHoraConsulta);
-            consulta.setDataModificacao(LocalDateTime.now());
+            consulta.setDataModificacao(calendarioSistema.getDataHoraSistema());
             return true;
         }
         return false;
@@ -132,16 +132,16 @@ public class ConsultaDAO {
         return null;
     }
 
-    public boolean atenderConsulta(Medico medico, InfoConsultaDAO infoConsultaDAO) {
+    public boolean atenderConsulta(Medico medico, InfoConsultaDAO infoConsultaDAO, CalendarioSistema calendarioSistema) {
         for (Consulta consulta : vetorConsulta) {
             if (consulta != null
                     && consulta.getMedico().equals(medico)
                     && consulta.getEstadoConsulta().equals("Agendada")) {
 
                 consulta.setEstadoConsulta("Realizada");
-                consulta.setDataModificacao(LocalDateTime.now());
+                consulta.setDataModificacao(calendarioSistema.getDataHoraSistema());
 
-                InfoConsulta infoConsulta = new InfoConsulta(consulta, "", LocalDateTime.now());
+                InfoConsulta infoConsulta = new InfoConsulta(consulta, "", calendarioSistema.getDataHoraSistema());
 
                 infoConsultaDAO.adicionaInfoConsulta(infoConsulta);
 

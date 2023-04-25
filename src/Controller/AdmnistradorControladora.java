@@ -55,12 +55,12 @@ public class AdmnistradorControladora {
                 }
                 case 2: {
                     menuOpcoesConsulta(consultaDAO, admnistrador,
-                            unidadeFranquiaDAO, vd, pessoaDAO, medicoDAO);
+                            unidadeFranquiaDAO, vd, pessoaDAO, medicoDAO, calendarioSistema);
                     break;
                 }
                 case 3: {
                     menuOpcoesProcedimento(consultaDAO, admnistrador, unidadeFranquiaDAO,
-                            vd, pessoaDAO, medicoDAO, procedimentoDAO);
+                            vd, pessoaDAO, medicoDAO, procedimentoDAO, calendarioSistema);
                     break;
                 }
                 case 4: {
@@ -76,7 +76,7 @@ public class AdmnistradorControladora {
     private void menuOpcoesConsulta(ConsultaDAO consultaDAO,
             Admnistrador admnistrador,
             UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd,
-            PessoaDAO pessoaDAO, MedicoDAO medicoDAO) {
+            PessoaDAO pessoaDAO, MedicoDAO medicoDAO,  CalendarioSistema calendarioSistema) {
 
         int opcao;
 
@@ -86,7 +86,7 @@ public class AdmnistradorControladora {
             switch (opcao) {
                 case 1: {
                     marcarConsulta(admnistrador, unidadeFranquiaDAO, vd,
-                            pessoaDAO, medicoDAO, consultaDAO);
+                            pessoaDAO, medicoDAO, consultaDAO, calendarioSistema);
 
                     break;
                 }
@@ -96,12 +96,12 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 3: {
-                    cancelarConsulta(consultaDAO, admnistrador, vd);
+                    cancelarConsulta(consultaDAO, admnistrador, vd, calendarioSistema);
                     break;
                 }
                 case 4: {
                     remarcarConsulta(admnistrador, unidadeFranquiaDAO, vd,
-                            pessoaDAO, medicoDAO, consultaDAO);
+                            pessoaDAO, medicoDAO, consultaDAO, calendarioSistema);
                     break;
                 }
 
@@ -113,7 +113,7 @@ public class AdmnistradorControladora {
 
     private void marcarConsulta(Admnistrador admnistrador,
             UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd,
-            PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ConsultaDAO consultaDAO) {
+            PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ConsultaDAO consultaDAO,  CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(admnistrador.getFranquia());
@@ -173,7 +173,7 @@ public class AdmnistradorControladora {
 
                         Consulta novaConsulta = new Consulta(diaConsulta, horaConsulta,
                                 medicoEncontrado, pessoaEncontrada, unidadeEncontrada,
-                                valorConsulta, "Agendada", LocalDateTime.now());
+                                valorConsulta, "Agendada", calendarioSistema.getDataHoraSistema());
 
                         if (consultaDAO.adicionaConsulta(novaConsulta) == true) {
                             System.out.println("\nConsulta marcada com sucesso.");
@@ -191,7 +191,7 @@ public class AdmnistradorControladora {
     }
 
     private void cancelarConsulta(ConsultaDAO consultaDAO,
-            Admnistrador admnistrador, ValidacaoEntradaDados vd) {
+            Admnistrador admnistrador, ValidacaoEntradaDados vd,  CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         consultaDAO.buscaConsultaPorFranquia(admnistrador.getFranquia());
@@ -205,7 +205,7 @@ public class AdmnistradorControladora {
         if (consultaEncontra == null) {
             System.out.println("\nConsulta nao Encontrada");
         } else {
-            if (consultaDAO.receConsultaECancela(consultaEncontra) == true) {
+            if (consultaDAO.receConsultaECancela(consultaEncontra, calendarioSistema) == true) {
                 System.out.println("\nConsulta cancelada com sucesso.");
 
             } else {
@@ -216,7 +216,8 @@ public class AdmnistradorControladora {
     }
 
     private void remarcarConsulta(Admnistrador admnistrador, UnidadeFranquiaDAO unidadeFranquiaDAO,
-            ValidacaoEntradaDados vd, PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ConsultaDAO consultaDAO) {
+            ValidacaoEntradaDados vd, PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ConsultaDAO consultaDAO, 
+             CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         consultaDAO.buscaConsultaPorFranquia(admnistrador.getFranquia());
@@ -245,7 +246,7 @@ public class AdmnistradorControladora {
             } else {
 
                 if (consultaDAO.recebeConsultaERemarca(diaConsulta, horaConsulta,
-                        consultaEncontrada) == true) {
+                        consultaEncontrada, calendarioSistema) == true) {
 
                     System.out.println("\nConsulta Remarcada Com Sucesso.");
                 } else {
@@ -258,7 +259,7 @@ public class AdmnistradorControladora {
 
     private void menuOpcoesProcedimento(ConsultaDAO consultaDAO, Admnistrador admnistrador,
             UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd, PessoaDAO pessoaDAO,
-            MedicoDAO medicoDAO, ProcedimentoDAO procedimentoDAO) {
+            MedicoDAO medicoDAO, ProcedimentoDAO procedimentoDAO,  CalendarioSistema calendarioSistema) {
 
         int opcao;
 
@@ -269,7 +270,7 @@ public class AdmnistradorControladora {
                 case 1: {
 
                     marcarProcedimento(pessoaDAO, medicoDAO, admnistrador, unidadeFranquiaDAO,
-                            procedimentoDAO, vd);
+                            procedimentoDAO, vd, calendarioSistema);
                     break;
                 }
                 case 2: {
@@ -278,11 +279,11 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 3: {
-                    cancelarProcedimento(procedimentoDAO, admnistrador, vd);
+                    cancelarProcedimento(procedimentoDAO, admnistrador, vd, calendarioSistema);
                     break;
                 }
                 case 4: {
-                    remarcarProcedimento(procedimentoDAO, admnistrador, vd);
+                    remarcarProcedimento(procedimentoDAO, admnistrador, vd, calendarioSistema);
                     break;
                 }
 
@@ -293,7 +294,8 @@ public class AdmnistradorControladora {
     }
 
     private void marcarProcedimento(PessoaDAO pessoaDAO, MedicoDAO medicoDAO, Admnistrador admnistrador,
-            UnidadeFranquiaDAO unidadeFranquiaDAO, ProcedimentoDAO procedimentoDAO, ValidacaoEntradaDados vd) {
+            UnidadeFranquiaDAO unidadeFranquiaDAO, ProcedimentoDAO procedimentoDAO, ValidacaoEntradaDados vd, 
+             CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         pessoaDAO.filtraPacientes();
@@ -348,10 +350,12 @@ public class AdmnistradorControladora {
                     LocalTime horaProcedimento = LocalTime.parse(Hora);
 
                     Consulta consulta = new Consulta(diaProcediemnto, horaProcedimento, medicoEncontrado,
-                            pessoaEncontrada, unidadeFranquiaEncontrada, 0, "Realizada", LocalDateTime.now());
+                            pessoaEncontrada, unidadeFranquiaEncontrada, 0, "Realizada", 
+                            calendarioSistema.getDataHoraSistema());
 
                     Procedimento procedimento = new Procedimento(nomeProcedimento, consulta,
-                            diaProcediemnto, horaProcedimento, "Agendado", 1500, "", LocalDateTime.now());
+                            diaProcediemnto, horaProcedimento, "Agendado", 1500, "", 
+                            calendarioSistema.getDataHoraSistema());
 
                     if (procedimentoDAO.adicionaProcedimento(procedimento) == true) {
                         System.out.println("\nProcedimento Marcado Com Sucesso!");
@@ -366,7 +370,8 @@ public class AdmnistradorControladora {
         }
     }
 
-    private void cancelarProcedimento(ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador, ValidacaoEntradaDados vd) {
+    private void cancelarProcedimento(ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador, 
+            ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
         System.out.println("\n");
         procedimentoDAO.buscaProcedimentoPorFranquia(admnistrador.getFranquia());
 
@@ -387,7 +392,8 @@ public class AdmnistradorControladora {
         }
     }
 
-    private void remarcarProcedimento(ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador, ValidacaoEntradaDados vd) {
+    private void remarcarProcedimento(ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador, 
+            ValidacaoEntradaDados vd,  CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         procedimentoDAO.buscaProcedimentoPorFranquia(admnistrador.getFranquia());
