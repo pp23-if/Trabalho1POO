@@ -13,7 +13,6 @@ import Model.Procedimento;
 import Model.ProcedimentoDAO;
 import View.MenuTitulosMedico;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -34,7 +33,7 @@ public class MedicoControladora {
 
     private void menuOpcoesMedico(Medico medico, MedicoDAO medicoDAO,
             ValidacaoEntradaDados vd, ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO,
-            ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO,  CalendarioSistema calendarioSistema) {
+            ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO, CalendarioSistema calendarioSistema) {
 
         int opcao;
 
@@ -47,7 +46,7 @@ public class MedicoControladora {
                     break;
                 }
                 case 2: {
-                    menuOpcoesAtualizarDadosMedico(medico, medicoDAO, vd);
+                    menuOpcoesAtualizarDadosMedico(medico, medicoDAO, vd, calendarioSistema);
                     break;
                 }
                 case 3: {
@@ -55,7 +54,7 @@ public class MedicoControladora {
                     break;
                 }
                 case 4: {
-                    menuOpcoesProcedimentosMedico(consultaDAO, procedimentoDAO, medico, vd);
+                    menuOpcoesProcedimentosMedico(consultaDAO, procedimentoDAO, medico, vd, calendarioSistema);
                     break;
                 }
                 case 5: {
@@ -68,7 +67,8 @@ public class MedicoControladora {
         } while (opcao != 0);
     }
 
-    private void menuOpcoesAtualizarDadosMedico(Medico medico, MedicoDAO medicoDAO, ValidacaoEntradaDados vd) {
+    private void menuOpcoesAtualizarDadosMedico(Medico medico, MedicoDAO medicoDAO, ValidacaoEntradaDados vd,
+             CalendarioSistema calendarioSistema) {
         int opcao;
 
         do {
@@ -81,7 +81,7 @@ public class MedicoControladora {
                     String novologinMedico = scanner.nextLine();
                     novologinMedico = vd.validaString(novologinMedico);
 
-                    if (medicoDAO.atualizaLoginMedico(medico, novologinMedico) == true) {
+                    if (medicoDAO.atualizaLoginMedico(medico, novologinMedico, calendarioSistema) == true) {
                         System.out.println("\nO Login De Medico Foi Atualizado Com Sucesso!");
                     } else {
                         System.out.println("\nO Login De Medico Informado, Ja Se Encontra Cadastrado.");
@@ -93,7 +93,7 @@ public class MedicoControladora {
                     String novaSenhaMedico = scanner.nextLine();
                     novaSenhaMedico = vd.validaString(novaSenhaMedico);
 
-                    if (medicoDAO.atualizaSenhaMedico(medico, novaSenhaMedico) == true) {
+                    if (medicoDAO.atualizaSenhaMedico(medico, novaSenhaMedico, calendarioSistema) == true) {
                         System.out.println("\nA Senha De Medico Foi Atualizada Com Sucesso!");
                     } else {
                         System.out.println("\nNao Foi Possivel Atualizar a Senha de Medico.");
@@ -106,7 +106,7 @@ public class MedicoControladora {
                     String novoTelefoneMedico = scanner.nextLine();
                     novoTelefoneMedico = vd.validaString(novoTelefoneMedico);
 
-                    if (medicoDAO.atualizaTelefoneMedico(medico, novoTelefoneMedico) == true) {
+                    if (medicoDAO.atualizaTelefoneMedico(medico, novoTelefoneMedico, calendarioSistema) == true) {
                         System.out.println("\nO Telefone De Medico Foi Atualizado Com Sucesso!");
                     } else {
                         System.out.println("\nNao Foi Possivel Atualizar o Telefone de Medico.");
@@ -148,7 +148,7 @@ public class MedicoControladora {
                     break;
                 }
                 case 4: {
-                    atualizaInfoConsulta(medico, infoConsultaDAO, vd);
+                    atualizaInfoConsulta(medico, infoConsultaDAO, vd, calendarioSistema);
                     break;
                 }
             }
@@ -156,7 +156,8 @@ public class MedicoControladora {
         } while (opcao != 0);
     }
 
-    private void atualizaInfoConsulta(Medico medico, InfoConsultaDAO infoConsultaDAO, ValidacaoEntradaDados vd) {
+    private void atualizaInfoConsulta(Medico medico, InfoConsultaDAO infoConsultaDAO, 
+            ValidacaoEntradaDados vd,  CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         infoConsultaDAO.buscaInfoConsultasPorMedico(medico);
@@ -173,7 +174,7 @@ public class MedicoControladora {
             System.out.println("\nInforme A Descricao Da Info Consulta: ");
             String descricao = scanner.nextLine();
 
-            if (infoConsultaDAO.atualizaDescricaoInfoConsulta(infoConsulta, descricao) == true) {
+            if (infoConsultaDAO.atualizaDescricaoInfoConsulta(infoConsulta, descricao, calendarioSistema) == true) {
                 System.out.println("\nDescricao Da Info Consulta Atualizada Com Sucesso!");
             } else {
                 System.out.println("\nNao Foi Possivel Atualizar A Descricao Da Info Consulta.");
@@ -182,7 +183,8 @@ public class MedicoControladora {
     }
 
     private void menuOpcoesProcedimentosMedico(ConsultaDAO consultaDAO,
-            ProcedimentoDAO procedimentoDAO, Medico medico, ValidacaoEntradaDados vd) {
+            ProcedimentoDAO procedimentoDAO, Medico medico, ValidacaoEntradaDados vd,
+            CalendarioSistema calendarioSistema) {
 
         int opcao;
 
@@ -191,11 +193,11 @@ public class MedicoControladora {
 
             switch (opcao) {
                 case 1: {
-                    marcarProcedimentoComoMedico(consultaDAO, procedimentoDAO, medico, vd);
+                    marcarProcedimentoComoMedico(consultaDAO, procedimentoDAO, medico, vd, calendarioSistema);
                     break;
                 }
                 case 2: {
-                     realizarProcedimento(procedimentoDAO, medico, vd);
+                     realizarProcedimento(procedimentoDAO, medico, vd, calendarioSistema);
                     break;
                 }
                 case 3: {
@@ -204,11 +206,11 @@ public class MedicoControladora {
                     break;
                 }
                 case 4: {
-                    cancelarProcedimentoComoMedico(procedimentoDAO, medico, vd);
+                    cancelarProcedimentoComoMedico(procedimentoDAO, medico, vd, calendarioSistema);
                     break;
                 }
                 case 5: {
-                    remarcarProcedimentoComoMedico(procedimentoDAO, medico, vd);
+                    remarcarProcedimentoComoMedico(procedimentoDAO, medico, vd, calendarioSistema);
                     break;
                 }
             }
@@ -217,7 +219,7 @@ public class MedicoControladora {
     }
 
     private void marcarProcedimentoComoMedico(ConsultaDAO consultaDAO,
-            ProcedimentoDAO procedimentoDAO, Medico medico, ValidacaoEntradaDados vd) {
+            ProcedimentoDAO procedimentoDAO, Medico medico, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         consultaDAO.buscaConsultaPorMedico(medico);
@@ -246,7 +248,7 @@ public class MedicoControladora {
             LocalTime horaProcedimento = LocalTime.parse(Hora);
 
             Procedimento procedimento = new Procedimento(nomeProcedimento, consultaEncontrada, diaProcedimento,
-                    horaProcedimento, "Agendado", 1500, "", LocalDateTime.now());
+                    horaProcedimento, "Agendado", 1500, "", calendarioSistema.getDataHoraSistema());
 
             if (procedimentoDAO.adicionaProcedimento(procedimento) == true) {
                 System.out.println("\nProcedimento Marcado Com Sucesso!");
@@ -258,7 +260,7 @@ public class MedicoControladora {
     }
 
     private void cancelarProcedimentoComoMedico(ProcedimentoDAO procedimentoDAO, Medico medico,
-            ValidacaoEntradaDados vd) {
+            ValidacaoEntradaDados vd,  CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         procedimentoDAO.buscaProcedimentoPorMedico(medico);
@@ -272,7 +274,7 @@ public class MedicoControladora {
         if (procedimentoEncontrado == null) {
             System.out.println("\nProcedimento Nao Encontrado.");
         } else {
-            if (procedimentoDAO.recebeProcedimentoECancela(procedimentoEncontrado) == true) {
+            if (procedimentoDAO.recebeProcedimentoECancela(procedimentoEncontrado, calendarioSistema) == true) {
                 System.out.println("\nProcedimento Cancelado Com Sucesso!");
             } else {
                 System.out.println("\nNao Foi Possivel Cancelar O Procedimento.");
@@ -282,7 +284,7 @@ public class MedicoControladora {
     }
 
     private void remarcarProcedimentoComoMedico(ProcedimentoDAO procedimentoDAO, Medico medico,
-            ValidacaoEntradaDados vd) {
+            ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
         
         System.out.println("\n");
         procedimentoDAO.buscaProcedimentoPorMedico(medico);
@@ -310,7 +312,7 @@ public class MedicoControladora {
                 System.out.println("\nDia e hora Informados, Indisponiveis.");
             } else {
                 if (procedimentoDAO.recebeProcedimentoERemarca(diaProcedimento,
-                        horaProcedimento, procedimentoEncontrado) == true) {
+                        horaProcedimento, procedimentoEncontrado, calendarioSistema) == true) {
                     System.out.println("\nProcedimento Remarcado Com Sucesso!");
                 } else {
                     System.out.println("\nNao Foi Possivel Remarcar O Procedimento.");
@@ -320,7 +322,7 @@ public class MedicoControladora {
     }
 
     private void realizarProcedimento(ProcedimentoDAO procedimentoDAO, Medico medico,
-            ValidacaoEntradaDados vd) 
+            ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) 
     {
         System.out.println("\n");
         Procedimento procedimentoEncontrado = procedimentoDAO.buscaProcedimentoNaoRealizado(medico);
@@ -337,7 +339,7 @@ public class MedicoControladora {
             String laudoProcedimento = scanner.nextLine();
             laudoProcedimento = vd.validaString(laudoProcedimento);
             
-            if(procedimentoDAO.realizarProcedimento(procedimentoEncontrado, laudoProcedimento) == true)
+            if(procedimentoDAO.realizarProcedimento(procedimentoEncontrado, laudoProcedimento, calendarioSistema) == true)
             {
                 System.out.println("\nProcedimento Realizado Com Sucesso!");
             }

@@ -82,14 +82,14 @@ public class MedicoDAO {
         return null;
     }
 
-    public boolean atualizaLoginMedico(Medico m, String novoLogin) {
+    public boolean atualizaLoginMedico(Medico m, String novoLogin, CalendarioSistema calendarioSistema) {
 
         if (!verificaSeloginEstaSendoUsado(novoLogin) == true) {
             for (Medico medico : vetorMedico) {
 
                 if (medico != null && medico.equals(m)) {
                     medico.getPessoa().setLoginPessoa(novoLogin);
-                    medico.getPessoa().setDataModificacao(LocalDateTime.now());
+                    medico.getPessoa().setDataModificacao(calendarioSistema.getDataHoraSistema());
                     return true;
                 }
 
@@ -99,13 +99,13 @@ public class MedicoDAO {
         return false;
     }
 
-    public boolean atualizaSenhaMedico(Medico m, String novaSenha) {
+    public boolean atualizaSenhaMedico(Medico m, String novaSenha, CalendarioSistema calendarioSistema) {
 
         for (Medico medico : vetorMedico) {
 
             if (medico != null && medico.equals(m)) {
                 medico.getPessoa().setSenhaPessoa(novaSenha);
-                medico.getPessoa().setDataModificacao(LocalDateTime.now());
+                medico.getPessoa().setDataModificacao(calendarioSistema.getDataHoraSistema());
                 return true;
             }
         }
@@ -113,14 +113,14 @@ public class MedicoDAO {
         return false;
     }
 
-    public boolean atualizaTelefoneMedico(Medico m, String novoTelefone) {
+    public boolean atualizaTelefoneMedico(Medico m, String novoTelefone, CalendarioSistema calendarioSistema) {
 
         if (!verificaSeTelefoneEstaSendoUsado(novoTelefone) == true) {
             for (Medico medico : vetorMedico) {
 
                 if (medico != null && medico.equals(m)) {
                     medico.getPessoa().setTelefonePessoa(novoTelefone);
-                    medico.getPessoa().setDataModificacao(LocalDateTime.now());
+                    medico.getPessoa().setDataModificacao(calendarioSistema.getDataHoraSistema());
                     return true;
                 }
             }

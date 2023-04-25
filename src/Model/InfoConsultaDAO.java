@@ -62,12 +62,13 @@ public class InfoConsultaDAO {
         return null;
     }
 
-    public boolean atualizaDescricaoInfoConsulta(InfoConsulta infoConsulta, String descricao)
+    public boolean atualizaDescricaoInfoConsulta(InfoConsulta infoConsulta, String descricao, 
+            CalendarioSistema calendarioSistema)
     {
         if(infoConsulta != null)
         {
             infoConsulta.setDescricao(descricao);
-            infoConsulta.setDataModificacao(LocalDateTime.now());
+            infoConsulta.setDataModificacao(calendarioSistema.getDataHoraSistema());
             return true;
         }
         return false;

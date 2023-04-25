@@ -73,10 +73,10 @@ public class ProcedimentoDAO {
         return null;
     }
 
-    public boolean recebeProcedimentoECancela(Procedimento procedimento) {
+    public boolean recebeProcedimentoECancela(Procedimento procedimento, CalendarioSistema calendarioSistema) {
         if (procedimento != null && procedimento.getEstadoProcedimento().equals("Agendado")) {
             procedimento.setEstadoProcedimento("Cancelado");
-            procedimento.setDataModificacao(LocalDateTime.now());
+            procedimento.setDataModificacao(calendarioSistema.getDataHoraSistema());
             return true;
         }
         return false;
@@ -95,13 +95,13 @@ public class ProcedimentoDAO {
     }
     
     public boolean recebeProcedimentoERemarca(LocalDate novoDiaProcedimento,
-            LocalTime novaHoraProcedimento, Procedimento procedimento)
+            LocalTime novaHoraProcedimento, Procedimento procedimento, CalendarioSistema calendarioSistema)
     {
         if(procedimento != null && procedimento.getEstadoProcedimento().equals("Agendado"))
         {
             procedimento.setDiaProcedimento(novoDiaProcedimento);
             procedimento.setHoraProcedimento(novaHoraProcedimento);
-            procedimento.setDataModificacao(LocalDateTime.now());
+            procedimento.setDataModificacao(calendarioSistema.getDataHoraSistema());
             return true;
         }
         return false;
@@ -137,13 +137,13 @@ public class ProcedimentoDAO {
         return null;
     }
     
-    public boolean realizarProcedimento(Procedimento procedimento, String laudo)
+    public boolean realizarProcedimento(Procedimento procedimento, String laudo, CalendarioSistema calendarioSistema)
     {
         if(procedimento != null)
         {
             procedimento.setEstadoProcedimento("Realizado");
             procedimento.setLaudo(laudo);
-            procedimento.setDataModificacao(LocalDateTime.now());
+            procedimento.setDataModificacao(calendarioSistema.getDataHoraSistema());
             return true;
         }
         return false;
