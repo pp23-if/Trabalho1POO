@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Admnistrador;
 import Model.AdmnistradorDAO;
+import Model.CalendarioSistema;
 import Model.ConsultaDAO;
 import Model.Franquia;
 import Model.FranquiaDAO;
@@ -25,9 +26,12 @@ public class GerenciaControladoras {
 
     /*Instanciando a Classe de Validacao de dados.*/
     ValidacaoEntradaDados vd = new ValidacaoEntradaDados();
+    
+    /*Instanciando o Calendario Do Sistema*/
+    CalendarioSistema calendarioSistema = new CalendarioSistema();
 
     /*Instanciando os DAO.*/
-    PessoaDAO pessoaDAO = new PessoaDAO();
+    PessoaDAO pessoaDAO = new PessoaDAO(calendarioSistema);
     MedicoDAO medicoDAO = new MedicoDAO(pessoaDAO);
     FranquiaDAO franquiaDAO = new FranquiaDAO(pessoaDAO);
     UnidadeFranquiaDAO unidadeFranquiaDAO = new UnidadeFranquiaDAO(pessoaDAO, franquiaDAO);
@@ -74,8 +78,7 @@ public class GerenciaControladoras {
     }
 
     private void cadastrarPessoa() {
-        LocalDateTime agora = LocalDateTime.now();
-
+        
         System.out.println("\nInforme o Nome da Pessoa: ");
         String nomePessoa = scanner.nextLine();
         nomePessoa = vd.validaString(nomePessoa);
@@ -112,7 +115,7 @@ public class GerenciaControladoras {
 
         } else {
             Pessoa pessoa = new Pessoa(nomePessoa, cpf, enderecoPessoa, telefonePessoa,
-                    loginPessoa, senhaPessoa, tipoUsuario, agora);
+                    loginPessoa, senhaPessoa, tipoUsuario, calendarioSistema.getDataHoraSistema());
 
             adicionado = pessoaDAO.adicionaPessoa(pessoa);
 

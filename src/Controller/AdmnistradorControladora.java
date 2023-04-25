@@ -347,7 +347,7 @@ public class AdmnistradorControladora {
                     LocalTime horaProcedimento = LocalTime.parse(Hora);
 
                     Consulta consulta = new Consulta(diaProcediemnto, horaProcedimento, medicoEncontrado,
-                            pessoaEncontrada, unidadeFranquiaEncontrada, 0, "", LocalDateTime.now());
+                            pessoaEncontrada, unidadeFranquiaEncontrada, 0, "Realizada", LocalDateTime.now());
 
                     Procedimento procedimento = new Procedimento(nomeProcedimento, consulta,
                             diaProcediemnto, horaProcedimento, "Agendado", 1500, "", LocalDateTime.now());
