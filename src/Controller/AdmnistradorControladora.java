@@ -66,7 +66,8 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 4: {
-                    menuOpcoesFinanceiro(financeiroAdmDAO, calendarioSistema);
+                    menuOpcoesFinanceiro(financeiroAdmDAO, calendarioSistema, 
+                            consultaDAO, procedimentoDAO);
                     break;
                 }
 
@@ -436,7 +437,8 @@ public class AdmnistradorControladora {
     }
 
     private void menuOpcoesFinanceiro(FinanceiroAdmDAO financeiroAdmDAO,
-            CalendarioSistema calendarioSistema) {
+            CalendarioSistema calendarioSistema, ConsultaDAO consultaDAO, 
+            ProcedimentoDAO procedimentoDAO) {
 
         int opcao;
 
@@ -451,6 +453,7 @@ public class AdmnistradorControladora {
                 case 1: {
                     dias++;
                     if (calendarioSistema.passaDias(dias) == true) {
+                        cancelaConsultasNaoAtendidasNoDia(consultaDAO, calendarioSistema);
                         System.out.println("\nDia Encerrado com sucesso.");
                     } else {
                         System.out.println("\nNao foi possivel Encerrar o dia");
@@ -475,6 +478,14 @@ public class AdmnistradorControladora {
             }
 
         } while (opcao != 0);
+    }
+    
+    private void cancelaConsultasNaoAtendidasNoDia(ConsultaDAO consultaDAO, 
+            CalendarioSistema calendarioSistema){
+        
+        if(consultaDAO.cancelaConsultasNaoRealizadasNoDia(calendarioSistema) == true){
+            System.out.println("\nTodas consultas nao realizadas foras canceladas.");
+        }
     }
 
 }

@@ -63,20 +63,18 @@ public class ConsultaDAO {
         return null;
     }
 
-    
-     public Consulta buscaConsultaRealizadaPorId(int idConsulta) {
+    public Consulta buscaConsultaRealizadaPorId(int idConsulta) {
         for (Consulta consulta : vetorConsulta) {
 
-            if (consulta != null && consulta.getIdConsulta() == idConsulta 
+            if (consulta != null && consulta.getIdConsulta() == idConsulta
                     && consulta.getEstadoConsulta().equals("Realizada")) {
                 return consulta;
             }
         }
         return null;
     }
-    
-    
-    public boolean receConsultaECancela(Consulta consulta,  CalendarioSistema calendarioSistema) {
+
+    public boolean receConsultaECancela(Consulta consulta, CalendarioSistema calendarioSistema) {
         if (consulta != null && consulta.getEstadoConsulta().equals("Agendada")) {
             consulta.setEstadoConsulta("Cancelada");
             consulta.setDataModificacao(calendarioSistema.getDataHoraSistema());
@@ -100,7 +98,7 @@ public class ConsultaDAO {
     }
 
     public boolean recebeConsultaERemarca(LocalDate novoDiaConsulta,
-            LocalTime novaHoraConsulta, Consulta consulta,  CalendarioSistema calendarioSistema) {
+            LocalTime novaHoraConsulta, Consulta consulta, CalendarioSistema calendarioSistema) {
         if (consulta != null && consulta.getEstadoConsulta().equals("Agendada")) {
             consulta.setDiaConsulta(novoDiaConsulta);
             consulta.setHoraConsulta(novaHoraConsulta);
@@ -150,20 +148,34 @@ public class ConsultaDAO {
         }
         return false;
     }
-    
-    public Consulta buscaConsultasQueTemMedicoSolicitanteEPacienteEscolhido(Pessoa pessoa, Medico medico)
-    {
+
+    public Consulta buscaConsultasQueTemMedicoSolicitanteEPacienteEscolhido(Pessoa pessoa, Medico medico) {
         for (Consulta consulta : vetorConsulta) {
-            
-            if(consulta != null
-               && consulta.getMedico().equals(medico)
-               && consulta.getPessoa().equals(pessoa))
-            {
+
+            if (consulta != null
+                    && consulta.getMedico().equals(medico)
+                    && consulta.getPessoa().equals(pessoa)) {
                 System.out.println(consulta + "\n");
             }
         }
         return null;
-        
+
+    }
+
+    public boolean cancelaConsultasNaoRealizadasNoDia(CalendarioSistema calendarioSistema) {
+        boolean canceladas = false;
+        for (Consulta consulta : vetorConsulta) {
+            if (consulta != null && consulta.getEstadoConsulta().equals("Agendada")) {
+
+                consulta.setEstadoConsulta("Cancelada");
+                canceladas = true;
+            }
+            if (canceladas == true) {
+                return true;
+            }
+        }
+        return false;
+
     }
 
 }
