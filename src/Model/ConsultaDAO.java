@@ -161,11 +161,16 @@ public class ConsultaDAO {
         return null;
 
     }
-
+    
+    
+    
     public boolean cancelaConsultasNaoRealizadasNoDia(CalendarioSistema calendarioSistema) {
+        System.out.println("dia do sistema = " + calendarioSistema.getDiaDoSistema());
+        
         boolean canceladas = false;
         for (Consulta consulta : vetorConsulta) {
-            if (consulta != null && consulta.getEstadoConsulta().equals("Agendada")) {
+            if (consulta != null && consulta.getEstadoConsulta().equals("Agendada") 
+                    && consulta.getDiaConsulta().isEqual(calendarioSistema.getDiaDoSistema())) {
 
                 consulta.setEstadoConsulta("Cancelada");
                 canceladas = true;

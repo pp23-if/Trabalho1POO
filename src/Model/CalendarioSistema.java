@@ -10,6 +10,8 @@ public class CalendarioSistema {
     private LocalDateTime dataHoraSistema = LocalDateTime.of(2023, 1, 1, 8, 0, 0);
     private LocalDateTime hoje;
     private LocalDateTime amanha;
+    private LocalDate diaDoSistema;
+    
 
     public LocalDateTime getDataHoraSistema() {
         return dataHoraSistema;
@@ -19,12 +21,18 @@ public class CalendarioSistema {
         this.dataHoraSistema = dataHoraSistema;
     }
 
+    public LocalDate getDiaDoSistema() {
+        return diaDoSistema;
+    }
+    
+    
     public boolean passaDias(int dias) {
         hoje = this.dataHoraSistema;
 
         this.setDataHoraSistema(dataHoraSistema.plusDays(dias));
         amanha = this.dataHoraSistema;
-
+        diaDoSistema = amanha.toLocalDate();
+        
         if (verificaSeDiaPaasou(hoje, amanha) == true) {
             return true;
         } else {
@@ -42,5 +50,7 @@ public class CalendarioSistema {
             return false;
         }
     }
+    
+    
 
 }
