@@ -48,7 +48,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 4: {
-                    menuOpcoesAtualizarDadosFranquia(franquia, franquiaDAO, vd);
+                    menuOpcoesAtualizarDadosFranquia(franquia, franquiaDAO, vd, calendarioSistema);
                     break;
                 }
                 case 5: {
@@ -61,7 +61,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 7: {
-                    cadastraMedico(pessoaDAO, medicoDAO, vd);
+                    cadastraMedico(pessoaDAO, medicoDAO, vd, calendarioSistema);
                     break;
                 }
                 case 8: {
@@ -70,7 +70,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 9: {
-                    cadastraUnidadeFranquia(pessoaDAO, unidadeFranquiaDAO, franquia, vd);
+                    cadastraUnidadeFranquia(pessoaDAO, unidadeFranquiaDAO, franquia, vd, calendarioSistema);
                     break;
                 }
                 case 10: {
@@ -113,7 +113,8 @@ public class FranquiaControladora {
                 senhaDonoFranquia = vd.validaString(senhaDonoFranquia);
 
                 Pessoa pessoaDonoFranquia = new Pessoa(pessoa.getNomePessoa(), pessoa.getCpf(), pessoa.getEnderecoPessoa(),
-                        pessoa.getTelefonePessoa(), loginDonoFranquia, senhaDonoFranquia, "DonodeFranquia", LocalDateTime.now());
+                        pessoa.getTelefonePessoa(), loginDonoFranquia, senhaDonoFranquia, "DonodeFranquia", 
+                        calendarioSistema.getDataHoraSistema());
 
                 if (pessoaDAO.adicionaPessoa(pessoaDonoFranquia) == true) {
                     System.out.println("\nInforme o Nome da Franquia: ");
@@ -156,7 +157,8 @@ public class FranquiaControladora {
 
     }
 
-    private void menuOpcoesAtualizarDadosFranquia(Franquia franquia, FranquiaDAO franquiaDAO, ValidacaoEntradaDados vd) {
+    private void menuOpcoesAtualizarDadosFranquia(Franquia franquia, FranquiaDAO franquiaDAO, ValidacaoEntradaDados vd, 
+            CalendarioSistema calendarioSistema) {
         int opcao;
 
         do {
@@ -168,7 +170,7 @@ public class FranquiaControladora {
                     String novoNomeFranquia = scanner.nextLine();
                     novoNomeFranquia = vd.validaString(novoNomeFranquia);
 
-                    if (franquiaDAO.atualizarNomeFranquia(franquia, novoNomeFranquia) == true) {
+                    if (franquiaDAO.atualizarNomeFranquia(franquia, novoNomeFranquia, calendarioSistema) == true) {
                         System.out.println("\nNome Da Franquia Atualizado Com Sucesso!");
                     } else {
                         System.out.println("\nNao Foi Possivel Atualizar O Nome Da Franquia.");
@@ -182,7 +184,7 @@ public class FranquiaControladora {
                     String novaCidadeFranquia = scanner.nextLine();
                     novaCidadeFranquia = vd.validaString(novaCidadeFranquia);
 
-                    if (franquiaDAO.atualizarCidadeFranquia(franquia, novaCidadeFranquia) == true) {
+                    if (franquiaDAO.atualizarCidadeFranquia(franquia, novaCidadeFranquia, calendarioSistema) == true) {
                         System.out.println("\nCidade Da Franquia Atualizado Com Sucesso!");
                     } else {
                         System.out.println("\nNao Foi Possivel Atualizar A Cidade Da Franquia.");
@@ -194,7 +196,7 @@ public class FranquiaControladora {
                     String novoEnderecoFranquia = scanner.nextLine();
                     novoEnderecoFranquia = vd.validaString(novoEnderecoFranquia);
 
-                    if (franquiaDAO.atualizarEnderecoFranquia(franquia, novoEnderecoFranquia) == true) {
+                    if (franquiaDAO.atualizarEnderecoFranquia(franquia, novoEnderecoFranquia, calendarioSistema) == true) {
                         System.out.println("\nEndereco Da Franquia Atualizado Com Sucesso!");
                     } else {
                         System.out.println("\nNao Foi Possivel Atualizar O Endereco Da Franquia.");
@@ -207,7 +209,7 @@ public class FranquiaControladora {
                     String novoLoginDonoFranquia = scanner.nextLine();
                     novoLoginDonoFranquia = vd.validaString(novoLoginDonoFranquia);
 
-                    if (franquiaDAO.atualizaLoginDonoDeFranquia(franquia, novoLoginDonoFranquia) == true) {
+                    if (franquiaDAO.atualizaLoginDonoDeFranquia(franquia, novoLoginDonoFranquia, calendarioSistema) == true) {
                         System.out.println("\nLogin De Dono De Franquia Atualizado Com Sucesso!");
                     } else {
                         System.out.println("\nNao Foi Possivel Atualizar o Login De Dono De Franquia.");
@@ -221,7 +223,7 @@ public class FranquiaControladora {
                     String novaSenhaDonoFranquia = scanner.nextLine();
                     novaSenhaDonoFranquia = vd.validaString(novaSenhaDonoFranquia);
 
-                    if (franquiaDAO.atualizaSenhaDonoDeFranquia(franquia, novaSenhaDonoFranquia) == true) {
+                    if (franquiaDAO.atualizaSenhaDonoDeFranquia(franquia, novaSenhaDonoFranquia, calendarioSistema) == true) {
                         System.out.println("\nSenha De Dono De Franquia Atualizado Com Sucesso!");
                     } else {
                         System.out.println("\nNao Foi Possivel Atualizar a Senha De Dono De Franquia.");
@@ -234,7 +236,7 @@ public class FranquiaControladora {
                     String novoTelefoneDonoFranquia = scanner.nextLine();
                     novoTelefoneDonoFranquia = vd.validaString(novoTelefoneDonoFranquia);
 
-                    if (franquiaDAO.atualizaTelefoneDonoDeFranquia(franquia, novoTelefoneDonoFranquia) == true) {
+                    if (franquiaDAO.atualizaTelefoneDonoDeFranquia(franquia, novoTelefoneDonoFranquia, calendarioSistema) == true) {
                         System.out.println("\nTelefone De Dono De Franquia Atualizado Com Sucesso!");
                     } else {
                         System.out.println("\nNao Foi Possivel Atualizar o Telefone De Dono De Franquia.");
@@ -246,7 +248,8 @@ public class FranquiaControladora {
         } while (opcao != 0);
     }
 
-    private void cadastraMedico(PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ValidacaoEntradaDados vd) {
+    private void cadastraMedico(PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ValidacaoEntradaDados vd, 
+            CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         pessoaDAO.filtraPessoasCandidatasAMedico();
@@ -287,13 +290,14 @@ public class FranquiaControladora {
                         String senhaMedico = scanner.nextLine();
                         senhaMedico = vd.validaString(senhaMedico);
 
-                        Pessoa pessoaMedico = new Pessoa(pessoaEncontrada.getNomePessoa(),
-                                pessoaEncontrada.getCpf(), pessoaEncontrada.getEnderecoPessoa(),
-                                pessoaEncontrada.getTelefonePessoa(), LoginMedico, senhaMedico, "Medico", LocalDateTime.now());
+                        Pessoa pessoaMedico = new Pessoa(pessoaEncontrada.getNomePessoa(),pessoaEncontrada.getCpf(), 
+                        pessoaEncontrada.getEnderecoPessoa(),pessoaEncontrada.getTelefonePessoa(), 
+                        LoginMedico, senhaMedico, "Medico", calendarioSistema.getDataHoraSistema());
 
                         if (pessoaDAO.adicionaPessoa(pessoaMedico) == true) {
 
-                            Medico medico = new Medico(crm, pessoaMedico, medicoEspecialidade, LocalDateTime.now());
+                       Medico medico = new Medico(crm, pessoaMedico, medicoEspecialidade, 
+                       calendarioSistema.getDataHoraSistema());
 
                             if (medicoDAO.adicionaMedico(medico) == true) {
                                 System.out.println("\nMedico Cadastrado Com Sucesso!");
@@ -312,8 +316,8 @@ public class FranquiaControladora {
         }
     }
 
-    private void cadastraUnidadeFranquia(PessoaDAO pessoaDAO,
-            UnidadeFranquiaDAO unidadeFranquiaDAO, Franquia franquia, ValidacaoEntradaDados vd) {
+    private void cadastraUnidadeFranquia(PessoaDAO pessoaDAO, UnidadeFranquiaDAO unidadeFranquiaDAO, 
+            Franquia franquia, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         pessoaDAO.filtraPessoaCandidatasADonoUnidadeFranquia();
@@ -353,11 +357,11 @@ public class FranquiaControladora {
                             pessoaEncontrada.getCpf(), pessoaEncontrada.getEnderecoPessoa(),
                             pessoaEncontrada.getTelefonePessoa(),
                             LoginDonoUnidadeFranquia, senhaDonoUnidadeFranquia,
-                            "DonoDeUnidadeDeFranquia", LocalDateTime.now());
+                            "DonoDeUnidadeDeFranquia", calendarioSistema.getDataHoraSistema());
 
                     if (pessoaDAO.adicionaPessoa(donoUnidadeFranquia) == true) {
-                        UnidadeFranquia unidadeFranquia = new UnidadeFranquia(franquia,
-                                cidadeUnidadeFranquia, enderecoUnidadeFranquia, donoUnidadeFranquia, LocalDateTime.now());
+                        UnidadeFranquia unidadeFranquia = new UnidadeFranquia(franquia,cidadeUnidadeFranquia,
+                        enderecoUnidadeFranquia, donoUnidadeFranquia, calendarioSistema.getDataHoraSistema());
 
                         if (unidadeFranquiaDAO.adicionaUnidadeFranquia(unidadeFranquia) == true) {
                             System.out.println("\nUnidade De Franquia Cadastrada Com Sucesso!");

@@ -92,14 +92,15 @@ public class FranquiaDAO {
         return false;
     }
 
-    public boolean atualizarNomeFranquia(Franquia f, String novoNomeFranquia) {
+    public boolean atualizarNomeFranquia(Franquia f, String novoNomeFranquia, 
+            CalendarioSistema calendarioSistema) {
 
         if (!verificaSeNomeFranquiaEstaSendoUsado(novoNomeFranquia) == true) {
             for (Franquia franquia : vetorFranquia) {
 
                 if (franquia != null && franquia.equals(f)) {
                     franquia.setNomeFranquia(novoNomeFranquia.toUpperCase());
-                    franquia.setDataModificacao(LocalDateTime.now());
+                    franquia.setDataModificacao(calendarioSistema.getDataHoraSistema());
                     return true;
                 }
             }
@@ -110,38 +111,41 @@ public class FranquiaDAO {
 
     
 
-    public boolean atualizarCidadeFranquia(Franquia f, String novaCidadeFranquia) {
+    public boolean atualizarCidadeFranquia(Franquia f, String novaCidadeFranquia, 
+            CalendarioSistema calendarioSistema) {
         for (Franquia franquia : vetorFranquia) {
 
             if (franquia != null && franquia.equals(f)) {
                 franquia.setCidade(novaCidadeFranquia);
-                franquia.setDataModificacao(LocalDateTime.now());
+                franquia.setDataModificacao(calendarioSistema.getDataHoraSistema());
                 return true;
             }
         }
         return false;
     }
 
-    public boolean atualizarEnderecoFranquia(Franquia f, String novoEnderecoFranquia) {
+    public boolean atualizarEnderecoFranquia(Franquia f, String novoEnderecoFranquia, 
+            CalendarioSistema calendarioSistema) {
         for (Franquia franquia : vetorFranquia) {
 
             if (franquia != null && franquia.equals(f)) {
                 franquia.setEnderecoFranquia(novoEnderecoFranquia);
-                franquia.setDataModificacao(LocalDateTime.now());
+                franquia.setDataModificacao(calendarioSistema.getDataHoraSistema());
                 return true;
             }
         }
         return false;
     }
 
-    public boolean atualizaLoginDonoDeFranquia(Franquia f, String novoLoginDonoFranquia) {
+    public boolean atualizaLoginDonoDeFranquia(Franquia f, String novoLoginDonoFranquia, 
+            CalendarioSistema calendarioSistema) {
 
         if (!verificaSeLoginDonoFranquiaEstaSendoUsado(novoLoginDonoFranquia) == true) {
             for (Franquia franquia : vetorFranquia) {
 
                 if (franquia != null && franquia.equals(f)) {
                     franquia.getPessoa().setLoginPessoa(novoLoginDonoFranquia);
-                    franquia.getPessoa().setDataModificacao(LocalDateTime.now());
+                    franquia.getPessoa().setDataModificacao(calendarioSistema.getDataHoraSistema());
                     return true;
                 }
             }
@@ -150,12 +154,13 @@ public class FranquiaDAO {
         return false;
     }
 
-    public boolean atualizaSenhaDonoDeFranquia(Franquia f, String novaSenhaDonoFranquia) {
+    public boolean atualizaSenhaDonoDeFranquia(Franquia f, String novaSenhaDonoFranquia, 
+            CalendarioSistema calendarioSistema) {
         for (Franquia franquia : vetorFranquia) {
 
             if (franquia != null && franquia.equals(f)) {
                 franquia.getPessoa().setSenhaPessoa(novaSenhaDonoFranquia);
-                franquia.getPessoa().setDataModificacao(LocalDateTime.now());
+                franquia.getPessoa().setDataModificacao(calendarioSistema.getDataHoraSistema());
                 return true;
             }
         }
@@ -163,7 +168,7 @@ public class FranquiaDAO {
     }
 
     public boolean atualizaTelefoneDonoDeFranquia(Franquia f, 
-            String novoTelefoneDonoFranquia) {
+            String novoTelefoneDonoFranquia, CalendarioSistema calendarioSistema) {
 
         if (!verificaSeTelefoneDonoFranquiaEstaSendoUsado(novoTelefoneDonoFranquia) == true) {
 
@@ -171,7 +176,7 @@ public class FranquiaDAO {
 
                 if (franquia != null && franquia.equals(f)) {
                     franquia.getPessoa().setTelefonePessoa(novoTelefoneDonoFranquia);
-                    franquia.getPessoa().setDataModificacao(LocalDateTime.now());
+                    franquia.getPessoa().setDataModificacao(calendarioSistema.getDataHoraSistema());
                     return true;
                 }
             }
