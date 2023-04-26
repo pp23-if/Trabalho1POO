@@ -5,6 +5,7 @@ import Model.AdmnistradorDAO;
 import Model.CalendarioSistema;
 import Model.Consulta;
 import Model.ConsultaDAO;
+import Model.FinanceiroAdmDAO;
 import Model.Medico;
 import Model.MedicoDAO;
 import Model.Pessoa;
@@ -27,18 +28,20 @@ public class AdmnistradorControladora {
 
     public AdmnistradorControladora(PessoaDAO pessoaDAO, AdmnistradorDAO admnistradorDAO,
             UnidadeFranquiaDAO unidadeFranquiaDAO, ConsultaDAO consultaDAO, ValidacaoEntradaDados vd,
-            Admnistrador admnistrador, MedicoDAO medicoDAO, ProcedimentoDAO procedimentoDAO, 
-            CalendarioSistema calendarioSistema) {
+            Admnistrador admnistrador, MedicoDAO medicoDAO, ProcedimentoDAO procedimentoDAO,
+            CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO) {
 
         menuOpcoesAdmnistrador(pessoaDAO, admnistradorDAO,
-        unidadeFranquiaDAO, consultaDAO, vd, admnistrador, medicoDAO, procedimentoDAO, calendarioSistema);
+                unidadeFranquiaDAO, consultaDAO, vd, admnistrador, medicoDAO, procedimentoDAO, calendarioSistema,
+                financeiroAdmDAO);
 
     }
 
     private void menuOpcoesAdmnistrador(PessoaDAO pessoaDAO,
-            AdmnistradorDAO admnistradorDAO,UnidadeFranquiaDAO unidadeFranquiaDAO,
-            ConsultaDAO consultaDAO, ValidacaoEntradaDados vd,Admnistrador admnistrador, 
-            MedicoDAO medicoDAO, ProcedimentoDAO procedimentoDAO, CalendarioSistema calendarioSistema) {
+            AdmnistradorDAO admnistradorDAO, UnidadeFranquiaDAO unidadeFranquiaDAO,
+            ConsultaDAO consultaDAO, ValidacaoEntradaDados vd, Admnistrador admnistrador,
+            MedicoDAO medicoDAO, ProcedimentoDAO procedimentoDAO, CalendarioSistema calendarioSistema,
+            FinanceiroAdmDAO financeiroAdmDAO) {
 
         int opcao;
 
@@ -63,6 +66,7 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 4: {
+                    menuOpcoesFinanceiro(financeiroAdmDAO, calendarioSistema);
                     break;
                 }
 
@@ -75,7 +79,7 @@ public class AdmnistradorControladora {
     private void menuOpcoesConsulta(ConsultaDAO consultaDAO,
             Admnistrador admnistrador,
             UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd,
-            PessoaDAO pessoaDAO, MedicoDAO medicoDAO,  CalendarioSistema calendarioSistema) {
+            PessoaDAO pessoaDAO, MedicoDAO medicoDAO, CalendarioSistema calendarioSistema) {
 
         int opcao;
 
@@ -112,7 +116,7 @@ public class AdmnistradorControladora {
 
     private void marcarConsulta(Admnistrador admnistrador,
             UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd,
-            PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ConsultaDAO consultaDAO,  CalendarioSistema calendarioSistema) {
+            PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ConsultaDAO consultaDAO, CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(admnistrador.getFranquia());
@@ -190,7 +194,7 @@ public class AdmnistradorControladora {
     }
 
     private void cancelarConsulta(ConsultaDAO consultaDAO,
-            Admnistrador admnistrador, ValidacaoEntradaDados vd,  CalendarioSistema calendarioSistema) {
+            Admnistrador admnistrador, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         consultaDAO.buscaConsultaPorFranquia(admnistrador.getFranquia());
@@ -215,8 +219,8 @@ public class AdmnistradorControladora {
     }
 
     private void remarcarConsulta(Admnistrador admnistrador, UnidadeFranquiaDAO unidadeFranquiaDAO,
-            ValidacaoEntradaDados vd, PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ConsultaDAO consultaDAO, 
-             CalendarioSistema calendarioSistema) {
+            ValidacaoEntradaDados vd, PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ConsultaDAO consultaDAO,
+            CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         consultaDAO.buscaConsultaPorFranquia(admnistrador.getFranquia());
@@ -258,7 +262,7 @@ public class AdmnistradorControladora {
 
     private void menuOpcoesProcedimento(ConsultaDAO consultaDAO, Admnistrador admnistrador,
             UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd, PessoaDAO pessoaDAO,
-            MedicoDAO medicoDAO, ProcedimentoDAO procedimentoDAO,  CalendarioSistema calendarioSistema) {
+            MedicoDAO medicoDAO, ProcedimentoDAO procedimentoDAO, CalendarioSistema calendarioSistema) {
 
         int opcao;
 
@@ -293,8 +297,8 @@ public class AdmnistradorControladora {
     }
 
     private void marcarProcedimento(PessoaDAO pessoaDAO, MedicoDAO medicoDAO, Admnistrador admnistrador,
-            UnidadeFranquiaDAO unidadeFranquiaDAO, ProcedimentoDAO procedimentoDAO, ValidacaoEntradaDados vd, 
-             CalendarioSistema calendarioSistema) {
+            UnidadeFranquiaDAO unidadeFranquiaDAO, ProcedimentoDAO procedimentoDAO, ValidacaoEntradaDados vd,
+            CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         pessoaDAO.filtraPacientes();
@@ -349,11 +353,11 @@ public class AdmnistradorControladora {
                     LocalTime horaProcedimento = LocalTime.parse(Hora);
 
                     Consulta consulta = new Consulta(diaProcediemnto, horaProcedimento, medicoEncontrado,
-                            pessoaEncontrada, unidadeFranquiaEncontrada, 0, "Realizada", 
+                            pessoaEncontrada, unidadeFranquiaEncontrada, 0, "Realizada",
                             calendarioSistema.getDataHoraSistema());
 
                     Procedimento procedimento = new Procedimento(nomeProcedimento, consulta,
-                            diaProcediemnto, horaProcedimento, "Agendado", 1500, "", 
+                            diaProcediemnto, horaProcedimento, "Agendado", 1500, "",
                             calendarioSistema.getDataHoraSistema());
 
                     if (procedimentoDAO.adicionaProcedimento(procedimento) == true) {
@@ -369,7 +373,7 @@ public class AdmnistradorControladora {
         }
     }
 
-    private void cancelarProcedimento(ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador, 
+    private void cancelarProcedimento(ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador,
             ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
         System.out.println("\n");
         procedimentoDAO.buscaProcedimentoPorFranquia(admnistrador.getFranquia());
@@ -391,8 +395,8 @@ public class AdmnistradorControladora {
         }
     }
 
-    private void remarcarProcedimento(ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador, 
-            ValidacaoEntradaDados vd,  CalendarioSistema calendarioSistema) {
+    private void remarcarProcedimento(ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador,
+            ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         procedimentoDAO.buscaProcedimentoPorFranquia(admnistrador.getFranquia());
@@ -429,6 +433,48 @@ public class AdmnistradorControladora {
 
         }
 
+    }
+
+    private void menuOpcoesFinanceiro(FinanceiroAdmDAO financeiroAdmDAO,
+            CalendarioSistema calendarioSistema) {
+
+        int opcao;
+
+        do {
+            System.out.println("\nData e Hora do Sistema: " + calendarioSistema.getDataHoraSistema().format(DateTimeFormatter.
+                    ofPattern("dd/MM/yyyy HH:mm:ss")));
+            opcao = telaAdmistrador.menuFinanceiroAdm();
+            
+
+            int dias = 0;
+            switch (opcao) {
+                case 1: {
+                    dias++;
+                    if (calendarioSistema.passaDias(dias) == true) {
+                        System.out.println("\nDia Encerrado com sucesso.");
+                    } else {
+                        System.out.println("\nNao foi possivel Encerrar o dia");
+                    }
+                    
+
+                    break;
+                }
+                case 2: {
+
+                    break;
+                }
+                case 3: {
+
+                    break;
+                }
+                case 4: {
+
+                    break;
+                }
+
+            }
+
+        } while (opcao != 0);
     }
 
 }
