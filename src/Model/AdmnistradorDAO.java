@@ -6,13 +6,14 @@ public class AdmnistradorDAO {
 
     private Admnistrador[] vetorAdm = new Admnistrador[50];
 
-    public AdmnistradorDAO(PessoaDAO pessoaDAO, FranquiaDAO franquiaDAO) {
+    public AdmnistradorDAO(PessoaDAO pessoaDAO, FranquiaDAO franquiaDAO, CalendarioSistema calendarioSistema) {
+        
         Pessoa pessoaAdm = pessoaDAO.buscaPessoaCadastrada("roadm", "20");
         if (pessoaAdm != null) {
             Franquia franquiaSelecionada = franquiaDAO.buscaFranquiaPorCnpj("123456789-30");
 
             if (franquiaSelecionada != null) {
-                Admnistrador adm = new Admnistrador(pessoaAdm, franquiaSelecionada, LocalDateTime.now());
+                Admnistrador adm = new Admnistrador(pessoaAdm, franquiaSelecionada, calendarioSistema.getDataHoraSistema());
 
                 adicionaAdmnistrador(adm);
             }

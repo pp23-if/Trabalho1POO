@@ -15,8 +15,6 @@ public class UnidadeFranquiaControladora {
 
     Scanner scanner = new Scanner(System.in);
     MenuTitulosUnidadeFranquia menuTitulosUnidadeFranquia = new MenuTitulosUnidadeFranquia();
-    
-
 
     public UnidadeFranquiaControladora(UnidadeFranquia unidadeFranquia, UnidadeFranquiaDAO unidadeFranquiaDAO,
             MedicoDAO medicoDAO, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
@@ -43,16 +41,16 @@ public class UnidadeFranquiaControladora {
                     break;
                 }
                 case 3: {
-                    menuOpcoesAtualizaDadosUnidadeFranquia(unidadeFranquia, unidadeFranquiaDAO, vd);
+                    menuOpcoesAtualizaDadosUnidadeFranquia(unidadeFranquia, unidadeFranquiaDAO, vd, calendarioSistema);
                     break;
                 }
                 case 4: {
-                     System.out.println("\n");
-                     unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(unidadeFranquia.getFranquia());
+                    System.out.println("\n");
+                    unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(unidadeFranquia.getFranquia());
                     break;
                 }
                 case 5: {
-                     cadastraMedicos(medicoDAO, pessoaDAO, vd);
+                    cadastraMedicos(medicoDAO, pessoaDAO, vd, calendarioSistema);
                     break;
                 }
                 case 6: {
@@ -78,7 +76,7 @@ public class UnidadeFranquiaControladora {
     }
 
     private void menuOpcoesAtualizaDadosUnidadeFranquia(UnidadeFranquia unidadeFranquia,
-            UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd) {
+            UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
 
         int opcao;
 
@@ -92,7 +90,7 @@ public class UnidadeFranquiaControladora {
                     novaCidadeUnidadeFranquia = vd.validaString(novaCidadeUnidadeFranquia);
 
                     if (unidadeFranquiaDAO.atualizaCidadeUnidadeFranquia(unidadeFranquia,
-                            novaCidadeUnidadeFranquia) == true) {
+                            novaCidadeUnidadeFranquia, calendarioSistema) == true) {
                         System.out.println("\nCidade Da Unidade De Franquia Atualizada Com Sucesso!");
                     } else {
                         System.out.println("\nNao Foi Possivel Atualizar A Cidade Da Unidade De Franquia.");
@@ -105,7 +103,7 @@ public class UnidadeFranquiaControladora {
                     novoEnderecoUnidadeFranquia = vd.validaString(novoEnderecoUnidadeFranquia);
 
                     if (unidadeFranquiaDAO.atualizaEnderecoUnidadeDeFranquia(unidadeFranquia,
-                            novoEnderecoUnidadeFranquia) == true) {
+                            novoEnderecoUnidadeFranquia, calendarioSistema) == true) {
                         System.out.println("\nEndereco Da Unidade De Franquia Atualizada Com Sucesso!");
                     } else {
                         System.out.println("\nNao Foi Possivel Atualizar O Endereco Da Unidade De Franquia.");
@@ -118,7 +116,7 @@ public class UnidadeFranquiaControladora {
                     novoLoginDonoUnidadeFranquia = vd.validaString(novoLoginDonoUnidadeFranquia);
 
                     if (unidadeFranquiaDAO.atualizaLoginDonoDeUnidadeDeFranquia(unidadeFranquia,
-                            novoLoginDonoUnidadeFranquia) == true) {
+                            novoLoginDonoUnidadeFranquia, calendarioSistema) == true) {
                         System.out.println("\nLogin Dono Unidade De Franquia Atualizada Com Sucesso!");
                     } else {
                         System.out.println("\nNao Foi Possivel Atualizar O Login Dono Da Unidade De Franquia.");
@@ -131,7 +129,7 @@ public class UnidadeFranquiaControladora {
                     novaSenhaDonoUnidadeFranquia = vd.validaString(novaSenhaDonoUnidadeFranquia);
 
                     if (unidadeFranquiaDAO.atualizaSenhaDonoDeUnidadeDeFranquia(unidadeFranquia,
-                            novaSenhaDonoUnidadeFranquia) == true) {
+                            novaSenhaDonoUnidadeFranquia, calendarioSistema) == true) {
                         System.out.println("\nSenha Dono Unidade De Franquia Atualizada Com Sucesso!");
                     } else {
                         System.out.println("\nNao Foi Possivel Atualizar A Senha Dono Da Unidade De Franquia.");
@@ -144,7 +142,7 @@ public class UnidadeFranquiaControladora {
                     novoTelefoneDonoUnidadeFranquia = vd.validaString(novoTelefoneDonoUnidadeFranquia);
 
                     if (unidadeFranquiaDAO.atualizaTelefoneDonoDeUnidadeDeFranquia(unidadeFranquia,
-                            novoTelefoneDonoUnidadeFranquia) == true) {
+                            novoTelefoneDonoUnidadeFranquia, calendarioSistema) == true) {
                         System.out.println("\nTelefone Dono Unidade De Franquia Atualizada Com Sucesso!");
                     } else {
                         System.out.println("\nNao Foi Possivel Atualizar O Telefone Dono Da Unidade De Franquia.");
@@ -158,8 +156,8 @@ public class UnidadeFranquiaControladora {
 
     }
 
-    private void cadastraMedicos(MedicoDAO medicoDAO, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd) 
-    {
+    private void cadastraMedicos(MedicoDAO medicoDAO, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd,
+            CalendarioSistema calendarioSistema) {
         System.out.println("\n");
         pessoaDAO.filtraPessoasCandidatasAMedico();
 
@@ -192,7 +190,6 @@ public class UnidadeFranquiaControladora {
                     String LoginMedico = scanner.nextLine();
                     LoginMedico = vd.validaString(LoginMedico);
 
-      
                     if (medicoDAO.verificaSeloginEstaSendoUsado(LoginMedico) == true) {
                         System.out.println("\nLogin De Medico Ja Esta Sendo Usado!");
                     } else {
@@ -202,12 +199,13 @@ public class UnidadeFranquiaControladora {
 
                         Pessoa pessoaMedico = new Pessoa(pessoaEncontrada.getNomePessoa(),
                                 pessoaEncontrada.getCpf(), pessoaEncontrada.getEnderecoPessoa(),
-                                pessoaEncontrada.getTelefonePessoa(), 
-                                LoginMedico, senhaMedico, "Medico", LocalDateTime.now());
+                                pessoaEncontrada.getTelefonePessoa(),
+                                LoginMedico, senhaMedico, "Medico", calendarioSistema.getDataHoraSistema());
 
                         if (pessoaDAO.adicionaPessoa(pessoaMedico) == true) {
 
-                            Medico medico = new Medico(crm, pessoaMedico, medicoEspecialidade, LocalDateTime.now());
+                            Medico medico = new Medico(crm, pessoaMedico, medicoEspecialidade,
+                                    calendarioSistema.getDataHoraSistema());
 
                             if (medicoDAO.adicionaMedico(medico) == true) {
                                 System.out.println("\nMedico Cadastrado Com Sucesso!");

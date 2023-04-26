@@ -1,12 +1,11 @@
 package Model;
 
-import java.time.LocalDateTime;
-
 public class UnidadeFranquiaDAO {
 
     private UnidadeFranquia[] vetorUnidadeFranquia = new UnidadeFranquia[50];
 
-    public UnidadeFranquiaDAO(PessoaDAO pessoaDAO, FranquiaDAO franquiaDAO) {
+    public UnidadeFranquiaDAO(PessoaDAO pessoaDAO, FranquiaDAO franquiaDAO, CalendarioSistema calendarioSistema) {
+        
         Pessoa donoUnidadeFranquia = pessoaDAO.buscaPessoaCadastrada("rgd", "30");
 
         if (donoUnidadeFranquia != null) {
@@ -14,7 +13,7 @@ public class UnidadeFranquiaDAO {
 
             if (franquiaCadastrada != null) {
                 UnidadeFranquia unidadeFranquia = new UnidadeFranquia(franquiaCadastrada, "Rio de Janeiro",
-                        "Avenida Brasil - 580", donoUnidadeFranquia, LocalDateTime.now());
+                        "Avenida Brasil - 580", donoUnidadeFranquia, calendarioSistema.getDataHoraSistema());
 
                 adicionaUnidadeFranquia(unidadeFranquia);
             }
@@ -94,38 +93,41 @@ public class UnidadeFranquiaDAO {
         return null;
     }
 
-    public boolean atualizaCidadeUnidadeFranquia(UnidadeFranquia uf, String novaCidadeUnidadeFranquia) {
+    public boolean atualizaCidadeUnidadeFranquia(UnidadeFranquia uf, String novaCidadeUnidadeFranquia,
+            CalendarioSistema calendarioSistema) {
         for (UnidadeFranquia unidadeFranquia : vetorUnidadeFranquia) {
 
             if (unidadeFranquia != null && unidadeFranquia.equals(uf)) {
                 unidadeFranquia.setCidadeUnidadeFranquia(novaCidadeUnidadeFranquia);
-                unidadeFranquia.setDataModificacao(LocalDateTime.now());
+                unidadeFranquia.setDataModificacao(calendarioSistema.getDataHoraSistema());
                 return true;
             }
         }
         return false;
     }
 
-    public boolean atualizaEnderecoUnidadeDeFranquia(UnidadeFranquia uf, String novoEnderecoUnidadeFranquia) {
+    public boolean atualizaEnderecoUnidadeDeFranquia(UnidadeFranquia uf, String novoEnderecoUnidadeFranquia,
+            CalendarioSistema calendarioSistema) {
         for (UnidadeFranquia unidadeFranquia : vetorUnidadeFranquia) {
 
             if (unidadeFranquia != null && unidadeFranquia.equals(uf)) {
                 unidadeFranquia.setEnderecoUnidadeFranquia(novoEnderecoUnidadeFranquia);
-                unidadeFranquia.setDataModificacao(LocalDateTime.now());
+                unidadeFranquia.setDataModificacao(calendarioSistema.getDataHoraSistema());
                 return true;
             }
         }
         return false;
     }
 
-    public boolean atualizaLoginDonoDeUnidadeDeFranquia(UnidadeFranquia uf, String novoLoginDonoDeUnidadeFranquia) {
+    public boolean atualizaLoginDonoDeUnidadeDeFranquia(UnidadeFranquia uf, String novoLoginDonoDeUnidadeFranquia,
+            CalendarioSistema calendarioSistema) {
 
         if (!verificaSeLoginDonoDeUnidadeFranquiaEstaEmUso(novoLoginDonoDeUnidadeFranquia) == true) {
             for (UnidadeFranquia unidadeFranquia : vetorUnidadeFranquia) {
 
                 if (unidadeFranquia != null && unidadeFranquia.equals(uf)) {
                     unidadeFranquia.getPessoa().setLoginPessoa(novoLoginDonoDeUnidadeFranquia);
-                    unidadeFranquia.getPessoa().setDataModificacao(LocalDateTime.now());
+                    unidadeFranquia.getPessoa().setDataModificacao(calendarioSistema.getDataHoraSistema());
                     return true;
                 }
             }
@@ -134,13 +136,14 @@ public class UnidadeFranquiaDAO {
         return false;
     }
 
-    public boolean atualizaSenhaDonoDeUnidadeDeFranquia(UnidadeFranquia uf, String novaSenhaDonoDeUnidadeFranquia) {
+    public boolean atualizaSenhaDonoDeUnidadeDeFranquia(UnidadeFranquia uf, String novaSenhaDonoDeUnidadeFranquia,
+            CalendarioSistema calendarioSistema) {
 
         for (UnidadeFranquia unidadeFranquia : vetorUnidadeFranquia) {
 
             if (unidadeFranquia != null && unidadeFranquia.equals(uf)) {
                 unidadeFranquia.getPessoa().setSenhaPessoa(novaSenhaDonoDeUnidadeFranquia);
-                unidadeFranquia.getPessoa().setDataModificacao(LocalDateTime.now());
+                unidadeFranquia.getPessoa().setDataModificacao(calendarioSistema.getDataHoraSistema());
                 return true;
             }
         }
@@ -148,14 +151,15 @@ public class UnidadeFranquiaDAO {
         return false;
     }
 
-    public boolean atualizaTelefoneDonoDeUnidadeDeFranquia(UnidadeFranquia uf, String novoTelefoneDonoDeUnidadeFranquia) {
+    public boolean atualizaTelefoneDonoDeUnidadeDeFranquia(UnidadeFranquia uf, String novoTelefoneDonoDeUnidadeFranquia,
+            CalendarioSistema calendarioSistema) {
 
         if (!verificaSeTelefoneDonoDeUnidadeFranquiaEstaEmUso(novoTelefoneDonoDeUnidadeFranquia) == true) {
             for (UnidadeFranquia unidadeFranquia : vetorUnidadeFranquia) {
 
                 if (unidadeFranquia != null && unidadeFranquia.equals(uf)) {
                     unidadeFranquia.getPessoa().setTelefonePessoa(novoTelefoneDonoDeUnidadeFranquia);
-                    unidadeFranquia.getPessoa().setDataModificacao(LocalDateTime.now());
+                    unidadeFranquia.getPessoa().setDataModificacao(calendarioSistema.getDataHoraSistema());
                     return true;
                 }
             }

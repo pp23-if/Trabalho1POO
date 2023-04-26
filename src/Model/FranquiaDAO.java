@@ -6,14 +6,15 @@ public class FranquiaDAO {
 
     private Franquia[] vetorFranquia = new Franquia[50];
 
-    public FranquiaDAO(PessoaDAO pessoaDAO) {
+    public FranquiaDAO(PessoaDAO pessoaDAO, CalendarioSistema calendarioSistema) {
+        
         Pessoa donoDeFranquia = pessoaDAO.buscaPessoaCadastrada("Edu28", "24");
 
         if (donoDeFranquia != null) {
             Franquia franquia = new Franquia("Unimed".toUpperCase(), 
                     "123456789-30", "Patos de Minas",
                     "Rua Principal - Centro", donoDeFranquia, 
-                    LocalDateTime.now());
+                    calendarioSistema.getDataHoraSistema());
 
             adicionaFranquia(franquia);
         }

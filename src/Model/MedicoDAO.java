@@ -1,31 +1,29 @@
 package Model;
 
-import java.time.LocalDateTime;
-
 public class MedicoDAO {
 
     private Medico[] vetorMedico = new Medico[50];
 
-    public MedicoDAO(PessoaDAO pessoaDAO) {
+    public MedicoDAO(PessoaDAO pessoaDAO, CalendarioSistema calendarioSistema) {
 
         Pessoa pessoaMedico1 = pessoaDAO.buscaPessoaCadastrada("lm23", "456");
 
         if (pessoaMedico1 != null) {
-            Medico medico1 = new Medico("ABC-123", pessoaMedico1, "Ortopedista", LocalDateTime.now());
+            Medico medico1 = new Medico("ABC-123", pessoaMedico1, "Ortopedista", calendarioSistema.getDataHoraSistema());
             adicionaMedico(medico1);
         }
 
         Pessoa pessoaMedico2 = pessoaDAO.buscaPessoaCadastrada("ju25", "123");
 
         if (pessoaMedico2 != null) {
-            Medico medico2 = new Medico("DEF-456", pessoaMedico2, "Nutricionista", LocalDateTime.now());
+            Medico medico2 = new Medico("DEF-456", pessoaMedico2, "Nutricionista", calendarioSistema.getDataHoraSistema());
             adicionaMedico(medico2);
         }
 
         Pessoa pessoaMedico3 = pessoaDAO.buscaPessoaCadastrada("mpm", "100");
 
         if (pessoaMedico3 != null) {
-            Medico medico3 = new Medico("GHI-789", pessoaMedico3, "Cardiologista", LocalDateTime.now());
+            Medico medico3 = new Medico("GHI-789", pessoaMedico3, "Cardiologista", calendarioSistema.getDataHoraSistema());
             adicionaMedico(medico3);
         }
 

@@ -15,7 +15,6 @@ import Model.ProcedimentoDAO;
 import Model.UnidadeFranquia;
 import Model.UnidadeFranquiaDAO;
 import View.MenuTitulos;
-import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class GerenciaControladoras {
@@ -32,11 +31,11 @@ public class GerenciaControladoras {
 
     /*Instanciando os DAO.*/
     PessoaDAO pessoaDAO = new PessoaDAO(calendarioSistema);
-    MedicoDAO medicoDAO = new MedicoDAO(pessoaDAO);
-    FranquiaDAO franquiaDAO = new FranquiaDAO(pessoaDAO);
-    UnidadeFranquiaDAO unidadeFranquiaDAO = new UnidadeFranquiaDAO(pessoaDAO, franquiaDAO);
+    MedicoDAO medicoDAO = new MedicoDAO(pessoaDAO, calendarioSistema);
+    FranquiaDAO franquiaDAO = new FranquiaDAO(pessoaDAO, calendarioSistema);
+    UnidadeFranquiaDAO unidadeFranquiaDAO = new UnidadeFranquiaDAO(pessoaDAO, franquiaDAO, calendarioSistema);
     ConsultaDAO consultaDAO = new ConsultaDAO();
-    AdmnistradorDAO admnistradorDAO = new AdmnistradorDAO(pessoaDAO, franquiaDAO);
+    AdmnistradorDAO admnistradorDAO = new AdmnistradorDAO(pessoaDAO, franquiaDAO, calendarioSistema);
     InfoConsultaDAO infoConsultaDAO = new InfoConsultaDAO();
     ProcedimentoDAO procedimentoDAO = new ProcedimentoDAO();
 
