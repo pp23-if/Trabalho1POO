@@ -1,7 +1,6 @@
 package Model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class ProcedimentoDAO {
@@ -147,5 +146,25 @@ public class ProcedimentoDAO {
             return true;
         }
         return false;
+    }
+    
+    public boolean cancelaProcedimentosNaoRealizadosNoDia(CalendarioSistema calendarioSistema) {
+        
+        boolean canceladas = false;
+        for (Procedimento procedimento : vetorProcedimento) {
+            
+            if(procedimento != null && procedimento.getEstadoProcedimento().equals("Agendado")
+                && calendarioSistema.getDiaDoSistema().isAfter(procedimento.getDiaProcedimento()))
+            {
+                 procedimento.setEstadoProcedimento("Cancelado");
+                 procedimento.setDataModificacao(calendarioSistema.getDataHoraSistema());
+                 canceladas = true;
+            }
+             if (canceladas == true) {
+                return true;
+            }
+        }
+        return false;
+
     }
 }

@@ -66,7 +66,7 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 4: {
-                    menuOpcoesFinanceiro(financeiroAdmDAO, calendarioSistema, 
+                    menuOpcoesFinanceiro(financeiroAdmDAO, calendarioSistema,
                             consultaDAO, procedimentoDAO);
                     break;
                 }
@@ -437,7 +437,7 @@ public class AdmnistradorControladora {
     }
 
     private void menuOpcoesFinanceiro(FinanceiroAdmDAO financeiroAdmDAO,
-            CalendarioSistema calendarioSistema, ConsultaDAO consultaDAO, 
+            CalendarioSistema calendarioSistema, ConsultaDAO consultaDAO,
             ProcedimentoDAO procedimentoDAO) {
 
         int opcao;
@@ -446,7 +446,6 @@ public class AdmnistradorControladora {
             System.out.println("\nData e Hora do Sistema: " + calendarioSistema.getDataHoraSistema().format(DateTimeFormatter.
                     ofPattern("dd/MM/yyyy HH:mm:ss")));
             opcao = telaAdmistrador.menuFinanceiroAdm();
-            
 
             int dias = 0;
             switch (opcao) {
@@ -455,10 +454,10 @@ public class AdmnistradorControladora {
                     if (calendarioSistema.passaDias(dias) == true) {
                         System.out.println("\nDia Encerrado com sucesso.");
                         cancelaConsultasNaoAtendidasNoDia(consultaDAO, calendarioSistema);
+                        cancelaProcedimentosNaoAtendidosNoDia(procedimentoDAO, calendarioSistema);
                     } else {
                         System.out.println("\nNao foi possivel Encerrar o dia");
                     }
-                    
 
                     break;
                 }
@@ -479,12 +478,21 @@ public class AdmnistradorControladora {
 
         } while (opcao != 0);
     }
+
+    private void cancelaConsultasNaoAtendidasNoDia(ConsultaDAO consultaDAO,
+            CalendarioSistema calendarioSistema) {
+
+        if (consultaDAO.cancelaConsultasNaoRealizadasNoDia(calendarioSistema) == true) {
+            System.out.println("\nTodas Consultas Nao realizadas No Dia Anterior Foram Canceladas.");
+        }
+    }
     
-    private void cancelaConsultasNaoAtendidasNoDia(ConsultaDAO consultaDAO, 
-            CalendarioSistema calendarioSistema){
-        
-        if(consultaDAO.cancelaConsultasNaoRealizadasNoDia(calendarioSistema) == true){
-            System.out.println("\nTodas consultas nao realizadas foras canceladas.");
+    private void cancelaProcedimentosNaoAtendidosNoDia(ProcedimentoDAO procedimentoDAO, 
+            CalendarioSistema calendarioSistema)
+    {
+        if(procedimentoDAO.cancelaProcedimentosNaoRealizadosNoDia(calendarioSistema) == true)
+        {
+          System.out.println("\nTodos Procedimentos Nao Realizados No Dia Anterior Foram Cancelados.");  
         }
     }
 

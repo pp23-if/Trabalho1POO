@@ -1,7 +1,6 @@
 package Model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class ConsultaDAO {
@@ -165,14 +164,14 @@ public class ConsultaDAO {
     
     
     public boolean cancelaConsultasNaoRealizadasNoDia(CalendarioSistema calendarioSistema) {
-        System.out.println("dia do sistema = " + calendarioSistema.getDiaDoSistema());
-        
+       
         boolean canceladas = false;
         for (Consulta consulta : vetorConsulta) {
             if (consulta != null && consulta.getEstadoConsulta().equals("Agendada") 
                     && calendarioSistema.getDiaDoSistema().isAfter(consulta.getDiaConsulta())) {
 
                 consulta.setEstadoConsulta("Cancelada");
+                consulta.setDataModificacao(calendarioSistema.getDataHoraSistema());
                 canceladas = true;
             }
             if (canceladas == true) {
