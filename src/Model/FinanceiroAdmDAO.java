@@ -66,16 +66,21 @@ public class FinanceiroAdmDAO {
         
         double valorTotalConsultas = 0;
         double valorTotalprocedimentos = 0;
-        double valorTotalEntradas = 0;
+        double valorTotalEntradas;
       
-
+        int mesSitemaComparavel = calendarioSistema.getDiaDoSistema().minusDays(1).getMonthValue();
+        
         for (FinanceiroAdm financeiroAdm : vetotFinanceiroAdm) {
-
+             
+             
             if (financeiroAdm != null
-                    && financeiroAdm.getDescritivoMovimento().equals("Consulta")) {
+                    && financeiroAdm.getDescritivoMovimento().equals("Consulta")
+                    && financeiroAdm.getDataCriacao().getMonthValue() == mesSitemaComparavel) {
                 valorTotalConsultas += financeiroAdm.getValor();
-            } else if (financeiroAdm != null
-                    && financeiroAdm.getDescritivoMovimento().equals("Procedimento")) {
+            } 
+            else if (financeiroAdm != null
+                    && financeiroAdm.getDescritivoMovimento().equals("Procedimento")
+                    && financeiroAdm.getDataCriacao().getMonthValue() == mesSitemaComparavel) {
                 valorTotalprocedimentos += financeiroAdm.getValor();
             }
 

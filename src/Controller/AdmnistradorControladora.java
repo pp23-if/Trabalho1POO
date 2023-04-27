@@ -455,7 +455,7 @@ public class AdmnistradorControladora {
                         System.out.println("\nDia Encerrado com sucesso.");
                         cancelaConsultasNaoAtendidasNoDia(consultaDAO, calendarioSistema);
                         cancelaProcedimentosNaoAtendidosNoDia(procedimentoDAO, calendarioSistema);
-                        verificaSeEhPrimeiroDiaDoMes(calendarioSistema);
+                        verificaSeEhPrimeiroDiaDoMes(calendarioSistema, financeiroAdmDAO);
                     } else {
                         System.out.println("\nNao foi possivel Encerrar o dia");
                     }
@@ -498,9 +498,14 @@ public class AdmnistradorControladora {
         }
     }
     
-    private void verificaSeEhPrimeiroDiaDoMes(CalendarioSistema calendarioSistema)
+    private void verificaSeEhPrimeiroDiaDoMes(CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO)
     {
-        
+        int diaSistema = calendarioSistema.getDiaDoSistema().getDayOfMonth();
+       
+        if(diaSistema == 01)
+        {
+            financeiroAdmDAO.calculaRendaBruta(calendarioSistema);
+        }
     }
 
 }
