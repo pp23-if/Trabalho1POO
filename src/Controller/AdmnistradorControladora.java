@@ -67,7 +67,7 @@ public class AdmnistradorControladora {
                 }
                 case 4: {
                     menuOpcoesFinanceiro(financeiroAdmDAO, calendarioSistema,
-                            consultaDAO, procedimentoDAO);
+                            consultaDAO, procedimentoDAO, admnistrador);
                     break;
                 }
 
@@ -438,7 +438,7 @@ public class AdmnistradorControladora {
 
     private void menuOpcoesFinanceiro(FinanceiroAdmDAO financeiroAdmDAO,
             CalendarioSistema calendarioSistema, ConsultaDAO consultaDAO,
-            ProcedimentoDAO procedimentoDAO) {
+            ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador) {
 
         int opcao;
 
@@ -462,7 +462,7 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 2: {
-
+                    
                     break;
                 }
                 case 3: {

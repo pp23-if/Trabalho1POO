@@ -129,7 +129,8 @@ public class ConsultaDAO {
         return null;
     }
 
-    public boolean atenderConsulta(Medico medico, InfoConsultaDAO infoConsultaDAO, CalendarioSistema calendarioSistema) {
+    public boolean atenderConsulta(Medico medico, InfoConsultaDAO infoConsultaDAO, CalendarioSistema calendarioSistema, 
+            FinanceiroAdmDAO financeiroAdmDAO) {
         for (Consulta consulta : vetorConsulta) {
             if (consulta != null
                     && consulta.getMedico().equals(medico)
@@ -139,6 +140,7 @@ public class ConsultaDAO {
                 consulta.setDataModificacao(calendarioSistema.getDataHoraSistema());
 
                 infoConsultaDAO.recebeConsultaRealizada(consulta, calendarioSistema);
+                financeiroAdmDAO.geraMovimentacaoFinanceiraConsulta(consulta, calendarioSistema);
                 /*InfoConsulta infoConsulta = new InfoConsulta(consulta, "", calendarioSistema.getDataHoraSistema());
                 infoConsultaDAO.adicionaInfoConsulta(infoConsulta);*/
 
@@ -182,16 +184,5 @@ public class ConsultaDAO {
 
     }
     
-    public Consulta buscaConsultaPorFranquiaERepassaParaFinanceiro(Franquia franquia, FinanceiroAdmDAO financeiroAdmDAO) {
-        for (Consulta consulta : vetorConsulta) {
-            if (consulta != null
-                    && consulta.getUnidadeFranquia().getFranquia().equals(franquia)) {
-                     
-               
-            }
-        }
-        return null;
-
-    }
 
 }

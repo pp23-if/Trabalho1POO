@@ -65,8 +65,8 @@ public class MenuTitulosAdmistrador {
         builder.append("\n============ MENU FINANCEIRO ==============");
         builder.append("\n 0 - Para sair do programa..............: ");
         builder.append("\n 1 - Encerrar Dia.......................: ");
-        builder.append("\n 2 - Gerar Entradas.....................: ");
-        builder.append("\n 3 - Gerar Saidas.......................: ");
+        builder.append("\n 2 - Gerar Saidas.....................: ");
+        builder.append("\n 3 - .......................: ");
         builder.append("\n 4 - Ver Movimentos Financeiros..........: ");
         builder.append("\n\n Informe Opcao..........................: ");
 

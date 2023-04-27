@@ -1,5 +1,7 @@
 package Model;
 
+import java.time.LocalDateTime;
+
 public class FinanceiroAdmDAO {
 
     private FinanceiroAdm[] vetotFinanceiroAdm = new FinanceiroAdm[50];
@@ -40,9 +42,10 @@ public class FinanceiroAdmDAO {
         return null;
     }
     
-    public void geraMovimentacaoFinanceira(Franquia franquia, UnidadeFranquia unidadeFranquia,
-            ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO)
+    public void geraMovimentacaoFinanceiraConsulta(Consulta consulta, CalendarioSistema calendarioSistema)
     {
-        
+        FinanceiroAdm entradaConsultas = new FinanceiroAdm("Entrada", consulta.getValor(), 
+                consulta.getUnidadeFranquia(), "Consulta", calendarioSistema.getDataHoraSistema());
+        adicionaFinanceiroAdm(entradaConsultas);
     }
 }
