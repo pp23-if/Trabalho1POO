@@ -455,6 +455,7 @@ public class AdmnistradorControladora {
                         System.out.println("\nDia Encerrado com sucesso.");
                         cancelaConsultasNaoAtendidasNoDia(consultaDAO, calendarioSistema);
                         cancelaProcedimentosNaoAtendidosNoDia(procedimentoDAO, calendarioSistema);
+                        verificaSeEhPrimeiroDiaDoMes(calendarioSistema);
                     } else {
                         System.out.println("\nNao foi possivel Encerrar o dia");
                     }
@@ -462,6 +463,8 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 2: {
+                    System.out.println("\nO valor Somado Da CONSULTA E PROCEDIMENTO SAO: " + 
+                            financeiroAdmDAO.calculaRendaBruta(calendarioSistema));
                     
                     break;
                 }
@@ -493,6 +496,11 @@ public class AdmnistradorControladora {
         if (procedimentoDAO.cancelaProcedimentosNaoRealizadosNoDia(calendarioSistema) == true) {
             System.out.println("\nTodos Procedimentos Nao Realizados No Dia Anterior Foram Cancelados.");
         }
+    }
+    
+    private void verificaSeEhPrimeiroDiaDoMes(CalendarioSistema calendarioSistema)
+    {
+        
     }
 
 }

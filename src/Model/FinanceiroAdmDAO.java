@@ -29,42 +29,61 @@ public class FinanceiroAdmDAO {
         }
 
     }
-    
-    public FinanceiroAdm mostraTodosMovimentosFinanceiros()
-    {
+
+    public FinanceiroAdm mostraTodosMovimentosFinanceiros() {
         for (FinanceiroAdm financeiroAdm : vetotFinanceiroAdm) {
-            
-            if(financeiroAdm != null)
-            {
+
+            if (financeiroAdm != null) {
                 System.out.println(financeiroAdm + "\n");
             }
         }
         return null;
     }
-    
-    public FinanceiroAdm buscaMovimentacoesFinanceirasPorFranquia(Franquia franquia)
-    {
+
+    public FinanceiroAdm buscaMovimentacoesFinanceirasPorFranquia(Franquia franquia) {
         for (FinanceiroAdm financeiroAdm : vetotFinanceiroAdm) {
-            
-            if(financeiroAdm != null && financeiroAdm.getUnidadeFranquia().getFranquia().equals(franquia))
-            {
+
+            if (financeiroAdm != null && financeiroAdm.getUnidadeFranquia().getFranquia().equals(franquia)) {
                 System.out.println(financeiroAdm + "\n");
             }
         }
         return null;
     }
-    
-    public void geraMovimentacaoFinanceiraConsulta(Consulta consulta, CalendarioSistema calendarioSistema)
-    {
-        FinanceiroAdm entradaConsultas = new FinanceiroAdm("Entrada", consulta.getValor(), 
+
+    public void geraMovimentacaoFinanceiraConsulta(Consulta consulta, CalendarioSistema calendarioSistema) {
+        FinanceiroAdm entradaConsultas = new FinanceiroAdm("Entrada", consulta.getValor(),
                 consulta.getUnidadeFranquia(), "Consulta", calendarioSistema.getDataHoraSistema());
         adicionaFinanceiroAdm(entradaConsultas);
     }
-    
-    public void geraMovimentacaoFinanceiraProcedimento(Procedimento procedimento, CalendarioSistema calendarioSistema)
-    {
-        FinanceiroAdm entradaProcedimentos = new  FinanceiroAdm("Entrada", procedimento.getValorProcedimento(), 
-                procedimento.getConsulta().getUnidadeFranquia(),"Procedimento", calendarioSistema.getDataHoraSistema());
+
+    public void geraMovimentacaoFinanceiraProcedimento(Procedimento procedimento, CalendarioSistema calendarioSistema) {
+        FinanceiroAdm entradaProcedimentos = new FinanceiroAdm("Entrada", procedimento.getValorProcedimento(),
+                procedimento.getConsulta().getUnidadeFranquia(), "Procedimento", calendarioSistema.getDataHoraSistema());
         adicionaFinanceiroAdm(entradaProcedimentos);
+    }
+
+    public double calculaRendaBruta(CalendarioSistema calendarioSistema) {
+        
+        double valorTotalConsultas = 0;
+        double valorTotalprocedimentos = 0;
+        double valorTotalEntradas = 0;
+      
+
+        for (FinanceiroAdm financeiroAdm : vetotFinanceiroAdm) {
+
+            if (financeiroAdm != null
+                    && financeiroAdm.getDescritivoMovimento().equals("Consulta")) {
+                valorTotalConsultas += financeiroAdm.getValor();
+            } else if (financeiroAdm != null
+                    && financeiroAdm.getDescritivoMovimento().equals("Procedimento")) {
+                valorTotalprocedimentos += financeiroAdm.getValor();
+            }
+
+        }
+        valorTotalEntradas = valorTotalConsultas + valorTotalprocedimentos;
+        
+         
+        return valorTotalEntradas;
+
     }
 }
