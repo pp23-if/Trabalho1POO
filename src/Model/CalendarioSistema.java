@@ -11,7 +11,6 @@ public class CalendarioSistema {
     private LocalDateTime hoje;
     private LocalDateTime amanha;
     private LocalDate diaDoSistema;
-    
 
     public LocalDateTime getDataHoraSistema() {
         return dataHoraSistema;
@@ -24,16 +23,17 @@ public class CalendarioSistema {
     public LocalDate getDiaDoSistema() {
         return diaDoSistema;
     }
-    
-    
+
     public boolean passaDias(int dias) {
+
         hoje = this.dataHoraSistema;
 
         this.setDataHoraSistema(dataHoraSistema.plusDays(dias));
         amanha = this.dataHoraSistema;
+
         diaDoSistema = amanha.toLocalDate();
-        
-        if (verificaSeDiaPaasou(hoje, amanha) == true) {
+
+        if (verificaSeDiaPassou(hoje, amanha) == true) {
             return true;
         } else {
             return false;
@@ -41,7 +41,7 @@ public class CalendarioSistema {
 
     }
 
-    public boolean verificaSeDiaPaasou(LocalDateTime hojeDataSistema,
+    private boolean verificaSeDiaPassou(LocalDateTime hojeDataSistema,
             LocalDateTime amanhaDataSistema) {
 
         if (amanhaDataSistema.isAfter(hojeDataSistema)) {
@@ -50,7 +50,5 @@ public class CalendarioSistema {
             return false;
         }
     }
-    
-    
 
 }
