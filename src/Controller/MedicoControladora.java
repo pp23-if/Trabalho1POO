@@ -53,11 +53,13 @@ public class MedicoControladora {
                     break;
                 }
                 case 3: {
-                    menuOpcoesConsultaMedico(medico, consultaDAO, infoConsultaDAO, vd, calendarioSistema, financeiroAdmDAO);
+                    menuOpcoesConsultaMedico(medico, consultaDAO, infoConsultaDAO, vd, 
+                            calendarioSistema, financeiroAdmDAO);
                     break;
                 }
                 case 4: {
-                    menuOpcoesProcedimentosMedico(consultaDAO, procedimentoDAO, medico, vd, calendarioSistema);
+                    menuOpcoesProcedimentosMedico(consultaDAO, procedimentoDAO, medico, vd, 
+                            calendarioSistema, financeiroAdmDAO);
                     break;
                 }
                 case 5: {
@@ -188,7 +190,7 @@ public class MedicoControladora {
 
     private void menuOpcoesProcedimentosMedico(ConsultaDAO consultaDAO,
             ProcedimentoDAO procedimentoDAO, Medico medico, ValidacaoEntradaDados vd,
-            CalendarioSistema calendarioSistema) {
+            CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO) {
 
         int opcao;
 
@@ -201,7 +203,7 @@ public class MedicoControladora {
                     break;
                 }
                 case 2: {
-                     realizarProcedimento(procedimentoDAO, medico, vd, calendarioSistema);
+                     realizarProcedimento(procedimentoDAO, medico, vd, calendarioSistema, financeiroAdmDAO);
                     break;
                 }
                 case 3: {
@@ -326,7 +328,7 @@ public class MedicoControladora {
     }
 
     private void realizarProcedimento(ProcedimentoDAO procedimentoDAO, Medico medico,
-            ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) 
+            ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO) 
     {
         System.out.println("\n");
         Procedimento procedimentoEncontrado = procedimentoDAO.buscaProcedimentoNaoRealizado(medico);
@@ -343,7 +345,8 @@ public class MedicoControladora {
             String laudoProcedimento = scanner.nextLine();
             laudoProcedimento = vd.validaString(laudoProcedimento);
             
-            if(procedimentoDAO.realizarProcedimento(procedimentoEncontrado, laudoProcedimento, calendarioSistema) == true)
+            if(procedimentoDAO.realizarProcedimento(procedimentoEncontrado, laudoProcedimento, 
+                    calendarioSistema, financeiroAdmDAO) == true)
             {
                 System.out.println("\nProcedimento Realizado Com Sucesso!");
             }

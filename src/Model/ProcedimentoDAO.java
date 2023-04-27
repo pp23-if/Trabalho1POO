@@ -136,13 +136,16 @@ public class ProcedimentoDAO {
         return null;
     }
     
-    public boolean realizarProcedimento(Procedimento procedimento, String laudo, CalendarioSistema calendarioSistema)
+    public boolean realizarProcedimento(Procedimento procedimento, String laudo, 
+            CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO)
     {
         if(procedimento != null)
         {
             procedimento.setEstadoProcedimento("Realizado");
             procedimento.setLaudo(laudo);
             procedimento.setDataModificacao(calendarioSistema.getDataHoraSistema());
+            
+            financeiroAdmDAO.geraMovimentacaoFinanceiraProcedimento(procedimento, calendarioSistema);
             return true;
         }
         return false;

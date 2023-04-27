@@ -42,10 +42,29 @@ public class FinanceiroAdmDAO {
         return null;
     }
     
+    public FinanceiroAdm buscaMovimentacoesFinanceirasPorFranquia(Franquia franquia)
+    {
+        for (FinanceiroAdm financeiroAdm : vetotFinanceiroAdm) {
+            
+            if(financeiroAdm != null && financeiroAdm.getUnidadeFranquia().getFranquia().equals(franquia))
+            {
+                System.out.println(financeiroAdm + "\n");
+            }
+        }
+        return null;
+    }
+    
     public void geraMovimentacaoFinanceiraConsulta(Consulta consulta, CalendarioSistema calendarioSistema)
     {
         FinanceiroAdm entradaConsultas = new FinanceiroAdm("Entrada", consulta.getValor(), 
                 consulta.getUnidadeFranquia(), "Consulta", calendarioSistema.getDataHoraSistema());
         adicionaFinanceiroAdm(entradaConsultas);
+    }
+    
+    public void geraMovimentacaoFinanceiraProcedimento(Procedimento procedimento, CalendarioSistema calendarioSistema)
+    {
+        FinanceiroAdm entradaProcedimentos = new  FinanceiroAdm("Entrada", procedimento.getValorProcedimento(), 
+                procedimento.getConsulta().getUnidadeFranquia(),"Procedimento", calendarioSistema.getDataHoraSistema());
+        adicionaFinanceiroAdm(entradaProcedimentos);
     }
 }

@@ -471,7 +471,7 @@ public class AdmnistradorControladora {
                 }
                 case 4: {
                     System.out.println("\n");
-                    financeiroAdmDAO.mostraTodosMovimentosFinanceiros();
+                    financeiroAdmDAO.buscaMovimentacoesFinanceirasPorFranquia(admnistrador.getFranquia());
                     break;
                 }
 
