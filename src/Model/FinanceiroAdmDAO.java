@@ -91,4 +91,20 @@ public class FinanceiroAdmDAO {
 
     }
     
+    public double calculaParteValorAdmnistradora(double rendaBruta)
+    {
+        double valorAdministradora = 0;
+        
+        valorAdministradora = (rendaBruta * 0.05) + 1000;
+        
+        return valorAdministradora;
+    }
+    
+    public double calculaRendaLiquida(double rendaBruta, double parteAdministradora)
+    {
+        double rendaLiquida = rendaBruta - parteAdministradora;
+        
+        return rendaLiquida;
+    }
+    
 }

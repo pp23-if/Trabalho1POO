@@ -455,7 +455,10 @@ public class AdmnistradorControladora {
                         System.out.println("\nDia Encerrado com sucesso.");
                         cancelaConsultasNaoAtendidasNoDia(consultaDAO, calendarioSistema);
                         cancelaProcedimentosNaoAtendidosNoDia(procedimentoDAO, calendarioSistema);
-                        verificaSeEhPrimeiroDiaDoMes(calendarioSistema, financeiroAdmDAO);
+
+                        if (verificaSeEhPrimeiroDiaDoMes(calendarioSistema) == true) {
+                            pagaAdmnistradora(calendarioSistema, financeiroAdmDAO);
+                        }
                     } else {
                         System.out.println("\nNao foi possivel Encerrar o dia");
                     }
@@ -498,21 +501,37 @@ public class AdmnistradorControladora {
         }
     }
 
-    private void verificaSeEhPrimeiroDiaDoMes(CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO) {
-        
-        double rendaBruta = 0;
+    private boolean verificaSeEhPrimeiroDiaDoMes(CalendarioSistema calendarioSistema) {
+
         int diaSistema = calendarioSistema.getDiaDoSistema().getDayOfMonth();
 
         if (diaSistema == 01) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void pagaAdmnistradora(CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO) {
+
+        double rendaBruta;
+        double parteAdministradora;
+        double ganhoLiquido;
+
+        rendaBruta = financeiroAdmDAO.calculaRendaBruta(calendarioSistema);
+        parteAdministradora = financeiroAdmDAO.calculaParteValorAdmnistradora(rendaBruta);
+        ganhoLiquido = financeiroAdmDAO.calculaRendaLiquida(rendaBruta, parteAdministradora);
+        
+        if (rendaBruta > 0) {
+            System.out.println("\nDia De Pagamento!!!");
+            System.out.println("******Ganho Bruto: ");
+            System.out.println("R$: " + rendaBruta);
+
+            System.out.println("\n*******Parte Da Admnistradora: ");
+            System.out.println("R$: " + parteAdministradora);
             
-            rendaBruta = financeiroAdmDAO.calculaRendaBruta(calendarioSistema);
-
-            if (rendaBruta > 0) {
-                System.out.println("\nDia De Pagamento!!!");
-                System.out.println("\n******Ganho Bruto: ");
-                System.out.println("\nR$: " + rendaBruta);
-            }
-
+            System.out.println("******Ganho Liquido: ");
+            System.out.println("R$: " + ganhoLiquido);
         }
     }
 
