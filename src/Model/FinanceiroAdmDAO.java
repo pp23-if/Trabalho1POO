@@ -86,9 +86,9 @@ public class FinanceiroAdmDAO {
 
         }
         valorTotalEntradas = valorTotalConsultas + valorTotalprocedimentos;
-        
-         
+      
         return valorTotalEntradas;
 
     }
+    
 }

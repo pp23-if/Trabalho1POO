@@ -463,9 +463,9 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 2: {
-                    System.out.println("\nO valor Somado Da CONSULTA E PROCEDIMENTO SAO: " + 
-                            financeiroAdmDAO.calculaRendaBruta(calendarioSistema));
-                    
+                    System.out.println("\nO valor Somado Da CONSULTA E PROCEDIMENTO SAO: "
+                            + financeiroAdmDAO.calculaRendaBruta(calendarioSistema));
+
                     break;
                 }
                 case 3: {
@@ -497,14 +497,22 @@ public class AdmnistradorControladora {
             System.out.println("\nTodos Procedimentos Nao Realizados No Dia Anterior Foram Cancelados.");
         }
     }
-    
-    private void verificaSeEhPrimeiroDiaDoMes(CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO)
-    {
+
+    private void verificaSeEhPrimeiroDiaDoMes(CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO) {
+        
+        double rendaBruta = 0;
         int diaSistema = calendarioSistema.getDiaDoSistema().getDayOfMonth();
-       
-        if(diaSistema == 01)
-        {
-            financeiroAdmDAO.calculaRendaBruta(calendarioSistema);
+
+        if (diaSistema == 01) {
+            
+            rendaBruta = financeiroAdmDAO.calculaRendaBruta(calendarioSistema);
+
+            if (rendaBruta > 0) {
+                System.out.println("\nDia De Pagamento!!!");
+                System.out.println("\n******Ganho Bruto: ");
+                System.out.println("\nR$: " + rendaBruta);
+            }
+
         }
     }
 
