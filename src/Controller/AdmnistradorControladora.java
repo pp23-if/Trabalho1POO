@@ -530,7 +530,7 @@ public class AdmnistradorControladora {
             System.out.println("\n*******Parte Da Admnistradora: ");
             System.out.println("R$: " + parteAdministradora);
             
-            System.out.println("******Ganho Liquido: ");
+            System.out.println("\n******Ganho Liquido: ");
             System.out.println("R$: " + ganhoLiquido);
         }
     }
