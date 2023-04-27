@@ -170,7 +170,7 @@ public class ConsultaDAO {
         boolean canceladas = false;
         for (Consulta consulta : vetorConsulta) {
             if (consulta != null && consulta.getEstadoConsulta().equals("Agendada") 
-                    && consulta.getDiaConsulta().isEqual(calendarioSistema.getDiaDoSistema())) {
+                    && calendarioSistema.getDiaDoSistema().isAfter(consulta.getDiaConsulta())) {
 
                 consulta.setEstadoConsulta("Cancelada");
                 canceladas = true;

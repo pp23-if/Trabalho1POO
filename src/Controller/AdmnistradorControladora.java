@@ -453,8 +453,8 @@ public class AdmnistradorControladora {
                 case 1: {
                     dias++;
                     if (calendarioSistema.passaDias(dias) == true) {
-                        cancelaConsultasNaoAtendidasNoDia(consultaDAO, calendarioSistema);
                         System.out.println("\nDia Encerrado com sucesso.");
+                        cancelaConsultasNaoAtendidasNoDia(consultaDAO, calendarioSistema);
                     } else {
                         System.out.println("\nNao foi possivel Encerrar o dia");
                     }
