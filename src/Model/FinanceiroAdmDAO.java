@@ -27,4 +27,22 @@ public class FinanceiroAdmDAO {
         }
 
     }
+    
+    public FinanceiroAdm mostraTodosMovimentosFinanceiros()
+    {
+        for (FinanceiroAdm financeiroAdm : vetotFinanceiroAdm) {
+            
+            if(financeiroAdm != null)
+            {
+                System.out.println(financeiroAdm + "\n");
+            }
+        }
+        return null;
+    }
+    
+    public void geraMovimentacaoFinanceira(Franquia franquia, UnidadeFranquia unidadeFranquia,
+            ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO)
+    {
+        
+    }
 }

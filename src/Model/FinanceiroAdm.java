@@ -69,7 +69,7 @@ public class FinanceiroAdm {
 
     public FinanceiroAdm(String tipoMovimento, double valor, UnidadeFranquia unidadeFranquia,
             String descritivoMovimento, LocalDateTime dataCriacao) {
-        this.idFinanceiroAdm = idFinanceiroAdm;
+        this.idFinanceiroAdm = sequence++;
         this.tipoMovimento = tipoMovimento;
         this.valor = valor;
         this.unidadeFranquia = unidadeFranquia;

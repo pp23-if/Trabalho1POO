@@ -138,9 +138,9 @@ public class ConsultaDAO {
                 consulta.setEstadoConsulta("Realizada");
                 consulta.setDataModificacao(calendarioSistema.getDataHoraSistema());
 
-                InfoConsulta infoConsulta = new InfoConsulta(consulta, "", calendarioSistema.getDataHoraSistema());
-
-                infoConsultaDAO.adicionaInfoConsulta(infoConsulta);
+                infoConsultaDAO.recebeConsultaRealizada(consulta, calendarioSistema);
+                /*InfoConsulta infoConsulta = new InfoConsulta(consulta, "", calendarioSistema.getDataHoraSistema());
+                infoConsultaDAO.adicionaInfoConsulta(infoConsulta);*/
 
                 return true;
             }
@@ -179,6 +179,18 @@ public class ConsultaDAO {
             }
         }
         return false;
+
+    }
+    
+    public Consulta buscaConsultaPorFranquiaERepassaParaFinanceiro(Franquia franquia, FinanceiroAdmDAO financeiroAdmDAO) {
+        for (Consulta consulta : vetorConsulta) {
+            if (consulta != null
+                    && consulta.getUnidadeFranquia().getFranquia().equals(franquia)) {
+                     
+               
+            }
+        }
+        return null;
 
     }
 

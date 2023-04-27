@@ -1,7 +1,5 @@
 package Model;
 
-import java.time.LocalDateTime;
-
 public class InfoConsultaDAO {
 
     private InfoConsulta vetorInfoConsulta[] = new InfoConsulta[50];
@@ -72,5 +70,11 @@ public class InfoConsultaDAO {
             return true;
         }
         return false;
+    }
+    
+    public void recebeConsultaRealizada(Consulta consulta, CalendarioSistema calendarioSistema)
+    {
+        InfoConsulta infoConsulta = new InfoConsulta(consulta, "", calendarioSistema.getDataHoraSistema());
+        adicionaInfoConsulta(infoConsulta);
     }
 }

@@ -470,7 +470,8 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 4: {
-
+                    System.out.println("\n");
+                    financeiroAdmDAO.mostraTodosMovimentosFinanceiros();
                     break;
                 }
 
@@ -486,13 +487,11 @@ public class AdmnistradorControladora {
             System.out.println("\nTodas Consultas Nao realizadas No Dia Anterior Foram Canceladas.");
         }
     }
-    
-    private void cancelaProcedimentosNaoAtendidosNoDia(ProcedimentoDAO procedimentoDAO, 
-            CalendarioSistema calendarioSistema)
-    {
-        if(procedimentoDAO.cancelaProcedimentosNaoRealizadosNoDia(calendarioSistema) == true)
-        {
-          System.out.println("\nTodos Procedimentos Nao Realizados No Dia Anterior Foram Cancelados.");  
+
+    private void cancelaProcedimentosNaoAtendidosNoDia(ProcedimentoDAO procedimentoDAO,
+            CalendarioSistema calendarioSistema) {
+        if (procedimentoDAO.cancelaProcedimentosNaoRealizadosNoDia(calendarioSistema) == true) {
+            System.out.println("\nTodos Procedimentos Nao Realizados No Dia Anterior Foram Cancelados.");
         }
     }
 

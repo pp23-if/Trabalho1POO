@@ -3,6 +3,7 @@ package Controller;
 import Model.CalendarioSistema;
 import Model.Consulta;
 import Model.ConsultaDAO;
+import Model.FinanceiroAdmDAO;
 import Model.InfoConsulta;
 import Model.InfoConsultaDAO;
 import Model.Medico;
@@ -24,16 +25,18 @@ public class MedicoControladora {
 
     public MedicoControladora(Medico medico, MedicoDAO medicoDAO, ValidacaoEntradaDados vd,
             ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO,
-            ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO, CalendarioSistema calendarioSistema) {
+            ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO, CalendarioSistema calendarioSistema,
+            FinanceiroAdmDAO financeiroAdmDAO) {
 
         menuOpcoesMedico(medico, medicoDAO, vd, consultaDAO, infoConsultaDAO, procedimentoDAO, 
-                pessoaDAO, calendarioSistema);
+                pessoaDAO, calendarioSistema, financeiroAdmDAO);
 
     }
 
     private void menuOpcoesMedico(Medico medico, MedicoDAO medicoDAO,
             ValidacaoEntradaDados vd, ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO,
-            ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO, CalendarioSistema calendarioSistema) {
+            ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO, CalendarioSistema calendarioSistema,
+            FinanceiroAdmDAO financeiroAdmDAO) {
 
         int opcao;
 
@@ -50,7 +53,7 @@ public class MedicoControladora {
                     break;
                 }
                 case 3: {
-                    menuOpcoesConsultaMedico(medico, consultaDAO, infoConsultaDAO, vd, calendarioSistema);
+                    menuOpcoesConsultaMedico(medico, consultaDAO, infoConsultaDAO, vd, calendarioSistema, financeiroAdmDAO);
                     break;
                 }
                 case 4: {
@@ -120,7 +123,8 @@ public class MedicoControladora {
     }
 
     private void menuOpcoesConsultaMedico(Medico medico, ConsultaDAO consultaDAO,
-            InfoConsultaDAO infoConsultaDAO, ValidacaoEntradaDados vd,  CalendarioSistema calendarioSistema) {
+            InfoConsultaDAO infoConsultaDAO, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema,
+            FinanceiroAdmDAO financeiroAdmDAO) {
 
         int opcao;
 
