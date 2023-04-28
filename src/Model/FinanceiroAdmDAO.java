@@ -62,7 +62,12 @@ public class FinanceiroAdmDAO {
         adicionaFinanceiroAdm(entradaProcedimentos);
     }
     
-    public void geraSaidas(CalendarioSistema calendarioSistema, UnidadeFranquiaDAO unidadeFranquiaDAO)
+    public void geraMovimentacaoFinanceiraPagamentosFranquia(UnidadeFranquia unidadeFranquia, double valorPagamento)
+    {
+        
+    }
+    
+    public void comparaUnidades(CalendarioSistema calendarioSistema, UnidadeFranquiaDAO unidadeFranquiaDAO)
     {
         UnidadeFranquia aux[];
         
@@ -71,11 +76,16 @@ public class FinanceiroAdmDAO {
         for (UnidadeFranquia unidadeFranquia : aux) {
             for (FinanceiroAdm financeiroAdm : vetotFinanceiroAdm) {
                 
+                if(unidadeFranquia != null && financeiroAdm != null
+                    && !unidadeFranquia.equals(financeiroAdm.getUnidadeFranquia()))
+                {
+                    System.out.println(unidadeFranquia + "\n"); 
+                }
             }
         }
     }
 
-    public double calculaRendaBruta(CalendarioSistema calendarioSistema) {
+    public double calculaRendaBruta(CalendarioSistema calendarioSistema, UnidadeFranquia unidadeFranquia) {
         
         double valorTotalConsultas = 0;
         double valorTotalprocedimentos = 0;
@@ -88,11 +98,13 @@ public class FinanceiroAdmDAO {
              
             if (financeiroAdm != null
                     && financeiroAdm.getDescritivoMovimento().equals("Consulta")
+                    && financeiroAdm.getUnidadeFranquia().equals(unidadeFranquia)
                     && financeiroAdm.getDataCriacao().getMonthValue() == mesSitemaComparavel) {
                 valorTotalConsultas += financeiroAdm.getValor();
             } 
             else if (financeiroAdm != null
                     && financeiroAdm.getDescritivoMovimento().equals("Procedimento")
+                    && financeiroAdm.getUnidadeFranquia().equals(unidadeFranquia)
                     && financeiroAdm.getDataCriacao().getMonthValue() == mesSitemaComparavel) {
                 valorTotalprocedimentos += financeiroAdm.getValor();
             }
