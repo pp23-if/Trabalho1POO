@@ -541,9 +541,9 @@ public class AdmnistradorControladora {
                             unidadeSelecionada, calendarioSistema);
                     ganhoLiquido = financeiroAdmDAO.calculaRendaLiquida(rendaBruta, parteAdministradora);
 
-                    System.out.println("\nDia De Pagamento!!!");
+                   
                     System.out.println("\nUnidade: " + unidadeSelecionada);
-                    System.out.println("\n******Ganho Bruto: ");
+                    System.out.println("\n*******Ganho Bruto: ");
                     System.out.println("R$: " + rendaBruta);
 
                     System.out.println("\n*******Parte Da Admnistradora: ");
@@ -563,35 +563,6 @@ public class AdmnistradorControladora {
 
         } while (opcao != 0);
 
-
-        /*System.out.println("\n");
-        financeiroAdmDAO.comparaUnidades(calendarioSistema, unidadeFranquiaDAO);
-
-        System.out.println("\nInforme o ID - UnidadeFranquia da Qual deseja fazer o Pagamento: ");
-        int idUnidadeFranquia = Integer.parseInt(scanner.nextLine());
-
-        UnidadeFranquia unidadeSelecionada = unidadeFranquiaDAO.buscaUnidadeFranquiaPorId(idUnidadeFranquia);
-
-        if (unidadeSelecionada == null) {
-            System.out.println("\nUnidade de Franquia nao Encontrada!");
-        } else {
-            rendaBruta = financeiroAdmDAO.calculaRendaBruta(calendarioSistema, unidadeSelecionada);
-            parteAdministradora = financeiroAdmDAO.calculaParteValorAdmnistradora(rendaBruta,
-                    unidadeSelecionada, calendarioSistema);
-            ganhoLiquido = financeiroAdmDAO.calculaRendaLiquida(rendaBruta, parteAdministradora);
-
-            System.out.println("\nDia De Pagamento!!!");
-            System.out.println("\nUnidade: " + unidadeSelecionada);
-            System.out.println("\n******Ganho Bruto: ");
-            System.out.println("R$: " + rendaBruta);
-
-            System.out.println("\n*******Parte Da Admnistradora: ");
-            System.out.println("R$: " + parteAdministradora);
-
-            System.out.println("\n******Ganho Liquido: ");
-            System.out.println("R$: " + ganhoLiquido);
-
-        }*/
     }
 
 }
