@@ -62,9 +62,12 @@ public class FinanceiroAdmDAO {
         adicionaFinanceiroAdm(entradaProcedimentos);
     }
     
-    public void geraMovimentacaoFinanceiraPagamentosFranquia(UnidadeFranquia unidadeFranquia, double valorPagamento)
+    public void geraMovimentacaoFinanceiraPagamentosFranquia(UnidadeFranquia unidadeFranquia, 
+            double valorPagamento, CalendarioSistema calendarioSistema)
     {
-        
+        FinanceiroAdm saidaPagamentoFranquia = new FinanceiroAdm("Saida", valorPagamento, unidadeFranquia, 
+                "PagamentoFranquia", calendarioSistema.getDataHoraSistema());
+        adicionaFinanceiroAdm(saidaPagamentoFranquia);
     }
     
     public void comparaUnidades(CalendarioSistema calendarioSistema, UnidadeFranquiaDAO unidadeFranquiaDAO)
@@ -72,17 +75,36 @@ public class FinanceiroAdmDAO {
         UnidadeFranquia aux[];
         
         aux = unidadeFranquiaDAO.geraVetorAuxiliar();
+        UnidadeFranquia auxiliar = null;
+        
         
         for (UnidadeFranquia unidadeFranquia : aux) {
             for (FinanceiroAdm financeiroAdm : vetotFinanceiroAdm) {
-                
                 if(unidadeFranquia != null && financeiroAdm != null
-                    && !unidadeFranquia.equals(financeiroAdm.getUnidadeFranquia()))
+                    && unidadeFranquia.equals(financeiroAdm.getUnidadeFranquia()))
                 {
-                    System.out.println(unidadeFranquia + "\n"); 
+                    auxiliar = unidadeFranquia;
                 }
+                  
             }
+            retornaunidades(auxiliar);
         }
+    }
+    
+    public boolean retornaunidades(UnidadeFranquia uf)
+    {
+        UnidadeFranquia vetorRetorno[] = new UnidadeFranquia[50];
+        
+        for (int i = 0; i < vetorRetorno.length; i++) {
+            
+            if(uf != null && vetorRetorno[i] == null && uf != vetorRetorno[i])
+            {
+                vetorRetorno[i] = uf;
+                return true;
+            }
+            
+        }
+        return false;
     }
 
     public double calculaRendaBruta(CalendarioSistema calendarioSistema, UnidadeFranquia unidadeFranquia) {

@@ -518,8 +518,9 @@ public class AdmnistradorControladora {
 
         System.out.println("\n");
         financeiroAdmDAO.comparaUnidades(calendarioSistema, unidadeFranquiaDAO);
+  
 
-        System.out.println("\nInforme o ID - UnidadeFranquia da Qual deseja fazer o Pagamento: ");
+        /*System.out.println("\nInforme o ID - UnidadeFranquia da Qual deseja fazer o Pagamento: ");
         int idUnidadeFranquia = Integer.parseInt(scanner.nextLine());
 
         UnidadeFranquia unidadeSelecionada = unidadeFranquiaDAO.buscaUnidadeFranquiaPorId(idUnidadeFranquia);
@@ -542,7 +543,7 @@ public class AdmnistradorControladora {
                 System.out.println("\n******Ganho Liquido: ");
                 System.out.println("R$: " + ganhoLiquido);
             }
-        }
+        }*/
 
     }
 
