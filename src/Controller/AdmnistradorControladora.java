@@ -457,7 +457,7 @@ public class AdmnistradorControladora {
                         cancelaProcedimentosNaoAtendidosNoDia(procedimentoDAO, calendarioSistema);
 
                         if (verificaSeEhPrimeiroDiaDoMes(calendarioSistema) == true) {
-                            pagaAdmnistradora(calendarioSistema, financeiroAdmDAO, unidadeFranquiaDAO);
+                            pagaAdmnistradora(calendarioSistema, financeiroAdmDAO, unidadeFranquiaDAO, admnistrador);
                         }
                     } else {
                         System.out.println("\nNao foi possivel Encerrar o dia");
@@ -511,27 +511,30 @@ public class AdmnistradorControladora {
     }
 
     private void pagaAdmnistradora(CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO,
-            UnidadeFranquiaDAO unidadeFranquiaDAO) {
+            UnidadeFranquiaDAO unidadeFranquiaDAO, Admnistrador admnistrador) {
 
         double rendaBruta;
         double parteAdministradora;
         double ganhoLiquido;
 
-        int opcao = 0;
+        int opcao;
 
         do {
-            
-            if (opcao != 0) {
-                System.out.println("\n");
-                financeiroAdmDAO.comparaUnidades(calendarioSistema, unidadeFranquiaDAO);
 
-                System.out.println("\nInforme o ID - UnidadeFranquia da Qual deseja fazer o Pagamento: ");
-                int idUnidadeFranquia = Integer.parseInt(scanner.nextLine());
+            System.out.println("\n");
+            unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(admnistrador.getFranquia());
 
-                UnidadeFranquia unidadeSelecionada = unidadeFranquiaDAO.buscaUnidadeFranquiaPorId(idUnidadeFranquia);
+            System.out.println("\nInforme o ID - UnidadeFranquia da Qual deseja fazer o Pagamento: ");
+            int idUnidadeFranquia = Integer.parseInt(scanner.nextLine());
 
-                if (unidadeSelecionada == null) {
-                    System.out.println("\nUnidade de Franquia nao Encontrada!");
+            UnidadeFranquia unidadeSelecionada = unidadeFranquiaDAO.buscaUnidadeFranquiaPorId(idUnidadeFranquia);
+
+            if (unidadeSelecionada == null) {
+                System.out.println("\nUnidade de Franquia nao Encontrada!");
+            } else {
+
+                if (financeiroAdmDAO.verificaPagamentoUnidade(calendarioSistema, unidadeSelecionada) == true) {
+                    System.out.println("\nA Unidade Informada Ja Fez O Pagamento Esse Mes.");
                 } else {
                     rendaBruta = financeiroAdmDAO.calculaRendaBruta(calendarioSistema, unidadeSelecionada);
                     parteAdministradora = financeiroAdmDAO.calculaParteValorAdmnistradora(rendaBruta,
@@ -550,8 +553,9 @@ public class AdmnistradorControladora {
                     System.out.println("R$: " + ganhoLiquido);
 
                 }
+
             }
-            
+
             System.out.println("\n0 - Para Sair Do Modulo De Pagamentos: ");
             System.out.println("\n1 - Para Continuar Realizando Pagamentos: ");
             System.out.println("\nInforme Opcao : ");

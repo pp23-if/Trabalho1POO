@@ -70,18 +70,18 @@ public class FinanceiroAdmDAO {
         adicionaFinanceiroAdm(saidaPagamentoFranquia);
     }
     
-    public void comparaUnidades(CalendarioSistema calendarioSistema, UnidadeFranquiaDAO unidadeFranquiaDAO)
+    public boolean verificaPagamentoUnidade(CalendarioSistema calendarioSistema, UnidadeFranquia unidadeFranquia)
     {
-        int mesSitemaComparavel = calendarioSistema.getDiaDoSistema().minusDays(1).getMonthValue();
-        
         for (FinanceiroAdm financeiroAdm : vetotFinanceiroAdm) {
             
             if(financeiroAdm != null
-               && financeiroAdm.getTipoMovimento().equals("Entrada"))
+                && financeiroAdm.getUnidadeFranquia().equals(unidadeFranquia)
+                && financeiroAdm.getDescritivoMovimento().equals("PagamentoFranquia"))
             {
-                System.out.println(financeiroAdm.getUnidadeFranquia() +  "\n"); 
+                return true;
             }
         }
+        return false;
     }
     
   

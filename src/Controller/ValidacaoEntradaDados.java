@@ -8,14 +8,13 @@ public class ValidacaoEntradaDados {
     Scanner scanner = new Scanner(System.in);
 
     /*Todos os metodos dessa classe serao Publicos.*/
-    public String validaString(String nome) {
-        while (nome.equals("") || nome.equals(" ")) {
+    public String validaString(String texto) {
+        while (texto.equals("") || texto.equals(" ")) {
             System.out.println("entrada incorreta!");
-            System.out.println("Informe o Nome da Pessoa: ");
-            nome = scanner.nextLine();
+            texto = scanner.nextLine();
 
         }
-        return nome;
+        return texto;
     }
 
     public int validarINT(int numero) {
