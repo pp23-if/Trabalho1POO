@@ -77,8 +77,7 @@ public class FinanceiroAdmDAO {
         for (FinanceiroAdm financeiroAdm : vetotFinanceiroAdm) {
             
             if(financeiroAdm != null
-               && !financeiroAdm.getDescritivoMovimento().equals("PagamentoFranquia")
-               && financeiroAdm.getDataCriacao().getMonthValue() == mesSitemaComparavel)
+               && financeiroAdm.getTipoMovimento().equals("Entrada"))
             {
                 System.out.println(financeiroAdm.getUnidadeFranquia() +  "\n"); 
             }
@@ -118,11 +117,14 @@ public class FinanceiroAdmDAO {
 
     }
     
-    public double calculaParteValorAdmnistradora(double rendaBruta)
+    public double calculaParteValorAdmnistradora(double rendaBruta, UnidadeFranquia unidadeFranquia,
+            CalendarioSistema calendarioSistema)
     {
-        double valorAdministradora = 0;
+        double valorAdministradora;
         
         valorAdministradora = (rendaBruta * 0.05) + 1000;
+        
+        geraMovimentacaoFinanceiraPagamentosFranquia(unidadeFranquia, valorAdministradora, calendarioSistema);
         
         return valorAdministradora;
     }
