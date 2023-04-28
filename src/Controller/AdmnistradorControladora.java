@@ -67,7 +67,7 @@ public class AdmnistradorControladora {
                 }
                 case 4: {
                     menuOpcoesFinanceiro(financeiroAdmDAO, calendarioSistema,
-                            consultaDAO, procedimentoDAO, admnistrador);
+                            consultaDAO, procedimentoDAO, admnistrador, unidadeFranquiaDAO);
                     break;
                 }
 
@@ -438,7 +438,7 @@ public class AdmnistradorControladora {
 
     private void menuOpcoesFinanceiro(FinanceiroAdmDAO financeiroAdmDAO,
             CalendarioSistema calendarioSistema, ConsultaDAO consultaDAO,
-            ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador) {
+            ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador, UnidadeFranquiaDAO unidadeFranquiaDAO) {
 
         int opcao;
 
@@ -457,7 +457,7 @@ public class AdmnistradorControladora {
                         cancelaProcedimentosNaoAtendidosNoDia(procedimentoDAO, calendarioSistema);
 
                         if (verificaSeEhPrimeiroDiaDoMes(calendarioSistema) == true) {
-                            pagaAdmnistradora(calendarioSistema, financeiroAdmDAO);
+                            pagaAdmnistradora(calendarioSistema, financeiroAdmDAO, unidadeFranquiaDAO);
                         }
                     } else {
                         System.out.println("\nNao foi possivel Encerrar o dia");
@@ -512,9 +512,16 @@ public class AdmnistradorControladora {
         return false;
     }
 
-    private void pagaAdmnistradora(CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO) {
+    private void pagaAdmnistradora(CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO,
+            UnidadeFranquiaDAO unidadeFranquiaDAO) {
 
-        double rendaBruta;
+        financeiroAdmDAO.geraSaidas(calendarioSistema, unidadeFranquiaDAO);
+        
+        
+        
+        
+        
+        /*double rendaBruta;
         double parteAdministradora;
         double ganhoLiquido;
 
@@ -532,7 +539,7 @@ public class AdmnistradorControladora {
             
             System.out.println("\n******Ganho Liquido: ");
             System.out.println("R$: " + ganhoLiquido);
-        }
+        }*/
     }
 
 }

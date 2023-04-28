@@ -61,6 +61,19 @@ public class FinanceiroAdmDAO {
                 procedimento.getConsulta().getUnidadeFranquia(), "Procedimento", calendarioSistema.getDataHoraSistema());
         adicionaFinanceiroAdm(entradaProcedimentos);
     }
+    
+    public void geraSaidas(CalendarioSistema calendarioSistema, UnidadeFranquiaDAO unidadeFranquiaDAO)
+    {
+        UnidadeFranquia aux[];
+        
+        aux = unidadeFranquiaDAO.geraVetorAuxiliar();
+        
+        for (UnidadeFranquia unidadeFranquia : aux) {
+            for (FinanceiroAdm financeiroAdm : vetotFinanceiroAdm) {
+                
+            }
+        }
+    }
 
     public double calculaRendaBruta(CalendarioSistema calendarioSistema) {
         

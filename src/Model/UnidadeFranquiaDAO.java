@@ -202,4 +202,19 @@ public class UnidadeFranquiaDAO {
         }
         return null;
     }
+    
+    public UnidadeFranquia[] geraVetorAuxiliar()
+    {
+        UnidadeFranquia vetUnidadeAux[] = new UnidadeFranquia[50];
+        
+        for (int i = 0; i < vetorUnidadeFranquia.length; i++) {
+            
+            if(vetorUnidadeFranquia[i] != null)
+            {
+                vetUnidadeAux[i] = vetorUnidadeFranquia[i];
+            }
+            
+        }
+        return vetUnidadeAux;
+    }
 }
