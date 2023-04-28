@@ -141,9 +141,7 @@ public class ConsultaDAO {
 
                 infoConsultaDAO.recebeConsultaRealizada(consulta, calendarioSistema);
                 financeiroAdmDAO.geraMovimentacaoFinanceiraConsulta(consulta, calendarioSistema);
-                /*InfoConsulta infoConsulta = new InfoConsulta(consulta, "", calendarioSistema.getDataHoraSistema());
-                infoConsultaDAO.adicionaInfoConsulta(infoConsulta);*/
-
+               
                 return true;
             }
         }

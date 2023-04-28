@@ -72,11 +72,13 @@ public class FinanceiroAdmDAO {
     
     public boolean verificaPagamentoUnidade(CalendarioSistema calendarioSistema, UnidadeFranquia unidadeFranquia)
     {
+       
         for (FinanceiroAdm financeiroAdm : vetotFinanceiroAdm) {
             
             if(financeiroAdm != null
-                && financeiroAdm.getUnidadeFranquia().equals(unidadeFranquia)
-                && financeiroAdm.getDescritivoMovimento().equals("PagamentoFranquia"))
+              && financeiroAdm.getUnidadeFranquia().equals(unidadeFranquia)
+              && financeiroAdm.getDescritivoMovimento().equals("PagamentoFranquia")
+              && financeiroAdm.getDataCriacao().getMonthValue() == calendarioSistema.getDataHoraSistema().getMonthValue())
             {
                 return true;
             }

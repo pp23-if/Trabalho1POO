@@ -517,6 +517,7 @@ public class AdmnistradorControladora {
         double parteAdministradora;
         double ganhoLiquido;
 
+        boolean pago;
         int opcao;
 
         do {
@@ -533,8 +534,10 @@ public class AdmnistradorControladora {
                 System.out.println("\nUnidade de Franquia nao Encontrada!");
             } else {
 
-                if (financeiroAdmDAO.verificaPagamentoUnidade(calendarioSistema, unidadeSelecionada) == true) {
-                    System.out.println("\nA Unidade Informada Ja Fez O Pagamento Esse Mes.");
+                 pago = financeiroAdmDAO.verificaPagamentoUnidade(calendarioSistema, unidadeSelecionada);
+                
+                if (pago == true) {
+                    System.out.println("\n*** A Unidade Informada Ja Fez O Pagamento Esse Mes. ***");
                 } else {
                     rendaBruta = financeiroAdmDAO.calculaRendaBruta(calendarioSistema, unidadeSelecionada);
                     parteAdministradora = financeiroAdmDAO.calculaParteValorAdmnistradora(rendaBruta,
