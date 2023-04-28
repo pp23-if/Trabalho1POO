@@ -72,40 +72,20 @@ public class FinanceiroAdmDAO {
     
     public void comparaUnidades(CalendarioSistema calendarioSistema, UnidadeFranquiaDAO unidadeFranquiaDAO)
     {
-        UnidadeFranquia aux[];
+        int mesSitemaComparavel = calendarioSistema.getDiaDoSistema().minusDays(1).getMonthValue();
         
-        aux = unidadeFranquiaDAO.geraVetorAuxiliar();
-        UnidadeFranquia auxiliar = null;
-        
-        
-        for (UnidadeFranquia unidadeFranquia : aux) {
-            for (FinanceiroAdm financeiroAdm : vetotFinanceiroAdm) {
-                if(unidadeFranquia != null && financeiroAdm != null
-                    && unidadeFranquia.equals(financeiroAdm.getUnidadeFranquia()))
-                {
-                    auxiliar = unidadeFranquia;
-                }
-                  
+        for (FinanceiroAdm financeiroAdm : vetotFinanceiroAdm) {
+            
+            if(financeiroAdm != null
+               && !financeiroAdm.getDescritivoMovimento().equals("PagamentoFranquia")
+               && financeiroAdm.getDataCriacao().getMonthValue() == mesSitemaComparavel)
+            {
+                System.out.println(financeiroAdm.getUnidadeFranquia() +  "\n"); 
             }
-            retornaunidades(auxiliar);
         }
     }
     
-    public boolean retornaunidades(UnidadeFranquia uf)
-    {
-        UnidadeFranquia vetorRetorno[] = new UnidadeFranquia[50];
-        
-        for (int i = 0; i < vetorRetorno.length; i++) {
-            
-            if(uf != null && vetorRetorno[i] == null && uf != vetorRetorno[i])
-            {
-                vetorRetorno[i] = uf;
-                return true;
-            }
-            
-        }
-        return false;
-    }
+  
 
     public double calculaRendaBruta(CalendarioSistema calendarioSistema, UnidadeFranquia unidadeFranquia) {
         
