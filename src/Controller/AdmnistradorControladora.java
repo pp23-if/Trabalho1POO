@@ -5,6 +5,7 @@ import Model.AdmnistradorDAO;
 import Model.CalendarioSistema;
 import Model.Consulta;
 import Model.ConsultaDAO;
+import Model.FinanceiroAdm;
 import Model.FinanceiroAdmDAO;
 import Model.Medico;
 import Model.MedicoDAO;
@@ -16,6 +17,7 @@ import Model.UnidadeFranquia;
 import Model.UnidadeFranquiaDAO;
 import View.MenuTitulosAdmistrador;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -67,7 +69,7 @@ public class AdmnistradorControladora {
                 }
                 case 4: {
                     menuOpcoesFinanceiro(financeiroAdmDAO, calendarioSistema,
-                            consultaDAO, procedimentoDAO, admnistrador, unidadeFranquiaDAO);
+                            consultaDAO, procedimentoDAO, admnistrador, unidadeFranquiaDAO, vd);
                     break;
                 }
 
@@ -438,7 +440,8 @@ public class AdmnistradorControladora {
 
     private void menuOpcoesFinanceiro(FinanceiroAdmDAO financeiroAdmDAO,
             CalendarioSistema calendarioSistema, ConsultaDAO consultaDAO,
-            ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador, UnidadeFranquiaDAO unidadeFranquiaDAO) {
+            ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador, UnidadeFranquiaDAO unidadeFranquiaDAO,
+            ValidacaoEntradaDados vd) {
 
         int opcao;
 
@@ -457,7 +460,7 @@ public class AdmnistradorControladora {
                         cancelaProcedimentosNaoAtendidosNoDia(procedimentoDAO, calendarioSistema);
 
                         if (verificaSeEhPrimeiroDiaDoMes(calendarioSistema) == true) {
-                            pagaAdmnistradora(calendarioSistema, financeiroAdmDAO, unidadeFranquiaDAO, admnistrador);
+                            pagaAdmnistradora(calendarioSistema, financeiroAdmDAO, unidadeFranquiaDAO, admnistrador, vd);
                         }
                     } else {
                         System.out.println("\nNao foi possivel Encerrar o dia");
@@ -466,7 +469,7 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 2: {
-
+                    pagaDespesasComuns(calendarioSistema, unidadeFranquiaDAO, admnistrador, vd, financeiroAdmDAO);
                     break;
                 }
                 case 3: {
@@ -511,7 +514,7 @@ public class AdmnistradorControladora {
     }
 
     private void pagaAdmnistradora(CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO,
-            UnidadeFranquiaDAO unidadeFranquiaDAO, Admnistrador admnistrador) {
+            UnidadeFranquiaDAO unidadeFranquiaDAO, Admnistrador admnistrador, ValidacaoEntradaDados vd) {
 
         double rendaBruta;
         double parteAdministradora;
@@ -529,6 +532,7 @@ public class AdmnistradorControladora {
 
             System.out.println("\nInforme o ID - UnidadeFranquia da Qual deseja fazer o Pagamento: ");
             int idUnidadeFranquia = Integer.parseInt(scanner.nextLine());
+            idUnidadeFranquia = vd.validarINT(idUnidadeFranquia);
 
             UnidadeFranquia unidadeSelecionada = unidadeFranquiaDAO.buscaUnidadeFranquiaPorId(idUnidadeFranquia);
 
@@ -567,6 +571,45 @@ public class AdmnistradorControladora {
 
         } while (opcao != 0);
 
+    }
+
+    private void pagaDespesasComuns(CalendarioSistema calendarioSistema, UnidadeFranquiaDAO unidadeFranquiaDAO,
+            Admnistrador admnistrador, ValidacaoEntradaDados vd, FinanceiroAdmDAO financeiroAdmDAO) {
+        
+        System.out.println("\n");
+        unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(admnistrador.getFranquia());
+
+        System.out.println("\nInforme o ID - UnidadeFranquia da Qual deseja fazer o Pagamento: ");
+        int idUnidadeFranquia = Integer.parseInt(scanner.nextLine());
+        idUnidadeFranquia = vd.validarINT(idUnidadeFranquia);
+
+        UnidadeFranquia unidadeSelecionada = unidadeFranquiaDAO.buscaUnidadeFranquiaPorId(idUnidadeFranquia);
+
+        if (unidadeSelecionada == null) {
+            System.out.println("\nUnidade de Franquia nao Encontrada!");
+        }
+        else
+        {
+            System.out.println("\nInforme O Descritivo Do Movimento: ");
+            String descritivoMovimento = scanner.nextLine();
+            descritivoMovimento = vd.validaString(descritivoMovimento);
+            
+            System.out.println("\nInforme O Valor Do Pagamento: ");
+            double valorPagamento = Double.parseDouble(scanner.nextLine());
+            valorPagamento = vd.validarDoble(valorPagamento);
+            
+            FinanceiroAdm financeiroAdm = new FinanceiroAdm("Saida", valorPagamento, unidadeSelecionada, 
+                    descritivoMovimento, calendarioSistema.getDataHoraSistema());
+            
+            if(financeiroAdmDAO.adicionaFinanceiroAdm(financeiroAdm) == true)
+            {
+                System.out.println("\nPagamento Realizado Com Sucesso!");
+            }
+            else
+            {
+               System.out.println("\nNao Foi Possivel Realizar O Pagamento."); 
+            }
+        }
     }
 
 }
