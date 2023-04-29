@@ -470,12 +470,12 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 3: {
-
+                    System.out.println("\n");
+                    financeiroAdmDAO.buscaMovimentacoesFinanceirasPorFranquia(admnistrador.getFranquia());
                     break;
                 }
                 case 4: {
-                    System.out.println("\n");
-                    financeiroAdmDAO.buscaMovimentacoesFinanceirasPorFranquia(admnistrador.getFranquia());
+
                     break;
                 }
 
@@ -520,6 +520,8 @@ public class AdmnistradorControladora {
         boolean pago;
         int opcao;
 
+        System.out.println("\n============ Dia de Pagamento!!! =============");
+
         do {
 
             System.out.println("\n");
@@ -534,8 +536,8 @@ public class AdmnistradorControladora {
                 System.out.println("\nUnidade de Franquia nao Encontrada!");
             } else {
 
-                 pago = financeiroAdmDAO.verificaPagamentoUnidade(calendarioSistema, unidadeSelecionada);
-                
+                pago = financeiroAdmDAO.verificaPagamentoUnidade(calendarioSistema, unidadeSelecionada);
+
                 if (pago == true) {
                     System.out.println("\n*** A Unidade Informada Ja Fez O Pagamento Esse Mes. ***");
                 } else {
@@ -544,7 +546,6 @@ public class AdmnistradorControladora {
                             unidadeSelecionada, calendarioSistema);
                     ganhoLiquido = financeiroAdmDAO.calculaRendaLiquida(rendaBruta, parteAdministradora);
 
-                   
                     System.out.println("\nUnidade: " + unidadeSelecionada);
                     System.out.println("\n*******Ganho Bruto: ");
                     System.out.println("R$: " + rendaBruta);
