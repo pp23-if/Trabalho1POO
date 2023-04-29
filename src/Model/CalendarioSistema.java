@@ -10,7 +10,7 @@ public class CalendarioSistema {
     private LocalDateTime dataHoraSistema = LocalDateTime.of(2023, 1, 25, 8, 0, 0);
     private LocalDateTime hoje;
     private LocalDateTime amanha;
-    private LocalDate diaDoSistema;
+    private LocalDate diaDoSistema = this.dataHoraSistema.toLocalDate();
 
     public LocalDateTime getDataHoraSistema() {
         return dataHoraSistema;
@@ -27,7 +27,7 @@ public class CalendarioSistema {
     public boolean passaDias(int dias) {
 
         hoje = this.dataHoraSistema;
-
+        
         this.setDataHoraSistema(dataHoraSistema.plusDays(dias));
         amanha = this.dataHoraSistema;
 

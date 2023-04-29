@@ -135,6 +135,9 @@ public class MedicoControladora {
 
             switch (opcao) {
                 case 1: {
+                    
+                    System.out.println("\n");
+                    consultaDAO.buscaConsultasDoDia(calendarioSistema, medico);
 
                     if (consultaDAO.atenderConsulta(medico, infoConsultaDAO, calendarioSistema, financeiroAdmDAO) == true) {
                         System.out.println("\nConsulta atendida com sucesso.");

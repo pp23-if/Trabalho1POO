@@ -134,7 +134,8 @@ public class ConsultaDAO {
         for (Consulta consulta : vetorConsulta) {
             if (consulta != null
                     && consulta.getMedico().equals(medico)
-                    && consulta.getEstadoConsulta().equals("Agendada")) {
+                    && consulta.getEstadoConsulta().equals("Agendada")
+                    && consulta.getDiaConsulta().isEqual(calendarioSistema.getDiaDoSistema())) {
 
                 consulta.setEstadoConsulta("Realizada");
                 consulta.setDataModificacao(calendarioSistema.getDataHoraSistema());
@@ -148,6 +149,22 @@ public class ConsultaDAO {
         return false;
     }
 
+    public Consulta buscaConsultasDoDia(CalendarioSistema calendarioSistema, Medico medico)
+    {
+        
+        for (Consulta consulta : vetorConsulta) {
+            
+            if(consulta != null
+              && consulta.getMedico().equals(medico)
+              && consulta.getEstadoConsulta().equals("Agendada")
+              && consulta.getDiaConsulta().isEqual(calendarioSistema.getDiaDoSistema()))
+            {
+                System.out.println(consulta + "\n");
+            }
+        }
+        return null;
+    }
+    
     public Consulta buscaConsultasQueTemMedicoSolicitanteEPacienteEscolhido(Pessoa pessoa, Medico medico) {
         for (Consulta consulta : vetorConsulta) {
 
