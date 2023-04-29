@@ -121,13 +121,14 @@ public class ProcedimentoDAO {
         return null;
     }
     
-    public Procedimento buscaProcedimentoNaoRealizado(Medico medico)
+    public Procedimento buscaProcedimentoNaoRealizado(Medico medico, CalendarioSistema calendarioSistema)
     {
         for (Procedimento procedimento : vetorProcedimento) {
             
             if(procedimento != null
                && procedimento.getConsulta().getMedico().equals(medico)
-               && procedimento.getEstadoProcedimento().equals("Agendado"))
+               && procedimento.getEstadoProcedimento().equals("Agendado")
+               && procedimento.getDiaProcedimento().isEqual(calendarioSistema.getDiaDoSistema()))
             {
                 return procedimento;
             }
@@ -135,6 +136,8 @@ public class ProcedimentoDAO {
         }
         return null;
     }
+    
+   
     
     public boolean realizarProcedimento(Procedimento procedimento, String laudo, 
             CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO)

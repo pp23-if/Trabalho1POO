@@ -334,7 +334,7 @@ public class MedicoControladora {
             ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO) 
     {
         System.out.println("\n");
-        Procedimento procedimentoEncontrado = procedimentoDAO.buscaProcedimentoNaoRealizado(medico);
+        Procedimento procedimentoEncontrado = procedimentoDAO.buscaProcedimentoNaoRealizado(medico, calendarioSistema);
         
         if(procedimentoEncontrado == null)
         {
