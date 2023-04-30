@@ -7,6 +7,7 @@ import Model.Consulta;
 import Model.ConsultaDAO;
 import Model.FinanceiroAdm;
 import Model.FinanceiroAdmDAO;
+import Model.FinanceiroMedicoDAO;
 import Model.Medico;
 import Model.MedicoDAO;
 import Model.Pessoa;
@@ -31,11 +32,11 @@ public class AdmnistradorControladora {
     public AdmnistradorControladora(PessoaDAO pessoaDAO, AdmnistradorDAO admnistradorDAO,
             UnidadeFranquiaDAO unidadeFranquiaDAO, ConsultaDAO consultaDAO, ValidacaoEntradaDados vd,
             Admnistrador admnistrador, MedicoDAO medicoDAO, ProcedimentoDAO procedimentoDAO,
-            CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO) {
+            CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO) {
 
         menuOpcoesAdmnistrador(pessoaDAO, admnistradorDAO,
                 unidadeFranquiaDAO, consultaDAO, vd, admnistrador, medicoDAO, procedimentoDAO, calendarioSistema,
-                financeiroAdmDAO);
+                financeiroAdmDAO, financeiroMedicoDAO);
 
     }
 
@@ -43,7 +44,7 @@ public class AdmnistradorControladora {
             AdmnistradorDAO admnistradorDAO, UnidadeFranquiaDAO unidadeFranquiaDAO,
             ConsultaDAO consultaDAO, ValidacaoEntradaDados vd, Admnistrador admnistrador,
             MedicoDAO medicoDAO, ProcedimentoDAO procedimentoDAO, CalendarioSistema calendarioSistema,
-            FinanceiroAdmDAO financeiroAdmDAO) {
+            FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO) {
 
         int opcao;
 
@@ -69,7 +70,7 @@ public class AdmnistradorControladora {
                 }
                 case 4: {
                     menuOpcoesFinanceiro(financeiroAdmDAO, calendarioSistema,
-                            consultaDAO, procedimentoDAO, admnistrador, unidadeFranquiaDAO, vd);
+                     consultaDAO, procedimentoDAO, admnistrador, unidadeFranquiaDAO, vd, financeiroMedicoDAO, medicoDAO);
                     break;
                 }
 
@@ -441,7 +442,7 @@ public class AdmnistradorControladora {
     private void menuOpcoesFinanceiro(FinanceiroAdmDAO financeiroAdmDAO,
             CalendarioSistema calendarioSistema, ConsultaDAO consultaDAO,
             ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador, UnidadeFranquiaDAO unidadeFranquiaDAO,
-            ValidacaoEntradaDados vd) {
+            ValidacaoEntradaDados vd, FinanceiroMedicoDAO financeiroMedicoDAO, MedicoDAO medicoDAO) {
 
         int opcao;
 
@@ -453,14 +454,22 @@ public class AdmnistradorControladora {
             int dias = 0;
             switch (opcao) {
                 case 1: {
+                    
                     dias++;
+                    
                     if (calendarioSistema.passaDias(dias) == true) {
                         System.out.println("\nDia Encerrado com sucesso.");
                         cancelaConsultasNaoAtendidasNoDia(consultaDAO, calendarioSistema);
                         cancelaProcedimentosNaoAtendidosNoDia(procedimentoDAO, calendarioSistema);
 
                         if (verificaSeEhPrimeiroDiaDoMes(calendarioSistema) == true) {
-                            pagaAdmnistradora(calendarioSistema, financeiroAdmDAO, unidadeFranquiaDAO, admnistrador, vd);
+                            
+                            if(pagaAdmnistradora(calendarioSistema, financeiroAdmDAO, unidadeFranquiaDAO, 
+                                    admnistrador, vd) == true)
+                            {
+                                CalculaValoresMedicos(calendarioSistema, consultaDAO, procedimentoDAO, 
+                                        financeiroMedicoDAO, medicoDAO, vd);
+                            }
                         }
                     } else {
                         System.out.println("\nNao foi possivel Encerrar o dia");
@@ -513,7 +522,7 @@ public class AdmnistradorControladora {
         return false;
     }
 
-    private void pagaAdmnistradora(CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO,
+    private boolean pagaAdmnistradora(CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO,
             UnidadeFranquiaDAO unidadeFranquiaDAO, Admnistrador admnistrador, ValidacaoEntradaDados vd) {
 
         double rendaBruta;
@@ -522,6 +531,8 @@ public class AdmnistradorControladora {
 
         boolean pago;
         int opcao;
+        
+        boolean saiu = false;
 
         System.out.println("\n============ Dia de Pagamento!!! =============");
 
@@ -564,17 +575,19 @@ public class AdmnistradorControladora {
 
             }
 
-            System.out.println("\n0 - Para Sair Do Modulo De Pagamentos: ");
-            System.out.println("\n1 - Para Continuar Realizando Pagamentos: ");
+            System.out.println("\n0 - Para Sair Do Modulo De Pagamentos Franquia: ");
+            System.out.println("\n1 - Para Continuar Realizando Pagamentos Franquia: ");
             System.out.println("\nInforme Opcao : ");
             opcao = Integer.parseInt(scanner.nextLine());
+            
+            if(opcao == 0)
+            {
+                saiu = true;
+            }
 
-        } while (opcao != 0);
+        } while (saiu == false);
 
-        if (opcao == 0) {
-            pagarMedicos(calendarioSistema);
-        }
-
+        return saiu == true;
     }
 
     private void pagaDespesasComuns(CalendarioSistema calendarioSistema, UnidadeFranquiaDAO unidadeFranquiaDAO,
@@ -611,10 +624,39 @@ public class AdmnistradorControladora {
         }
     }
 
-    private void pagarMedicos(CalendarioSistema calendarioSistema) {
+    private void CalculaValoresMedicos(CalendarioSistema calendarioSistema, ConsultaDAO consultaDAO, 
+            ProcedimentoDAO procedimentoDAO, FinanceiroMedicoDAO financeiroMedicoDAO, 
+            MedicoDAO medicoDAO, ValidacaoEntradaDados vd) {
+        
+         double valorConsultas;
+         double valorProcedimentos;
+         double parteUnidadeFranquia;
+        
+         boolean medicoValorCalculado;
+         int opcao;
+        
        
          System.out.println("\n============ Pagamento Dos Medicos! =============");
          
+          do {
+
+            System.out.println("\n");
+            medicoDAO.mostraTodosMedicos();
+            
+            System.out.println("\nInforme o ID - Medico Que deseja fazer o Pagamento: ");
+            int idMedico = Integer.parseInt(scanner.nextLine());
+            idMedico = vd.validarINT(idMedico);
+            
+            //fazer a pesquisa dos vencimentos dos medicos.
+            
+            
+
+            System.out.println("\n0 - Para Sair Do Modulo De Geracao De Vencimentos Medicos: ");
+            System.out.println("\n1 - Para Continuar Realizando Geracao De Vencimentos Medicos: ");
+            System.out.println("\nInforme Opcao : ");
+            opcao = Integer.parseInt(scanner.nextLine());
+
+        } while (opcao != 0);
          
     }
 }

@@ -5,6 +5,7 @@ import Model.AdmnistradorDAO;
 import Model.CalendarioSistema;
 import Model.ConsultaDAO;
 import Model.FinanceiroAdmDAO;
+import Model.FinanceiroMedicoDAO;
 import Model.Franquia;
 import Model.FranquiaDAO;
 import Model.InfoConsultaDAO;
@@ -40,6 +41,7 @@ public class GerenciaControladoras {
     InfoConsultaDAO infoConsultaDAO = new InfoConsultaDAO();
     ProcedimentoDAO procedimentoDAO = new ProcedimentoDAO();
     FinanceiroAdmDAO financeiroAdmDAO = new FinanceiroAdmDAO();
+    FinanceiroMedicoDAO financeiroMedicoDAO = new FinanceiroMedicoDAO();
 
     public GerenciaControladoras() {
 
@@ -187,7 +189,7 @@ public class GerenciaControladoras {
                         = new AdmnistradorControladora(pessoaDAO, admnistradorDAO, 
                                 unidadeFranquiaDAO, consultaDAO, vd, 
                                 admnistradorEncontrado, medicoDAO, 
-                                procedimentoDAO, calendarioSistema, financeiroAdmDAO);
+                                procedimentoDAO, calendarioSistema, financeiroAdmDAO, financeiroMedicoDAO);
             }
 
         } else {
