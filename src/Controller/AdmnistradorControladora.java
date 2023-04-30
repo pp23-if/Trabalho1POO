@@ -571,11 +571,15 @@ public class AdmnistradorControladora {
 
         } while (opcao != 0);
 
+        if (opcao == 0) {
+            pagarMedicos(calendarioSistema);
+        }
+
     }
 
     private void pagaDespesasComuns(CalendarioSistema calendarioSistema, UnidadeFranquiaDAO unidadeFranquiaDAO,
             Admnistrador admnistrador, ValidacaoEntradaDados vd, FinanceiroAdmDAO financeiroAdmDAO) {
-        
+
         System.out.println("\n");
         unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(admnistrador.getFranquia());
 
@@ -587,29 +591,30 @@ public class AdmnistradorControladora {
 
         if (unidadeSelecionada == null) {
             System.out.println("\nUnidade de Franquia nao Encontrada!");
-        }
-        else
-        {
+        } else {
             System.out.println("\nInforme O Descritivo Do Movimento: ");
             String descritivoMovimento = scanner.nextLine();
             descritivoMovimento = vd.validaString(descritivoMovimento);
-            
+
             System.out.println("\nInforme O Valor Do Pagamento: ");
             double valorPagamento = Double.parseDouble(scanner.nextLine());
             valorPagamento = vd.validarDoble(valorPagamento);
-            
-            FinanceiroAdm financeiroAdm = new FinanceiroAdm("Saida", valorPagamento, unidadeSelecionada, 
+
+            FinanceiroAdm financeiroAdm = new FinanceiroAdm("Saida", valorPagamento, unidadeSelecionada,
                     descritivoMovimento, calendarioSistema.getDataHoraSistema());
-            
-            if(financeiroAdmDAO.adicionaFinanceiroAdm(financeiroAdm) == true)
-            {
+
+            if (financeiroAdmDAO.adicionaFinanceiroAdm(financeiroAdm) == true) {
                 System.out.println("\nPagamento Realizado Com Sucesso!");
-            }
-            else
-            {
-               System.out.println("\nNao Foi Possivel Realizar O Pagamento."); 
+            } else {
+                System.out.println("\nNao Foi Possivel Realizar O Pagamento.");
             }
         }
     }
 
+    private void pagarMedicos(CalendarioSistema calendarioSistema) {
+       
+         System.out.println("\n============ Pagamento Dos Medicos! =============");
+         
+         
+    }
 }

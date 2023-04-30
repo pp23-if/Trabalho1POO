@@ -1,7 +1,5 @@
 package Model;
 
-import java.time.LocalDateTime;
-
 public class FinanceiroAdmDAO {
 
     private FinanceiroAdm[] vetotFinanceiroAdm = new FinanceiroAdm[50];
@@ -137,5 +135,7 @@ public class FinanceiroAdmDAO {
         
         return rendaLiquida;
     }
+    
+    
     
 }
