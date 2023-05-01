@@ -129,7 +129,7 @@ public class ConsultaDAO {
         return null;
     }
 
-    public boolean atenderConsulta(Medico medico, InfoConsultaDAO infoConsultaDAO, CalendarioSistema calendarioSistema, 
+    public boolean atenderConsulta(Medico medico, InfoConsultaDAO infoConsultaDAO, CalendarioSistema calendarioSistema,
             FinanceiroAdmDAO financeiroAdmDAO) {
         for (Consulta consulta : vetorConsulta) {
             if (consulta != null
@@ -142,29 +142,27 @@ public class ConsultaDAO {
 
                 infoConsultaDAO.recebeConsultaRealizada(consulta, calendarioSistema);
                 financeiroAdmDAO.geraMovimentacaoFinanceiraConsulta(consulta, calendarioSistema);
-               
+
                 return true;
             }
         }
         return false;
     }
 
-    public Consulta buscaConsultasDoDia(CalendarioSistema calendarioSistema, Medico medico)
-    {
-        
+    public Consulta buscaConsultasDoDia(CalendarioSistema calendarioSistema, Medico medico) {
+
         for (Consulta consulta : vetorConsulta) {
-            
-            if(consulta != null
-              && consulta.getMedico().equals(medico)
-              && consulta.getEstadoConsulta().equals("Agendada")
-              && consulta.getDiaConsulta().isEqual(calendarioSistema.getDiaDoSistema()))
-            {
+
+            if (consulta != null
+                    && consulta.getMedico().equals(medico)
+                    && consulta.getEstadoConsulta().equals("Agendada")
+                    && consulta.getDiaConsulta().isEqual(calendarioSistema.getDiaDoSistema())) {
                 System.out.println(consulta + "\n");
             }
         }
         return null;
     }
-    
+
     public Consulta buscaConsultasQueTemMedicoSolicitanteEPacienteEscolhido(Pessoa pessoa, Medico medico) {
         for (Consulta consulta : vetorConsulta) {
 
@@ -177,14 +175,12 @@ public class ConsultaDAO {
         return null;
 
     }
-    
-    
-    
+
     public boolean cancelaConsultasNaoRealizadasNoDia(CalendarioSistema calendarioSistema) {
-       
+
         boolean canceladas = false;
         for (Consulta consulta : vetorConsulta) {
-            if (consulta != null && consulta.getEstadoConsulta().equals("Agendada") 
+            if (consulta != null && consulta.getEstadoConsulta().equals("Agendada")
                     && calendarioSistema.getDiaDoSistema().isAfter(consulta.getDiaConsulta())) {
 
                 consulta.setEstadoConsulta("Cancelada");
@@ -198,7 +194,25 @@ public class ConsultaDAO {
         return false;
 
     }
-    
-  
+
+    public double calculaValorConsultasDoMes(Medico medico, CalendarioSistema calendarioSistema) {
+        
+        double totalConsulta = 0;
+
+        int mesSitemaComparavel = calendarioSistema.getDiaDoSistema().minusDays(1).getMonthValue();
+
+        for (Consulta consulta : vetorConsulta) {
+
+            if (consulta != null
+                    && consulta.getMedico().equals(medico)
+                    && consulta.getEstadoConsulta().equals("Realizada")
+                    && consulta.getDiaConsulta().getMonthValue() == mesSitemaComparavel) {
+                
+                totalConsulta += consulta.getValor();
+            }
+        }
+
+        return totalConsulta;
+    }
 
 }

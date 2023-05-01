@@ -44,7 +44,6 @@ public class FinanceiroMedicoDAO {
       
      public boolean verificaCalculosValoresMedico(Medico medico, CalendarioSistema calendarioSistema) 
      {
-          int mesSitemaComparavel = calendarioSistema.getDiaDoSistema().minusDays(1).getMonthValue();
          
          for (FinanceiroMedico financeiroMedico : vetorFinanceiroMedico) {
              

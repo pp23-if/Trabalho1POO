@@ -646,8 +646,7 @@ public class AdmnistradorControladora {
             System.out.println("\nInforme o ID - Medico Que deseja Gerar O Calculo: ");
             int idMedico = Integer.parseInt(scanner.nextLine());
             idMedico = vd.validarINT(idMedico);
-            
-            //fazer a pesquisa dos vencimentos dos medicos.
+    
             
              Medico medicoEncontrado = medicoDAO.buscaMedicoPorId(idMedico);
              
@@ -661,11 +660,22 @@ public class AdmnistradorControladora {
                  {
                      System.out.println("\nOs Calculos Do Medico Informado Ja Foram Feitos esse mes.");
                  }
+                 else
+                 {
+                     System.out.println("\n" + medicoEncontrado);
+                     
+                     valorConsultas = consultaDAO.calculaValorConsultasDoMes(medicoEncontrado, calendarioSistema);
+                     System.out.println("\nVAlor Bruto Das Consultas: " + valorConsultas);
+                     
+                     
+                     valorProcedimentos = procedimentoDAO.calculaValorProcedimentosDoMes(medicoEncontrado, calendarioSistema);
+                     System.out.println("\nVAlor Bruto Dos Procedimentos: " + valorProcedimentos);
+                 }
              }
             
 
-            System.out.println("\n0 - Para Sair Do Modulo De Geracao De Vencimentos Medicos: ");
-            System.out.println("\n1 - Para Continuar Realizando Geracao De Vencimentos Medicos: ");
+            System.out.println("\n0 - Para Sair Do Modulo De Geracao De Calculos Financeiros De Medicos: ");
+            System.out.println("\n1 - Para Continuar Realizando Geracao De Calculos Financeiros De Medicos: ");
             System.out.println("\nInforme Opcao : ");
             opcao = Integer.parseInt(scanner.nextLine());
 
