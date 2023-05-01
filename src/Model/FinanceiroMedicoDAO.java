@@ -42,7 +42,7 @@ public class FinanceiroMedicoDAO {
         return null;
      }
       
-     public boolean verificaCalculosValoresMedico(Medico medico, CalendarioSistema calendarioSistema) 
+     public boolean verificaCalculosValoresMedico(Medico medico, CalendarioSistema calendarioSistema, Franquia franquia) 
      {
          
          for (FinanceiroMedico financeiroMedico : vetorFinanceiroMedico) {
@@ -50,11 +50,23 @@ public class FinanceiroMedicoDAO {
              if(financeiroMedico != null
                 && financeiroMedico.getMedico().equals(medico)
                 && financeiroMedico.getEstado().equals("Agendado")
+                && financeiroMedico.getFranquia().equals(franquia)
                 && financeiroMedico.getDataCriacao().isEqual(calendarioSistema.getDataHoraSistema()))
              {
                 return true; 
              }
          }
         return false;
+     }
+     
+     public double calculaValorLiquidoAReceberMedico(double valorTotalConsultas, double valorTotalProcedimentos,
+             double parteUnidadeFranquiaConsulta, double parteUnidadeFranquiaProcedimento)
+     {
+         
+       double valorLiquidoMedico = valorTotalConsultas + valorTotalProcedimentos;
+       
+       valorLiquidoMedico = valorLiquidoMedico - (parteUnidadeFranquiaConsulta + parteUnidadeFranquiaProcedimento);
+       
+       return valorLiquidoMedico;
      }
 }

@@ -163,7 +163,7 @@ public class ProcedimentoDAO {
 
     }
 
-    public double calculaValorProcedimentosDoMes(Medico medico, CalendarioSistema calendarioSistema) {
+    public double calculaValorProcedimentosDoMes(Medico medico, CalendarioSistema calendarioSistema, Franquia franquia) {
         
         double totalProcedimentos = 0;
 
@@ -174,6 +174,7 @@ public class ProcedimentoDAO {
             if (procedimento != null
                     && procedimento.getConsulta().getMedico().equals(medico)
                     && procedimento.getEstadoProcedimento().equals("Realizado")
+                    && procedimento.getConsulta().getUnidadeFranquia().getFranquia().equals(franquia)
                     && procedimento.getDiaProcedimento().getMonthValue() == mesSitemaComparavel) {
                 
                 totalProcedimentos += procedimento.getValorProcedimento();
@@ -182,5 +183,14 @@ public class ProcedimentoDAO {
         }
         
         return totalProcedimentos;
+    }
+    
+    public double calculaParteDaUnidadeSobreProcedimentos(double valorProcedimentos)
+    {
+        double valorParteProcedimento;
+        
+        valorParteProcedimento = valorProcedimentos * 0.50;
+        
+        return valorParteProcedimento;
     }
 }

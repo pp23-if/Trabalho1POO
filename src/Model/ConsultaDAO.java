@@ -195,7 +195,7 @@ public class ConsultaDAO {
 
     }
 
-    public double calculaValorConsultasDoMes(Medico medico, CalendarioSistema calendarioSistema) {
+    public double calculaValorConsultasDoMes(Medico medico, CalendarioSistema calendarioSistema, Franquia franquia) {
         
         double totalConsulta = 0;
 
@@ -206,6 +206,7 @@ public class ConsultaDAO {
             if (consulta != null
                     && consulta.getMedico().equals(medico)
                     && consulta.getEstadoConsulta().equals("Realizada")
+                    && consulta.getUnidadeFranquia().getFranquia().equals(franquia)
                     && consulta.getDiaConsulta().getMonthValue() == mesSitemaComparavel) {
                 
                 totalConsulta += consulta.getValor();
@@ -213,6 +214,15 @@ public class ConsultaDAO {
         }
 
         return totalConsulta;
+    }
+    
+    public double calculaParteDaUnidadeSobreConsultas(double valorConsultas)
+    {
+        double valorParteConsulta;
+        
+        valorParteConsulta = valorConsultas * 0.30;
+        
+        return valorParteConsulta;
     }
 
 }

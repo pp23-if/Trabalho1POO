@@ -7,6 +7,7 @@ import Model.Consulta;
 import Model.ConsultaDAO;
 import Model.FinanceiroAdm;
 import Model.FinanceiroAdmDAO;
+import Model.FinanceiroMedico;
 import Model.FinanceiroMedicoDAO;
 import Model.Medico;
 import Model.MedicoDAO;
@@ -468,7 +469,7 @@ public class AdmnistradorControladora {
                                     admnistrador, vd) == true)
                             {
                                 CalculaValoresMedicos(calendarioSistema, consultaDAO, procedimentoDAO, 
-                                        financeiroMedicoDAO, medicoDAO, vd);
+                                        financeiroMedicoDAO, medicoDAO, vd, admnistrador);
                             }
                         }
                     } else {
@@ -626,17 +627,18 @@ public class AdmnistradorControladora {
 
     private void CalculaValoresMedicos(CalendarioSistema calendarioSistema, ConsultaDAO consultaDAO, 
             ProcedimentoDAO procedimentoDAO, FinanceiroMedicoDAO financeiroMedicoDAO, 
-            MedicoDAO medicoDAO, ValidacaoEntradaDados vd) {
+            MedicoDAO medicoDAO, ValidacaoEntradaDados vd, Admnistrador admnistrador) {
         
          double valorConsultas;
          double valorProcedimentos;
-         double parteUnidadeFranquia;
+         double parteUnidadeFranquiaConsulta;
+         double parteUnidadeFranquiaProcedimento;
+         double valorLiquidomedico;
         
-         boolean medicoValorCalculado;
          int opcao;
         
        
-         System.out.println("\n============ Pagamento Dos Medicos! =============");
+         System.out.println("\n=========== Gerar Valores Dos Medicos! =============");
          
           do {
 
@@ -656,7 +658,8 @@ public class AdmnistradorControladora {
              }
              else
              {
-                 if(financeiroMedicoDAO.verificaCalculosValoresMedico(medicoEncontrado, calendarioSistema) == true)
+                 if(financeiroMedicoDAO.verificaCalculosValoresMedico(medicoEncontrado, calendarioSistema, 
+                         admnistrador.getFranquia()) == true)
                  {
                      System.out.println("\nOs Calculos Do Medico Informado Ja Foram Feitos esse mes.");
                  }
@@ -664,12 +667,36 @@ public class AdmnistradorControladora {
                  {
                      System.out.println("\n" + medicoEncontrado);
                      
-                     valorConsultas = consultaDAO.calculaValorConsultasDoMes(medicoEncontrado, calendarioSistema);
+                     valorConsultas = consultaDAO.calculaValorConsultasDoMes(medicoEncontrado, calendarioSistema, 
+                             admnistrador.getFranquia());
                      System.out.println("\nVAlor Bruto Das Consultas: " + valorConsultas);
                      
-                     
-                     valorProcedimentos = procedimentoDAO.calculaValorProcedimentosDoMes(medicoEncontrado, calendarioSistema);
+                     valorProcedimentos = procedimentoDAO.calculaValorProcedimentosDoMes(medicoEncontrado, 
+                             calendarioSistema, admnistrador.getFranquia());
                      System.out.println("\nVAlor Bruto Dos Procedimentos: " + valorProcedimentos);
+                     
+                     parteUnidadeFranquiaConsulta = consultaDAO.calculaParteDaUnidadeSobreConsultas(valorConsultas);
+                     System.out.println("\nA Parte Da Unidade Sobre As Consultas E: " + parteUnidadeFranquiaConsulta);
+                     
+                     parteUnidadeFranquiaProcedimento = procedimentoDAO.calculaParteDaUnidadeSobreProcedimentos(valorProcedimentos);
+                     System.out.println("\nA Parte Da Unidade Sobre Os Procedimentos E: " + parteUnidadeFranquiaProcedimento);
+                      
+                     valorLiquidomedico = financeiroMedicoDAO.calculaValorLiquidoAReceberMedico(valorConsultas, valorProcedimentos, 
+                             parteUnidadeFranquiaConsulta, parteUnidadeFranquiaProcedimento);
+                     System.out.println("\nO Valor Liquido A Ser Pago Ao Medico E: " + valorLiquidomedico);
+                     
+                     FinanceiroMedico financeiroMedico = new FinanceiroMedico(valorLiquidomedico, medicoEncontrado, 
+                            "Agendado" , admnistrador.getFranquia(), calendarioSistema.getDataHoraSistema());
+                     
+                     if(financeiroMedicoDAO.adicionaFinanceiroMedico(financeiroMedico) == true)
+                     {
+                         System.out.println("\nCalculos Gerados Com Sucesso!");
+                     }
+                     else
+                     {
+                         System.out.println("\nNao Foi Possivel Gerar Os Calculos.");
+                     }
+                     
                  }
              }
             
