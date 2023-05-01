@@ -42,5 +42,20 @@ public class FinanceiroMedicoDAO {
         return null;
      }
       
-      
+     public boolean verificaCalculosValoresMedico(Medico medico, CalendarioSistema calendarioSistema) 
+     {
+          int mesSitemaComparavel = calendarioSistema.getDiaDoSistema().minusDays(1).getMonthValue();
+         
+         for (FinanceiroMedico financeiroMedico : vetorFinanceiroMedico) {
+             
+             if(financeiroMedico != null
+                && financeiroMedico.getMedico().equals(medico)
+                && financeiroMedico.getEstado().equals("Agendado")
+                && financeiroMedico.getDataCriacao().isEqual(calendarioSistema.getDataHoraSistema()))
+             {
+                return true; 
+             }
+         }
+        return false;
+     }
 }

@@ -643,12 +643,25 @@ public class AdmnistradorControladora {
             System.out.println("\n");
             medicoDAO.mostraTodosMedicos();
             
-            System.out.println("\nInforme o ID - Medico Que deseja fazer o Pagamento: ");
+            System.out.println("\nInforme o ID - Medico Que deseja Gerar O Calculo: ");
             int idMedico = Integer.parseInt(scanner.nextLine());
             idMedico = vd.validarINT(idMedico);
             
             //fazer a pesquisa dos vencimentos dos medicos.
             
+             Medico medicoEncontrado = medicoDAO.buscaMedicoPorId(idMedico);
+             
+             if(medicoEncontrado == null)
+             {
+                 System.out.println("\nO Medico Informado Nao Foi Encontrado!!!");
+             }
+             else
+             {
+                 if(financeiroMedicoDAO.verificaCalculosValoresMedico(medicoEncontrado, calendarioSistema) == true)
+                 {
+                     System.out.println("\nOs Calculos Do Medico Informado Ja Foram Feitos esse mes.");
+                 }
+             }
             
 
             System.out.println("\n0 - Para Sair Do Modulo De Geracao De Vencimentos Medicos: ");
