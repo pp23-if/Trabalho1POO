@@ -724,7 +724,24 @@ public class AdmnistradorControladora {
                 int idFinanceiroMedico = Integer.parseInt(scanner.nextLine());
                 idFinanceiroMedico = vd.validarINT(idFinanceiroMedico);
                 
-                FinanceiroMedico financeiroMedicoEncontrado;
+                FinanceiroMedico financeiroMedicoEncontrado =  
+                        financeiroMedicoDAO.buscaPagamentosMedicosPorID(idFinanceiroMedico);
+                
+                if(financeiroMedicoEncontrado == null)
+                {
+                    System.out.println("\nFinanceiro Medico Nao Encontrado!");
+                }
+                else
+                {
+                    if(financeiroMedicoDAO.pagarMedico(financeiroMedicoEncontrado, calendarioSistema) == true)
+                    {
+                        System.out.println("\nPagamento Realizado Com Sucesso!");
+                    }
+                    else
+                    {
+                       System.out.println("\nNao Foi Possivel Realizar O Pagamento.");  
+                    }
+                }
             }
 
             System.out.println("\n0 - Para Sair Do Modulo De Pagamento De Medicos: ");

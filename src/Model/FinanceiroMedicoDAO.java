@@ -99,6 +99,17 @@ public class FinanceiroMedicoDAO {
         return null;
      }
      
+     public boolean pagarMedico(FinanceiroMedico financeiroMedico, CalendarioSistema calendarioSistema)
+     {
+         if(financeiroMedico != null)
+         {
+             financeiroMedico.setEstado("Pago");
+             financeiroMedico.setDataModificacao(calendarioSistema.getDataHoraSistema());
+             return true;
+         }
+        return false;
+     }
+     
      public double calculaValorLiquidoAReceberMedico(double valorTotalConsultas, double valorTotalProcedimentos,
              double parteUnidadeFranquiaConsulta, double parteUnidadeFranquiaProcedimento)
      {
