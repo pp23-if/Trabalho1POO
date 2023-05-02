@@ -19,7 +19,6 @@ import Model.UnidadeFranquia;
 import Model.UnidadeFranquiaDAO;
 import View.MenuTitulosAdmistrador;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -71,7 +70,7 @@ public class AdmnistradorControladora {
                 }
                 case 4: {
                     menuOpcoesFinanceiro(financeiroAdmDAO, calendarioSistema,
-                     consultaDAO, procedimentoDAO, admnistrador, unidadeFranquiaDAO, vd, financeiroMedicoDAO, medicoDAO);
+                            consultaDAO, procedimentoDAO, admnistrador, unidadeFranquiaDAO, vd, financeiroMedicoDAO, medicoDAO);
                     break;
                 }
 
@@ -455,21 +454,22 @@ public class AdmnistradorControladora {
             int dias = 0;
             switch (opcao) {
                 case 1: {
-                    
+
                     dias++;
-                    
+
                     if (calendarioSistema.passaDias(dias) == true) {
                         System.out.println("\nDia Encerrado com sucesso.");
                         cancelaConsultasNaoAtendidasNoDia(consultaDAO, calendarioSistema);
                         cancelaProcedimentosNaoAtendidosNoDia(procedimentoDAO, calendarioSistema);
 
                         if (verificaSeEhPrimeiroDiaDoMes(calendarioSistema) == true) {
-                            
-                            if(pagaAdmnistradora(calendarioSistema, financeiroAdmDAO, unidadeFranquiaDAO, 
-                                    admnistrador, vd) == true)
-                            {
-                                CalculaValoresMedicos(calendarioSistema, consultaDAO, procedimentoDAO, 
-                                        financeiroMedicoDAO, medicoDAO, vd, admnistrador);
+
+                            if (pagaAdmnistradora(calendarioSistema, financeiroAdmDAO, unidadeFranquiaDAO,
+                                    admnistrador, vd) == true) {
+                                if (CalculaValoresMedicos(calendarioSistema, consultaDAO, procedimentoDAO,
+                                        financeiroMedicoDAO, medicoDAO, vd, admnistrador) == true) {
+
+                                }
                             }
                         }
                     } else {
@@ -488,7 +488,8 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 4: {
-
+                    System.out.println("\n");
+                    financeiroMedicoDAO.buscaPagamentosMedicosPorFranquia(admnistrador.getFranquia());
                     break;
                 }
 
@@ -532,7 +533,7 @@ public class AdmnistradorControladora {
 
         boolean pago;
         int opcao;
-        
+
         boolean saiu = false;
 
         System.out.println("\n============ Dia de Pagamento!!! =============");
@@ -580,9 +581,8 @@ public class AdmnistradorControladora {
             System.out.println("\n1 - Para Continuar Realizando Pagamentos Franquia: ");
             System.out.println("\nInforme Opcao : ");
             opcao = Integer.parseInt(scanner.nextLine());
-            
-            if(opcao == 0)
-            {
+
+            if (opcao == 0) {
                 saiu = true;
             }
 
@@ -625,88 +625,114 @@ public class AdmnistradorControladora {
         }
     }
 
-    private void CalculaValoresMedicos(CalendarioSistema calendarioSistema, ConsultaDAO consultaDAO, 
-            ProcedimentoDAO procedimentoDAO, FinanceiroMedicoDAO financeiroMedicoDAO, 
+    private boolean CalculaValoresMedicos(CalendarioSistema calendarioSistema, ConsultaDAO consultaDAO,
+            ProcedimentoDAO procedimentoDAO, FinanceiroMedicoDAO financeiroMedicoDAO,
             MedicoDAO medicoDAO, ValidacaoEntradaDados vd, Admnistrador admnistrador) {
-        
-         double valorConsultas;
-         double valorProcedimentos;
-         double parteUnidadeFranquiaConsulta;
-         double parteUnidadeFranquiaProcedimento;
-         double valorLiquidomedico;
-        
-         int opcao;
-        
-       
-         System.out.println("\n=========== Gerar Valores Dos Medicos! =============");
-         
-          do {
+
+        double valorConsultas;
+        double valorProcedimentos;
+        double parteUnidadeFranquiaConsulta;
+        double parteUnidadeFranquiaProcedimento;
+        double valorLiquidomedico;
+
+        boolean saiu = false;
+        int opcao;
+
+        System.out.println("\n=========== Gerar Valores Dos Medicos! =============");
+
+        do {
 
             System.out.println("\n");
             medicoDAO.mostraTodosMedicos();
-            
+
             System.out.println("\nInforme o ID - Medico Que deseja Gerar O Calculo: ");
             int idMedico = Integer.parseInt(scanner.nextLine());
             idMedico = vd.validarINT(idMedico);
-    
-            
-             Medico medicoEncontrado = medicoDAO.buscaMedicoPorId(idMedico);
-             
-             if(medicoEncontrado == null)
-             {
-                 System.out.println("\nO Medico Informado Nao Foi Encontrado!!!");
-             }
-             else
-             {
-                 if(financeiroMedicoDAO.verificaCalculosValoresMedico(medicoEncontrado, calendarioSistema, 
-                         admnistrador.getFranquia()) == true)
-                 {
-                     System.out.println("\nOs Calculos Do Medico Informado Ja Foram Feitos esse mes.");
-                 }
-                 else
-                 {
-                     System.out.println("\n" + medicoEncontrado);
-                     
-                     valorConsultas = consultaDAO.calculaValorConsultasDoMes(medicoEncontrado, calendarioSistema, 
-                             admnistrador.getFranquia());
-                     System.out.println("\nVAlor Bruto Das Consultas: " + valorConsultas);
-                     
-                     valorProcedimentos = procedimentoDAO.calculaValorProcedimentosDoMes(medicoEncontrado, 
-                             calendarioSistema, admnistrador.getFranquia());
-                     System.out.println("\nVAlor Bruto Dos Procedimentos: " + valorProcedimentos);
-                     
-                     parteUnidadeFranquiaConsulta = consultaDAO.calculaParteDaUnidadeSobreConsultas(valorConsultas);
-                     System.out.println("\nA Parte Da Unidade Sobre As Consultas E: " + parteUnidadeFranquiaConsulta);
-                     
-                     parteUnidadeFranquiaProcedimento = procedimentoDAO.calculaParteDaUnidadeSobreProcedimentos(valorProcedimentos);
-                     System.out.println("\nA Parte Da Unidade Sobre Os Procedimentos E: " + parteUnidadeFranquiaProcedimento);
-                      
-                     valorLiquidomedico = financeiroMedicoDAO.calculaValorLiquidoAReceberMedico(valorConsultas, valorProcedimentos, 
-                             parteUnidadeFranquiaConsulta, parteUnidadeFranquiaProcedimento);
-                     System.out.println("\nO Valor Liquido A Ser Pago Ao Medico E: " + valorLiquidomedico);
-                     
-                     FinanceiroMedico financeiroMedico = new FinanceiroMedico(valorLiquidomedico, medicoEncontrado, 
-                            "Agendado" , admnistrador.getFranquia(), calendarioSistema.getDataHoraSistema());
-                     
-                     if(financeiroMedicoDAO.adicionaFinanceiroMedico(financeiroMedico) == true)
-                     {
-                         System.out.println("\nCalculos Gerados Com Sucesso!");
-                     }
-                     else
-                     {
-                         System.out.println("\nNao Foi Possivel Gerar Os Calculos.");
-                     }
-                     
-                 }
-             }
-            
+
+            Medico medicoEncontrado = medicoDAO.buscaMedicoPorId(idMedico);
+
+            if (medicoEncontrado == null) {
+                System.out.println("\nO Medico Informado Nao Foi Encontrado!!!");
+            } else {
+                if (financeiroMedicoDAO.verificaCalculosValoresMedico(medicoEncontrado, calendarioSistema,
+                        admnistrador.getFranquia()) == true) {
+                    System.out.println("\n--------- Os Calculos Do Medico Informado Ja Foram Feitos esse mes. -----");
+                } else {
+                    System.out.println("\n" + medicoEncontrado);
+
+                    valorConsultas = consultaDAO.calculaValorConsultasDoMes(medicoEncontrado, calendarioSistema,
+                            admnistrador.getFranquia());
+                    System.out.println("\nValor Bruto Das Consultas: " + valorConsultas);
+
+                    valorProcedimentos = procedimentoDAO.calculaValorProcedimentosDoMes(medicoEncontrado,
+                            calendarioSistema, admnistrador.getFranquia());
+                    System.out.println("\nValor Bruto Dos Procedimentos: " + valorProcedimentos);
+
+                    parteUnidadeFranquiaConsulta = consultaDAO.calculaParteDaUnidadeSobreConsultas(valorConsultas);
+                    System.out.println("\nA Parte Da Unidade Sobre As Consultas E: " + parteUnidadeFranquiaConsulta);
+
+                    parteUnidadeFranquiaProcedimento = procedimentoDAO.calculaParteDaUnidadeSobreProcedimentos(valorProcedimentos);
+                    System.out.println("\nA Parte Da Unidade Sobre Os Procedimentos E: " + parteUnidadeFranquiaProcedimento);
+
+                    valorLiquidomedico = financeiroMedicoDAO.calculaValorLiquidoAReceberMedico(valorConsultas, valorProcedimentos,
+                            parteUnidadeFranquiaConsulta, parteUnidadeFranquiaProcedimento);
+                    System.out.println("\nO Valor Liquido A Ser Pago Ao Medico E: " + valorLiquidomedico);
+
+                    FinanceiroMedico financeiroMedico = new FinanceiroMedico(valorLiquidomedico, medicoEncontrado,
+                            "Agendado", admnistrador.getFranquia(), calendarioSistema.getDataHoraSistema());
+
+                    if (financeiroMedicoDAO.adicionaFinanceiroMedico(financeiroMedico) == true) {
+                        System.out.println("\nCalculos Gerados Com Sucesso!");
+                    } else {
+                        System.out.println("\nNao Foi Possivel Gerar Os Calculos.");
+                    }
+
+                }
+            }
 
             System.out.println("\n0 - Para Sair Do Modulo De Geracao De Calculos Financeiros De Medicos: ");
             System.out.println("\n1 - Para Continuar Realizando Geracao De Calculos Financeiros De Medicos: ");
             System.out.println("\nInforme Opcao : ");
             opcao = Integer.parseInt(scanner.nextLine());
 
+            if (opcao == 0) {
+                saiu = true;
+            }
+
+        } while (saiu == false);
+
+        return saiu == true;
+    }
+
+    private void pagarMedicos(Admnistrador admnistrador, FinanceiroMedicoDAO financeiroMedicoDAO,
+            CalendarioSistema calendarioSistema, ValidacaoEntradaDados vd) {
+        
+        int opcao;
+
+        System.out.println("\n=========== Pagar Os Medicos! =============");
+
+        do {
+
+            System.out.println("\n");
+            if (financeiroMedicoDAO.buscaPagamentosMedicosPorFranquiaEhMes(admnistrador.getFranquia(),
+                    calendarioSistema) == false) {
+                System.out.println("\nTodos Os Medicos Ja Foram pagos Esse Mes!!!!");
+                
+            } else {
+                
+                System.out.println("\nInforme o ID - Financeiro Medico Que Deseja Pagar: ");
+                int idFinanceiroMedico = Integer.parseInt(scanner.nextLine());
+                idFinanceiroMedico = vd.validarINT(idFinanceiroMedico);
+                
+                FinanceiroMedico financeiroMedicoEncontrado;
+            }
+
+            System.out.println("\n0 - Para Sair Do Modulo De Pagamento De Medicos: ");
+            System.out.println("\n1 - Para Continuar Realizando Pagamento De Medicos: ");
+            System.out.println("\nInforme Opcao : ");
+            opcao = Integer.parseInt(scanner.nextLine());
+
         } while (opcao != 0);
-         
+
     }
 }

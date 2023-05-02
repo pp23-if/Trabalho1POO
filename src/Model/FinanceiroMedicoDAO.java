@@ -59,6 +59,46 @@ public class FinanceiroMedicoDAO {
         return false;
      }
      
+     public FinanceiroMedico buscaPagamentosMedicosPorFranquia(Franquia franquia)
+     {
+         for (FinanceiroMedico financeiroMedico : vetorFinanceiroMedico) {
+             
+             if(financeiroMedico != null && financeiroMedico.getFranquia().equals(franquia))
+             {
+                 System.out.println(financeiroMedico + "\n");
+             }
+         }
+        return null;
+     }
+     
+     public boolean buscaPagamentosMedicosPorFranquiaEhMes(Franquia franquia, CalendarioSistema calendarioSistema)
+     {
+         for (FinanceiroMedico financeiroMedico : vetorFinanceiroMedico) {
+             
+             if(financeiroMedico != null && financeiroMedico.getFranquia().equals(franquia)
+                && financeiroMedico.getEstado().equals("Agendado")
+                && financeiroMedico.getDataCriacao().isEqual(calendarioSistema.getDataHoraSistema()))
+             {
+                 System.out.println(financeiroMedico + "\n");
+                 return true;
+             }
+         }
+        return false;
+        
+     }
+     
+     public FinanceiroMedico buscaPagamentosMedicosPorID(int idFinanceiroMedico)
+     {
+         for (FinanceiroMedico financeiroMedico : vetorFinanceiroMedico) {
+             
+             if(financeiroMedico != null && financeiroMedico.getIdFinanceiroMedico() == idFinanceiroMedico)
+             {
+                 return financeiroMedico;
+             }
+         }
+        return null;
+     }
+     
      public double calculaValorLiquidoAReceberMedico(double valorTotalConsultas, double valorTotalProcedimentos,
              double parteUnidadeFranquiaConsulta, double parteUnidadeFranquiaProcedimento)
      {

@@ -135,14 +135,16 @@ public class FinanceiroMedico {
             return "ID - Financeiro Medico: " + this.idFinanceiroMedico + "," + " "
                     + "Medico: " + this.medico.getPessoa().getNomePessoa() + "," + " "
                     + "Crm: " + this.medico.getCrm() + "," + " "
-                    + "Estado: " + this.Estado + "\n"
+                    + "Estado: " + this.Estado + "," + " "
+                    + "valor: " + this.valor + "\n"
                     + "Franquia: " + this.franquia + "\n"
                     + "Data e Hora Criacao: " + fd.format(this.dataCriacao) + "," + " ";
         } else {
             return "ID - Financeiro Medico: " + this.idFinanceiroMedico + "," + " "
                     + "Medico: " + this.medico.getPessoa().getNomePessoa() + "," + " "
                     + "Crm: " + this.medico.getCrm() + "," + " "
-                    + "Estado: " + this.Estado + "\n"
+                    + "Estado: " + this.Estado + "," + " "
+                    + "valor: " + this.valor + "\n"
                     + "Franquia: " + this.franquia + "\n"
                     + "Data e Hora Criacao: " + fd.format(this.dataCriacao) + "," + " "
                     + "Data e Hora Modificao: " + fd.format(this.dataModificacao);
