@@ -15,7 +15,7 @@ public class MenuTitulos {
         builder.append("\n 1 - Login..........................: ");
         builder.append("\n 2 - Cadastrar Pessoa...............: ");
         builder.append("\n 3 - Listar Todos os Vetores........: ");
-        builder.append("\n\n Informe Opcao......................: ");
+        builder.append("\n\n Informe Opcao....................: ");
 
         System.out.print(builder.toString());
 
