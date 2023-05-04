@@ -443,5 +443,7 @@ public class FranquiaControladora {
         System.out.println("\n");
         financeiroMedicoDAO.geraRelatorioPagamentoMedicosPorFranquiaMes(franquia, numeroMes);
         
+        //por enqunato deu tudo certo.
+        
     }
 }
