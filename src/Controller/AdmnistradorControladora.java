@@ -467,8 +467,9 @@ public class AdmnistradorControladora {
                             if (pagaAdmnistradora(calendarioSistema, financeiroAdmDAO, unidadeFranquiaDAO,
                                     admnistrador, vd) == true) {
                                 if (CalculaValoresMedicos(calendarioSistema, consultaDAO, procedimentoDAO,
-                                        financeiroMedicoDAO, medicoDAO, vd, admnistrador) == true) {
-
+                                        financeiroMedicoDAO, medicoDAO, vd, admnistrador) == true) 
+                                {
+                                    pagarMedicos(admnistrador, financeiroMedicoDAO, calendarioSistema, vd);
                                 }
                             }
                         }
@@ -631,8 +632,8 @@ public class AdmnistradorControladora {
 
         double valorConsultas;
         double valorProcedimentos;
-        double parteUnidadeFranquiaConsulta;
-        double parteUnidadeFranquiaProcedimento;
+        double parteDescontadaConsulta;
+        double parteDescontadaProcedimento;
         double valorLiquidomedico;
 
         boolean saiu = false;
@@ -668,14 +669,14 @@ public class AdmnistradorControladora {
                             calendarioSistema, admnistrador.getFranquia());
                     System.out.println("\nValor Bruto Dos Procedimentos: " + valorProcedimentos);
 
-                    parteUnidadeFranquiaConsulta = consultaDAO.calculaParteDaUnidadeSobreConsultas(valorConsultas);
-                    System.out.println("\nA Parte Da Unidade Sobre As Consultas E: " + parteUnidadeFranquiaConsulta);
+                    parteDescontadaConsulta = consultaDAO.calculaParteDaUnidadeSobreConsultas(valorConsultas);
+                    System.out.println("\nA Parte Descontada Sobre As Consultas E: " + parteDescontadaConsulta);
 
-                    parteUnidadeFranquiaProcedimento = procedimentoDAO.calculaParteDaUnidadeSobreProcedimentos(valorProcedimentos);
-                    System.out.println("\nA Parte Da Unidade Sobre Os Procedimentos E: " + parteUnidadeFranquiaProcedimento);
+                    parteDescontadaProcedimento = procedimentoDAO.calculaParteDaUnidadeSobreProcedimentos(valorProcedimentos);
+                    System.out.println("\nA Parte Descontada Sobre Os Procedimentos E: " + parteDescontadaProcedimento);
 
                     valorLiquidomedico = financeiroMedicoDAO.calculaValorLiquidoAReceberMedico(valorConsultas, valorProcedimentos,
-                            parteUnidadeFranquiaConsulta, parteUnidadeFranquiaProcedimento);
+                            parteDescontadaConsulta, parteDescontadaProcedimento);
                     System.out.println("\nO Valor Liquido A Ser Pago Ao Medico E: " + valorLiquidomedico);
 
                     FinanceiroMedico financeiroMedico = new FinanceiroMedico(valorLiquidomedico, medicoEncontrado,
