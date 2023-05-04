@@ -22,5 +22,4 @@ public class MenuTitulos {
         return Integer.parseInt(scanner.nextLine());
     }
     
-    //tirei os espacamentos.
 }
