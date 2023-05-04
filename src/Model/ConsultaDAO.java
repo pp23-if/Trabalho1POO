@@ -216,7 +216,7 @@ public class ConsultaDAO {
         return totalConsulta;
     }
     
-    public double calculaParteDaUnidadeSobreConsultas(double valorConsultas)
+    public double calculaParteDescontoConsultas(double valorConsultas)
     {
         double valorParteConsulta;
         

@@ -669,10 +669,10 @@ public class AdmnistradorControladora {
                             calendarioSistema, admnistrador.getFranquia());
                     System.out.println("\nValor Bruto Dos Procedimentos: " + valorProcedimentos);
 
-                    parteDescontadaConsulta = consultaDAO.calculaParteDaUnidadeSobreConsultas(valorConsultas);
+                    parteDescontadaConsulta = consultaDAO.calculaParteDescontoConsultas(valorConsultas);
                     System.out.println("\nA Parte Descontada Sobre As Consultas E: " + parteDescontadaConsulta);
 
-                    parteDescontadaProcedimento = procedimentoDAO.calculaParteDaUnidadeSobreProcedimentos(valorProcedimentos);
+                    parteDescontadaProcedimento = procedimentoDAO.calculaParteDescontoProcedimentos(valorProcedimentos);
                     System.out.println("\nA Parte Descontada Sobre Os Procedimentos E: " + parteDescontadaProcedimento);
 
                     valorLiquidomedico = financeiroMedicoDAO.calculaValorLiquidoAReceberMedico(valorConsultas, valorProcedimentos,

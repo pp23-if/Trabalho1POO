@@ -185,7 +185,7 @@ public class ProcedimentoDAO {
         return totalProcedimentos;
     }
     
-    public double calculaParteDaUnidadeSobreProcedimentos(double valorProcedimentos)
+    public double calculaParteDescontoProcedimentos(double valorProcedimentos)
     {
         double valorParteProcedimento;
         
