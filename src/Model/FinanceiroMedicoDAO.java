@@ -131,4 +131,17 @@ public class FinanceiroMedicoDAO {
              }
          }
      }
+     
+     public void geraRelatorioPagamentoMedicosPorFranquiaMes(Franquia franquia, int numeroMes)
+     {
+         for (FinanceiroMedico financeiroMedico : vetorFinanceiroMedico) {
+             
+             if(financeiroMedico != null 
+                && financeiroMedico.getFranquia().equals(franquia)
+                && financeiroMedico.getDataCriacao().getMonthValue() == numeroMes)
+             {
+                 System.out.println(financeiroMedico + "\n");
+             }
+         }
+     }
 }

@@ -147,4 +147,17 @@ public class FinanceiroAdmDAO {
         }
     }
     
+    public void geraRelatorioEntradaSaidaFranquiaMes(Franquia franquia, int numeroMes)
+    {
+        for (FinanceiroAdm financeiroAdm : vetotFinanceiroAdm) {
+            
+            if(financeiroAdm != null 
+               && financeiroAdm.getUnidadeFranquia().getFranquia().equals(franquia)
+               && financeiroAdm.getDataCriacao().getMonthValue() == numeroMes)
+            {
+                System.out.println(financeiroAdm  + "\n");
+            }
+        }
+    }
+    
 }

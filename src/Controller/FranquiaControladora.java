@@ -84,7 +84,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 11: {
-                     geraRelatoriosFranquia(financeiroAdmDAO, financeiroMedicoDAO, franquia);
+                     geraRelatoriosFranquia(financeiroAdmDAO, financeiroMedicoDAO, franquia, vd);
                     break;
                 }
             }
@@ -390,7 +390,7 @@ public class FranquiaControladora {
     }
 
     private void geraRelatoriosFranquia(FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO,
-            Franquia franquia) {
+            Franquia franquia, ValidacaoEntradaDados vd) {
         
         int opcao;
 
@@ -399,12 +399,12 @@ public class FranquiaControladora {
 
             switch (opcao) {
                 case 1: {
-                    relatorioGeralfranquia(financeiroAdmDAO, financeiroMedicoDAO, franquia);
+                    relatorioGeralFranquia(financeiroAdmDAO, financeiroMedicoDAO, franquia);
                     break;
                 }
 
                 case 2: {
-
+                    relatorioMensalFranquia(financeiroAdmDAO, financeiroMedicoDAO, franquia, vd);
                     break;
 
                 }
@@ -414,7 +414,7 @@ public class FranquiaControladora {
         } while (opcao != 0);
     }
     
-    private void relatorioGeralfranquia(FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO, 
+    private void relatorioGeralFranquia(FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO, 
             Franquia franquia)
     {
         System.out.println("\nMovimentacoes Financeiras  - (Entrada/saida): ");
@@ -427,4 +427,21 @@ public class FranquiaControladora {
         
     }
 
+     private void relatorioMensalFranquia(FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO, 
+            Franquia franquia, ValidacaoEntradaDados vd)
+    {
+        
+        System.out.println("\nInforme O Mes Que Deseja Ver Relatorio: ");
+        int numeroMes = Integer.parseInt(scanner.nextLine());
+        numeroMes = vd.validarINT(numeroMes);
+        
+        System.out.println("\nMovimentacoes Financeiras  - (Entrada/saida): ");
+        System.out.println("\n");
+        financeiroAdmDAO.geraRelatorioEntradaSaidaFranquiaMes(franquia, numeroMes);
+        
+        System.out.println("\nMovimentacoes Financeiras - (Pagamentos Dos Medicos) : ");
+        System.out.println("\n");
+        financeiroMedicoDAO.geraRelatorioPagamentoMedicosPorFranquiaMes(franquia, numeroMes);
+        
+    }
 }
