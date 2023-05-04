@@ -19,7 +19,8 @@ public class MenuTitulosUnidadeFranquia {
         builder.append("\n5 - Cadastrar Medico..............................: ");
         builder.append("\n6 - Exibir Todos Os Medicos.......................: ");
         builder.append("\n7 - Excluir??.....................................: ");
-        builder.append("\n\n Informe Opcao...................................: ");
+        builder.append("\n8 - Relatorios Unidade De Franquia.......: ");
+        builder.append("\n\nInforme Opcao...................................: ");
 
         System.out.print(builder.toString());
 
@@ -38,6 +39,21 @@ public class MenuTitulosUnidadeFranquia {
         builder.append("\n4 - Atualizar Senha Dono Unidade Franquia..................: ");
         builder.append("\n5 - Atualizar Telefone Dono Unidade De Franquia............: ");
         builder.append("\n\n Informe Opcao............................................: ");
+        
+        System.out.print(builder.toString());
+
+        return Integer.parseInt(scanner.nextLine());
+    }
+    
+     public int menuRelatoriosFinanceirosUnidadeFranquia() {
+
+        StringBuilder builder = new StringBuilder("");
+
+        builder.append("\n============ MENU RELATORIOS FIANCEIROS UNIDADE FRANQUIA ===========");
+        builder.append("\n0 - Para Sair..............................................: ");
+        builder.append("\n1 - Ver Relatorio Geral Unidade Franquia...................: ");
+        builder.append("\n2 - Ver Relatorio Mensal Unidade Franquia..................: ");
+        builder.append("\n\n Informe Opcao...........................................: ");
         
         System.out.print(builder.toString());
 

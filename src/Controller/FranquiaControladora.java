@@ -421,7 +421,7 @@ public class FranquiaControladora {
         System.out.println("\n");
         financeiroAdmDAO.geraRelatorioEntradaSaidaFranquia(franquia);
         
-        System.out.println("\nMovimentacoes Financeiras - (Pagamentos Dos Medicos) : ");
+        System.out.println("\nMovimentacoes Financeiras - (Pagamentos Dos Medicos): ");
         System.out.println("\n");
         financeiroMedicoDAO.geraRelatorioPagamentoMedicosPorFranquia(franquia);
         
@@ -439,11 +439,9 @@ public class FranquiaControladora {
         System.out.println("\n");
         financeiroAdmDAO.geraRelatorioEntradaSaidaFranquiaMes(franquia, numeroMes);
         
-        System.out.println("\nMovimentacoes Financeiras - (Pagamentos Dos Medicos) : ");
+        System.out.println("\nMovimentacoes Financeiras - (Pagamentos Dos Medicos): ");
         System.out.println("\n");
         financeiroMedicoDAO.geraRelatorioPagamentoMedicosPorFranquiaMes(franquia, numeroMes);
-        
-        //por enqunato deu tudo certo.
         
     }
 }

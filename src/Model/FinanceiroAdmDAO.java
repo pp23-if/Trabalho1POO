@@ -160,4 +160,15 @@ public class FinanceiroAdmDAO {
         }
     }
     
+     public void geraRelatorioEntradaSaidaUnidadeFranquia(UnidadeFranquia unidadeFranquia)
+    {
+        for (FinanceiroAdm financeiroAdm : vetotFinanceiroAdm) {
+            
+            if(financeiroAdm != null && financeiroAdm.getUnidadeFranquia().equals(unidadeFranquia))
+            {
+                System.out.println(financeiroAdm  + "\n");
+            }
+        }
+    }
+    
 }
