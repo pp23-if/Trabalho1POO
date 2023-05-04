@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.CalendarioSistema;
+import Model.FinanceiroAdmDAO;
+import Model.FinanceiroMedicoDAO;
 import Model.Franquia;
 import Model.FranquiaDAO;
 import Model.Medico;
@@ -19,15 +21,18 @@ public class FranquiaControladora {
     MenuTitulosFranquia telaFranquia = new MenuTitulosFranquia();
 
     public FranquiaControladora(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO,
-            MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO, 
-            ValidacaoEntradaDados vd,  CalendarioSistema calendarioSistema) {
+            MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO,
+            ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO,
+            FinanceiroMedicoDAO financeiroMedicoDAO) {
 
-        menuOpcoesFranquia(franquia, franquiaDAO, pessoaDAO, medicoDAO, unidadeFranquiaDAO, vd, calendarioSistema);
+        menuOpcoesFranquia(franquia, franquiaDAO, pessoaDAO, medicoDAO, unidadeFranquiaDAO, vd,
+                calendarioSistema, financeiroAdmDAO, financeiroMedicoDAO);
     }
 
     private void menuOpcoesFranquia(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO,
-            MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd, 
-            CalendarioSistema calendarioSistema) {
+            MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd,
+            CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO,
+            FinanceiroMedicoDAO financeiroMedicoDAO) {
 
         int opcao;
 
@@ -78,13 +83,17 @@ public class FranquiaControladora {
                     unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(franquia);
                     break;
                 }
+                case 11: {
+
+                    break;
+                }
             }
 
         } while (opcao != 0);
     }
 
     private void cadastraNovaFranquia(FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd,
-             CalendarioSistema calendarioSistema) {
+            CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         pessoaDAO.filtraPessoasCandidatasADonoDeFranquia();
@@ -113,7 +122,7 @@ public class FranquiaControladora {
                 senhaDonoFranquia = vd.validaString(senhaDonoFranquia);
 
                 Pessoa pessoaDonoFranquia = new Pessoa(pessoa.getNomePessoa(), pessoa.getCpf(), pessoa.getEnderecoPessoa(),
-                        pessoa.getTelefonePessoa(), loginDonoFranquia, senhaDonoFranquia, "DonodeFranquia", 
+                        pessoa.getTelefonePessoa(), loginDonoFranquia, senhaDonoFranquia, "DonodeFranquia",
                         calendarioSistema.getDataHoraSistema());
 
                 if (pessoaDAO.adicionaPessoa(pessoaDonoFranquia) == true) {
@@ -137,7 +146,7 @@ public class FranquiaControladora {
                         System.out.println("\nA Franquia Ja Existe");
                     } else {
                         Franquia franquia = new Franquia(nomeFranquia.toUpperCase(), cnpjFranquia,
-                        cidadeFranquia, enderecoFranquia, pessoaDonoFranquia, calendarioSistema.getDataHoraSistema());
+                                cidadeFranquia, enderecoFranquia, pessoaDonoFranquia, calendarioSistema.getDataHoraSistema());
 
                         boolean franquiaAdicionada = franquiaDAO.adicionaFranquia(franquia);
 
@@ -157,7 +166,7 @@ public class FranquiaControladora {
 
     }
 
-    private void menuOpcoesAtualizarDadosFranquia(Franquia franquia, FranquiaDAO franquiaDAO, ValidacaoEntradaDados vd, 
+    private void menuOpcoesAtualizarDadosFranquia(Franquia franquia, FranquiaDAO franquiaDAO, ValidacaoEntradaDados vd,
             CalendarioSistema calendarioSistema) {
         int opcao;
 
@@ -248,7 +257,7 @@ public class FranquiaControladora {
         } while (opcao != 0);
     }
 
-    private void cadastraMedico(PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ValidacaoEntradaDados vd, 
+    private void cadastraMedico(PessoaDAO pessoaDAO, MedicoDAO medicoDAO, ValidacaoEntradaDados vd,
             CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
@@ -290,14 +299,14 @@ public class FranquiaControladora {
                         String senhaMedico = scanner.nextLine();
                         senhaMedico = vd.validaString(senhaMedico);
 
-                        Pessoa pessoaMedico = new Pessoa(pessoaEncontrada.getNomePessoa(),pessoaEncontrada.getCpf(), 
-                        pessoaEncontrada.getEnderecoPessoa(),pessoaEncontrada.getTelefonePessoa(), 
-                        LoginMedico, senhaMedico, "Medico", calendarioSistema.getDataHoraSistema());
+                        Pessoa pessoaMedico = new Pessoa(pessoaEncontrada.getNomePessoa(), pessoaEncontrada.getCpf(),
+                                pessoaEncontrada.getEnderecoPessoa(), pessoaEncontrada.getTelefonePessoa(),
+                                LoginMedico, senhaMedico, "Medico", calendarioSistema.getDataHoraSistema());
 
                         if (pessoaDAO.adicionaPessoa(pessoaMedico) == true) {
 
-                       Medico medico = new Medico(crm, pessoaMedico, medicoEspecialidade, 
-                       calendarioSistema.getDataHoraSistema());
+                            Medico medico = new Medico(crm, pessoaMedico, medicoEspecialidade,
+                                    calendarioSistema.getDataHoraSistema());
 
                             if (medicoDAO.adicionaMedico(medico) == true) {
                                 System.out.println("\nMedico Cadastrado Com Sucesso!");
@@ -316,7 +325,7 @@ public class FranquiaControladora {
         }
     }
 
-    private void cadastraUnidadeFranquia(PessoaDAO pessoaDAO, UnidadeFranquiaDAO unidadeFranquiaDAO, 
+    private void cadastraUnidadeFranquia(PessoaDAO pessoaDAO, UnidadeFranquiaDAO unidadeFranquiaDAO,
             Franquia franquia, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
@@ -360,8 +369,8 @@ public class FranquiaControladora {
                             "DonoDeUnidadeDeFranquia", calendarioSistema.getDataHoraSistema());
 
                     if (pessoaDAO.adicionaPessoa(donoUnidadeFranquia) == true) {
-                        UnidadeFranquia unidadeFranquia = new UnidadeFranquia(franquia,cidadeUnidadeFranquia,
-                        enderecoUnidadeFranquia, donoUnidadeFranquia, calendarioSistema.getDataHoraSistema());
+                        UnidadeFranquia unidadeFranquia = new UnidadeFranquia(franquia, cidadeUnidadeFranquia,
+                                enderecoUnidadeFranquia, donoUnidadeFranquia, calendarioSistema.getDataHoraSistema());
 
                         if (unidadeFranquiaDAO.adicionaUnidadeFranquia(unidadeFranquia) == true) {
                             System.out.println("\nUnidade De Franquia Cadastrada Com Sucesso!");
@@ -378,6 +387,37 @@ public class FranquiaControladora {
 
         }
 
+    }
+
+    private void geraRelatoriosFranquia(FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO) {
+        
+        int opcao;
+
+        do {
+            opcao = telaFranquia.menuRelatoriosFinanceirosFranquia();
+
+            switch (opcao) {
+                case 1: {
+                    relatorioGeralfranquia(financeiroAdmDAO, financeiroMedicoDAO);
+                    break;
+                }
+
+                case 2: {
+
+                    break;
+
+                }
+
+            }
+
+        } while (opcao != 0);
+    }
+    
+    private void relatorioGeralfranquia(FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO)
+    {
+        System.out.println("\nMovimentacoes Financeiras  - (Entrada/saida): ");
+        System.out.println("\nMovimentacoes Financeiras - (Pagamentos Dos Medicos) : ");
+        
     }
 
 }

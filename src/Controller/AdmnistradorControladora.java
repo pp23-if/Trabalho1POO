@@ -557,7 +557,7 @@ public class AdmnistradorControladora {
                 pago = financeiroAdmDAO.verificaPagamentoUnidade(calendarioSistema, unidadeSelecionada);
 
                 if (pago == true) {
-                    System.out.println("\n*** A Unidade Informada Ja Fez O Pagamento Esse Mes. ***");
+                    System.out.println("\n------ A Unidade Informada Ja Fez O Pagamento Esse Mes. -----");
                 } else {
                     rendaBruta = financeiroAdmDAO.calculaRendaBruta(calendarioSistema, unidadeSelecionada);
                     parteAdministradora = financeiroAdmDAO.calculaParteValorAdmnistradora(rendaBruta,
@@ -717,7 +717,7 @@ public class AdmnistradorControladora {
             System.out.println("\n");
             if (financeiroMedicoDAO.buscaPagamentosMedicosPorFranquiaEhMes(admnistrador.getFranquia(),
                     calendarioSistema) == false) {
-                System.out.println("\nTodos Os Medicos Ja Foram pagos Esse Mes!!!!");
+                System.out.println("------------ Todos Os Medicos Ja Foram pagos Esse Mes! --------");
                 
             } else {
                 
