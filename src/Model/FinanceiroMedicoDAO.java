@@ -120,4 +120,15 @@ public class FinanceiroMedicoDAO {
        
        return valorLiquidoMedico;
      }
+     
+     public void geraRelatorioPagamentoMedicosPorFranquia(Franquia franquia)
+     {
+         for (FinanceiroMedico financeiroMedico : vetorFinanceiroMedico) {
+             
+             if(financeiroMedico != null && financeiroMedico.getFranquia().equals(franquia))
+             {
+                 System.out.println(financeiroMedico + "\n");
+             }
+         }
+     }
 }

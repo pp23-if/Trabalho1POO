@@ -136,6 +136,15 @@ public class FinanceiroAdmDAO {
         return rendaLiquida;
     }
     
-    
+    public void geraRelatorioEntradaSaidaFranquia(Franquia franquia)
+    {
+        for (FinanceiroAdm financeiroAdm : vetotFinanceiroAdm) {
+            
+            if(financeiroAdm != null && financeiroAdm.getUnidadeFranquia().getFranquia().equals(franquia))
+            {
+                System.out.println(financeiroAdm  + "\n");
+            }
+        }
+    }
     
 }

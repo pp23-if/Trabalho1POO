@@ -84,7 +84,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 11: {
-
+                     geraRelatoriosFranquia(financeiroAdmDAO, financeiroMedicoDAO, franquia);
                     break;
                 }
             }
@@ -389,7 +389,8 @@ public class FranquiaControladora {
 
     }
 
-    private void geraRelatoriosFranquia(FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO) {
+    private void geraRelatoriosFranquia(FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO,
+            Franquia franquia) {
         
         int opcao;
 
@@ -398,7 +399,7 @@ public class FranquiaControladora {
 
             switch (opcao) {
                 case 1: {
-                    relatorioGeralfranquia(financeiroAdmDAO, financeiroMedicoDAO);
+                    relatorioGeralfranquia(financeiroAdmDAO, financeiroMedicoDAO, franquia);
                     break;
                 }
 
@@ -413,10 +414,16 @@ public class FranquiaControladora {
         } while (opcao != 0);
     }
     
-    private void relatorioGeralfranquia(FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO)
+    private void relatorioGeralfranquia(FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO, 
+            Franquia franquia)
     {
         System.out.println("\nMovimentacoes Financeiras  - (Entrada/saida): ");
+        System.out.println("\n");
+        financeiroAdmDAO.geraRelatorioEntradaSaidaFranquia(franquia);
+        
         System.out.println("\nMovimentacoes Financeiras - (Pagamentos Dos Medicos) : ");
+        System.out.println("\n");
+        financeiroMedicoDAO.geraRelatorioPagamentoMedicosPorFranquia(franquia);
         
     }
 
