@@ -269,6 +269,11 @@ public class UnidadeFranquiaControladora {
 
         int opcao;
         double valoresMedicos;
+        double parteUnidadeConsulta;
+        double parteUnidadeProcedimento;
+        double valorBrutoConsulta;
+        double valorBrutoProcedimento;
+       
 
         do {
 
@@ -293,11 +298,20 @@ public class UnidadeFranquiaControladora {
                 System.out.println("\nMedico: " + medicoEncontrado);
                 System.out.println("\nUnidade: " + unidadeFranquia);
 
+                valorBrutoConsulta =  consultaDAO.calculaValorConsultasPorUnidadeFranquia(medicoEncontrado, unidadeFranquia);
+                System.out.println("\nValor Bruto Das Consultas: " + valorBrutoConsulta);
+                
+                valorBrutoProcedimento =   procedimentoDAO.calculaValorProcedimentosPorUnidadeFranquia(medicoEncontrado, unidadeFranquia);
+                System.out.println("\nValor Bruto Dos Procedimentos: " + valorBrutoProcedimento);
+                
+                parteUnidadeConsulta = consultaDAO.calculaParteDescontoConsultas(valorBrutoConsulta);
+                System.out.println("\nParte Da Unidade De Franquia Sobre Consultas: " + parteUnidadeConsulta);
+                
+                parteUnidadeProcedimento = procedimentoDAO.calculaParteDescontoProcedimentos(valorBrutoProcedimento);
+                System.out.println("\nParte Da Unidade De Franquia Sobre Procedimentos: " + parteUnidadeProcedimento);
                
-                  valoresMedicos = consultaDAO.calculaValorConsultasPorUnidadeFranquia(medicoEncontrado, unidadeFranquia)
-                        + procedimentoDAO.calculaValorProcedimentosPorUnidadeFranquia(medicoEncontrado, unidadeFranquia);
-
-                System.out.println("\nValores Recebidos - (Consultas + Procedimentos): " + valoresMedicos);
+                valoresMedicos = financeiroMedicoDAO.calculaValorLiquidoAReceberMedico(valorBrutoConsulta, valorBrutoProcedimento, parteUnidadeConsulta, parteUnidadeProcedimento);
+                System.out.println("\nValores Pagos Ao Medico - (Consultas + Procedimentos): " + valoresMedicos);
             }
 
             System.out.println("\n0 - Para Sair Do Relatorio: ");
@@ -320,11 +334,11 @@ public class UnidadeFranquiaControladora {
 
         do {
 
-            System.out.println("\nMovimentacoes Financeiras Unidade De Franquia  - (Entrada/saida): ");
+            System.out.println("\nMovimentacoes Financeiras Mensais Unidade De Franquia  - (Entrada/saida): ");
             System.out.println("\n");
             financeiroAdmDAO.geraRelatorioEntradaSaidaUnidadeFranquia(unidadeFranquia);
 
-            System.out.println("\nMovimentacoes Financeiras Unidade De Franquia - (Pagamentos Dos Medicos): ");
+            System.out.println("\nMovimentacoes Financeiras Mensais Unidade De Franquia - (Pagamentos Dos Medicos): ");
             System.out.println("\n");
             medicoDAO.mostraTodosMedicos();
 
@@ -337,7 +351,7 @@ public class UnidadeFranquiaControladora {
             if (medicoEncontrado == null) {
                 System.out.println("\nMedico Nao Encontrado.");
             } else {
-                System.out.println("\n---- Relacao Valores Recebidos Pelo Medico - Unidade Franquia ---");
+                System.out.println("\n---- Relacao Valores Mensais Recebidos Pelo Medico - Unidade Franquia ---");
                 System.out.println("\nMedico: " + medicoEncontrado);
                 System.out.println("\nUnidade: " + unidadeFranquia);
 
