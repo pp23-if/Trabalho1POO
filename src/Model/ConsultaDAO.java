@@ -234,6 +234,25 @@ public class ConsultaDAO {
         return totalConsulta;
     }
     
+     public double calculaValorConsultasPorUnidadeFranquiaMes(Medico medico, UnidadeFranquia unidadeFranquia, int numeroMes) {
+        
+        double totalConsulta = 0;
+
+        for (Consulta consulta : vetorConsulta) {
+
+            if (consulta != null
+                    && consulta.getMedico().equals(medico)
+                    && consulta.getEstadoConsulta().equals("Realizada")
+                    && consulta.getUnidadeFranquia().equals(unidadeFranquia)
+                    && consulta.getDiaConsulta().getMonthValue() == numeroMes) {
+                
+                totalConsulta += consulta.getValor();
+            }
+        }
+
+        return totalConsulta;
+    }
+    
     public double calculaParteDescontoConsultas(double valorConsultas)
     {
         double valorParteConsulta;
