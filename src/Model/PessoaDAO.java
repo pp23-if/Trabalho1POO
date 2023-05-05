@@ -338,26 +338,5 @@ public class PessoaDAO {
         return null;
     }
     
-   
-     
-    /*private boolean verificaSeNomeEstaSendoUsado(String nome) {
-        for (Pessoa pessoa : vetorPessoa) {
-            if (pessoa != null && pessoa.getNomePessoa().equals(nome.toUpperCase(Locale.US)) || 
-                pessoa != null && pessoa.getNomePessoa().equals(nome.toLowerCase(Locale.US))) {
-                return true;
-            }
-        }
-        return false;
-    }*/
- /*public boolean verificaSePessoaExiste(String login, String nome, String cpf) {
-        for (Pessoa pessoa : vetorPessoa) {
-            if (pessoa != null && pessoa.getLoginPessoa().equals(login)
-                    || pessoa != null && pessoa.getNomePessoa().equals(nome)
-                    || pessoa != null && pessoa.getCpf().equals(cpf)) {    
-                return true;
-            }
-            
-        }
-        return false;
-    }*/
+  
 }
