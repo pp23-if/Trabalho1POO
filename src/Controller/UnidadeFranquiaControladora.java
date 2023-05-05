@@ -1,12 +1,14 @@
 package Controller;
 
 import Model.CalendarioSistema;
+import Model.ConsultaDAO;
 import Model.FinanceiroAdmDAO;
 import Model.FinanceiroMedicoDAO;
 import Model.Medico;
 import Model.MedicoDAO;
 import Model.Pessoa;
 import Model.PessoaDAO;
+import Model.ProcedimentoDAO;
 import Model.UnidadeFranquia;
 import Model.UnidadeFranquiaDAO;
 import View.MenuTitulosUnidadeFranquia;
@@ -20,16 +22,18 @@ public class UnidadeFranquiaControladora {
 
     public UnidadeFranquiaControladora(UnidadeFranquia unidadeFranquia, UnidadeFranquiaDAO unidadeFranquiaDAO,
             MedicoDAO medicoDAO, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema,
-            FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO) {
+            FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO,
+            ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO) {
 
-        menuOpcoesUnidadeFranquia(unidadeFranquia, unidadeFranquiaDAO, vd, medicoDAO, pessoaDAO, 
-                calendarioSistema, financeiroAdmDAO, financeiroMedicoDAO);
+        menuOpcoesUnidadeFranquia(unidadeFranquia, unidadeFranquiaDAO, vd, medicoDAO, pessoaDAO,
+                calendarioSistema, financeiroAdmDAO, financeiroMedicoDAO, consultaDAO, procedimentoDAO);
     }
 
     private void menuOpcoesUnidadeFranquia(UnidadeFranquia unidadeFranquia,
             UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd,
             MedicoDAO medicoDAO, PessoaDAO pessoaDAO, CalendarioSistema calendarioSistema,
-            FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO) {
+            FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO,
+            ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO) {
 
         int opcao;
 
@@ -68,7 +72,8 @@ public class UnidadeFranquiaControladora {
                     break;
                 }
                 case 8: {
-                    geraRelatoriosUnidadeFranquia(financeiroAdmDAO, financeiroMedicoDAO, unidadeFranquia, vd);
+                    geraRelatoriosUnidadeFranquia(financeiroAdmDAO, financeiroMedicoDAO, unidadeFranquia,
+                            vd, consultaDAO, procedimentoDAO, medicoDAO);
                     break;
                 }
                 case 9: {
@@ -229,11 +234,10 @@ public class UnidadeFranquiaControladora {
         }
 
     }
-    
-    
-    private void geraRelatoriosUnidadeFranquia(FinanceiroAdmDAO financeiroAdmDAO, 
-            FinanceiroMedicoDAO financeiroMedicoDAO, UnidadeFranquia unidadeFranquia, ValidacaoEntradaDados vd)
-    {
+
+    private void geraRelatoriosUnidadeFranquia(FinanceiroAdmDAO financeiroAdmDAO,
+            FinanceiroMedicoDAO financeiroMedicoDAO, UnidadeFranquia unidadeFranquia, ValidacaoEntradaDados vd,
+            ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO, MedicoDAO medicoDAO) {
         int opcao;
 
         do {
@@ -241,12 +245,13 @@ public class UnidadeFranquiaControladora {
 
             switch (opcao) {
                 case 1: {
-                    
+                    relatorioGeralUnidadeFranquia(financeiroAdmDAO, financeiroMedicoDAO, unidadeFranquia,
+                            consultaDAO, procedimentoDAO, medicoDAO, vd);
                     break;
                 }
 
                 case 2: {
-                   
+
                     break;
 
                 }
@@ -255,16 +260,44 @@ public class UnidadeFranquiaControladora {
 
         } while (opcao != 0);
     }
-    
-    private void relatorioGeralUnidadeFranquia(FinanceiroAdmDAO financeiroAdmDAO, 
-            FinanceiroMedicoDAO financeiroMedicoDAO, UnidadeFranquia unidadeFranquia)
-    {
+
+    private void relatorioGeralUnidadeFranquia(FinanceiroAdmDAO financeiroAdmDAO,
+            FinanceiroMedicoDAO financeiroMedicoDAO, UnidadeFranquia unidadeFranquia,
+            ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO, MedicoDAO medicoDAO, ValidacaoEntradaDados vd) {
+
+        int opcao;
+
         System.out.println("\nMovimentacoes Financeiras Unidade De Franquia  - (Entrada/saida): ");
         System.out.println("\n");
         financeiroAdmDAO.geraRelatorioEntradaSaidaUnidadeFranquia(unidadeFranquia);
-        
-        System.out.println("\nMovimentacoes Financeiras Unidade De Franquia - (Pagamentos Dos Medicos): ");
-        System.out.println("\n");
+
+        do {
+            System.out.println("\nMovimentacoes Financeiras Unidade De Franquia - (Pagamentos Dos Medicos): ");
+
+            medicoDAO.mostraTodosMedicos();
+
+            System.out.println("\nInforme O ID - Medico: ");
+            int idMedico = Integer.parseInt(scanner.nextLine());
+            idMedico = vd.validarINT(idMedico);
+
+            Medico medicoEncontrado = medicoDAO.buscaMedicoPorId(idMedico);
+
+            if (medicoEncontrado == null) {
+                System.out.println("\nMedico Nao Encontrado.");
+            } else 
+            {
+                System.out.println("\n---- Relacao Valores Recebidos Pelo Medico - Unidade Franquia ---");
+                System.out.println("\nMedico: " + medicoEncontrado);
+                System.out.println("\nUnidade: " + unidadeFranquia);
+            }
+
+            System.out.println("\n0 - Para Sair Do Relatorio: ");
+            System.out.println("\n1 - Para Continuar No Relatorio: ");
+            System.out.println("\nInforme Opcao : ");
+            opcao = Integer.parseInt(scanner.nextLine());
+
+        } while (opcao != 0);
+
     }
 
 }

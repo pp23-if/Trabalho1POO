@@ -178,7 +178,8 @@ public class GerenciaControladoras {
 
                 UnidadeFranquiaControladora unidadeFranquiaControladora
                         = new UnidadeFranquiaControladora(unidadeFranquia, unidadeFranquiaDAO, medicoDAO,
-                                pessoaDAO, vd, calendarioSistema, financeiroAdmDAO, financeiroMedicoDAO);
+                                pessoaDAO, vd, calendarioSistema, financeiroAdmDAO, financeiroMedicoDAO,
+                        consultaDAO, procedimentoDAO);
                 
             } else if (pessoaLogada.getTipoUsuario().equals("Admnistrador")) {
                 
