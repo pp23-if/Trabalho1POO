@@ -17,7 +17,7 @@ public class MenuTitulosPaciente {
         builder.append("\n3 - Ver Minhas Consultas..........: ");
         builder.append("\n4 - Ver Meus Procedimentos........: ");
         builder.append("\n5 - ..............................: ");
-        builder.append("\n\n Informe Opcao...................: ");
+        builder.append("\n\nInforme Opcao...................: ");
         
         System.out.print(builder.toString());
 
@@ -36,7 +36,7 @@ public class MenuTitulosPaciente {
         builder.append("\n4 - Atualizar Telefone.............................: ");
         builder.append("\n5 - Atualizar Login................................: ");
         builder.append("\n6 - Atualizar Senha................................: ");
-        builder.append("\n\n Informe Opcao....................................: ");
+        builder.append("\n\nInforme Opcao....................................: ");
         
         System.out.print(builder.toString());
 

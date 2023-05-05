@@ -4,6 +4,7 @@ import Model.CalendarioSistema;
 import Model.Consulta;
 import Model.ConsultaDAO;
 import Model.FinanceiroAdmDAO;
+import Model.FinanceiroMedicoDAO;
 import Model.InfoConsulta;
 import Model.InfoConsultaDAO;
 import Model.Medico;
@@ -26,17 +27,17 @@ public class MedicoControladora {
     public MedicoControladora(Medico medico, MedicoDAO medicoDAO, ValidacaoEntradaDados vd,
             ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO,
             ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO, CalendarioSistema calendarioSistema,
-            FinanceiroAdmDAO financeiroAdmDAO) {
+            FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO) {
 
-        menuOpcoesMedico(medico, medicoDAO, vd, consultaDAO, infoConsultaDAO, procedimentoDAO, 
-                pessoaDAO, calendarioSistema, financeiroAdmDAO);
+        menuOpcoesMedico(medico, medicoDAO, vd, consultaDAO, infoConsultaDAO, procedimentoDAO,
+                pessoaDAO, calendarioSistema, financeiroAdmDAO, financeiroMedicoDAO);
 
     }
 
     private void menuOpcoesMedico(Medico medico, MedicoDAO medicoDAO,
             ValidacaoEntradaDados vd, ConsultaDAO consultaDAO, InfoConsultaDAO infoConsultaDAO,
             ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO, CalendarioSistema calendarioSistema,
-            FinanceiroAdmDAO financeiroAdmDAO) {
+            FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO) {
 
         int opcao;
 
@@ -53,12 +54,12 @@ public class MedicoControladora {
                     break;
                 }
                 case 3: {
-                    menuOpcoesConsultaMedico(medico, consultaDAO, infoConsultaDAO, vd, 
+                    menuOpcoesConsultaMedico(medico, consultaDAO, infoConsultaDAO, vd,
                             calendarioSistema, financeiroAdmDAO);
                     break;
                 }
                 case 4: {
-                    menuOpcoesProcedimentosMedico(consultaDAO, procedimentoDAO, medico, vd, 
+                    menuOpcoesProcedimentosMedico(consultaDAO, procedimentoDAO, medico, vd,
                             calendarioSistema, financeiroAdmDAO);
                     break;
                 }
@@ -67,13 +68,17 @@ public class MedicoControladora {
                             pessoaDAO, medico, vd);
                     break;
                 }
+                case 6: {
+                    geraRelatorioFinanceiroMedico(medico, financeiroMedicoDAO, vd);
+                    break;
+                }
             }
 
         } while (opcao != 0);
     }
 
     private void menuOpcoesAtualizarDadosMedico(Medico medico, MedicoDAO medicoDAO, ValidacaoEntradaDados vd,
-             CalendarioSistema calendarioSistema) {
+            CalendarioSistema calendarioSistema) {
         int opcao;
 
         do {
@@ -135,7 +140,7 @@ public class MedicoControladora {
 
             switch (opcao) {
                 case 1: {
-                    
+
                     System.out.println("\n");
                     consultaDAO.buscaConsultasDoDia(calendarioSistema, medico);
 
@@ -165,8 +170,8 @@ public class MedicoControladora {
         } while (opcao != 0);
     }
 
-    private void atualizaInfoConsulta(Medico medico, InfoConsultaDAO infoConsultaDAO, 
-            ValidacaoEntradaDados vd,  CalendarioSistema calendarioSistema) {
+    private void atualizaInfoConsulta(Medico medico, InfoConsultaDAO infoConsultaDAO,
+            ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         infoConsultaDAO.buscaInfoConsultasPorMedico(medico);
@@ -206,7 +211,7 @@ public class MedicoControladora {
                     break;
                 }
                 case 2: {
-                     realizarProcedimento(procedimentoDAO, medico, vd, calendarioSistema, financeiroAdmDAO);
+                    realizarProcedimento(procedimentoDAO, medico, vd, calendarioSistema, financeiroAdmDAO);
                     break;
                 }
                 case 3: {
@@ -269,7 +274,7 @@ public class MedicoControladora {
     }
 
     private void cancelarProcedimentoComoMedico(ProcedimentoDAO procedimentoDAO, Medico medico,
-            ValidacaoEntradaDados vd,  CalendarioSistema calendarioSistema) {
+            ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
 
         System.out.println("\n");
         procedimentoDAO.buscaProcedimentoPorMedico(medico);
@@ -294,7 +299,7 @@ public class MedicoControladora {
 
     private void remarcarProcedimentoComoMedico(ProcedimentoDAO procedimentoDAO, Medico medico,
             ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
-        
+
         System.out.println("\n");
         procedimentoDAO.buscaProcedimentoPorMedico(medico);
 
@@ -331,40 +336,33 @@ public class MedicoControladora {
     }
 
     private void realizarProcedimento(ProcedimentoDAO procedimentoDAO, Medico medico,
-            ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO) 
-    {
+            ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO) {
         System.out.println("\n");
         Procedimento procedimentoEncontrado = procedimentoDAO.buscaProcedimentoNaoRealizado(medico, calendarioSistema);
-        
-        if(procedimentoEncontrado == null)
-        {
+
+        if (procedimentoEncontrado == null) {
             System.out.println("\nNao Existem Procedimentos Agendados.");
-        }
-        else
-        {
+        } else {
             System.out.println("\n" + procedimentoEncontrado);
-            
+
             System.out.println("\nInforme O Laudo Do Procedimento: ");
             String laudoProcedimento = scanner.nextLine();
             laudoProcedimento = vd.validaString(laudoProcedimento);
-            
-            if(procedimentoDAO.realizarProcedimento(procedimentoEncontrado, laudoProcedimento, 
-                    calendarioSistema, financeiroAdmDAO) == true)
-            {
+
+            if (procedimentoDAO.realizarProcedimento(procedimentoEncontrado, laudoProcedimento,
+                    calendarioSistema, financeiroAdmDAO) == true) {
                 System.out.println("\nProcedimento Realizado Com Sucesso!");
+            } else {
+                System.out.println("\nNao Foi Possivel Realizar O Procedimento.");
             }
-            else
-            {
-               System.out.println("\nNao Foi Possivel Realizar O Procedimento."); 
-            }
-            
+
         }
-        
+
     }
 
     private void gerarRelatorioDeConsultasEProcedimentosDeUmDadoPaciente(ConsultaDAO consultaDAO,
             ProcedimentoDAO procedimentoDAO, PessoaDAO pessoaDAO, Medico medico, ValidacaoEntradaDados vd) {
-        
+
         System.out.println("\n");
         pessoaDAO.filtraPacientes();
 
@@ -388,5 +386,49 @@ public class MedicoControladora {
 
         }
 
+    }
+
+    private void geraRelatorioFinanceiroMedico(Medico medico, FinanceiroMedicoDAO financeiroMedicoDAO,
+            ValidacaoEntradaDados vd) {
+        int opcao;
+
+        do {
+            opcao = telaMedico.menuRelatoriosFinanceirosMedico();
+
+            switch (opcao) {
+                case 1: {
+                    relatorioMontanteGeralMedico(medico, financeiroMedicoDAO);
+                    break;
+                }
+
+                case 2: {
+                    relatorioMontanteMensalMedico(medico, financeiroMedicoDAO, vd);
+                    break;
+
+                }
+
+            }
+
+        } while (opcao != 0);
+    }
+
+    private void relatorioMontanteGeralMedico(Medico medico, FinanceiroMedicoDAO financeiroMedicoDAO) {
+        System.out.println("\nMedico: " + medico);
+        System.out.println("\nValores Recebidos - (Consultas + Procedimentos): ");
+        System.out.println("\n");
+        financeiroMedicoDAO.buscaPagamentosMedicosPorMedico(medico);
+    }
+
+    private void relatorioMontanteMensalMedico(Medico medico, FinanceiroMedicoDAO financeiroMedicoDAO,
+            ValidacaoEntradaDados vd) {
+        
+        System.out.println("\nInforme O Mes Que Deseja Ver Relatorio: ");
+        int numeroMes = Integer.parseInt(scanner.nextLine());
+        numeroMes = vd.validarINT(numeroMes);
+        
+        System.out.println("\nMedico: " + medico);
+        System.out.println("\nValores Recebidos - (Consultas + Procedimentos): ");
+        System.out.println("\n");
+        financeiroMedicoDAO.buscaPagamentosMedicosPorMedicoMes(medico, numeroMes);
     }
 }

@@ -99,6 +99,31 @@ public class FinanceiroMedicoDAO {
         return null;
      }
      
+     public FinanceiroMedico buscaPagamentosMedicosPorMedico(Medico medico)
+     {
+         for (FinanceiroMedico financeiroMedico : vetorFinanceiroMedico) {
+             
+             if(financeiroMedico != null && financeiroMedico.getMedico().equals(medico))
+             {
+                 System.out.println(financeiroMedico + "\n");
+             }
+         }
+        return null;
+     }
+     
+     public FinanceiroMedico buscaPagamentosMedicosPorMedicoMes(Medico medico, int numeroMes)
+     {
+         for (FinanceiroMedico financeiroMedico : vetorFinanceiroMedico) {
+             
+             if(financeiroMedico != null && financeiroMedico.getMedico().equals(medico)
+                && financeiroMedico.getDataCriacao().getMonthValue() == numeroMes)
+             {
+                 System.out.println(financeiroMedico + "\n");
+             }
+         }
+        return null;
+     }
+     
      public boolean pagarMedico(FinanceiroMedico financeiroMedico, CalendarioSistema calendarioSistema)
      {
          if(financeiroMedico != null)

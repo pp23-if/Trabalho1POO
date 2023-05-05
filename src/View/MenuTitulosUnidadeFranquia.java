@@ -38,7 +38,7 @@ public class MenuTitulosUnidadeFranquia {
         builder.append("\n3 - Atualizar Login Dono Unidade Franquia..................: ");
         builder.append("\n4 - Atualizar Senha Dono Unidade Franquia..................: ");
         builder.append("\n5 - Atualizar Telefone Dono Unidade De Franquia............: ");
-        builder.append("\n\n Informe Opcao............................................: ");
+        builder.append("\n\nInforme Opcao............................................: ");
         
         System.out.print(builder.toString());
 
@@ -53,7 +53,7 @@ public class MenuTitulosUnidadeFranquia {
         builder.append("\n0 - Para Sair..............................................: ");
         builder.append("\n1 - Ver Relatorio Geral Unidade Franquia...................: ");
         builder.append("\n2 - Ver Relatorio Mensal Unidade Franquia..................: ");
-        builder.append("\n\n Informe Opcao...........................................: ");
+        builder.append("\n\nInforme Opcao...........................................: ");
         
         System.out.print(builder.toString());
 

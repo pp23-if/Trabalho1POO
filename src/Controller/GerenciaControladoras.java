@@ -161,7 +161,7 @@ public class GerenciaControladoras {
 
                 MedicoControladora medicoControladora = new MedicoControladora(medico,
                         medicoDAO, vd, consultaDAO, infoConsultaDAO, procedimentoDAO, pessoaDAO, 
-                        calendarioSistema, financeiroAdmDAO);
+                        calendarioSistema, financeiroAdmDAO, financeiroMedicoDAO);
 
             } else if (pessoaLogada.getTipoUsuario().equals("DonodeFranquia")) {
 

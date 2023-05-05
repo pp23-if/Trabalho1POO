@@ -17,7 +17,7 @@ public class MenuTitulosAdmistrador {
         builder.append("\n3 - Procedimentos.....................: ");
         builder.append("\n4 - Financeiro........................: ");
         builder.append("\n5 - ..................................: ");
-        builder.append("\n\n Informe Opcao.......................: ");
+        builder.append("\n\nInforme Opcao.......................: ");
 
         System.out.print(builder.toString());
 
@@ -34,7 +34,7 @@ public class MenuTitulosAdmistrador {
         builder.append("\n2 - Ver Consultas...................: ");
         builder.append("\n3 - Cancelar Consulta...............: ");
         builder.append("\n4 - Remarcar Consulta...............: ");
-        builder.append("\n\n Informe Opcao.....................: ");
+        builder.append("\n\nInforme Opcao.....................: ");
 
         System.out.print(builder.toString());
 
@@ -51,7 +51,7 @@ public class MenuTitulosAdmistrador {
         builder.append("\n2 - Ver Procedimentos..................: ");
         builder.append("\n3 - Cancelar Procedimento..............: ");
         builder.append("\n4 - Remarcar Procedimento..............: ");
-        builder.append("\n\n Informe Opcao........................: ");
+        builder.append("\n\nInforme Opcao........................: ");
 
         System.out.print(builder.toString());
 
@@ -68,7 +68,7 @@ public class MenuTitulosAdmistrador {
         builder.append("\n2 - Pagar Despesas.....................: ");
         builder.append("\n3 - Ver Movimentos Financeiros.........: ");
         builder.append("\n4 - Ver Pagamentos Dos Medicos.........: ");
-        builder.append("\n\n Informe Opcao........................: ");
+        builder.append("\n\nInforme Opcao........................: ");
 
         System.out.print(builder.toString());
 
