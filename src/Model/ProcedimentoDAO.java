@@ -185,6 +185,27 @@ public class ProcedimentoDAO {
         return totalProcedimentos;
     }
     
+    
+     public double calculaValorProcedimentosPorUnidadeFranquia(Medico medico, UnidadeFranquia unidadeFranquia) {
+        
+        double totalProcedimentos = 0;
+
+        for (Procedimento procedimento : vetorProcedimento) {
+
+            if (procedimento != null
+                    && procedimento.getConsulta().getMedico().equals(medico)
+                    && procedimento.getEstadoProcedimento().equals("Realizado")
+                    && procedimento.getConsulta().getUnidadeFranquia().equals(unidadeFranquia)) {
+                
+                totalProcedimentos += procedimento.getValorProcedimento();
+            }
+
+        }
+        
+        return totalProcedimentos;
+    }
+    
+    
     public double calculaParteDescontoProcedimentos(double valorProcedimentos)
     {
         double valorParteProcedimento;

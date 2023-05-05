@@ -73,7 +73,7 @@ public class UnidadeFranquiaControladora {
                 }
                 case 8: {
                     geraRelatoriosUnidadeFranquia(financeiroAdmDAO, financeiroMedicoDAO, unidadeFranquia,
-                            vd, consultaDAO, procedimentoDAO, medicoDAO);
+                            vd, consultaDAO, procedimentoDAO, medicoDAO, calendarioSistema);
                     break;
                 }
                 case 9: {
@@ -237,7 +237,9 @@ public class UnidadeFranquiaControladora {
 
     private void geraRelatoriosUnidadeFranquia(FinanceiroAdmDAO financeiroAdmDAO,
             FinanceiroMedicoDAO financeiroMedicoDAO, UnidadeFranquia unidadeFranquia, ValidacaoEntradaDados vd,
-            ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO, MedicoDAO medicoDAO) {
+            ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO, MedicoDAO medicoDAO, 
+            CalendarioSistema calendarioSistema) {
+        
         int opcao;
 
         do {
@@ -251,7 +253,8 @@ public class UnidadeFranquiaControladora {
                 }
 
                 case 2: {
-
+                    relatorioMensalUnidadeFranquia(financeiroAdmDAO, financeiroMedicoDAO, unidadeFranquia, 
+                            consultaDAO, procedimentoDAO, medicoDAO, vd, calendarioSistema);
                     break;
 
                 }
@@ -266,14 +269,16 @@ public class UnidadeFranquiaControladora {
             ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO, MedicoDAO medicoDAO, ValidacaoEntradaDados vd) {
 
         int opcao;
-
-        System.out.println("\nMovimentacoes Financeiras Unidade De Franquia  - (Entrada/saida): ");
-        System.out.println("\n");
-        financeiroAdmDAO.geraRelatorioEntradaSaidaUnidadeFranquia(unidadeFranquia);
+        double valoresMedicos;
 
         do {
-            System.out.println("\nMovimentacoes Financeiras Unidade De Franquia - (Pagamentos Dos Medicos): ");
 
+            System.out.println("\nMovimentacoes Financeiras Unidade De Franquia  - (Entrada/saida): ");
+            System.out.println("\n");
+            financeiroAdmDAO.geraRelatorioEntradaSaidaUnidadeFranquia(unidadeFranquia);
+
+            System.out.println("\nMovimentacoes Financeiras Unidade De Franquia - (Pagamentos Dos Medicos): ");
+            System.out.println("\n");
             medicoDAO.mostraTodosMedicos();
 
             System.out.println("\nInforme O ID - Medico: ");
@@ -284,11 +289,16 @@ public class UnidadeFranquiaControladora {
 
             if (medicoEncontrado == null) {
                 System.out.println("\nMedico Nao Encontrado.");
-            } else 
-            {
+            } else {
                 System.out.println("\n---- Relacao Valores Recebidos Pelo Medico - Unidade Franquia ---");
                 System.out.println("\nMedico: " + medicoEncontrado);
                 System.out.println("\nUnidade: " + unidadeFranquia);
+
+               
+                  valoresMedicos = consultaDAO.calculaValorConsultasPorUnidadeFranquia(medicoEncontrado, unidadeFranquia)
+                        + procedimentoDAO.calculaValorProcedimentosPorUnidadeFranquia(medicoEncontrado, unidadeFranquia);
+
+                System.out.println("\nValores Recebidos - (Consultas + Procedimentos): " + valoresMedicos);
             }
 
             System.out.println("\n0 - Para Sair Do Relatorio: ");
@@ -299,5 +309,53 @@ public class UnidadeFranquiaControladora {
         } while (opcao != 0);
 
     }
+    
 
+     private void relatorioMensalUnidadeFranquia(FinanceiroAdmDAO financeiroAdmDAO,
+            FinanceiroMedicoDAO financeiroMedicoDAO, UnidadeFranquia unidadeFranquia,
+            ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO, MedicoDAO medicoDAO, ValidacaoEntradaDados vd,
+            CalendarioSistema calendarioSistema) {
+
+        int opcao;
+        double valoresMedicos;
+
+        do {
+
+            System.out.println("\nMovimentacoes Financeiras Unidade De Franquia  - (Entrada/saida): ");
+            System.out.println("\n");
+            financeiroAdmDAO.geraRelatorioEntradaSaidaUnidadeFranquia(unidadeFranquia);
+
+            System.out.println("\nMovimentacoes Financeiras Unidade De Franquia - (Pagamentos Dos Medicos): ");
+            System.out.println("\n");
+            medicoDAO.mostraTodosMedicos();
+
+            System.out.println("\nInforme O ID - Medico: ");
+            int idMedico = Integer.parseInt(scanner.nextLine());
+            idMedico = vd.validarINT(idMedico);
+
+            Medico medicoEncontrado = medicoDAO.buscaMedicoPorId(idMedico);
+
+            if (medicoEncontrado == null) {
+                System.out.println("\nMedico Nao Encontrado.");
+            } else {
+                System.out.println("\n---- Relacao Valores Recebidos Pelo Medico - Unidade Franquia ---");
+                System.out.println("\nMedico: " + medicoEncontrado);
+                System.out.println("\nUnidade: " + unidadeFranquia);
+
+               
+                  valoresMedicos = consultaDAO.calculaValorConsultasPorUnidadeFranquia(medicoEncontrado, unidadeFranquia)
+                        + procedimentoDAO.calculaValorProcedimentosPorUnidadeFranquia(medicoEncontrado, unidadeFranquia);
+
+                System.out.println("\nValores Recebidos - (Consultas + Procedimentos): " + valoresMedicos);
+            }
+
+            System.out.println("\n0 - Para Sair Do Relatorio: ");
+            System.out.println("\n1 - Para Continuar No Relatorio: ");
+            System.out.println("\nInforme Opcao : ");
+            opcao = Integer.parseInt(scanner.nextLine());
+
+        } while (opcao != 0);
+
+    }
+    
 }
