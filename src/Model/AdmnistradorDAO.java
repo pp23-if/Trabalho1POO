@@ -60,4 +60,29 @@ public class AdmnistradorDAO {
         }
         return null;
     }
+    
+    public boolean verificaSeFranquiaPossuiAdmnistrador(Franquia franquia)
+    {
+        for (Admnistrador admnistrador : vetorAdm) {
+            
+            if(admnistrador != null && admnistrador.getFranquia().equals(franquia))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean verificaSePessoaEhAdmnistrador(Pessoa pessoa)
+    {
+        for (Admnistrador admnistrador : vetorAdm) {
+            
+            if(admnistrador != null 
+               && admnistrador.getPessoa().getCpf().equals(pessoa.getCpf()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

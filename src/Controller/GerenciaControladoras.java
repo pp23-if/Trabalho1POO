@@ -170,7 +170,8 @@ public class GerenciaControladoras {
 
                 FranquiaControladora franquiaControladora
                         = new FranquiaControladora(franquia, franquiaDAO, pessoaDAO, medicoDAO,
-                                unidadeFranquiaDAO, vd, calendarioSistema, financeiroAdmDAO, financeiroMedicoDAO);
+                                unidadeFranquiaDAO, vd, calendarioSistema, financeiroAdmDAO, 
+                                financeiroMedicoDAO, admnistradorDAO);
                 
             } else if (pessoaLogada.getTipoUsuario().equals("DonoDeUnidadeDeFranquia")) {
                 

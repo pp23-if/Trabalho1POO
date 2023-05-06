@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Admnistrador;
+import Model.AdmnistradorDAO;
 import Model.CalendarioSistema;
 import Model.FinanceiroAdmDAO;
 import Model.FinanceiroMedicoDAO;
@@ -23,16 +25,16 @@ public class FranquiaControladora {
     public FranquiaControladora(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO,
             MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO,
             ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO,
-            FinanceiroMedicoDAO financeiroMedicoDAO) {
+            FinanceiroMedicoDAO financeiroMedicoDAO, AdmnistradorDAO admnistradorDAO) {
 
         menuOpcoesFranquia(franquia, franquiaDAO, pessoaDAO, medicoDAO, unidadeFranquiaDAO, vd,
-                calendarioSistema, financeiroAdmDAO, financeiroMedicoDAO);
+                calendarioSistema, financeiroAdmDAO, financeiroMedicoDAO, admnistradorDAO);
     }
 
     private void menuOpcoesFranquia(Franquia franquia, FranquiaDAO franquiaDAO, PessoaDAO pessoaDAO,
             MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO, ValidacaoEntradaDados vd,
             CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO,
-            FinanceiroMedicoDAO financeiroMedicoDAO) {
+            FinanceiroMedicoDAO financeiroMedicoDAO, AdmnistradorDAO admnistradorDAO) {
 
         int opcao;
 
@@ -53,7 +55,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 4: {
-                   
+                    designaAdmnistradorFranquia(admnistradorDAO, franquia, pessoaDAO, vd, calendarioSistema);
                     break;
                 }
                 case 5: {
@@ -446,5 +448,54 @@ public class FranquiaControladora {
         System.out.println("\n");
         financeiroMedicoDAO.geraRelatorioPagamentoMedicosPorFranquiaMes(franquia, numeroMes);
         
+    }
+     
+    private void designaAdmnistradorFranquia(AdmnistradorDAO admnistradorDAO, Franquia franquia, 
+            PessoaDAO pessoaDAO, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema)
+    {
+        System.out.println("\n");
+        
+        if(admnistradorDAO.verificaSeFranquiaPossuiAdmnistrador(franquia) == true)
+        {
+           System.out.println("\nEssa Franquia Ja Possui Um Admnistrador."); 
+        }
+        else
+        {
+           System.out.println("\n");
+           pessoaDAO.mostraTodasPessoas();
+           
+            System.out.println("\nInforme o ID - Pessoa Que Deseja Como Admnistrador Da Franquia: ");
+            int idPessoa = Integer.parseInt(scanner.nextLine());
+            idPessoa = vd.validarINT(idPessoa);
+            
+            Pessoa pessoaEncontrada = pessoaDAO.buscaPessoaPorId(idPessoa);
+            
+            if(pessoaEncontrada == null)
+            {
+                System.out.println("\nPessoa Nao Encontrada.");
+            }
+            else
+            {
+               if(admnistradorDAO.verificaSePessoaEhAdmnistrador(pessoaEncontrada) == true)
+               {
+                 System.out.println("\nA Pessoa Informada Ja e Admnistrador.");  
+               }
+               else
+               {
+                   Admnistrador admnistrador = new Admnistrador(pessoaEncontrada, franquia, 
+                           calendarioSistema.getDataHoraSistema());
+                   
+                   if(admnistradorDAO.adicionaAdmnistrador(admnistrador) == true)
+                   {
+                       System.out.println("\nAdmnistrador Designado Com Sucesso!");
+                   }
+                   else
+                   {
+                     System.out.println("\nNao Foi Possivel Designar O Admnistrador.");  
+                   }
+               }
+            }
+          
+        }
     }
 }
