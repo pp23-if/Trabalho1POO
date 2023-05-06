@@ -11,13 +11,13 @@ public class MenuTitulosPaciente {
         StringBuilder builder = new StringBuilder("");
 
         builder.append("\n============ MENU PACIENTE ==========");
-        builder.append("\n0 - Para Sair.....................:");
-        builder.append("\n1 - Ver Meu Cadastro..............:");
-        builder.append("\n2 - Atualizar Meus Dados..........: ");
-        builder.append("\n3 - Ver Minhas Consultas..........: ");
-        builder.append("\n4 - Ver Meus Procedimentos........: ");
-        builder.append("\n5 - ..............................: ");
-        builder.append("\n\nInforme Opcao...................: ");
+        builder.append("\n0 - Para Sair..........................:");
+        builder.append("\n1 - Ver Meu Cadastro...................:");
+        builder.append("\n2 - Atualizar Meus Dados...............: ");
+        builder.append("\n3 - Ver Minhas Consultas...............: ");
+        builder.append("\n4 - Ver Meus Procedimentos.............: ");
+        builder.append("\n5 - Gerar Relatorio Medico.............: ");
+        builder.append("\n\nInforme Opcao........................: ");
         
         System.out.print(builder.toString());
 

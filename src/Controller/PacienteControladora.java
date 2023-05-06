@@ -2,6 +2,8 @@ package Controller;
 
 import Model.CalendarioSistema;
 import Model.ConsultaDAO;
+import Model.Medico;
+import Model.MedicoDAO;
 import Model.Pessoa;
 import Model.PessoaDAO;
 import Model.ProcedimentoDAO;
@@ -16,13 +18,14 @@ public class PacienteControladora {
 
     public PacienteControladora(Pessoa pessoa, PessoaDAO pessoaDAO,
             ValidacaoEntradaDados vd, ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO, 
-            CalendarioSistema calendarioSistema) {
+            CalendarioSistema calendarioSistema, MedicoDAO medicoDAO) {
 
-        menuOpcoesPaciente(pessoa, pessoaDAO, vd, consultaDAO, procedimentoDAO, calendarioSistema);
+        menuOpcoesPaciente(pessoa, pessoaDAO, vd, consultaDAO, procedimentoDAO, calendarioSistema, medicoDAO);
     }
 
     private void menuOpcoesPaciente(Pessoa pessoa, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd,
-            ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO, CalendarioSistema calendarioSistema) {
+            ConsultaDAO consultaDAO, ProcedimentoDAO procedimentoDAO, CalendarioSistema calendarioSistema, 
+            MedicoDAO medicoDAO) {
 
         int opcao;
 
@@ -50,6 +53,8 @@ public class PacienteControladora {
                     break;
                 }
                 case 5: {
+                    gerarRelatorioDeConsultasEProcedimentosDeUmDadoPaciente(consultaDAO, procedimentoDAO, 
+                            pessoa, vd, medicoDAO);
                     break;
                 }
             }
@@ -152,6 +157,34 @@ public class PacienteControladora {
             }
 
         } while (opcao != 0);
+    }
+    
+    private void gerarRelatorioDeConsultasEProcedimentosDeUmDadoPaciente(ConsultaDAO consultaDAO,
+            ProcedimentoDAO procedimentoDAO, Pessoa pessoa, ValidacaoEntradaDados vd, MedicoDAO medicoDAO) {
+
+        System.out.println("\n");
+        medicoDAO.mostraTodosMedicos();
+
+        System.out.println("\nInforme o ID - Medico: ");
+        int idMedico = Integer.parseInt(scanner.nextLine());
+        idMedico = vd.validarINT(idMedico);
+
+        Medico medicoEncontrado = medicoDAO.buscaMedicoPorId(idMedico);
+
+        if (medicoEncontrado == null) {
+            System.out.println("\nMedico Nao Encontrado.");
+        } else {
+            System.out.println("\n******* - Paciente: " + pessoa.getNomePessoa());
+            System.out.println("\n ....... Consultas ........:");
+            System.out.println("\n");
+            consultaDAO.buscaConsultasQueTemMedicoSolicitanteEPacienteEscolhido(pessoa, medicoEncontrado);
+
+            System.out.println("\n ....... Procedimentos ........:");
+            System.out.println("\n");
+            procedimentoDAO.buscaProcedimentosQueTemMedicoSolicitanteEPacienteEscolhido(pessoa, medicoEncontrado);
+
+        }
+
     }
 
 }

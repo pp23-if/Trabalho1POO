@@ -153,7 +153,8 @@ public class GerenciaControladoras {
             if (pessoaLogada.getTipoUsuario().equals("Paciente")) {
 
                 PacienteControladora pacienteControladora = 
-                new PacienteControladora(pessoaLogada, pessoaDAO, vd, consultaDAO, procedimentoDAO, calendarioSistema);
+                new PacienteControladora(pessoaLogada, pessoaDAO, vd, consultaDAO, procedimentoDAO, 
+                        calendarioSistema, medicoDAO);
 
             } else if (pessoaLogada.getTipoUsuario().equals("Medico")) {
 
