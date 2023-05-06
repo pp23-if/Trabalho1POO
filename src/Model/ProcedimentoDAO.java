@@ -81,11 +81,14 @@ public class ProcedimentoDAO {
         return false;
     }
 
-    public boolean verificaDisponibilidadeDataEHoraProcedimento(LocalDate diaProcedimento, LocalTime horaProcedimento) {
+    public boolean verificaDisponibilidadeDataEHoraProcedimentoMedico(LocalDate diaProcedimento, LocalTime horaProcedimento,
+            Medico medico) {
+        
         for (Procedimento procedimento : vetorProcedimento) {
 
             if (procedimento != null && procedimento.getDiaProcedimento().equals(diaProcedimento)
-                    && procedimento.getHoraProcedimento().equals(horaProcedimento)) {
+                    && procedimento.getHoraProcedimento().equals(horaProcedimento)
+                    &&procedimento.getConsulta().getMedico().equals(medico)) {
 
                 return true;
             }

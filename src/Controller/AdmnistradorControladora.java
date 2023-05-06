@@ -262,9 +262,9 @@ public class AdmnistradorControladora {
             if (consultaDAO.verificaDataConsulta(calendarioSistema, diaConsulta) == true) {
 
                 System.out.println("\nData Informada Invalida.");
-                
+
             } else {
-                
+
                 if (consultaDAO.verificaDisponibilidadeDiaEHoraMedico(diaConsulta, horaConsulta,
                         consultaEncontrada.getMedico()) == true) {
                     System.out.println("\nDia e Hora Informados Indisponiveis.");
@@ -274,9 +274,9 @@ public class AdmnistradorControladora {
                             consultaEncontrada, calendarioSistema) == true) {
 
                         System.out.println("\nConsulta Remarcada Com Sucesso.");
-                        
+
                     } else {
-                        
+
                         System.out.println("\nNao Foi Possivel Remarcar a Consulta, Conulta Realizada Ou Cancelada.");
                     }
                 }
@@ -378,18 +378,34 @@ public class AdmnistradorControladora {
                     String Hora = scanner.nextLine();
                     LocalTime horaProcedimento = LocalTime.parse(Hora);
 
-                    Consulta consulta = new Consulta(diaProcediemnto, horaProcedimento, medicoEncontrado,
-                            pessoaEncontrada, unidadeFranquiaEncontrada, 0, "Realizada",
-                            calendarioSistema.getDataHoraSistema());
-
-                    Procedimento procedimento = new Procedimento(nomeProcedimento, consulta,
-                            diaProcediemnto, horaProcedimento, "Agendado", 1500, "",
-                            calendarioSistema.getDataHoraSistema());
-
-                    if (procedimentoDAO.adicionaProcedimento(procedimento) == true) {
-                        System.out.println("\nProcedimento Marcado Com Sucesso!");
+                    if (procedimentoDAO.verificaDataProcedimento(calendarioSistema, diaProcediemnto) == true) {
+                        System.out.println("\nData Informada Invalida.");
                     } else {
-                        System.out.println("\nNao Foi Possivel Marcar O Procediemnto.");
+                        if (procedimentoDAO.verificaDisponibilidadeDataEHoraProcedimentoMedico(diaProcediemnto, horaProcedimento,
+                                medicoEncontrado) == true) {
+
+                            System.out.println("\nDia e Hora Informados Indisponiveis.");
+
+                        } else {
+
+                            Consulta consulta = new Consulta(diaProcediemnto, horaProcedimento, medicoEncontrado,
+                                    pessoaEncontrada, unidadeFranquiaEncontrada, 0, "Realizada",
+                                    calendarioSistema.getDataHoraSistema());
+
+                            Procedimento procedimento = new Procedimento(nomeProcedimento, consulta,
+                                    diaProcediemnto, horaProcedimento, "Agendado", 1500, "",
+                                    calendarioSistema.getDataHoraSistema());
+
+                            if (procedimentoDAO.adicionaProcedimento(procedimento) == true) {
+
+                                System.out.println("\nProcedimento Marcado Com Sucesso!");
+
+                            } else {
+
+                                System.out.println("\nNao Foi Possivel Marcar O Procediemnto.");
+                            }
+
+                        }
                     }
 
                 }
@@ -446,14 +462,27 @@ public class AdmnistradorControladora {
             String Hora = scanner.nextLine();
             LocalTime horaProcedimento = LocalTime.parse(Hora);
 
-            if (procedimentoDAO.verificaDisponibilidadeDataEHoraProcedimento(diaProcedimento, horaProcedimento) == true) {
-                System.out.println("\nDia e hora Informados, Indisponiveis.");
-            } else {
-                if (procedimentoDAO.recebeProcedimentoERemarca(diaProcedimento,
-                        horaProcedimento, procedimentoEncontrado, calendarioSistema) == true) {
-                    System.out.println("\nProcedimento Remarcado Com Sucesso!");
+            if (procedimentoDAO.verificaDataProcedimento(calendarioSistema, diaProcedimento) == true)
+            {
+                System.out.println("\nData Informada Invalida.");
+            } 
+            else 
+            {
+                if (procedimentoDAO.verificaDisponibilidadeDataEHoraProcedimentoMedico(diaProcedimento, horaProcedimento,
+                        procedimentoEncontrado.getConsulta().getMedico()) == true) {
+
+                    System.out.println("\nDia e hora Informados, Indisponiveis.");
+
                 } else {
-                    System.out.println("\nNao Foi Possivel Remarcar O Procedimento.");
+                    if (procedimentoDAO.recebeProcedimentoERemarca(diaProcedimento,
+                            horaProcedimento, procedimentoEncontrado, calendarioSistema) == true) {
+                        
+                        System.out.println("\nProcedimento Remarcado Com Sucesso!");
+                        
+                    } else {
+                        
+                        System.out.println("\nNao Foi Possivel Remarcar O Procedimento.");
+                    }
                 }
             }
 
@@ -481,6 +510,7 @@ public class AdmnistradorControladora {
 
                     if (calendarioSistema.passaDias(dias) == true) {
                         System.out.println("\nDia Encerrado com sucesso.");
+
                         cancelaConsultasNaoAtendidasNoDia(consultaDAO, calendarioSistema);
                         cancelaProcedimentosNaoAtendidosNoDia(procedimentoDAO, calendarioSistema);
 
@@ -488,8 +518,10 @@ public class AdmnistradorControladora {
 
                             if (pagaAdmnistradora(calendarioSistema, financeiroAdmDAO, unidadeFranquiaDAO,
                                     admnistrador, vd) == true) {
+
                                 if (CalculaValoresMedicos(calendarioSistema, consultaDAO, procedimentoDAO,
                                         financeiroMedicoDAO, medicoDAO, vd, admnistrador) == true) {
+
                                     pagarMedicos(admnistrador, financeiroMedicoDAO, calendarioSistema, vd);
                                 }
                             }
@@ -738,7 +770,7 @@ public class AdmnistradorControladora {
             System.out.println("\n");
             if (financeiroMedicoDAO.buscaPagamentosMedicosPorFranquiaEhMes(admnistrador.getFranquia(),
                     calendarioSistema) == false) {
-                System.out.println("------------ Todos Os Medicos Ja Foram pagos Esse Mes! --------");
+                System.out.println("\n------------ Todos Os Medicos Ja Foram pagos Esse Mes! --------");
 
             } else {
 

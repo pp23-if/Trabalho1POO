@@ -257,18 +257,36 @@ public class MedicoControladora {
             String dia = scanner.nextLine();
             LocalDate diaProcedimento = LocalDate.parse(dia, fdia);
 
-            System.out.println("\nInforme a Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
+            System.out.println("\nInforme a Hora Do Procedimento No Seguinte Formato, Hora:Minutos (00:00)..: ");
             String Hora = scanner.nextLine();
             LocalTime horaProcedimento = LocalTime.parse(Hora);
 
-            Procedimento procedimento = new Procedimento(nomeProcedimento, consultaEncontrada, diaProcedimento,
-                    horaProcedimento, "Agendado", 1500, "", calendarioSistema.getDataHoraSistema());
+            if (procedimentoDAO.verificaDataProcedimento(calendarioSistema, diaProcedimento) == true) {
 
-            if (procedimentoDAO.adicionaProcedimento(procedimento) == true) {
-                System.out.println("\nProcedimento Marcado Com Sucesso!");
+                System.out.println("\nData Informada Invalida.");
+
             } else {
-                System.out.println("\nNao Foi Possivel Marcar o Procedimento.");
+
+                if (procedimentoDAO.verificaDisponibilidadeDataEHoraProcedimentoMedico(diaProcedimento,
+                        horaProcedimento, medico) == true) {
+
+                    System.out.println("\nDia e hora Informados, Indisponiveis.");
+
+                } else {
+
+                    Procedimento procedimento = new Procedimento(nomeProcedimento, consultaEncontrada, diaProcedimento,
+                            horaProcedimento, "Agendado", 1500, "", calendarioSistema.getDataHoraSistema());
+
+                    if (procedimentoDAO.adicionaProcedimento(procedimento) == true) {
+
+                        System.out.println("\nProcedimento Marcado Com Sucesso!");
+
+                    } else {
+                        System.out.println("\nNao Foi Possivel Marcar o Procedimento.");
+                    }
+                }
             }
+
         }
 
     }
@@ -322,16 +340,29 @@ public class MedicoControladora {
             String Hora = scanner.nextLine();
             LocalTime horaProcedimento = LocalTime.parse(Hora);
 
-            if (procedimentoDAO.verificaDisponibilidadeDataEHoraProcedimento(diaProcedimento, horaProcedimento) == true) {
-                System.out.println("\nDia e hora Informados, Indisponiveis.");
+            if (procedimentoDAO.verificaDataProcedimento(calendarioSistema, diaProcedimento) == true) {
+                
+                System.out.println("\nData Informada Invalida.");
+                
             } else {
-                if (procedimentoDAO.recebeProcedimentoERemarca(diaProcedimento,
-                        horaProcedimento, procedimentoEncontrado, calendarioSistema) == true) {
-                    System.out.println("\nProcedimento Remarcado Com Sucesso!");
+                if (procedimentoDAO.verificaDisponibilidadeDataEHoraProcedimentoMedico(diaProcedimento, horaProcedimento,
+                        medico) == true) {
+                    
+                    System.out.println("\nDia e hora Informados, Indisponiveis.");
+                    
                 } else {
-                    System.out.println("\nNao Foi Possivel Remarcar O Procedimento.");
+                    if (procedimentoDAO.recebeProcedimentoERemarca(diaProcedimento,
+                            horaProcedimento, procedimentoEncontrado, calendarioSistema) == true) {
+                        
+                        System.out.println("\nProcedimento Remarcado Com Sucesso!");
+                        
+                    } else {
+                        
+                        System.out.println("\nNao Foi Possivel Remarcar O Procedimento.");
+                    }
                 }
             }
+
         }
     }
 
@@ -421,11 +452,11 @@ public class MedicoControladora {
 
     private void relatorioMontanteMensalMedico(Medico medico, FinanceiroMedicoDAO financeiroMedicoDAO,
             ValidacaoEntradaDados vd) {
-        
+
         System.out.println("\nInforme O Mes Que Deseja Ver Relatorio: ");
         int numeroMes = Integer.parseInt(scanner.nextLine());
         numeroMes = vd.validarINT(numeroMes);
-        
+
         System.out.println("\nMedico: " + medico);
         System.out.println("\nValores Recebidos - (Consultas + Procedimentos): ");
         System.out.println("\n");
