@@ -17,14 +17,15 @@ public class MenuTitulosFranquia {
         builder.append("\n1 - Ver Cadastro da Franquia..............: ");
         builder.append("\n2 - Ver Cadastro Dono De Franquia.........: ");
         builder.append("\n3 - Cadastrar Nova Franquia...............: ");
-        builder.append("\n4 - Atualizar Dados da Franquia E Dono....: ");
-        builder.append("\n5 - Excluir Dados da Franquia.............: ");
-        builder.append("\n6 - Exibir Todas As Franquias.............: ");
-        builder.append("\n7 - Cadastrar Medico......................: ");
-        builder.append("\n8 - Exibir Todos Os Medicos...............: ");
-        builder.append("\n9 - Cadastar Unidade De Franquia..........: ");
-        builder.append("\n10 - Exibir Unidades Franquia.............: ");
-        builder.append("\n11 - Relatorios Franquia..................: ");
+        builder.append("\n4 - Designar Admnistrador da Franquia.....: ");
+        builder.append("\n5 - Atualizar Dados da Franquia E Dono....: ");
+        builder.append("\n6 - Excluir Dados da Franquia.............: ");
+        builder.append("\n7 - Exibir Todas As Franquias.............: ");
+        builder.append("\n8 - Cadastrar Medico......................: ");
+        builder.append("\n9 - Exibir Todos Os Medicos...............: ");
+        builder.append("\n10 - Cadastar Unidade De Franquia..........: ");
+        builder.append("\n11 - Exibir Unidades Franquia.............: ");
+        builder.append("\n12 - Relatorios Franquia..................: ");
         builder.append("\n\nInforme Opcao..........................: ");
         
         System.out.print(builder.toString());

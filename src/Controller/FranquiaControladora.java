@@ -53,37 +53,40 @@ public class FranquiaControladora {
                     break;
                 }
                 case 4: {
-                    menuOpcoesAtualizarDadosFranquia(franquia, franquiaDAO, vd, calendarioSistema);
+                   
                     break;
                 }
                 case 5: {
-
+                     menuOpcoesAtualizarDadosFranquia(franquia, franquiaDAO, vd, calendarioSistema);
                     break;
                 }
                 case 6: {
+                    break;
+                }
+                case 7: {
                     System.out.println("\n");
                     franquiaDAO.mostraTodasFranquias();
                     break;
                 }
-                case 7: {
+                case 8: {
                     cadastraMedico(pessoaDAO, medicoDAO, vd, calendarioSistema);
                     break;
                 }
-                case 8: {
+                case 9: {
                     System.out.println("\n");
                     medicoDAO.mostraTodosMedicos();
                     break;
                 }
-                case 9: {
+                case 10: {
                     cadastraUnidadeFranquia(pessoaDAO, unidadeFranquiaDAO, franquia, vd, calendarioSistema);
                     break;
                 }
-                case 10: {
+                case 11: {
                     System.out.println("\n");
                     unidadeFranquiaDAO.buscaUnidadeFranquiaAtravesDaFranquiaVinculada(franquia);
                     break;
                 }
-                case 11: {
+                case 12: {
                      geraRelatoriosFranquia(financeiroAdmDAO, financeiroMedicoDAO, franquia, vd);
                     break;
                 }

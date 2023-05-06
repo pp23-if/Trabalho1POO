@@ -53,7 +53,7 @@ public class AdmnistradorControladora {
 
             switch (opcao) {
                 case 1: {
-                    System.out.println(admnistradorDAO.
+                    System.out.println("\n" + admnistradorDAO.
                             buscaAdmnistradorAtravesPessoaVinculada(admnistrador.getPessoa()));
 
                     break;
@@ -802,6 +802,5 @@ public class AdmnistradorControladora {
 
     }
 
-    //Fazer Mais Validacoes da Data.
-    //ao mrcar consulta ou procedimento.
+    
 }
