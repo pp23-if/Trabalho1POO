@@ -181,7 +181,7 @@ public class AdmnistradorControladora {
                         if (consultaDAO.verificaDataConsulta(calendarioSistema, diaConsulta) == true) {
                             System.out.println("\nData Informada Invalida.");
                         } else {
-                            if (consultaDAO.verificaDisponibilidadeDiaEHoraMedico(diaConsulta,
+                            if (consultaDAO.verificaDisponibilidadeDiaEHoraConsultaMedico(diaConsulta,
                                     horaConsulta, medicoEncontrado) == true) {
 
                                 System.out.println("\nDia e Hora Informados Indisponiveis.");
@@ -265,7 +265,7 @@ public class AdmnistradorControladora {
 
             } else {
 
-                if (consultaDAO.verificaDisponibilidadeDiaEHoraMedico(diaConsulta, horaConsulta,
+                if (consultaDAO.verificaDisponibilidadeDiaEHoraConsultaMedico(diaConsulta, horaConsulta,
                         consultaEncontrada.getMedico()) == true) {
                     System.out.println("\nDia e Hora Informados Indisponiveis.");
                 } else {
@@ -490,6 +490,7 @@ public class AdmnistradorControladora {
 
     }
 
+    
     private void menuOpcoesFinanceiro(FinanceiroAdmDAO financeiroAdmDAO,
             CalendarioSistema calendarioSistema, ConsultaDAO consultaDAO,
             ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador, UnidadeFranquiaDAO unidadeFranquiaDAO,

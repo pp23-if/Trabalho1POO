@@ -88,7 +88,7 @@ public class ProcedimentoDAO {
 
             if (procedimento != null && procedimento.getDiaProcedimento().equals(diaProcedimento)
                     && procedimento.getHoraProcedimento().equals(horaProcedimento)
-                    &&procedimento.getConsulta().getMedico().equals(medico)) {
+                    && procedimento.getConsulta().getMedico().equals(medico)) {
 
                 return true;
             }

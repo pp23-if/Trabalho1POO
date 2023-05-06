@@ -82,7 +82,7 @@ public class ConsultaDAO {
         return false;
     }
 
-    public boolean verificaDisponibilidadeDiaEHoraMedico(LocalDate novoDiaConsulta,
+    public boolean verificaDisponibilidadeDiaEHoraConsultaMedico(LocalDate novoDiaConsulta,
             LocalTime novaHoraConsulta, Medico medico) {
 
         for (Consulta consulta : vetorConsulta) {
