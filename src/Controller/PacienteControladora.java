@@ -159,6 +159,7 @@ public class PacienteControladora {
         } while (opcao != 0);
     }
     
+    //fiz um metodo para o paciente buscar as consultas e procedimentos juntos.
     private void gerarRelatorioDeConsultasEProcedimentosDeUmDadoPaciente(ConsultaDAO consultaDAO,
             ProcedimentoDAO procedimentoDAO, Pessoa pessoa, ValidacaoEntradaDados vd, MedicoDAO medicoDAO) {
 
