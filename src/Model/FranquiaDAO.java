@@ -12,8 +12,8 @@ public class FranquiaDAO {
 
         if (donoDeFranquia != null) {
             Franquia franquia = new Franquia("Unimed".toUpperCase(), 
-                    "123456789-30", "Patos de Minas",
-                    "Rua Principal - Centro", donoDeFranquia, 
+                    "123456789-30", "Sao Paulo",
+                    "Avenida Paulista, 2000 - Centro", donoDeFranquia, 
                     calendarioSistema.getDataHoraSistema());
 
             adicionaFranquia(franquia);

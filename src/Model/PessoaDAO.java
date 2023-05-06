@@ -9,7 +9,7 @@ public class PessoaDAO {
     public PessoaDAO(CalendarioSistema calendarioSistema) {
         
 
-        Pessoa pessoa = new Pessoa("Pedro Augusto Rodrigues", "123", "1", "1",
+        Pessoa pessoa = new Pessoa("Pedro Augusto Rodrigues", "123",  "Rua 13", "225544",
                 "1", "1", "Paciente", calendarioSistema.getDataHoraSistema());
         adicionaPessoa(pessoa);
 
@@ -60,6 +60,11 @@ public class PessoaDAO {
         Pessoa pessoa13 = new Pessoa("Roberta Miranda De Sousa", "77882424", "Rua dos Abacates - 557", "99330044",
                 "roadm", "20", "Admnistrador", calendarioSistema.getDataHoraSistema());
         adicionaPessoa(pessoa13);
+        
+        
+        Pessoa pessoa14 = new Pessoa("Pedro Augusto Rodrigues", "123", "Rua 13", "225544",
+                "pp23", "69", "DonoDeUnidadeDeFranquia", calendarioSistema.getDataHoraSistema());
+        adicionaPessoa(pessoa14);
 
     }
 

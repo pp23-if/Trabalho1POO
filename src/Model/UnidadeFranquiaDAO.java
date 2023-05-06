@@ -12,10 +12,23 @@ public class UnidadeFranquiaDAO {
             Franquia franquiaCadastrada = franquiaDAO.buscaFranquiaPorCnpj("123456789-30");
 
             if (franquiaCadastrada != null) {
-                UnidadeFranquia unidadeFranquia = new UnidadeFranquia(franquiaCadastrada, "Rio de Janeiro",
-                        "Avenida Brasil - 580", donoUnidadeFranquia, calendarioSistema.getDataHoraSistema());
+                UnidadeFranquia unidadeFranquia = new UnidadeFranquia(franquiaCadastrada, "Uberaba",
+                        "Avenida Leopoldino De Oliveira - 580", donoUnidadeFranquia, calendarioSistema.getDataHoraSistema());
 
                 adicionaUnidadeFranquia(unidadeFranquia);
+            }
+        }
+        
+         Pessoa donoUnidadeFranquia2 = pessoaDAO.buscaPessoaCadastrada("pp23", "69");
+         
+           if (donoUnidadeFranquia2 != null) {
+            Franquia franquiaCadastrada = franquiaDAO.buscaFranquiaPorCnpj("123456789-30");
+
+            if (franquiaCadastrada != null) {
+                UnidadeFranquia unidadeFranquia2 = new UnidadeFranquia(franquiaCadastrada, "Uberlandia",
+                        "Avenida Rondom Pacheco - 1200", donoUnidadeFranquia2, calendarioSistema.getDataHoraSistema());
+
+                adicionaUnidadeFranquia(unidadeFranquia2);
             }
         }
 
