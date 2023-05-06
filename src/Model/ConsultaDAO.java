@@ -82,16 +82,26 @@ public class ConsultaDAO {
         return false;
     }
 
-    public boolean verificaDisponibilidadeDiaEHora(LocalDate novoDiaConsulta,
-            LocalTime novaHoraConsulta) {
+    public boolean verificaDisponibilidadeDiaEHoraMedico(LocalDate novoDiaConsulta,
+            LocalTime novaHoraConsulta, Medico medico) {
 
         for (Consulta consulta : vetorConsulta) {
 
             if (consulta != null && consulta.getDiaConsulta().equals(novoDiaConsulta)
-                    && consulta.getHoraConsulta().equals(novaHoraConsulta)) {
+                    && consulta.getHoraConsulta().equals(novaHoraConsulta)
+                    && consulta.getMedico().equals(medico)) {
                 return true;
             }
 
+        }
+        return false;
+    }
+    
+    public boolean verificaDataConsulta(CalendarioSistema calendarioSistema, LocalDate novoDiaConsulta)
+    {
+        if(novoDiaConsulta.isBefore(calendarioSistema.getDiaDoSistema()))
+        {
+          return true;  
         }
         return false;
     }

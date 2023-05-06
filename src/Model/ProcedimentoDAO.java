@@ -93,6 +93,16 @@ public class ProcedimentoDAO {
         return false;
     }
 
+    public boolean verificaDataProcedimento(CalendarioSistema calendarioSistema, LocalDate novoDiaProcedimento)
+    {
+        if(novoDiaProcedimento.isBefore(calendarioSistema.getDiaDoSistema()))
+        {
+          return true;  
+        }
+        return false;
+    }
+    
+    
     public boolean recebeProcedimentoERemarca(LocalDate novoDiaProcedimento,
             LocalTime novaHoraProcedimento, Procedimento procedimento, CalendarioSistema calendarioSistema) {
         if (procedimento != null && procedimento.getEstadoProcedimento().equals("Agendado")) {
