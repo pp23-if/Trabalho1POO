@@ -597,7 +597,7 @@ public class AdmnistradorControladora {
                 }
 
                 case 2: {
-                     pagaDespesasComuns(calendarioSistema, unidadeFranquiaDAO, admnistrador, vd, financeiroAdmDAO);
+                     pagaDespesasAvulsas(calendarioSistema, unidadeFranquiaDAO, admnistrador, vd, financeiroAdmDAO);
                     break;
 
                 }
@@ -674,7 +674,7 @@ public class AdmnistradorControladora {
         return saiu == true;
     }
 
-    private void pagaDespesasComuns(CalendarioSistema calendarioSistema, UnidadeFranquiaDAO unidadeFranquiaDAO,
+    private void pagaDespesasAvulsas(CalendarioSistema calendarioSistema, UnidadeFranquiaDAO unidadeFranquiaDAO,
             Admnistrador admnistrador, ValidacaoEntradaDados vd, FinanceiroAdmDAO financeiroAdmDAO) {
 
         System.out.println("\n");
