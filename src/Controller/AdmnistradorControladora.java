@@ -417,6 +417,7 @@ public class AdmnistradorControladora {
 
     private void cancelarProcedimento(ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador,
             ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
+        
         System.out.println("\n");
         procedimentoDAO.buscaProcedimentoPorFranquia(admnistrador.getFranquia());
 
