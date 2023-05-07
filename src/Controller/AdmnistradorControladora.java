@@ -462,12 +462,9 @@ public class AdmnistradorControladora {
             String Hora = scanner.nextLine();
             LocalTime horaProcedimento = LocalTime.parse(Hora);
 
-            if (procedimentoDAO.verificaDataProcedimento(calendarioSistema, diaProcedimento) == true)
-            {
+            if (procedimentoDAO.verificaDataProcedimento(calendarioSistema, diaProcedimento) == true) {
                 System.out.println("\nData Informada Invalida.");
-            } 
-            else 
-            {
+            } else {
                 if (procedimentoDAO.verificaDisponibilidadeDataEHoraProcedimentoMedico(diaProcedimento, horaProcedimento,
                         procedimentoEncontrado.getConsulta().getMedico()) == true) {
 
@@ -476,11 +473,11 @@ public class AdmnistradorControladora {
                 } else {
                     if (procedimentoDAO.recebeProcedimentoERemarca(diaProcedimento,
                             horaProcedimento, procedimentoEncontrado, calendarioSistema) == true) {
-                        
+
                         System.out.println("\nProcedimento Remarcado Com Sucesso!");
-                        
+
                     } else {
-                        
+
                         System.out.println("\nNao Foi Possivel Remarcar O Procedimento.");
                     }
                 }
@@ -490,7 +487,6 @@ public class AdmnistradorControladora {
 
     }
 
-    
     private void menuOpcoesFinanceiro(FinanceiroAdmDAO financeiroAdmDAO,
             CalendarioSistema calendarioSistema, ConsultaDAO consultaDAO,
             ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador, UnidadeFranquiaDAO unidadeFranquiaDAO,
@@ -515,18 +511,6 @@ public class AdmnistradorControladora {
                         cancelaConsultasNaoAtendidasNoDia(consultaDAO, calendarioSistema);
                         cancelaProcedimentosNaoAtendidosNoDia(procedimentoDAO, calendarioSistema);
 
-                        if (verificaSeEhPrimeiroDiaDoMes(calendarioSistema) == true) {
-
-                            if (pagaAdmnistradora(calendarioSistema, financeiroAdmDAO, unidadeFranquiaDAO,
-                                    admnistrador, vd) == true) {
-
-                                if (CalculaValoresMedicos(calendarioSistema, consultaDAO, procedimentoDAO,
-                                        financeiroMedicoDAO, medicoDAO, vd, admnistrador) == true) {
-
-                                    pagarMedicos(admnistrador, financeiroMedicoDAO, calendarioSistema, vd);
-                                }
-                            }
-                        }
                     } else {
                         System.out.println("\nNao foi possivel Encerrar o dia");
                     }
@@ -534,7 +518,8 @@ public class AdmnistradorControladora {
                     break;
                 }
                 case 2: {
-                    pagaDespesasComuns(calendarioSistema, unidadeFranquiaDAO, admnistrador, vd, financeiroAdmDAO);
+                     pagamentosAdm(financeiroAdmDAO, calendarioSistema, consultaDAO, 
+                             procedimentoDAO, admnistrador, unidadeFranquiaDAO, vd, financeiroMedicoDAO, medicoDAO);
                     break;
                 }
                 case 3: {
@@ -577,6 +562,49 @@ public class AdmnistradorControladora {
         }
 
         return false;
+    }
+
+    private void pagamentosAdm(FinanceiroAdmDAO financeiroAdmDAO,
+            CalendarioSistema calendarioSistema, ConsultaDAO consultaDAO,
+            ProcedimentoDAO procedimentoDAO, Admnistrador admnistrador, UnidadeFranquiaDAO unidadeFranquiaDAO,
+            ValidacaoEntradaDados vd, FinanceiroMedicoDAO financeiroMedicoDAO, MedicoDAO medicoDAO) {
+        
+        int opcao;
+
+        do {
+            opcao = telaAdmistrador.menuPagamentosAdm();
+
+            switch (opcao) {
+                case 1: {
+
+                    if (verificaSeEhPrimeiroDiaDoMes(calendarioSistema) == true) 
+                    {
+                           if (pagaAdmnistradora(calendarioSistema, financeiroAdmDAO, unidadeFranquiaDAO,
+                                    admnistrador, vd) == true) {
+
+                               if (CalculaValoresMedicos(calendarioSistema, consultaDAO, procedimentoDAO,
+                                        financeiroMedicoDAO, medicoDAO, vd, admnistrador) == true) {
+
+                                    pagarMedicos(admnistrador, financeiroMedicoDAO, calendarioSistema, vd);
+                               }
+                            }
+                        
+                    } else {
+                        System.out.println("\nEsse Tipo De Pagamento So Libera No Dia 01 De Cada Mes!");
+                    }
+
+                    break;
+                }
+
+                case 2: {
+                     pagaDespesasComuns(calendarioSistema, unidadeFranquiaDAO, admnistrador, vd, financeiroAdmDAO);
+                    break;
+
+                }
+
+            }
+
+        } while (opcao != 0);
     }
 
     private boolean pagaAdmnistradora(CalendarioSistema calendarioSistema, FinanceiroAdmDAO financeiroAdmDAO,
@@ -802,5 +830,4 @@ public class AdmnistradorControladora {
 
     }
 
-    
 }

@@ -65,10 +65,26 @@ public class MenuTitulosAdmistrador {
         builder.append("\n============ MENU FINANCEIRO =============");
         builder.append("\n0 - Para sair do programa..............: ");
         builder.append("\n1 - Encerrar Dia.......................: ");
-        builder.append("\n2 - Pagar Despesas.....................: ");
+        builder.append("\n2 - Fazer Pagamentos...................: ");
         builder.append("\n3 - Ver Movimentos Financeiros.........: ");
         builder.append("\n4 - Ver Pagamentos Dos Medicos.........: ");
         builder.append("\n\nInforme Opcao........................: ");
+
+        System.out.print(builder.toString());
+
+        return Integer.parseInt(scanner.nextLine());
+    }
+      
+      
+       public int menuPagamentosAdm() {
+
+        StringBuilder builder = new StringBuilder("");
+
+        builder.append("\n============ MENU PAGAMENTOS =============");
+        builder.append("\n0 - Para sair do programa...................: ");
+        builder.append("\n1 - Pagar Franquia E Medicos................: ");
+        builder.append("\n2 - Pagar Despesas Avulsas..................: ");
+        builder.append("\n\nInforme Opcao.............................: ");
 
         System.out.print(builder.toString());
 
