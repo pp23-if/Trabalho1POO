@@ -345,6 +345,16 @@ public class PessoaDAO {
         return null;
     }
     
+     public Pessoa filtraMedicos(){
+        for (Pessoa pessoa : vetorPessoa) {
+            if(pessoa != null && pessoa.getTipoUsuario().equals("Medico")
+               && pessoa.isHabilitado() == true){
+                System.out.println(pessoa + "\n");
+            }
+        }
+        return null;
+    }
+    
    public boolean excluirPaciente(Pessoa pessoa, CalendarioSistema calendarioSistema)
    {
        if(pessoa != null
@@ -357,4 +367,6 @@ public class PessoaDAO {
        }
         return false;
    }
+   
+  
 }

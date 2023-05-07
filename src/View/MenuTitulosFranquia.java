@@ -74,14 +74,10 @@ public class MenuTitulosFranquia {
         StringBuilder builder = new StringBuilder("");
 
         builder.append("\n============ MENU EXCLUSOES DONO DE FRANQUIA ==========");
-        builder.append("\n0 - Para Sair..........................................:");
+        builder.append("\n0 - Para Sair................................:");
         builder.append("\n1 - Excluir Paciente.........................: ");
-        builder.append("\n2 - .......................: ");
-        builder.append("\n3 - .....................: ");
-        builder.append("\n4 - ...................: ");
-        builder.append("\n5 - ...................: ");
-        builder.append("\n6 - ................: ");
-        builder.append("\n\nInforme Opcao........................................: ");
+        builder.append("\n2 - Excluir Medico...........................: ");
+        builder.append("\n\nInforme Opcao..............................: ");
        
         System.out.print(builder.toString());
 

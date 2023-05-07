@@ -63,7 +63,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 6: {
-                    menuOpcoesExclusao(pessoaDAO,vd, calendarioSistema);
+                    menuOpcoesExclusao(pessoaDAO,vd, calendarioSistema, medicoDAO);
                     break;
                 }
                 case 7: {
@@ -512,7 +512,8 @@ public class FranquiaControladora {
         }
     }
 
-    private void menuOpcoesExclusao(PessoaDAO pessoaDAO, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
+    private void menuOpcoesExclusao(PessoaDAO pessoaDAO, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema,
+            MedicoDAO medicoDAO) {
         int opcao;
 
         do {
@@ -525,7 +526,7 @@ public class FranquiaControladora {
                 }
 
                 case 2: {
-
+                    excluirMedico(medicoDAO, vd, calendarioSistema);
                     break;
 
                 }
@@ -557,6 +558,35 @@ public class FranquiaControladora {
             } else {
                 
                 System.out.println("\nNao Foi Possivel Excluir O Paciente.");
+            }
+        }
+
+    }
+    
+    
+     private void excluirMedico(MedicoDAO medicoDAO, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
+         
+        System.out.println("\n");
+        medicoDAO.mostraTodosMedicos();
+
+        System.out.println("\nInforme o ID - Medico Que Deseja Excluir: ");
+        int idMedico = Integer.parseInt(scanner.nextLine());
+        idMedico = vd.validarINT(idMedico);
+
+        Medico medicoEncontrado = medicoDAO.buscaMedicoPorId(idMedico);
+
+        if (medicoEncontrado == null) {
+            
+            System.out.println("\nMedico Nao Encontrado.");
+            
+        } else {
+            if (medicoDAO.excluirMedico(medicoEncontrado, calendarioSistema) == true) {
+                
+                System.out.println("\nMedico Excluido Com Sucesso!");
+                
+            } else {
+                
+                System.out.println("\nNao Foi Possivel Excluir O Medico.");
             }
         }
 

@@ -52,7 +52,7 @@ public class MedicoDAO {
 
     public void mostraTodosMedicos() {
         for (Medico medico : vetorMedico) {
-            if (medico != null) {
+            if (medico != null && medico.getPessoa().isHabilitado() == true) {
                 System.out.println(medico + "\n");
             }
         }
@@ -197,4 +197,17 @@ public class MedicoDAO {
         }
         return false;
     }
+    
+    public boolean excluirMedico(Medico medico, CalendarioSistema calendarioSistema)
+   {
+       if(medico != null && medico.equals(medico)
+          && medico.getPessoa().isHabilitado() == true)
+       {
+          medico.getPessoa().setHabilitado(false);
+          medico.getPessoa().setDataModificacao(calendarioSistema.getDataHoraSistema());
+          medico.setDataModificacao(calendarioSistema.getDataHoraSistema());
+          return true;
+       }
+        return false;
+   }
 }
