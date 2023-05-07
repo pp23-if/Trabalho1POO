@@ -19,7 +19,7 @@ public class MenuTitulosFranquia {
         builder.append("\n3 - Cadastrar Nova Franquia...............: ");
         builder.append("\n4 - Designar Admnistrador da Franquia.....: ");
         builder.append("\n5 - Atualizar Dados da Franquia E Dono....: ");
-        builder.append("\n6 - Excluir Dados da Franquia.............: ");
+        builder.append("\n6 - Exclusoes.............................: ");
         builder.append("\n7 - Exibir Todas As Franquias.............: ");
         builder.append("\n8 - Cadastrar Medico......................: ");
         builder.append("\n9 - Exibir Todos Os Medicos...............: ");

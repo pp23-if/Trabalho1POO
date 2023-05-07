@@ -15,6 +15,7 @@ public class Pessoa {
     private String loginPessoa;
     private String senhaPessoa;
     private String tipoUsuario;
+    private boolean habilitado;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataModificacao;
 
@@ -89,9 +90,18 @@ public class Pessoa {
     public void setDataModificacao(LocalDateTime dataModificacao) {
         this.dataModificacao = dataModificacao;
     }
+    
+      public boolean isHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
+    }
 
     public Pessoa(String nomePessoa, String cpf, String enderecoPessoa, String telefonePessoa,
             String loginPessoa, String senhaPessoa, String tipoUsuario, LocalDateTime dataCriacao) {
+        
         this.idPessoa = sequence++;
         this.nomePessoa = nomePessoa;
         this.cpf = cpf;
@@ -101,6 +111,7 @@ public class Pessoa {
         this.senhaPessoa = senhaPessoa;
         this.tipoUsuario = tipoUsuario;
         this.dataCriacao = dataCriacao;
+        this.habilitado = true;
     }
 
     @Override
@@ -195,4 +206,6 @@ public class Pessoa {
         }
 
     }
+
+  
 }
