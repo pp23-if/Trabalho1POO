@@ -456,7 +456,7 @@ public class FranquiaControladora {
             System.out.println("\nEssa Franquia Ja Possui Um Admnistrador.");
         } else {
             System.out.println("\n");
-            pessoaDAO.mostraTodasPessoas();
+            pessoaDAO.filtraPacientes();
 
             System.out.println("\nInforme o ID - Pessoa Que Deseja Como Admnistrador Da Franquia: ");
             int idPessoa = Integer.parseInt(scanner.nextLine());
