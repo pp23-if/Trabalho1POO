@@ -148,7 +148,8 @@ public class GerenciaControladoras {
 
     private void gerenciaControladoras(Pessoa pessoaLogada) {
 
-        if (pessoaLogada != null) {
+        if (pessoaLogada != null && pessoaLogada.isHabilitado() == true) {
+            
             System.out.println("\nLogin efetuado Com Sucesso!");
             System.out.println("Logado Como: " + pessoaLogada.getTipoUsuario());
 

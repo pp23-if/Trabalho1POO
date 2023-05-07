@@ -1,7 +1,5 @@
 package Model;
 
-import java.time.LocalDateTime;
-
 public class PessoaDAO {
 
     private Pessoa vetorPessoa[] = new Pessoa[50];
@@ -339,12 +337,24 @@ public class PessoaDAO {
     
     public Pessoa filtraPacientes(){
         for (Pessoa pessoa : vetorPessoa) {
-            if(pessoa != null && pessoa.getTipoUsuario().equals("Paciente")){
+            if(pessoa != null && pessoa.getTipoUsuario().equals("Paciente")
+               && pessoa.isHabilitado() == true){
                 System.out.println(pessoa + "\n");
             }
         }
         return null;
     }
     
-  
+   public boolean excluirPaciente(Pessoa pessoa, CalendarioSistema calendarioSistema)
+   {
+       if(pessoa != null
+          && pessoa.getTipoUsuario().equals("Paciente")
+          && pessoa.isHabilitado() == true)
+       {
+          pessoa.setHabilitado(false);
+          pessoa.setDataModificacao(calendarioSistema.getDataHoraSistema());
+          return true;
+       }
+        return false;
+   }
 }

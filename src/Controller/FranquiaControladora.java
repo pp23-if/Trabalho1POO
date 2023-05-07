@@ -63,6 +63,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 6: {
+                    menuOpcoesExclusao(pessoaDAO,vd, calendarioSistema);
                     break;
                 }
                 case 7: {
@@ -421,6 +422,7 @@ public class FranquiaControladora {
 
     private void relatorioGeralFranquia(FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO,
             Franquia franquia) {
+
         System.out.println("\nMovimentacoes Financeiras  - (Entrada/saida): ");
         System.out.println("\n");
         financeiroAdmDAO.geraRelatorioEntradaSaidaFranquia(franquia);
@@ -509,4 +511,55 @@ public class FranquiaControladora {
 
         }
     }
+
+    private void menuOpcoesExclusao(PessoaDAO pessoaDAO, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
+        int opcao;
+
+        do {
+            opcao = telaFranquia.menuExclusoesDonoFranquia();
+
+            switch (opcao) {
+                case 1: {
+                    excluirPaciente(pessoaDAO, vd, calendarioSistema);
+                    break;
+                }
+
+                case 2: {
+
+                    break;
+
+                }
+
+            }
+
+        } while (opcao != 0);
+    }
+
+    private void excluirPaciente(PessoaDAO pessoaDAO, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
+        System.out.println("\n");
+        pessoaDAO.filtraPacientes();
+
+        System.out.println("\nInforme o ID - Pessoa Que Deseja Excluir: ");
+        int idPessoa = Integer.parseInt(scanner.nextLine());
+        idPessoa = vd.validarINT(idPessoa);
+
+        Pessoa pessoaEncontrada = pessoaDAO.buscaPessoaPorId(idPessoa);
+
+        if (pessoaEncontrada == null) {
+            
+            System.out.println("\nPessoa Nao Encontrada.");
+            
+        } else {
+            if (pessoaDAO.excluirPaciente(pessoaEncontrada, calendarioSistema) == true) {
+                
+                System.out.println("\nPaciente Excluido Com Sucesso!");
+                
+            } else {
+                
+                System.out.println("\nNao Foi Possivel Excluir O Paciente.");
+            }
+        }
+
+    }
+
 }
