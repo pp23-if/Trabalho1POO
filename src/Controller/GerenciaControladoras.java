@@ -39,7 +39,7 @@ public class GerenciaControladoras {
     ConsultaDAO consultaDAO = new ConsultaDAO();
     AdmnistradorDAO admnistradorDAO = new AdmnistradorDAO(pessoaDAO, franquiaDAO, calendarioSistema);
     InfoConsultaDAO infoConsultaDAO = new InfoConsultaDAO();
-    ProcedimentoDAO procedimentoDAO = new ProcedimentoDAO();
+    ProcedimentoDAO procedimentoDAO = new ProcedimentoDAO(pessoaDAO, medicoDAO, unidadeFranquiaDAO, calendarioSistema);
     FinanceiroAdmDAO financeiroAdmDAO = new FinanceiroAdmDAO();
     FinanceiroMedicoDAO financeiroMedicoDAO = new FinanceiroMedicoDAO();
 
@@ -73,6 +73,7 @@ public class GerenciaControladoras {
                     unidadeFranquiaDAO.MostraTodasUnidadesDeFranquia();
                     System.out.println("\nMostrando Todos os ADMNISTRADORES Cadastradas: " + "\n");
                     admnistradorDAO.buscaTodosAdmnistradores();
+                  
                     break;
                 }
 

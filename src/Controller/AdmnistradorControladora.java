@@ -366,6 +366,8 @@ public class AdmnistradorControladora {
 
                     DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+                    DateTimeFormatter fdh = DateTimeFormatter.ofPattern("HH:mm:ss");
+                    
                     System.out.println("\nQual procedimento Sera Feito: ");
                     String nomeProcedimento = scanner.nextLine();
                     nomeProcedimento = vd.validaString(nomeProcedimento);
@@ -376,7 +378,7 @@ public class AdmnistradorControladora {
 
                     System.out.println("\nInforme a Hora Da Consulta No Seguinte Formato, Hora:Minutos (00:00)..: ");
                     String Hora = scanner.nextLine();
-                    LocalTime horaProcedimento = LocalTime.parse(Hora);
+                    LocalTime horaProcedimento = LocalTime.parse(Hora, fdh);
 
                     if (procedimentoDAO.verificaDataProcedimento(calendarioSistema, diaProcediemnto) == true) {
                         System.out.println("\nData Informada Invalida.");

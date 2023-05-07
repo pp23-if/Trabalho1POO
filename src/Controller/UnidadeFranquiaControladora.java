@@ -337,7 +337,7 @@ public class UnidadeFranquiaControladora {
 
         do {
 
-            System.out.println("\nInforme O Mes Que Deseja Ver Relatorio: ");
+            System.out.println("\nInforme O Numero Do Mes Que Deseja Ver Relatorio: ");
             int numeroMes = Integer.parseInt(scanner.nextLine());
             numeroMes = vd.validarINT(numeroMes);
 

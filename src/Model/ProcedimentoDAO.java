@@ -1,13 +1,48 @@
 package Model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class ProcedimentoDAO {
 
     private Procedimento vetorProcedimento[] = new Procedimento[50];
 
-    public ProcedimentoDAO() {
+    public ProcedimentoDAO(PessoaDAO pessoaDAO, MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO,
+            CalendarioSistema calendarioSistema) {
+        
+        
+        UnidadeFranquia unidadeEncontrada = unidadeFranquiaDAO.buscaUnidadeFranquiaPorId(2);
+        
+        if(unidadeEncontrada != null)
+        {
+            Medico medicoEncontrado = medicoDAO.buscaMedicoPorId(1);
+            
+            if(medicoEncontrado != null)
+            {
+                Pessoa pessoaEncontrada = pessoaDAO.buscaPessoaPorId(1);
+                
+                if(pessoaEncontrada != null)
+                {
+                    
+                    DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    DateTimeFormatter fd = DateTimeFormatter.ofPattern("HH:mm:ss");
+                    
+                    LocalDate diaConsulta = LocalDate.parse("28/01/2023", fdia);
+                    LocalTime horaConsulta = LocalTime.parse("15:23", fd);
+                    
+                    Consulta consultaProcedimento = new Consulta(diaConsulta, horaConsulta, medicoEncontrado, 
+                            pessoaEncontrada, unidadeEncontrada, 0,"Realizada", calendarioSistema.getDataHoraSistema());
+                    
+                    Procedimento procedimentoMarcado = new Procedimento("Exame De Sangue", consultaProcedimento, 
+                            diaConsulta, horaConsulta, "Agendado", 1500, "", calendarioSistema.getDataHoraSistema());
+                    
+                    adicionaProcedimento(procedimentoMarcado);
+                }
+            }
+        }
+        
     }
 
     public boolean adicionaProcedimento(Procedimento procedimento) {
