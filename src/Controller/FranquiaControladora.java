@@ -59,7 +59,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 5: {
-                     menuOpcoesAtualizarDadosFranquia(franquia, franquiaDAO, vd, calendarioSistema);
+                    menuOpcoesAtualizarDadosFranquia(franquia, franquiaDAO, vd, calendarioSistema);
                     break;
                 }
                 case 6: {
@@ -89,7 +89,7 @@ public class FranquiaControladora {
                     break;
                 }
                 case 12: {
-                     geraRelatoriosFranquia(financeiroAdmDAO, financeiroMedicoDAO, franquia, vd);
+                    geraRelatoriosFranquia(financeiroAdmDAO, financeiroMedicoDAO, franquia, vd);
                     break;
                 }
             }
@@ -396,7 +396,7 @@ public class FranquiaControladora {
 
     private void geraRelatoriosFranquia(FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO,
             Franquia franquia, ValidacaoEntradaDados vd) {
-        
+
         int opcao;
 
         do {
@@ -418,84 +418,95 @@ public class FranquiaControladora {
 
         } while (opcao != 0);
     }
-    
-    private void relatorioGeralFranquia(FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO, 
-            Franquia franquia)
-    {
+
+    private void relatorioGeralFranquia(FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO,
+            Franquia franquia) {
         System.out.println("\nMovimentacoes Financeiras  - (Entrada/saida): ");
         System.out.println("\n");
         financeiroAdmDAO.geraRelatorioEntradaSaidaFranquia(franquia);
-        
+
         System.out.println("\nMovimentacoes Financeiras - (Pagamentos Dos Medicos): ");
         System.out.println("\n");
         financeiroMedicoDAO.geraRelatorioPagamentoMedicosPorFranquia(franquia);
-        
+
     }
 
-     private void relatorioMensalFranquia(FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO, 
-            Franquia franquia, ValidacaoEntradaDados vd)
-    {
-        
+    private void relatorioMensalFranquia(FinanceiroAdmDAO financeiroAdmDAO, FinanceiroMedicoDAO financeiroMedicoDAO,
+            Franquia franquia, ValidacaoEntradaDados vd) {
+
         System.out.println("\nInforme O Mes Que Deseja Ver Relatorio: ");
         int numeroMes = Integer.parseInt(scanner.nextLine());
         numeroMes = vd.validarINT(numeroMes);
-        
+
         System.out.println("\nMovimentacoes Financeiras  - (Entrada/saida): ");
         System.out.println("\n");
         financeiroAdmDAO.geraRelatorioEntradaSaidaFranquiaMes(franquia, numeroMes);
-        
+
         System.out.println("\nMovimentacoes Financeiras - (Pagamentos Dos Medicos): ");
         System.out.println("\n");
         financeiroMedicoDAO.geraRelatorioPagamentoMedicosPorFranquiaMes(franquia, numeroMes);
-        
+
     }
-     
-    private void designaAdmnistradorFranquia(AdmnistradorDAO admnistradorDAO, Franquia franquia, 
-            PessoaDAO pessoaDAO, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema)
-    {
+
+    private void designaAdmnistradorFranquia(AdmnistradorDAO admnistradorDAO, Franquia franquia,
+            PessoaDAO pessoaDAO, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
         System.out.println("\n");
-        
-        if(admnistradorDAO.verificaSeFranquiaPossuiAdmnistrador(franquia) == true)
-        {
-           System.out.println("\nEssa Franquia Ja Possui Um Admnistrador."); 
-        }
-        else
-        {
-           System.out.println("\n");
-           pessoaDAO.mostraTodasPessoas();
-           
+
+        if (admnistradorDAO.verificaSeFranquiaPossuiAdmnistrador(franquia) == true) {
+            System.out.println("\nEssa Franquia Ja Possui Um Admnistrador.");
+        } else {
+            System.out.println("\n");
+            pessoaDAO.mostraTodasPessoas();
+
             System.out.println("\nInforme o ID - Pessoa Que Deseja Como Admnistrador Da Franquia: ");
             int idPessoa = Integer.parseInt(scanner.nextLine());
             idPessoa = vd.validarINT(idPessoa);
-            
+
             Pessoa pessoaEncontrada = pessoaDAO.buscaPessoaPorId(idPessoa);
-            
-            if(pessoaEncontrada == null)
-            {
+
+            if (pessoaEncontrada == null) {
                 System.out.println("\nPessoa Nao Encontrada.");
+            } else {
+                if (admnistradorDAO.verificaSePessoaEhAdmnistrador(pessoaEncontrada) == true) {
+                    System.out.println("\nA Pessoa Informada Ja e Admnistrador.");
+                } else {
+                    System.out.println("\nInforme o Login De Admnistrador: ");
+                    String loginAdmnistrador = scanner.nextLine();
+                    loginAdmnistrador = vd.validaString(loginAdmnistrador);
+
+                    if (admnistradorDAO.verificaSeLoginAdmnistradorEstaEmUso(loginAdmnistrador) == true) {
+                        System.out.println("\nLogin Informado Ja se Encontra Em Uso.");
+                    } else {
+                        System.out.println("\nInforme a Senha De Admnistrador: ");
+                        String senhaAdmnistrador = scanner.nextLine();
+                        senhaAdmnistrador = vd.validaString(senhaAdmnistrador);
+
+                        Pessoa pessoaAdm = new Pessoa(pessoaEncontrada.getNomePessoa(), pessoaEncontrada.getCpf(),
+                                pessoaEncontrada.getCpf(), pessoaEncontrada.getTelefonePessoa(),
+                                loginAdmnistrador, senhaAdmnistrador, "Admnistrador", calendarioSistema.getDataHoraSistema());
+
+                        if (pessoaDAO.adicionaPessoa(pessoaAdm) == true) {
+
+                            Admnistrador admnistrador = new Admnistrador(pessoaAdm, franquia,
+                                    calendarioSistema.getDataHoraSistema());
+
+                            if (admnistradorDAO.adicionaAdmnistrador(admnistrador) == true) {
+
+                                System.out.println("\nAdmnistrador Designado Com Sucesso!");
+
+                            } else {
+
+                                System.out.println("\nNao Foi Possivel Designar O Admnistrador.");
+                            }
+                        } else {
+                            System.out.println("\nErro Ao Designar Admnistrador.");
+                        }
+
+                    }
+
+                }
             }
-            else
-            {
-               if(admnistradorDAO.verificaSePessoaEhAdmnistrador(pessoaEncontrada) == true)
-               {
-                 System.out.println("\nA Pessoa Informada Ja e Admnistrador.");  
-               }
-               else
-               {
-                   Admnistrador admnistrador = new Admnistrador(pessoaEncontrada, franquia, 
-                           calendarioSistema.getDataHoraSistema());
-                   
-                   if(admnistradorDAO.adicionaAdmnistrador(admnistrador) == true)
-                   {
-                       System.out.println("\nAdmnistrador Designado Com Sucesso!");
-                   }
-                   else
-                   {
-                     System.out.println("\nNao Foi Possivel Designar O Admnistrador.");  
-                   }
-               }
-            }
-          
+
         }
     }
 }

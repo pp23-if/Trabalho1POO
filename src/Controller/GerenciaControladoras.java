@@ -71,6 +71,8 @@ public class GerenciaControladoras {
                     franquiaDAO.mostraTodasFranquias();
                     System.out.println("\nMostrando Todas as UNIDADES DE FRANQUIAS Cadastradas: " + "\n");
                     unidadeFranquiaDAO.MostraTodasUnidadesDeFranquia();
+                    System.out.println("\nMostrando Todos os ADMNISTRADORES Cadastradas: " + "\n");
+                    admnistradorDAO.buscaTodosAdmnistradores();
                     break;
                 }
 

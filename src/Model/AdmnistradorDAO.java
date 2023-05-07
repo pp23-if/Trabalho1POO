@@ -85,4 +85,16 @@ public class AdmnistradorDAO {
         }
         return false;
     }
+    
+    public boolean verificaSeLoginAdmnistradorEstaEmUso(String loginAdmnistrador)
+    {
+        for (Admnistrador admnistrador : vetorAdm) {
+            
+            if(admnistrador != null && admnistrador.getPessoa().getLoginPessoa().equals(loginAdmnistrador))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
