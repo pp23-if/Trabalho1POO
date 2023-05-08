@@ -10,7 +10,7 @@ public class ProcedimentoDAO {
     private Procedimento vetorProcedimento[] = new Procedimento[50];
 
     public ProcedimentoDAO(PessoaDAO pessoaDAO, MedicoDAO medicoDAO, UnidadeFranquiaDAO unidadeFranquiaDAO,
-            CalendarioSistema calendarioSistema) {
+            CalendarioSistema calendarioSistema, ConsultaDAO consultaDAO) {
         
         
         UnidadeFranquia unidadeEncontrada = unidadeFranquiaDAO.buscaUnidadeFranquiaPorId(2);
@@ -27,18 +27,26 @@ public class ProcedimentoDAO {
                 {
                     
                     DateTimeFormatter fdia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    DateTimeFormatter fd = DateTimeFormatter.ofPattern("HH:mm:ss");
+                
                     
-                    LocalDate diaConsulta = LocalDate.parse("28/01/2023", fdia);
-                    LocalTime horaConsulta = LocalTime.parse("15:23", fd);
+                    LocalDate diaConsulta = LocalDate.parse("27/01/2023", fdia);
+                    LocalTime horaConsulta = LocalTime.parse("15:23");
                     
                     Consulta consultaProcedimento = new Consulta(diaConsulta, horaConsulta, medicoEncontrado, 
-                            pessoaEncontrada, unidadeEncontrada, 0,"Realizada", calendarioSistema.getDataHoraSistema());
+                            pessoaEncontrada, unidadeEncontrada, 500,"Agendada", calendarioSistema.getDataHoraSistema());
                     
-                    Procedimento procedimentoMarcado = new Procedimento("Exame De Sangue", consultaProcedimento, 
-                            diaConsulta, horaConsulta, "Agendado", 1500, "", calendarioSistema.getDataHoraSistema());
+                    if(consultaDAO.adicionaConsulta(consultaProcedimento) == true)
+                    {
+                        
+                        LocalDate diaProcedimento = LocalDate.parse("28/01/2023", fdia);
+                        LocalTime horaProcedimento = LocalTime.parse("16:14");
+                        
+                          Procedimento procedimentoMarcado = new Procedimento("Exame De Sangue", consultaProcedimento, 
+                            diaProcedimento, horaProcedimento, "Agendado", 1500, "", calendarioSistema.getDataHoraSistema());
                     
-                    adicionaProcedimento(procedimentoMarcado);
+                        adicionaProcedimento(procedimentoMarcado);
+                    }
+                    
                 }
             }
         }

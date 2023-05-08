@@ -39,7 +39,8 @@ public class GerenciaControladoras {
     ConsultaDAO consultaDAO = new ConsultaDAO();
     AdmnistradorDAO admnistradorDAO = new AdmnistradorDAO(pessoaDAO, franquiaDAO, calendarioSistema);
     InfoConsultaDAO infoConsultaDAO = new InfoConsultaDAO();
-    ProcedimentoDAO procedimentoDAO = new ProcedimentoDAO(pessoaDAO, medicoDAO, unidadeFranquiaDAO, calendarioSistema);
+    ProcedimentoDAO procedimentoDAO = new ProcedimentoDAO(pessoaDAO, medicoDAO, unidadeFranquiaDAO, 
+            calendarioSistema, consultaDAO);
     FinanceiroAdmDAO financeiroAdmDAO = new FinanceiroAdmDAO();
     FinanceiroMedicoDAO financeiroMedicoDAO = new FinanceiroMedicoDAO();
 
