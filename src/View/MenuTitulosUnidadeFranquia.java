@@ -18,8 +18,7 @@ public class MenuTitulosUnidadeFranquia {
         builder.append("\n4 - Exibir Todas As Unidades De Franquia..........: ");
         builder.append("\n5 - Cadastrar Medico..............................: ");
         builder.append("\n6 - Exibir Todos Os Medicos.......................: ");
-        builder.append("\n7 - Excluir??.....................................: ");
-        builder.append("\n8 - Relatorios Unidade De Franquia.......: ");
+        builder.append("\n7 - Relatorios Unidade De Franquia................: ");
         builder.append("\n\nInforme Opcao...................................: ");
 
         System.out.print(builder.toString());

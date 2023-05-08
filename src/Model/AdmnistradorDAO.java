@@ -1,7 +1,5 @@
 package Model;
 
-import java.time.LocalDateTime;
-
 public class AdmnistradorDAO {
 
     private Admnistrador[] vetorAdm = new Admnistrador[50];

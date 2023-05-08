@@ -16,7 +16,6 @@ public class MenuTitulosAdmistrador {
         builder.append("\n2 - Consultas.........................: ");
         builder.append("\n3 - Procedimentos.....................: ");
         builder.append("\n4 - Financeiro........................: ");
-        builder.append("\n5 - ..................................: ");
         builder.append("\n\nInforme Opcao.......................: ");
 
         System.out.print(builder.toString());

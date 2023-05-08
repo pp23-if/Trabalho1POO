@@ -26,7 +26,7 @@ public class MenuTitulosFranquia {
         builder.append("\n10 - Cadastar Unidade De Franquia..........: ");
         builder.append("\n11 - Exibir Unidades Franquia.............: ");
         builder.append("\n12 - Relatorios Franquia..................: ");
-        builder.append("\n\nInforme Opcao..........................: ");
+        builder.append("\n\nInforme Opcao...........................: ");
         
         System.out.print(builder.toString());
 

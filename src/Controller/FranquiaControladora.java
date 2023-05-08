@@ -14,7 +14,6 @@ import Model.PessoaDAO;
 import Model.UnidadeFranquia;
 import Model.UnidadeFranquiaDAO;
 import View.MenuTitulosFranquia;
-import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class FranquiaControladora {

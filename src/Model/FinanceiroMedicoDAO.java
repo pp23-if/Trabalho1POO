@@ -4,6 +4,9 @@ package Model;
 
 public class FinanceiroMedicoDAO {
 
+    private FinanceiroMedico[] vetorFinanceiroMedico = new FinanceiroMedico[50];
+    
+    
     public FinanceiroMedicoDAO() {
     }
     
@@ -18,7 +21,7 @@ public class FinanceiroMedicoDAO {
 
     }
     
-    private FinanceiroMedico[] vetorFinanceiroMedico = new FinanceiroMedico[50];
+    
     
      private int proximaPosilivreFinanceiroMedico() {
         for (int i = 0; i < vetorFinanceiroMedico.length; i++) {

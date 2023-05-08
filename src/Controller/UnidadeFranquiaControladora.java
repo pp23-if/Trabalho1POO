@@ -67,18 +67,11 @@ public class UnidadeFranquiaControladora {
                     break;
                 }
                 case 7: {
-
-                    break;
-                }
-                case 8: {
-                    geraRelatoriosUnidadeFranquia(financeiroAdmDAO, financeiroMedicoDAO, unidadeFranquia,
+                     geraRelatoriosUnidadeFranquia(financeiroAdmDAO, financeiroMedicoDAO, unidadeFranquia,
                             vd, consultaDAO, procedimentoDAO, medicoDAO, calendarioSistema);
                     break;
                 }
-                case 9: {
-
-                    break;
-                }
+              
             }
 
         } while (opcao != 0);

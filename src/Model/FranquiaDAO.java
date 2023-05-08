@@ -1,7 +1,5 @@
 package Model;
 
-import java.time.LocalDateTime;
-
 public class FranquiaDAO {
 
     private Franquia[] vetorFranquia = new Franquia[50];
