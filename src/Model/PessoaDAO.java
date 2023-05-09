@@ -368,5 +368,42 @@ public class PessoaDAO {
         return false;
    }
    
+   public void filtraPacientesExcluidos()
+   {
+       for (Pessoa pessoa : vetorPessoa) {
+           
+           if(pessoa != null
+               && pessoa.getTipoUsuario().equals("Paciente")
+               && pessoa.isHabilitado() == false)
+           {
+               System.out.println(pessoa + "\n");  
+           }
+       }
+   }
+   
+    public Pessoa buscaPessoaExcluidaPorId(int idPessoaExcluida) {
+        for (Pessoa pessoa : vetorPessoa) {
+
+            if (pessoa != null && pessoa.getId() == idPessoaExcluida
+                    && pessoa.isHabilitado() == false) {
+                return pessoa;
+            }
+        }
+        return null;
+
+    }
+    
+   public boolean ReverterExclusaoPaciente(Pessoa pessoa, CalendarioSistema calendarioSistema)
+   {
+       if(pessoa != null
+          && pessoa.getTipoUsuario().equals("Paciente")
+          && pessoa.isHabilitado() == false)
+       {
+          pessoa.setHabilitado(true);
+          pessoa.setDataModificacao(calendarioSistema.getDataHoraSistema());
+          return true;
+       }
+        return false;
+   }
   
 }

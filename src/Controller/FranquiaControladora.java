@@ -525,7 +525,7 @@ public class FranquiaControladora {
                 }
 
                 case 2: {
-                    
+                    reverterExclusaoPaciente(pessoaDAO, vd, calendarioSistema);
                     break;
                 }
                 
@@ -545,6 +545,7 @@ public class FranquiaControladora {
     }
 
     private void excluirPaciente(PessoaDAO pessoaDAO, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
+        
         System.out.println("\n");
         pessoaDAO.filtraPacientes();
 
@@ -598,6 +599,36 @@ public class FranquiaControladora {
             }
         }
 
+    }
+     
+    private void reverterExclusaoPaciente(PessoaDAO pessoaDAO, ValidacaoEntradaDados vd, 
+            CalendarioSistema calendarioSistema)
+    {
+        
+         System.out.println("\n");
+         pessoaDAO.filtraPacientesExcluidos();
+         
+        System.out.println("\nInforme o ID - Pessoa Que Deseja Reverter Exclusao: ");
+        int idPessoaExcluida = Integer.parseInt(scanner.nextLine());
+        idPessoaExcluida = vd.validarINT(idPessoaExcluida);
+        
+        Pessoa pessoaExcluida = pessoaDAO.buscaPessoaExcluidaPorId(idPessoaExcluida);
+         
+        if(pessoaExcluida == null)
+        {
+          System.out.println("\nPessoa Excluida Nao Encontrada.");  
+        }
+        else
+        {
+            if(pessoaDAO.ReverterExclusaoPaciente(pessoaExcluida, calendarioSistema) == true)
+            {
+                System.out.println("\nReversao De Exclusao Do Paciente Realizada Com Sucesso!");
+            }
+            else
+            {
+               System.out.println("\nNao Foi Possivel Reverter A Exclusao.");  
+            }
+        }
     }
 
 }
