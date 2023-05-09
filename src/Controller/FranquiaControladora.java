@@ -535,7 +535,7 @@ public class FranquiaControladora {
                 }
                 
                 case 4: {
-                   
+                    reverterExclusaoMedico(medicoDAO, vd, calendarioSistema);
                     break;
                 }
 
@@ -616,7 +616,7 @@ public class FranquiaControladora {
          
         if(pessoaExcluida == null)
         {
-          System.out.println("\nPessoa Excluida Nao Encontrada.");  
+          System.out.println("\nPaciente Excluido Nao Encontrado.");  
         }
         else
         {
@@ -626,9 +626,40 @@ public class FranquiaControladora {
             }
             else
             {
-               System.out.println("\nNao Foi Possivel Reverter A Exclusao.");  
+               System.out.println("\nNao Foi Possivel Reverter A Exclusao Do Paciente.");  
             }
         }
     }
+    
+    private void reverterExclusaoMedico(MedicoDAO medicoDAO, ValidacaoEntradaDados vd, 
+            CalendarioSistema calendarioSistema)
+    {
+        
+         System.out.println("\n");
+         medicoDAO.filtraMedicosExcluidos();
+         
+        System.out.println("\nInforme o ID - Medico Que Deseja Reverter Exclusao: ");
+        int idMedicoExcluido = Integer.parseInt(scanner.nextLine());
+        idMedicoExcluido = vd.validarINT(idMedicoExcluido);
+        
+        Medico medicoExcluido = medicoDAO.buscaMedicoExcluidoPorId(idMedicoExcluido);
+         
+        if(medicoExcluido == null)
+        {
+          System.out.println("\nMedico Excluido Nao Encontrado.");  
+        }
+        else
+        {
+            if(medicoDAO.reverterExclusaoMedico(medicoExcluido, calendarioSistema) == true)
+            {
+                System.out.println("\nReversao De Exclusao Do Medico Realizado Com Sucesso!");
+            }
+            else
+            {
+               System.out.println("\nNao Foi Possivel Reverter A Exclusao Do Medico.");  
+            }
+        }
+    }
+
 
 }

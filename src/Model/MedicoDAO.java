@@ -198,9 +198,9 @@ public class MedicoDAO {
         return false;
     }
     
-    public boolean excluirMedico(Medico medico, CalendarioSistema calendarioSistema)
+   public boolean excluirMedico(Medico medico, CalendarioSistema calendarioSistema)
    {
-       if(medico != null && medico.equals(medico)
+       if(medico != null
           && medico.getPessoa().isHabilitado() == true)
        {
           medico.getPessoa().setHabilitado(false);
@@ -210,4 +210,39 @@ public class MedicoDAO {
        }
         return false;
    }
+    
+    public void filtraMedicosExcluidos()
+    {
+        for (Medico medico : vetorMedico) {
+            
+            if(medico != null && medico.getPessoa().isHabilitado() == false)
+            {
+                System.out.println(medico + "\n");
+            }
+        }
+    }
+    
+   public boolean reverterExclusaoMedico(Medico medico, CalendarioSistema calendarioSistema)
+   {
+       if(medico != null
+          && medico.getPessoa().isHabilitado() == false)
+       {
+          medico.getPessoa().setHabilitado(true);
+          medico.getPessoa().setDataModificacao(calendarioSistema.getDataHoraSistema());
+          medico.setDataModificacao(calendarioSistema.getDataHoraSistema());
+          return true;
+       }
+        return false;
+   }
+   
+    public Medico buscaMedicoExcluidoPorId(int idMedicoExcluido) {
+        for (Medico medico : vetorMedico) {
+
+            if (medico != null && medico.getIdMedico() == idMedicoExcluido
+                    && medico.getPessoa().isHabilitado() == false) {
+                return medico;
+            }
+        }
+        return null;
+    }
 }
