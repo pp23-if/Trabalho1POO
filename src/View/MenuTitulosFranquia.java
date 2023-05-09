@@ -19,7 +19,7 @@ public class MenuTitulosFranquia {
         builder.append("\n3 - Cadastrar Nova Franquia...............: ");
         builder.append("\n4 - Designar Admnistrador da Franquia.....: ");
         builder.append("\n5 - Atualizar Dados da Franquia E Dono....: ");
-        builder.append("\n6 - Exclusoes.............................: ");
+        builder.append("\n6 - Exclusoes/Reverter Exclusoes..........: ");
         builder.append("\n7 - Exibir Todas As Franquias.............: ");
         builder.append("\n8 - Cadastrar Medico......................: ");
         builder.append("\n9 - Exibir Todos Os Medicos...............: ");
@@ -74,9 +74,11 @@ public class MenuTitulosFranquia {
         StringBuilder builder = new StringBuilder("");
 
         builder.append("\n============ MENU EXCLUSOES DONO DE FRANQUIA ==========");
-        builder.append("\n0 - Para Sair................................:");
+        builder.append("\n0 - Para Sair................................: ");
         builder.append("\n1 - Excluir Paciente.........................: ");
-        builder.append("\n2 - Excluir Medico...........................: ");
+        builder.append("\n2 - Reverter Exclusao Paciente...............: ");
+        builder.append("\n3 - Excluir Medico...........................: ");
+        builder.append("\n4 - Reverter Exclusao Medico.................: ");
         builder.append("\n\nInforme Opcao..............................: ");
        
         System.out.print(builder.toString());

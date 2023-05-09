@@ -160,6 +160,7 @@ public class UnidadeFranquiaControladora {
 
     private void cadastraMedicos(MedicoDAO medicoDAO, PessoaDAO pessoaDAO, ValidacaoEntradaDados vd,
             CalendarioSistema calendarioSistema) {
+        
         System.out.println("\n");
         pessoaDAO.filtraPessoasCandidatasAMedico();
 

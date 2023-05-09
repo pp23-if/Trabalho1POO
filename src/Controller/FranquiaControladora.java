@@ -525,9 +525,18 @@ public class FranquiaControladora {
                 }
 
                 case 2: {
+                    
+                    break;
+                }
+                
+                case 3: {
                     excluirMedico(medicoDAO, vd, calendarioSistema);
                     break;
-
+                }
+                
+                case 4: {
+                   
+                    break;
                 }
 
             }

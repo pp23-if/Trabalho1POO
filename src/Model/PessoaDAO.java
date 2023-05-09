@@ -110,7 +110,7 @@ public class PessoaDAO {
     public boolean verificaSePessoaExiste(String login, String cpf) {
         for (Pessoa pessoa : vetorPessoa) {
             if (pessoa != null && pessoa.getLoginPessoa().equals(login)
-                    || pessoa != null && pessoa.getCpf().equals(cpf)) {
+                || pessoa != null && pessoa.getCpf().equals(cpf)) {
                 return true;
             }
 
