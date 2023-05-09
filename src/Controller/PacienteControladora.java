@@ -163,7 +163,7 @@ public class PacienteControladora {
             ProcedimentoDAO procedimentoDAO, Pessoa pessoa, ValidacaoEntradaDados vd, MedicoDAO medicoDAO) {
 
         System.out.println("\n");
-        medicoDAO.mostraTodosMedicos();
+        medicoDAO.mostraTodosMedicosHabilitados();
 
         System.out.println("\nInforme o ID - Medico: ");
         int idMedico = Integer.parseInt(scanner.nextLine());

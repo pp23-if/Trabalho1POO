@@ -149,8 +149,9 @@ public class AdmnistradorControladora {
             if (pessoaEncontrada == null) {
                 System.out.println("\nPessoa nao encontrada");
             } else {
-
-                medicoDAO.mostraTodosMedicos();
+                
+                System.out.println("\n");
+                medicoDAO.mostraTodosMedicosHabilitados();
 
                 System.out.println("\nInforme o ID Do Medico que deseja se consultar: ");
                 int idMedico = Integer.parseInt(scanner.nextLine());
@@ -339,7 +340,7 @@ public class AdmnistradorControladora {
             System.out.println("\nPaciente Nao Encontrado.");
         } else {
             System.out.println("\n");
-            medicoDAO.mostraTodosMedicos();
+            medicoDAO.mostraTodosMedicosHabilitados();
 
             System.out.println("\nInforme o ID - Medico que Ira Fazer O Procedimento: ");
             int idMedico = Integer.parseInt(scanner.nextLine());
@@ -727,7 +728,7 @@ public class AdmnistradorControladora {
         do {
 
             System.out.println("\n");
-            medicoDAO.mostraTodosMedicos();
+            medicoDAO.mostraTodosMedicosHabilitados();
 
             System.out.println("\nInforme o ID - Medico Que deseja Gerar O Calculo: ");
             int idMedico = Integer.parseInt(scanner.nextLine());

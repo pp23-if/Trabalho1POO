@@ -76,7 +76,7 @@ public class FranquiaControladora {
                 }
                 case 9: {
                     System.out.println("\n");
-                    medicoDAO.mostraTodosMedicos();
+                    medicoDAO.mostraTodosMedicosHabilitados();
                     break;
                 }
                 case 10: {
@@ -576,7 +576,7 @@ public class FranquiaControladora {
      private void excluirMedico(MedicoDAO medicoDAO, ValidacaoEntradaDados vd, CalendarioSistema calendarioSistema) {
          
         System.out.println("\n");
-        medicoDAO.mostraTodosMedicos();
+        medicoDAO.mostraTodosMedicosHabilitados();
 
         System.out.println("\nInforme o ID - Medico Que Deseja Excluir: ");
         int idMedico = Integer.parseInt(scanner.nextLine());

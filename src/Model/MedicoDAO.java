@@ -50,9 +50,18 @@ public class MedicoDAO {
 
     }
 
-    public void mostraTodosMedicos() {
+    public void mostraTodosMedicosHabilitados() {
         for (Medico medico : vetorMedico) {
             if (medico != null && medico.getPessoa().isHabilitado() == true) {
+                System.out.println(medico + "\n");
+            }
+        }
+    }
+    
+    
+     public void mostraTodosMedicos() {
+        for (Medico medico : vetorMedico) {
+            if (medico != null) {
                 System.out.println(medico + "\n");
             }
         }

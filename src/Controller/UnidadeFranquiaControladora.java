@@ -63,7 +63,7 @@ public class UnidadeFranquiaControladora {
                 }
                 case 6: {
                     System.out.println("\n");
-                    medicoDAO.mostraTodosMedicos();
+                    medicoDAO.mostraTodosMedicosHabilitados();
                     break;
                 }
                 case 7: {
@@ -276,7 +276,7 @@ public class UnidadeFranquiaControladora {
 
             System.out.println("\nMovimentacoes Financeiras Unidade De Franquia - (Pagamentos Dos Medicos): ");
             System.out.println("\n");
-            medicoDAO.mostraTodosMedicos();
+            medicoDAO.mostraTodosMedicosHabilitados();
 
             System.out.println("\nInforme O ID - Medico: ");
             int idMedico = Integer.parseInt(scanner.nextLine());
@@ -341,7 +341,7 @@ public class UnidadeFranquiaControladora {
 
             System.out.println("\nMovimentacoes Financeiras Mensais Unidade De Franquia - (Pagamentos Dos Medicos): ");
             System.out.println("\n");
-            medicoDAO.mostraTodosMedicos();
+            medicoDAO.mostraTodosMedicosHabilitados();
 
             System.out.println("\nInforme O ID - Medico: ");
             int idMedico = Integer.parseInt(scanner.nextLine());

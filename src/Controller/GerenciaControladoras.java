@@ -67,7 +67,7 @@ public class GerenciaControladoras {
                     System.out.println("\nMostrando Todas as PESSOAS Cadastradas: " + "\n");
                     pessoaDAO.mostraTodasPessoas();
                     System.out.println("\nMostrando TodOS os MEDICOS Cadastrados: " + "\n");
-                    medicoDAO.mostraTodosMedicos();
+                    medicoDAO.mostraTodosMedicosHabilitados();
                     System.out.println("\nMostrando Todas as FRANQUIAS Cadastradas: " + "\n");
                     franquiaDAO.mostraTodasFranquias();
                     System.out.println("\nMostrando Todas as UNIDADES DE FRANQUIAS Cadastradas: " + "\n");
