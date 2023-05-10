@@ -92,6 +92,11 @@ public class FranquiaControladora {
                     geraRelatoriosFranquia(financeiroAdmDAO, financeiroMedicoDAO, franquia, vd);
                     break;
                 }
+                case 13: {
+                    System.out.println("\n");
+                    pessoaDAO.filtraPacientes();
+                    break;
+                }
             }
 
         } while (opcao != 0);

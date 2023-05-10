@@ -284,7 +284,8 @@ public class PessoaDAO {
             if (pessoa != null && !pessoa.getTipoUsuario().equals("DonoDeUnidadeDeFranquia") 
                     && !pessoa.getTipoUsuario().equals("Medico")
                     && !pessoa.getCpf().equals(cpfDono)
-                    && !pessoa.getTipoUsuario().equals("Admnistrador")) {
+                    && !pessoa.getTipoUsuario().equals("Admnistrador")
+                    && pessoa.isHabilitado() == true) {
                 
                 System.out.println(pessoa + "\n");
             }
@@ -311,7 +312,9 @@ public class PessoaDAO {
             
             if(pessoa != null && !pessoa.getTipoUsuario().equals("Medico") 
                     && !pessoa.getTipoUsuario().equals("DonodeFranquia") 
-                    && !pessoa.getTipoUsuario().equals("DonoDeUnidadeDeFranquia"))
+                    && !pessoa.getTipoUsuario().equals("DonoDeUnidadeDeFranquia")
+                    && !pessoa.getTipoUsuario().equals("Admnistrador")
+                    && pessoa.isHabilitado() == true)
             {
                 System.out.println(pessoa + "\n");
             }
@@ -327,7 +330,8 @@ public class PessoaDAO {
             if(pessoa != null && !pessoa.getTipoUsuario().equals("Medico") &&
                !pessoa.getTipoUsuario().equals("DonodeFranquia")  && 
                !pessoa.getTipoUsuario().equals("DonoDeUnidadeDeFranquia") &&
-               !pessoa.getTipoUsuario().equals("Admnistrador"))
+               !pessoa.getTipoUsuario().equals("Admnistrador")
+               && pessoa.isHabilitado() == true)
             {
                 System.out.println(pessoa + "\n");
             }
