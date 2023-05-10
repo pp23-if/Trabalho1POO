@@ -728,7 +728,7 @@ public class AdmnistradorControladora {
         do {
 
             System.out.println("\n");
-            medicoDAO.mostraTodosMedicosHabilitados();
+            medicoDAO.mostraTodosMedicos();
 
             System.out.println("\nInforme o ID - Medico Que deseja Gerar O Calculo: ");
             int idMedico = Integer.parseInt(scanner.nextLine());
