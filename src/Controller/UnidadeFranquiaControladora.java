@@ -328,12 +328,13 @@ public class UnidadeFranquiaControladora {
         double valorBrutoConsulta;
         double valorBrutoProcedimento;
         double valoresMedicos;
+        
+        
+        System.out.println("\nInforme O Numero Do Mes Que Deseja Ver Relatorio: ");
+        int numeroMes = Integer.parseInt(scanner.nextLine());
+        numeroMes = vd.validarINT(numeroMes);
 
         do {
-
-            System.out.println("\nInforme O Numero Do Mes Que Deseja Ver Relatorio: ");
-            int numeroMes = Integer.parseInt(scanner.nextLine());
-            numeroMes = vd.validarINT(numeroMes);
 
             System.out.println("\nMovimentacoes Financeiras Mensais Unidade De Franquia  - (Entrada/saida): ");
             System.out.println("\n");
